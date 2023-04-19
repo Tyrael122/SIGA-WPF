@@ -74,7 +74,7 @@ Public Class DAL
     End Function
 
     Public Sub ConnectToDatabase()
-        connection = New SqlConnection("Server=localhost;Database=myDatabase;Trusted_Connection=True;")
+        connection = New SqlConnection(Environment.GetEnvironmentVariable("StringConnection"))
 
         connection.Open()
     End Sub
