@@ -31,9 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Icons8-Windows-8-Users-Name.512.png" />
-    <Resource Include="key-icon.png" />
-    <Resource Include="user-icon.png" />
+    <Resource Include="Views\Icons\Icons8-Windows-8-Users-Name.512.png" />
+    <Resource Include="Views\Icons\key-icon.png" />
+    <Resource Include="Views\Icons\user-icon.png" />
   </ItemGroup>
 
 </Project>
