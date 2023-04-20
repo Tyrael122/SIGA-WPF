@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
-    <RootNamespace>LoginScreenWPF</RootNamespace>
+    <RootNamespace>SIGAWPF</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
