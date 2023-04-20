@@ -19,12 +19,12 @@ Public Class DAL
     Public Function ReadAll(table As UserType) As List(Of IDAO) Implements IDAL.ReadAll
         Throw New NotImplementedException()
     End Function
-    Function ReadByCredentials(table As UserType, credentials As Credentials) As List(Of IDAO) Implements IDAL.ReadByCredentials
-        Dim tempEntity As IDAO = BusinessRules.GetEntityFromEnum(table)
+    Function ReadByCredentials(userType As UserType, credentials As Credentials) As List(Of IDAO) Implements IDAL.ReadByCredentials
+        Dim tempEntity As IDAO = BusinessRules.GetEntityFromEnum(userType)
 
         Dim sql As String
 
-        sql = "SELECT " & GetSelectFields(tempEntity) & " FROM logins WHERE " & GetWhereFields(credentials)
+        sql = "SELECT " & GetSelectFields(tempEntity) & " FROM " & userType.ToString() & " WHERE " & GetWhereFields(credentials)
 
         sqlCommand = New SqlCommand(sql, connection)
         sqlDataReader = sqlCommand.ExecuteReader()

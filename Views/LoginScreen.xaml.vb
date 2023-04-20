@@ -1,7 +1,7 @@
 ﻿Class MainWindow
     Implements IView
 
-    Private Presenter As IPresenter = New PresenterForms(Me)
+    Private Presenter As IPresenter = New PresenterWindow(Me)
 
     Private Sub ComboBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
 
@@ -22,6 +22,10 @@
 
     Public Sub DisplayError() Implements IView.DisplayError
         Throw New NotImplementedException()
+    End Sub
+
+    Public Sub CloseView() Implements IView.CloseView
+        Me.Close()
     End Sub
 
     Private Sub LoginForm_Initialized(sender As Object, e As EventArgs) Handles LoginForm.Initialized

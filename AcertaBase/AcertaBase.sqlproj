@@ -62,9 +62,16 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\logins.sql" />
+    <Build Include="dbo\Tables\Aluno.sql" />
+    <Build Include="dbo\Tables\Professor.sql" />
+    <Build Include="dbo\Tables\FuncionarioAdm.sql" />
+    <Build Include="dbo\Tables\Disciplina_1.sql" />
+    <Build Include="dbo\Tables\DisciplinasAluno.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AcertaBase.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AcertaBase.refactorlog" />
   </ItemGroup>
 </Project>

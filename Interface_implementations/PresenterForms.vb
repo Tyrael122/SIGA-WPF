@@ -1,4 +1,6 @@
-﻿Public Class PresenterForms
+﻿Imports System.Runtime.CompilerServices
+
+Public Class PresenterWindow
     Implements IPresenter
 
     Private View As IView
@@ -11,9 +13,10 @@
         Dim isCredentialsCorrect As Boolean = LoginRules.ValidateCredentials(username, password, userType)
 
         If isCredentialsCorrect Then
-            ' TODO: Close the Login form via View.Close()
-            Dim window As Window = ChooseForm(userType)
+            Dim window As Window = ChooseWindow(userType)
             window.Show()
+
+            View.CloseView()
 
             ' TODO: Log the user in
             ' TODO: Display to the user the right plataform dependent on his userType
@@ -27,7 +30,14 @@
         End If
     End Sub
 
-    Private Function ChooseForm(userType As UserType) As Window
+    Private Function ChooseWindow(userType As UserType) As Window
+        If userType = UserType.Aluno Then
+            Return New AlunoHomePage()
+        ElseIf userType = UserType.Professor Then
+            ' Return New ProfessorHomePage()
+        ElseIf userType = UserType.FuncionarioAdm Then
+            ' Return New FuncionarioAdmHomePage()
+        End If
         Throw New NotImplementedException() ' TODO: Should choose the right form based on the userType
     End Function
 End Class
