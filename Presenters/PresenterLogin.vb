@@ -1,8 +1,6 @@
 ﻿Imports System.Runtime.CompilerServices
 
-Public Class PresenterWindow
-    Implements IPresenter
-
+Public Class PresenterLogin
     Private View As IView
 
     Public Sub New(view As IView)
@@ -31,13 +29,15 @@ Public Class PresenterWindow
     End Sub
 
     Private Function ChooseWindow(userType As UserType) As Window
-        If userType = UserType.Aluno Then
-            Return New AlunoHomePage()
-        ElseIf userType = UserType.Professor Then
-            ' Return New ProfessorHomePage()
-        ElseIf userType = UserType.FuncionarioAdm Then
-            ' Return New FuncionarioAdmHomePage()
-        End If
+        Select Case (userType)
+            Case UserType.Aluno
+                Return New AlunoHomePage()
+            Case UserType.Professor
+                ' Return New ProfessorHomePage()
+            Case UserType.FuncionarioAdm
+                Return New FuncionarioHomePage()
+        End Select
+
         Throw New NotImplementedException() ' TODO: Should choose the right form based on the userType
     End Function
 End Class

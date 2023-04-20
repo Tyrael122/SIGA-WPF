@@ -1,7 +1,7 @@
 ﻿Class MainWindow
     Implements IView
 
-    Private Presenter As IPresenter = New PresenterWindow(Me)
+    Private Presenter As PresenterLogin = New PresenterLogin(Me)
 
     Private Sub ComboBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
 
