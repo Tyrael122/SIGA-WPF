@@ -4,7 +4,7 @@
     Private Presenter As PresenterFuncionario = New PresenterFuncionario(Me)
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
-        Throw New NotImplementedException()
+        lblInfo.Content = infoMessage
     End Sub
 
     Public Sub DisplayError() Implements IView.DisplayError
@@ -22,5 +22,16 @@
         }
 
         Presenter.RegisterAluno(map)
+    End Sub
+
+    Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        alunosDataGrid.ItemsSource = BusinessRules.GetAllAlunos()
+        'Dim aluno As Aluno = New Aluno
+        'aluno.Curso = Curso.ADS
+        'aluno.Login = "owec"
+        'aluno.Password = "oicioq"
+
+
+        'alunosDataGrid.ItemsSource = {aluno}
     End Sub
 End Class

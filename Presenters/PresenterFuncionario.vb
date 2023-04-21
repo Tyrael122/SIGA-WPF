@@ -8,7 +8,12 @@ Public Class PresenterFuncionario
     End Sub
 
     Public Sub RegisterAluno(data As IDictionary)
-        BusinessRules.RegisterAluno(data)
-    End Sub
+        Dim hasInsertedSucessufully = BusinessRules.RegisterAluno(data)
 
+        If hasInsertedSucessufully Then
+            View.DisplayInfo("Aluno adicionado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao adicionar aluno.")
+        End If
+    End Sub
 End Class

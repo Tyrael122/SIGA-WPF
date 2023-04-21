@@ -12,19 +12,41 @@ Public Class DAL
         ConnectToDatabase()
     End Sub
 
-    Public Sub Save(entity As IDAO, table As UserType) Implements IDAL.Save
-        Throw New NotImplementedException()
+    Public Sub Save(data As IDictionary, table As UserType) Implements IDAL.Save
+        Dim sql As String
+        sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ")"
+        sql += " VALUES (" & GetParseableData(data) & ")"
+
+        sqlCommand = New SqlCommand(sql, connection)
+        sqlCommand.ExecuteNonQuery() ' How do we know the insert operation succeeded?
     End Sub
 
     Public Function ReadAll(table As UserType) As List(Of IDAO) Implements IDAL.ReadAll
-        Throw New NotImplementedException()
+        Dim sql As String
+        sql = "SELECT * FROM " & table.ToString()
+
+        sqlCommand = New SqlCommand(sql, connection)
+        sqlDataReader = sqlCommand.ExecuteReader()
+
+        Dim tempEntity As IDAO = BusinessRules.GetEntityFromEnum(table)
+
+        Dim entitiesRead As New List(Of IDAO)
+        Dim rowData(sqlDataReader.FieldCount) As Object
+
+        While sqlDataReader.Read()
+            sqlDataReader.GetValues(rowData)
+            tempEntity.LoadFromDataRow(rowData)
+
+            entitiesRead.Add(tempEntity)
+        End While
+
+        Return entitiesRead
     End Function
     Function ReadByCredentials(userType As UserType, credentials As Credentials) As List(Of IDAO) Implements IDAL.ReadByCredentials
         Dim tempEntity As IDAO = BusinessRules.GetEntityFromEnum(userType)
 
         Dim sql As String
-
-        sql = "SELECT " & GetSelectFields(tempEntity) & " FROM " & userType.ToString() & " WHERE " & GetWhereFields(credentials)
+        sql = "SELECT " & GetParseableFields(tempEntity) & " FROM " & userType.ToString() & " WHERE " & GetWhereFields(credentials)
 
         sqlCommand = New SqlCommand(sql, connection)
         sqlDataReader = sqlCommand.ExecuteReader()
@@ -42,11 +64,35 @@ Public Class DAL
         Return entitiesRead
     End Function
 
-    Private Shared Function GetSelectFields(tempEntity As IDAO) As String
+    Private Shared Function GetParseableFields(tempEntity As IDAO) As String
+        Dim fieldsArray As String() = tempEntity.GetFieldsToParse()
+
+        Dim data As New Dictionary(Of String, String)
+        data = fieldsArray.ToDictionary(Function(field) field)
+
+        Return GetParseableFields(data)
+    End Function
+
+    Private Shared Function GetParseableFields(data As IDictionary) As String
         Dim fieldsToSelect As String = Nothing
-        For Each field In tempEntity.GetFieldsToParse()
+        For Each field In data.Keys
             fieldsToSelect += field & ", "
         Next
+        fieldsToSelect = fieldsToSelect.Remove(fieldsToSelect.Length - 2)
+        Return fieldsToSelect
+    End Function
+
+    ' Evident copy and paste, refactor later.
+    Private Shared Function GetParseableData(data As IDictionary) As String
+        Dim fieldsToSelect As String = Nothing
+        For Each field In data.Values
+            If Not IsNumeric(field) Then
+                fieldsToSelect += "'" & field & "'" & ", "
+            Else
+                fieldsToSelect += field & ", "
+            End If
+        Next
+
         fieldsToSelect = fieldsToSelect.Remove(fieldsToSelect.Length - 2)
         Return fieldsToSelect
     End Function

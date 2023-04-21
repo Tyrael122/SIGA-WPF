@@ -7,7 +7,7 @@ Public Class PresenterLogin
         Me.View = view
     End Sub
 
-    Public Sub TryLogin(username As String, password As String, userType As UserType) Implements IPresenter.TryLogin
+    Public Sub TryLogin(username As String, password As String, userType As UserType) 'Implements IPresenter.TryLogin
         Dim isCredentialsCorrect As Boolean = LoginRules.ValidateCredentials(username, password, userType)
 
         If isCredentialsCorrect Then

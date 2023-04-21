@@ -23,14 +23,6 @@
         End Set
     End Property
 
-    Public Property Aluno As Aluno
-        Get
-            Return Nothing
-        End Get
-        Set(value As Aluno)
-        End Set
-    End Property
-
     'Public Property Presenter As IPresenter
     '    Get
     '        Return Nothing
@@ -54,29 +46,63 @@
     End Property
 
     Public Shared Function RegisterAluno(data As IDictionary) As Boolean
-        Dim Aluno As New Aluno()
-        Try
-            Aluno.LoadFromDictionary(data)
-        Catch ex As ArgumentException
-            Return False
-        End Try
-
         Dim dataBridge As IDAL = New DAL()
-        dataBridge.Save(Aluno, UserType.Aluno)
+        dataBridge.Save(data, UserType.Aluno)
 
         ' TODO: Check if the insertion was correctly done
+        Return True
     End Function
 
     Public Shared Function GetEntityFromEnum(userType As UserType) As IDAO
         Select Case userType
-            Case 0
+            Case UserType.Aluno
                 Return New Aluno()
-            Case 1
+            Case UserType.Professor
                 Return New Professor()
-            Case 2
+            Case UserType.FuncionarioAdm
                 Return New FuncionarioAdministrativo()
             Case Else
                 Throw New ArgumentOutOfRangeException(NameOf(userType), "The userType is not valid, should be between 0 and 2")
         End Select
+    End Function
+
+    Friend Shared Function GetAllAlunos() As IEnumerable
+        Dim dataBridge As New DAL
+
+        Dim alunos = dataBridge.ReadAll(UserType.Aluno)
+
+        Return alunos.Cast(Of Aluno)
+
+        ' Converter a lista de alunos para uma lista de listas com os valores das propriedades do alunos
+
+        'Dim fieldsToParse As String() = alunos.First().GetFieldsToParse()
+
+        'Dim data = Array.Empty(Of String())
+        'For Each aluno In alunos
+        '    Dim fieldsAluno = Array.Empty(Of String)
+
+        '    For Each field In fieldsToParse
+        '        fieldsAluno = fieldsAluno.Append(aluno.GetType().GetField(field).GetValue(aluno)).ToArray()
+        '    Next
+
+        '    data = data.Append(fieldsAluno).ToArray()
+        'Next
+        'Return data
+
+        'Dim listaDeAlunos As Object()
+
+
+
+
+        'Dim list As Object() = alunos.ForEach(Function(aluno)
+
+        '                                      End Function)
+
+        'Dim test = From aluno In alunos
+        '           Select New 
+
+        'Return ' List of list with alunos values
+
+
     End Function
 End Class

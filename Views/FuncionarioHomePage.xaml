@@ -1,9 +1,10 @@
-﻿<Window x:Class="FuncionarioHomePage"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIGAWPF"
+        xmlns:SqlClient="clr-namespace:System.Data.SqlClient;assembly=System.Data.SqlClient" x:Class="FuncionarioHomePage"
         mc:Ignorable="d"
         Title="FuncionarioHomePage" Height="450" Width="800">
     <Grid>
@@ -14,18 +15,28 @@
                         <ColumnDefinition Width="34*"/>
                         <ColumnDefinition Width="363*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="1" Content="Nome:" HorizontalAlignment="Left" Margin="69,118,0,0" VerticalAlignment="Top"/>
-                    <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="117,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Grid Background="#FFE5E5E5" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="35*"/>
-                            <ColumnDefinition Width="362*"/>
+                            <ColumnDefinition Width="0*"/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="1" Content="Login:" HorizontalAlignment="Left" Margin="69,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                        <TextBox x:Name="txtLogin" Grid.Column="1" HorizontalAlignment="Left" Margin="117,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-                        <Label Grid.Column="1" Content="Senha:" HorizontalAlignment="Left" Margin="69,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                        <TextBox x:Name="txtPassword" Grid.Column="1" HorizontalAlignment="Left" Margin="117,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-                        <Button x:Name="btnCadastrar" Grid.Column="1" Content="Cadastrar" HorizontalAlignment="Left" Margin="137,0,0,0" VerticalAlignment="Center" Height="30" Width="65"/>
+                        <Label x:Name="lblInfo" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="88,68,0,0" VerticalAlignment="Top" Height="24" Width="127"/>
+                        <TabControl Grid.ColumnSpan="2">
+                            <TabItem Header="Cadastro" Height="22" Margin="-2,-2,-2,0" VerticalAlignment="Top">
+                                <Grid Background="#FFE5E5E5">
+                                    <Label Content="Login:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                    <TextBox x:Name="txtLogin" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                    <Label Content="Senha:" HorizontalAlignment="Left" Margin="139,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                    <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                    <Button x:Name="btnCadastrar" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Editar">
+                                <Grid Background="#FFE5E5E5">
+                                    <DataGrid x:Name="alunosDataGrid"/>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
                     </Grid>
                 </Grid>
             </TabItem>
