@@ -41,7 +41,26 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Professor">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TabControl Grid.Column="1" HorizontalAlignment="Left" Width="784" Margin="-6,0,0,0">
+                        <TabItem Header="Cadastrar">
+                            <Grid Background="#FFE5E5E5">
+                                <Label Content="Login:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                <TextBox x:Name="txtLogin_Copy" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <Label Content="Senha:" HorizontalAlignment="Left" Margin="139,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                <TextBox x:Name="txtPassword_Copy" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <Button x:Name="btnCadastrarProfessor" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Editar">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
             </TabItem>
         </TabControl>
 

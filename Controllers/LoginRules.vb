@@ -4,6 +4,8 @@
         Dim resultList As IEnumerable(Of IDAO)
 
         resultList = dataBridge.ReadByCredentials(userType, New Credentials(user, password))
+        dataBridge.CloseConnection()
+
         If resultList.Count <> 1 Then
             Return False
         End If

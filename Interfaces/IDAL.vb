@@ -4,4 +4,5 @@
     Function ReadByCredentials(table As UserType, credentials As Credentials) As List(Of IDAO)
     Sub Delete(entity As IDAO)
     Sub Edit(entity As IDAO, table As UserType)
+    Sub CloseConnection()
 End Interface

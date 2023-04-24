@@ -8,7 +8,7 @@ Public Class PresenterFuncionario
     End Sub
 
     Public Sub RegisterAluno(data As IDictionary)
-        Dim hasInsertedSucessufully = BusinessRules.RegisterAluno(data)
+        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, UserType.Aluno)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Aluno adicionado com sucesso!")
@@ -16,4 +16,22 @@ Public Class PresenterFuncionario
             View.DisplayInfo("Erro ao adicionar aluno.")
         End If
     End Sub
+
+    Friend Sub RegisterProfessor(data As IDictionary(Of String, String))
+        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, UserType.Professor)
+
+        If hasInsertedSucessufully Then
+            View.DisplayInfo("Professor adicionado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao adicionar professor.")
+        End If
+    End Sub
+
+    Friend Function GetAllAlunos() As IEnumerable
+        Return BusinessRules.GetAllAlunos()
+    End Function
+
+    Friend Function GetAllProfessores() As IEnumerable
+        Return BusinessRules.GetAllProfessores()
+    End Function
 End Class

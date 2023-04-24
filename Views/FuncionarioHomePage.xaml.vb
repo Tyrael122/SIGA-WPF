@@ -25,13 +25,15 @@
     End Sub
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        alunosDataGrid.ItemsSource = BusinessRules.GetAllAlunos()
-        'Dim aluno As Aluno = New Aluno
-        'aluno.Curso = Curso.ADS
-        'aluno.Login = "owec"
-        'aluno.Password = "oicioq"
+        alunosDataGrid.ItemsSource = Presenter.GetAllAlunos()
+    End Sub
 
+    Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
+        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
+            {"Login", txtLogin.Text},
+            {"Password", txtPassword.Text}
+        }
 
-        'alunosDataGrid.ItemsSource = {aluno}
+        Presenter.RegisterProfessor(map)
     End Sub
 End Class

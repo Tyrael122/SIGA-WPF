@@ -28,7 +28,7 @@ Public Class DAL
         sqlCommand = New SqlCommand(sql, connection)
         sqlDataReader = sqlCommand.ExecuteReader()
 
-        Dim tempEntity As IDAO = BusinessRules.GetEntityFromEnum(table)
+        Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
 
         Dim entitiesRead As New List(Of IDAO)
         Dim rowData(sqlDataReader.FieldCount) As Object
@@ -43,7 +43,7 @@ Public Class DAL
         Return entitiesRead
     End Function
     Function ReadByCredentials(userType As UserType, credentials As Credentials) As List(Of IDAO) Implements IDAL.ReadByCredentials
-        Dim tempEntity As IDAO = BusinessRules.GetEntityFromEnum(userType)
+        Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(userType)
 
         Dim sql As String
         sql = "SELECT " & GetParseableFields(tempEntity) & " FROM " & userType.ToString() & " WHERE " & GetWhereFields(credentials)
@@ -125,7 +125,7 @@ Public Class DAL
         connection.Open()
     End Sub
 
-    Public Sub CloseConnection()
+    Public Sub CloseConnection() Implements IDAL.CloseConnection
         connection.Close()
     End Sub
 End Class
