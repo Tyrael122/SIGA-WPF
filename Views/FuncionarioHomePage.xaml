@@ -22,16 +22,17 @@
                         </Grid.ColumnDefinitions>
                         <Label x:Name="lblInfo" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="88,68,0,0" VerticalAlignment="Top" Height="24" Width="127"/>
                         <TabControl Grid.ColumnSpan="2">
-                            <TabItem Header="Cadastro" Height="22" Margin="-2,-2,-2,0" VerticalAlignment="Top">
+                            <TabItem x:Name="tabCadastroAluno" Header="Cadastro" Height="22" Margin="-2,-2,-2,0" VerticalAlignment="Top">
                                 <Grid Background="#FFE5E5E5">
                                     <Label Content="Login:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
                                     <TextBox x:Name="txtLogin" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
                                     <Label Content="Senha:" HorizontalAlignment="Left" Margin="139,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
                                     <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
                                     <Button x:Name="btnCadastrar" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
+                                    <Label x:Name="lblInfoCadastroAluno" Content="" HorizontalAlignment="Left" Height="29" Margin="148,84,0,0" VerticalAlignment="Top" Width="159"/>
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="Editar">
+                            <TabItem x:Name="tabEditarAlunos" Header="Editar">
                                 <Grid Background="#FFE5E5E5">
                                     <DataGrid x:Name="alunosDataGrid"/>
                                 </Grid>
@@ -47,17 +48,20 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TabControl Grid.Column="1" HorizontalAlignment="Left" Width="784" Margin="-6,0,0,0">
-                        <TabItem Header="Cadastrar">
+                        <TabItem x:Name="tabCadastroProfessor" Header="Cadastrar">
                             <Grid Background="#FFE5E5E5">
                                 <Label Content="Login:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                                <TextBox x:Name="txtLogin_Copy" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <TextBox x:Name="txtLoginProfessor" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
                                 <Label Content="Senha:" HorizontalAlignment="Left" Margin="139,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                                <TextBox x:Name="txtPassword_Copy" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <TextBox x:Name="txtPasswordProfessor" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
                                 <Button x:Name="btnCadastrarProfessor" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
+                                <Label x:Name="lblInfoCadastroProfessor" Content="" HorizontalAlignment="Left" Height="33" Margin="144,80,0,0" VerticalAlignment="Top" Width="163"/>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Editar">
-                            <Grid Background="#FFE5E5E5"/>
+                        <TabItem x:Name="tabEditarProfessor" Header="Editar">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="professorDataGrid"/>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </Grid>

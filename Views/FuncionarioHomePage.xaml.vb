@@ -5,6 +5,12 @@
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         lblInfo.Content = infoMessage
+
+        If tabCadastroProfessor.IsSelected Then
+            lblInfoCadastroProfessor.Content = infoMessage
+        ElseIf tabCadastroAluno.IsSelected Then
+            lblInfoCadastroAluno.Content = infoMessage
+        End If
     End Sub
 
     Public Sub DisplayError() Implements IView.DisplayError
@@ -25,15 +31,28 @@
     End Sub
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        alunosDataGrid.ItemsSource = Presenter.GetAllAlunos()
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
         Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-            {"Login", txtLogin.Text},
-            {"Password", txtPassword.Text}
+            {"Login", txtLoginProfessor.Text},
+            {"Password", txtPasswordProfessor.Text}
         }
 
         Presenter.RegisterProfessor(map)
+    End Sub
+
+    Private Sub tabEditarAlunos_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles tabEditarAlunos.MouseLeftButtonDown
+    End Sub
+
+    Private Sub tabEditarProfessor_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles tabEditarProfessor.MouseLeftButtonDown
+    End Sub
+
+    Private Sub tabEditarProfessor_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarProfessor.GotFocus
+        professorDataGrid.ItemsSource = Presenter.GetAllProfessores()
+    End Sub
+
+    Private Sub tabEditarAlunos_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarAlunos.GotFocus
+        alunosDataGrid.ItemsSource = Presenter.GetAllAlunos()
     End Sub
 End Class

@@ -93,8 +93,8 @@
     Friend Shared Function GetAllProfessores() As IEnumerable
         Dim dataBridge As New DAL
 
-        Dim alunos = dataBridge.ReadAll(UserType.Professor)
+        Dim professores = dataBridge.ReadAll(UserType.Professor)
 
-        Return alunos.Cast(Of Professor)
+        Return professores.Cast(Of Professor)
     End Function
 End Class

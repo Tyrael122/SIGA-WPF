@@ -28,18 +28,19 @@ Public Class DAL
         sqlCommand = New SqlCommand(sql, connection)
         sqlDataReader = sqlCommand.ExecuteReader()
 
-        Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
-
         Dim entitiesRead As New List(Of IDAO)
         Dim rowData(sqlDataReader.FieldCount) As Object
 
         While sqlDataReader.Read()
             sqlDataReader.GetValues(rowData)
+
+            Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
             tempEntity.LoadFromDataRow(rowData)
 
             entitiesRead.Add(tempEntity)
         End While
 
+        sqlDataReader.Close()
         Return entitiesRead
     End Function
     Function ReadByCredentials(userType As UserType, credentials As Credentials) As List(Of IDAO) Implements IDAL.ReadByCredentials
