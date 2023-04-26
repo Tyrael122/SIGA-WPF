@@ -13,6 +13,7 @@
 
     Public Sub LoadFromDataRow(rowData() As Object) Implements IDAO.LoadFromDataRow
         Dim i As Integer = 1
+        ' Needed to pass a dict to get the data through the field name, not an index.
         For Each field In Me.GetFieldsToParse()
             Me.GetType().GetProperty(field).SetValue(Me, rowData(i))
             i += 1
