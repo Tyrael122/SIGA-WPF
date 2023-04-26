@@ -1,4 +1,6 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Collections.ObjectModel
+Imports System.Data.Common
+Imports System.Data.SqlClient
 Imports System.Reflection
 
 Public Class DAL
@@ -32,10 +34,22 @@ Public Class DAL
         Dim rowData(sqlDataReader.FieldCount) As Object
 
         While sqlDataReader.Read()
+            Dim columnsSchema As ReadOnlyCollection(Of DbColumn) = sqlDataReader.GetColumnSchema()
+            Dim columns As IEnumerable(Of String) = columnsSchema.Select(Function(dbColumn) dbColumn.ColumnName)
+
             sqlDataReader.GetValues(rowData)
 
             Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
-            tempEntity.LoadFromDataRow(rowData)
+
+            Dim tempDict As New Dictionary(Of String, Object)
+            Dim i = 0
+            For Each column In columns
+                tempDict.Add(column, rowData(i))
+                i += 1
+            Next
+            'tempDict = columns.Zip(rowData).ToDictionary(Function(columnName) columnName)
+
+            tempEntity.LoadFromDictionary(tempDict)
 
             entitiesRead.Add(tempEntity)
         End While

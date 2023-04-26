@@ -11,20 +11,29 @@
         Return fields.ToArray()
     End Function
 
-    Public Sub LoadFromDataRow(rowData() As Object) Implements IDAO.LoadFromDataRow
+    Public Sub LoadFromDataRow(data() As Object) Implements IDAO.LoadFromDataRow
         Dim i As Integer = 1
         ' Needed to pass a dict to get the data through the field name, not an index.
         For Each field In Me.GetFieldsToParse()
-            Me.GetType().GetProperty(field).SetValue(Me, rowData(i))
+            Me.GetType().GetProperty(field).SetValue(Me, data(i))
             i += 1
         Next
     End Sub
+
+    'Public Sub LoadFromCustom(data As IDictionary) Implements IDAO.LoadFromCustom
+    '    Dim i As Integer = 1
+    '    ' Needed to pass a dict to get the data through the field name, not an index.
+    '    For Each field In Me.GetFieldsToParse()
+    '        Me.GetType().GetProperty(field).SetValue(Me, data.Item(field))
+    '        i += 1
+    '    Next
+    'End Sub
 
     Public Sub LoadFromDictionary(data As IDictionary) Implements IDAO.LoadFromDictionary
         For Each field In Me.GetFieldsToParse()
             If data.Contains(field) Then ' Should we throw an exception if the field is not in the dict?
                 Dim valuePassedIn As Object = data.Item(field)
-                Me.GetType().GetField(field).SetValue(Me, valuePassedIn)
+                Me.GetType().GetProperty(field).SetValue(Me, valuePassedIn)
             Else
                 ' TODO: Should only throw exception for required fields
                 Throw New ArgumentException("The field " & field & " wasn't found in the dictionary")
