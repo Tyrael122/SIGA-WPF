@@ -27,6 +27,15 @@ Public Class PresenterFuncionario
         End If
     End Sub
 
+    Friend Sub RegisterCurso(data As IDictionary(Of String, String))
+        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, Table.Curso)
+        If hasInsertedSucessufully Then
+            View.DisplayInfo("Curso adicionado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao adicionar curso.")
+        End If
+    End Sub
+
     Friend Function GetAllAlunos() As IEnumerable
         Return BusinessRules.GetAllAlunos()
     End Function

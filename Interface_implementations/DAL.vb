@@ -12,7 +12,7 @@ Public Class DAL
         ConnectToDatabase()
     End Sub
 
-    Public Sub Save(data As IDictionary, table As UserType) Implements IDAL.Save
+    Public Sub Save(data As IDictionary, table As Table) Implements IDAL.Save
         Dim sql As String
         sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ")"
         sql += " VALUES (" & GetParseableData(data) & ")"

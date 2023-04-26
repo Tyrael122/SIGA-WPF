@@ -1,4 +1,4 @@
 ﻿Public Class Professor
-    Inherits DAO
+    Inherits UserDAO
     Implements IDAO
 End Class

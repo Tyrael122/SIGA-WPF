@@ -1,5 +1,7 @@
 ﻿CREATE TABLE [dbo].[Curso]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [Nome] NVARCHAR(50) NOT NULL 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Nome] NVARCHAR(50) NOT NULL, 
+    [Sigla] NVARCHAR(10) NULL, 
+    [Turno] TINYINT NULL 
 )

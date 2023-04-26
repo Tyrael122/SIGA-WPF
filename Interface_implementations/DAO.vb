@@ -1,28 +1,14 @@
 ﻿Public MustInherit Class DAO
     Implements IDAO
 
-    Private _Login As String
-    Public Property Login As String
-        Get
-            Return _Login
-        End Get
-        Set(value As String)
-            _Login = value
-        End Set
-    End Property
-
-    Private _Password As String
-    Public Property Password As String
-        Get
-            Return _Password
-        End Get
-        Set(value As String)
-            _Password = value
-        End Set
-    End Property
-
     Public Overridable Function GetFieldsToParse() As String() Implements IDAO.GetFieldsToParse
-        Return {NameOf(Login), NameOf(Password)}
+        Dim fields As New List(Of String)
+
+        For Each field In Me.GetType().GetFields()
+            fields.Add(field.Name)
+        Next
+
+        Return fields.ToArray()
     End Function
 
     Public Sub LoadFromDataRow(rowData() As Object) Implements IDAO.LoadFromDataRow

@@ -26,7 +26,7 @@
             </TextBox.Background>
         </TextBox>
         <Label Content="Password" HorizontalAlignment="Left" Margin="60,181,0,0" VerticalAlignment="Top" Foreground="White" Grid.Row="1"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="125,185,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FFAEAEAE" BorderThickness="0,0,0,2" Padding="16,0,0,0" Grid.Row="1">
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="125,185,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FFAEAEAE" BorderThickness="0,0,0,2" Padding="16,0,0,0" Grid.Row="1" PasswordChar="k">
             <PasswordBox.Background>
                 <ImageBrush Stretch="None" AlignmentX="Left"/>
             </PasswordBox.Background>

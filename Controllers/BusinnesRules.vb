@@ -71,10 +71,9 @@
         End Select
     End Function
 
-    Friend Shared Function RegisterEntity(data As Object, userType As UserType) As Object
+    Friend Shared Function RegisterEntity(data As Object, entityType As Table) As Object
         Dim dataBridge As IDAL = New DAL()
-        dataBridge.Save(data, userType)
-
+        dataBridge.Save(data, entityType)
 
         dataBridge.CloseConnection()
 
@@ -96,5 +95,13 @@
         Dim professores = dataBridge.ReadAll(UserType.Professor)
 
         Return professores.Cast(Of Professor)
+    End Function
+
+    Friend Shared Function GetAllCursos() As IEnumerable
+        Dim dataBridge As New DAL
+
+        Dim cursos = dataBridge.ReadAll(Table.Curso)
+
+        Return cursos.Cast(Of Curso)
     End Function
 End Class

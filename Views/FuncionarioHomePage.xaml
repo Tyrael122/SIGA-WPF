@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="FuncionarioHomePage" Height="450" Width="800">
     <Grid>
-        <TabControl>
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Alunos" Margin="-2,-2,-2,2">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -66,7 +66,31 @@
                     </TabControl>
                 </Grid>
             </TabItem>
+            <TabItem HorizontalAlignment="Center" Height="20" Header="Curso" VerticalAlignment="Center" Width="54">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem x:Name="tabCadastroCurso" Header="Cadastro">
+                            <Grid Background="#FFE5E5E5" Margin="-22,0,22,0">
+                                <Label Content="Turno:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                <Label Content="Sigla:" HorizontalAlignment="Left" Margin="142,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                <TextBox x:Name="txtSigla" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <Button x:Name="btnCadastrarCurso" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
+                                <Label x:Name="lblInfoCadastroCurso" Content="" HorizontalAlignment="Left" Height="29" Margin="150,61,0,0" VerticalAlignment="Top" Width="159"/>
+                                <Label Content="Nome:" HorizontalAlignment="Left" Margin="139,95,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                <TextBox x:Name="txtNomeCurso" HorizontalAlignment="Left" Margin="189,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <ComboBox x:Name="cmbTurno" HorizontalAlignment="Left" Margin="187,122,0,0" VerticalAlignment="Top" Width="120">
+                                    <ComboBoxItem Content="Matutino"/>
+                                    <ComboBoxItem Content="Vespertino"/>
+                                    <ComboBoxItem Content="Noturno"/>
+                                </ComboBox>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Editar">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
         </TabControl>
-
     </Grid>
 </Window>

@@ -10,6 +10,8 @@
             lblInfoCadastroProfessor.Content = infoMessage
         ElseIf tabCadastroAluno.IsSelected Then
             lblInfoCadastroAluno.Content = infoMessage
+        ElseIf tabCadastroCurso.IsSelected Then
+            lblInfoCadastroCurso.Content = infoMessage
         End If
     End Sub
 
@@ -54,5 +56,19 @@
 
     Private Sub tabEditarAlunos_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarAlunos.GotFocus
         alunosDataGrid.ItemsSource = Presenter.GetAllAlunos()
+    End Sub
+
+    Private Sub TabControl_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+
+    End Sub
+
+    Private Sub btnCadastrarCurso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarCurso.Click
+        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
+            {"Nome", txtNomeCurso.Text},
+            {"Sigla", txtSigla.Text},
+            {"Turno", cmbTurno.SelectedIndex}
+        }
+
+        Presenter.RegisterCurso(map)
     End Sub
 End Class

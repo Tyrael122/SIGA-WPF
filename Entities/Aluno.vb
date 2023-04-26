@@ -1,5 +1,5 @@
 ﻿Public Class Aluno
-    Inherits DAO
+    Inherits UserDAO
     Implements IDAO
 
     Private _Curso As Curso
