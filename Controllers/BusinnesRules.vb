@@ -45,16 +45,18 @@
         End Set
     End Property
 
-    Public Shared Function GetNewEntityOf(userType As UserType) As IDAO
-        Select Case userType
-            Case UserType.Aluno
+    Public Shared Function GetNewEntityOf(table As Table) As IDAO
+        Select Case table
+            Case Table.Aluno
                 Return New Aluno()
-            Case UserType.Professor
+            Case Table.Professor
                 Return New Professor()
-            Case UserType.FuncionarioAdm
+            Case Table.FuncionarioAdm
                 Return New FuncionarioAdministrativo()
+            Case Table.Curso
+                Return New Curso()
             Case Else
-                Throw New ArgumentOutOfRangeException(NameOf(userType), "The userType is not valid, should be between 0 and 2")
+                Throw New ArgumentOutOfRangeException(NameOf(UserType), "The userType is not valid, should be between 0 and 2")
         End Select
     End Function
 

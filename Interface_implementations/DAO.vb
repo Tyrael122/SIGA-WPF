@@ -4,7 +4,7 @@
     Public Overridable Function GetFieldsToParse() As String() Implements IDAO.GetFieldsToParse
         Dim fields As New List(Of String)
 
-        For Each field In Me.GetType().GetFields()
+        For Each field In Me.GetType().GetProperties()
             fields.Add(field.Name)
         Next
 

@@ -71,4 +71,8 @@
 
         Presenter.RegisterCurso(map)
     End Sub
+
+    Private Sub tabEditarCurso_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarCurso.GotFocus
+        cursoDataGrid.ItemsSource = Presenter.GetAllCursos()
+    End Sub
 End Class

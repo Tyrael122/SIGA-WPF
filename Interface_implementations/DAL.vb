@@ -21,7 +21,7 @@ Public Class DAL
         sqlCommand.ExecuteNonQuery() ' How do we know the insert operation succeeded?
     End Sub
 
-    Public Function ReadAll(table As UserType) As List(Of IDAO) Implements IDAL.ReadAll
+    Public Function ReadAll(table As Table) As List(Of IDAO) Implements IDAL.ReadAll
         Dim sql As String
         sql = "SELECT * FROM " & table.ToString()
 

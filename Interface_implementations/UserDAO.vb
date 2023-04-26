@@ -23,15 +23,6 @@
     End Property
 
     Public Overrides Function GetFieldsToParse() As String() Implements IDAO.GetFieldsToParse
-        Dim data As String() = MyBase.GetFieldsToParse()
-
-        Dim additionalData As String() =
-            {NameOf(Login), NameOf(Password)}
-
-        For Each field In additionalData
-            data = data.Append(field).ToArray()
-        Next
-
-        Return data
+        Return MyBase.GetFieldsToParse()
     End Function
 End Class

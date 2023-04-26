@@ -85,8 +85,10 @@
                                 </ComboBox>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Editar">
-                            <Grid Background="#FFE5E5E5"/>
+                        <TabItem x:Name="tabEditarCurso" Header="Editar">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="cursoDataGrid"/>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </Grid>

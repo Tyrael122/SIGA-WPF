@@ -43,4 +43,8 @@ Public Class PresenterFuncionario
     Friend Function GetAllProfessores() As IEnumerable
         Return BusinessRules.GetAllProfessores()
     End Function
+
+    Friend Function GetAllCursos() As IEnumerable
+        Return BusinessRules.GetAllCursos()
+    End Function
 End Class
