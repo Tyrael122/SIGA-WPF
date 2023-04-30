@@ -2,8 +2,8 @@
     [ID]       INT           IDENTITY (0, 1) NOT NULL,
     [Login]    VARCHAR (255) NULL,
     [Password] VARCHAR (255) NULL,
-    [IdCurso] INT NOT NULL, 
+    [Curso] INT NULL, 
     PRIMARY KEY CLUSTERED ([ID] ASC), 
-    CONSTRAINT [IdCursoAluno] FOREIGN KEY ([IdCurso]) REFERENCES [Curso]([Id])
+    CONSTRAINT [IdCursoAluno] FOREIGN KEY ([Curso]) REFERENCES [Curso]([Id])
 );
 

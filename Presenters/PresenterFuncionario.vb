@@ -36,6 +36,15 @@ Public Class PresenterFuncionario
         End If
     End Sub
 
+    Friend Sub RegisterDisciplina(data As IDictionary(Of String, String))
+        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, Table.Disciplina)
+        If hasInsertedSucessufully Then
+            View.DisplayInfo("Disciplina adicionado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao adicionar disciplina.")
+        End If
+    End Sub
+
     Friend Function GetAllAlunos() As IEnumerable
         Return BusinessRules.GetAllAlunos()
     End Function
@@ -46,5 +55,9 @@ Public Class PresenterFuncionario
 
     Friend Function GetAllCursos() As IEnumerable
         Return BusinessRules.GetAllCursos()
+    End Function
+
+    Friend Function GetAllDisciplinas() As IEnumerable
+        Return BusinessRules.GetAllDisciplinas()
     End Function
 End Class

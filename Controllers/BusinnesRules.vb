@@ -55,6 +55,8 @@
                 Return New FuncionarioAdministrativo()
             Case Table.Curso
                 Return New Curso()
+            Case Table.Disciplina
+                Return New Disciplina()
             Case Else
                 Throw New ArgumentOutOfRangeException(NameOf(UserType), "The userType is not valid, should be between 0 and 2")
         End Select
@@ -105,5 +107,13 @@
         Dim cursos = dataBridge.ReadAll(Table.Curso)
 
         Return cursos.Cast(Of Curso)
+    End Function
+
+    Friend Shared Function GetAllDisciplinas() As IEnumerable
+        Dim dataBridge As New DAL
+
+        Dim disciplinas = dataBridge.ReadAll(Table.Disciplina)
+
+        Return disciplinas.Cast(Of Disciplina)
     End Function
 End Class

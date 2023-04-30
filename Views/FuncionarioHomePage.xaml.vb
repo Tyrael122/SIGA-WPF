@@ -12,6 +12,8 @@
             lblInfoCadastroAluno.Content = infoMessage
         ElseIf tabCadastroCurso.IsSelected Then
             lblInfoCadastroCurso.Content = infoMessage
+        ElseIf tabCadastroDisciplina.IsSelected Then
+            lblInfoCadastroDisciplina.Content = infoMessage
         End If
     End Sub
 
@@ -33,6 +35,7 @@
     End Sub
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        DisciplinasCursoDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
@@ -44,22 +47,12 @@
         Presenter.RegisterProfessor(map)
     End Sub
 
-    Private Sub tabEditarAlunos_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles tabEditarAlunos.MouseLeftButtonDown
-    End Sub
-
-    Private Sub tabEditarProfessor_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles tabEditarProfessor.MouseLeftButtonDown
-    End Sub
-
     Private Sub tabEditarProfessor_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarProfessor.GotFocus
         professorDataGrid.ItemsSource = Presenter.GetAllProfessores()
     End Sub
 
     Private Sub tabEditarAlunos_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarAlunos.GotFocus
         alunosDataGrid.ItemsSource = Presenter.GetAllAlunos()
-    End Sub
-
-    Private Sub TabControl_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-
     End Sub
 
     Private Sub btnCadastrarCurso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarCurso.Click
@@ -74,5 +67,16 @@
 
     Private Sub tabEditarCurso_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarCurso.GotFocus
         cursoDataGrid.ItemsSource = Presenter.GetAllCursos()
+    End Sub
+
+    Private Sub btnCadastrarDisciplina_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarDisciplina.Click
+        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
+            {"Name", txtNomeDisciplina.Text},
+            {"Semester", txtSemestre.Text},
+            {"Workload", txtCargaHoraria.Text},
+            {"Description", txtDescricao.Text}
+        }
+
+        Presenter.RegisterDisciplina(map)
     End Sub
 End Class
