@@ -85,10 +85,10 @@
                                 </ComboBox>
                                 <DataGrid x:Name="DisciplinasCursoDataGrid" Margin="313,72,144,189" IsTextSearchEnabled="True" SelectionMode="Extended" Grid.Column="1">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Selecionar">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <CheckBox/>
+                                                    <CheckBox Click="CheckBox_Click" Tag="{Binding}"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -104,7 +104,7 @@
                     </TabControl>
                 </Grid>
             </TabItem>
-            <TabItem HorizontalAlignment="Center" Header="Disciplina" VerticalAlignment="Center">
+            <TabItem HorizontalAlignment="Center" Header="Disciplina" VerticalAlignment="Bottom" Margin="0,0,0,1">
                 <Grid Background="#FFE5E5E5">
                     <TabControl>
                         <TabItem x:Name="tabCadastroDisciplina" Header="Cadastro">

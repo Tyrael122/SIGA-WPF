@@ -1,4 +1,6 @@
-﻿Public Class FuncionarioHomePage
+﻿Imports System.Data
+
+Public Class FuncionarioHomePage
     Implements IView
 
     Private Presenter As PresenterFuncionario = New PresenterFuncionario(Me)
@@ -78,5 +80,14 @@
         }
 
         Presenter.RegisterDisciplina(map)
+    End Sub
+
+    Private Sub CheckBox_Click(sender As Object, e As RoutedEventArgs)
+        Dim checkBox As CheckBox = CType(sender, CheckBox)
+        If checkBox.IsChecked Then
+            Presenter.AddDisciplinaSelecionadaAoCurso(checkBox.Tag)
+        Else
+            Presenter.RemoveDisciplinaSelecionadaDoCurso(checkBox.Tag)
+        End If
     End Sub
 End Class

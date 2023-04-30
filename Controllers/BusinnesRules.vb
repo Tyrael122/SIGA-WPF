@@ -88,7 +88,7 @@
     Friend Shared Function GetAllAlunos() As IEnumerable
         Dim dataBridge As New DAL
 
-        Dim alunos = dataBridge.ReadAll(UserType.Aluno)
+        Dim alunos = dataBridge.ReadAllEntities(UserType.Aluno)
 
         Return alunos.Cast(Of Aluno)
     End Function
@@ -96,7 +96,7 @@
     Friend Shared Function GetAllProfessores() As IEnumerable
         Dim dataBridge As New DAL
 
-        Dim professores = dataBridge.ReadAll(UserType.Professor)
+        Dim professores = dataBridge.ReadAllEntities(UserType.Professor)
 
         Return professores.Cast(Of Professor)
     End Function
@@ -104,7 +104,7 @@
     Friend Shared Function GetAllCursos() As IEnumerable
         Dim dataBridge As New DAL
 
-        Dim cursos = dataBridge.ReadAll(Table.Curso)
+        Dim cursos = dataBridge.ReadAllEntities(Table.Curso)
 
         Return cursos.Cast(Of Curso)
     End Function
@@ -112,7 +112,7 @@
     Friend Shared Function GetAllDisciplinas() As IEnumerable
         Dim dataBridge As New DAL
 
-        Dim disciplinas = dataBridge.ReadAll(Table.Disciplina)
+        Dim disciplinas = dataBridge.ReadAllEntities(Table.Disciplina)
 
         Return disciplinas.Cast(Of Disciplina)
     End Function

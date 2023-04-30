@@ -2,6 +2,7 @@
 
 Public Class PresenterFuncionario
     Private View As IView
+    Private DisciplinasCurso As New List(Of Disciplina)
 
     Public Sub New(view As IView)
         Me.View = view
@@ -28,6 +29,9 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Sub RegisterCurso(data As IDictionary(Of String, String))
+
+
+
         Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, Table.Curso)
         If hasInsertedSucessufully Then
             View.DisplayInfo("Curso adicionado com sucesso!")
@@ -43,6 +47,14 @@ Public Class PresenterFuncionario
         Else
             View.DisplayInfo("Erro ao adicionar disciplina.")
         End If
+    End Sub
+
+    Friend Sub AddDisciplinaSelecionadaAoCurso(discplina As Disciplina)
+        DisciplinasCurso.Add(discplina)
+    End Sub
+
+    Friend Sub RemoveDisciplinaSelecionadaDoCurso(disciplina As Disciplina)
+        DisciplinasCurso.Remove(disciplina)
     End Sub
 
     Friend Function GetAllAlunos() As IEnumerable

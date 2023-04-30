@@ -23,7 +23,7 @@ Public Class DAL
         sqlCommand.ExecuteNonQuery() ' How do we know the insert operation succeeded?
     End Sub
 
-    Public Function ReadAll(table As Table) As List(Of IDAO) Implements IDAL.ReadAll
+    Public Function ReadAllEntities(table As Table) As List(Of IDAO) Implements IDAL.ReadAllEntities
         Dim sql As String
         sql = "SELECT * FROM " & table.ToString()
 
@@ -31,6 +31,10 @@ Public Class DAL
         sqlDataReader = sqlCommand.ExecuteReader()
 
         Dim entitiesRead As New List(Of IDAO)
+
+        Dim list As New List(Of IDictionary(Of String, String))
+        list.Where(Function(dict) dict.Item("ID") > 5)
+
         Dim rowData(sqlDataReader.FieldCount) As Object
 
         While sqlDataReader.Read()
@@ -142,5 +146,10 @@ Public Class DAL
 
     Public Sub CloseConnection() Implements IDAL.CloseConnection
         connection.Close()
+    End Sub
+
+    Protected Overrides Sub Finalize()
+        CloseConnection()
+        MyBase.Finalize()
     End Sub
 End Class
