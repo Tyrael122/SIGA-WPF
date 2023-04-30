@@ -2,9 +2,10 @@
 Imports System.Data.Common
 Imports System.Data.SqlClient
 Imports System.Reflection
+Imports System.Linq
 
 Public Class DAL
-    Implements IDAL
+    Implements IDAL, IDisposable
 
     Private connection As SqlConnection
     Private sqlCommand As SqlCommand
@@ -13,6 +14,31 @@ Public Class DAL
     Public Sub New()
         ConnectToDatabase()
     End Sub
+
+
+    Public Function SelectFields(table As Table, ParamArray fieldsToSelect() As String) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectFields
+        Dim sql As String
+        sql = "SELECT " & String.Join(", ", fieldsToSelect) & " FROM " & table.ToString()
+
+        sqlCommand = New SqlCommand(sql, connection)
+        sqlDataReader = sqlCommand.ExecuteReader()
+
+        Dim result As New List(Of IDictionary(Of String, String))
+        While sqlDataReader.Read()
+            Dim row As New Dictionary(Of String, String)
+            For i As Integer = 0 To sqlDataReader.FieldCount - 1
+                row.Add(sqlDataReader.GetName(i), sqlDataReader.GetValue(i))
+            Next
+            result.Add(row)
+        End While
+        sqlDataReader.Close()
+        Return result
+
+    End Function
+
+    Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectAll
+        Return SelectFields(table, "*")
+    End Function
 
     Public Sub Save(data As IDictionary, table As Table) Implements IDAL.Save
         Dim sql As String
@@ -31,9 +57,6 @@ Public Class DAL
         sqlDataReader = sqlCommand.ExecuteReader()
 
         Dim entitiesRead As New List(Of IDAO)
-
-        Dim list As New List(Of IDictionary(Of String, String))
-        list.Where(Function(dict) dict.Item("ID") > 5)
 
         Dim rowData(sqlDataReader.FieldCount) As Object
 
@@ -61,44 +84,11 @@ Public Class DAL
         sqlDataReader.Close()
         Return entitiesRead
     End Function
-    Function ReadByCredentials(userType As UserType, credentials As Credentials) As List(Of IDAO) Implements IDAL.ReadByCredentials
-        Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(userType)
-
-        Dim sql As String
-        sql = "SELECT " & GetParseableFields(tempEntity) & " FROM " & userType.ToString() & " WHERE " & GetWhereFields(credentials)
-
-        sqlCommand = New SqlCommand(sql, connection)
-        sqlDataReader = sqlCommand.ExecuteReader()
-
-        Dim entitiesRead As New List(Of IDAO)
-        Dim rowData(sqlDataReader.FieldCount) As Object
-
-        While sqlDataReader.Read()
-            sqlDataReader.GetValues(rowData)
-            tempEntity.LoadFromDataRow(rowData)
-
-            entitiesRead.Add(tempEntity)
-        End While
-
-        Return entitiesRead
-    End Function
-
-    Private Shared Function GetParseableFields(tempEntity As IDAO) As String
-        Dim fieldsArray As String() = tempEntity.GetFieldsToParse()
-
-        Dim data As New Dictionary(Of String, String)
-        data = fieldsArray.ToDictionary(Function(field) field)
-
-        Return GetParseableFields(data)
-    End Function
 
     Private Shared Function GetParseableFields(data As IDictionary) As String
-        Dim fieldsToSelect As String = Nothing
-        For Each field In data.Keys
-            fieldsToSelect += field & ", "
-        Next
-        fieldsToSelect = fieldsToSelect.Remove(fieldsToSelect.Length - 2)
-        Return fieldsToSelect
+        Dim temp As ICollection(Of String) = data.Keys
+
+        Return String.Join(", ", temp.ToList())
     End Function
 
     ' Evident copy and paste, refactor later.
@@ -124,32 +114,13 @@ Public Class DAL
         Throw New NotImplementedException()
     End Sub
 
-    Public Shared Function GetWhereFields(credentials As Credentials) As String
-        Dim properties As PropertyInfo() = credentials.GetType().GetProperties()
-
-        Dim whereClause As String = Nothing
-        For Each credentialProperty In properties
-            If credentialProperty.GetValue(credentials) IsNot Nothing Then
-                whereClause += credentialProperty.Name & " = '" & credentialProperty.GetValue(credentials) & "' AND "
-            End If
-        Next
-
-        whereClause = whereClause.Remove(whereClause.Length - 5)
-        Return whereClause
-    End Function
-
     Public Sub ConnectToDatabase()
         connection = New SqlConnection(Environment.GetEnvironmentVariable("StringConnection"))
 
         connection.Open()
     End Sub
 
-    Public Sub CloseConnection() Implements IDAL.CloseConnection
+    Public Sub Dispose() Implements IDisposable.Dispose
         connection.Close()
-    End Sub
-
-    Protected Overrides Sub Finalize()
-        CloseConnection()
-        MyBase.Finalize()
     End Sub
 End Class

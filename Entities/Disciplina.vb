@@ -2,6 +2,16 @@
     Inherits DAO
     Implements IDAO
 
+    Private _Id As Integer
+    Public Property Id As Integer
+        Get
+            Return _Id
+        End Get
+        Set(value As Integer)
+            _Id = value
+        End Set
+    End Property
+
     Private _Name As String
     Public Property Name As String
         Get

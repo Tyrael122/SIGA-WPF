@@ -4,4 +4,5 @@
     FuncionarioAdm
     Curso
     Disciplina
+    DisciplinaCurso
 End Enum

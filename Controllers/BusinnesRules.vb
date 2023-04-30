@@ -75,13 +75,11 @@
         End Select
     End Function
 
-    Friend Shared Function RegisterEntity(data As Object, entityType As Table) As Object
+    Friend Shared Function Save(data As IDictionary, table As Table) As Object
         Dim dataBridge As IDAL = New DAL()
-        dataBridge.Save(data, entityType)
+        dataBridge.Save(data, table)
 
-        dataBridge.CloseConnection()
-
-        ' TODO: Check if the insertion was correctly done
+        ' TODO: Maybe we should check if the insertion was correctly done
         Return True
     End Function
 
@@ -115,5 +113,35 @@
         Dim disciplinas = dataBridge.ReadAllEntities(Table.Disciplina)
 
         Return disciplinas.Cast(Of Disciplina)
+    End Function
+
+    Friend Shared Function SaveDisciplinaCurso(courseData As IDictionary(Of String, String), disciplinasCurso As List(Of Disciplina), disciplinaCurso As Table) As Object
+        ' TODO: Generalize the method to work with any table
+        ' TODO: Get the course ID somehow. Maybe we should pass it as a parameter.
+
+        Dim dataBridge As IDAL = New DAL()
+        Dim data As IEnumerable(Of IDictionary(Of String, String))
+
+        data = dataBridge.SelectAll(Table.Curso).Where(Function(dict)
+                                                           For Each key In courseData.Keys
+                                                               If dict(key) <> courseData(key) Then
+                                                                   Return False
+                                                               End If
+                                                           Next
+                                                           Return True
+                                                       End Function)
+
+        Dim CursoId As String = data.First().Item("Id")
+
+        For Each disciplina In disciplinasCurso
+            Dim dataDict As New Dictionary(Of String, String) From {
+                {"IdCurso", CursoId},
+                {"IdDisciplina", disciplina.Id}
+            }
+
+            dataBridge.Save(dataDict, disciplinaCurso)
+        Next
+
+        Return True
     End Function
 End Class

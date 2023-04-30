@@ -2,14 +2,14 @@
 
 Public Class PresenterFuncionario
     Private View As IView
-    Private DisciplinasCurso As New List(Of Disciplina)
+    Private disciplinasCurso As New List(Of Disciplina)
 
     Public Sub New(view As IView)
         Me.View = view
     End Sub
 
     Public Sub RegisterAluno(data As IDictionary)
-        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, UserType.Aluno)
+        Dim hasInsertedSucessufully = BusinessRules.Save(data, UserType.Aluno)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Aluno adicionado com sucesso!")
@@ -19,7 +19,7 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Sub RegisterProfessor(data As IDictionary(Of String, String))
-        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, UserType.Professor)
+        Dim hasInsertedSucessufully = BusinessRules.Save(data, UserType.Professor)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Professor adicionado com sucesso!")
@@ -28,11 +28,11 @@ Public Class PresenterFuncionario
         End If
     End Sub
 
-    Friend Sub RegisterCurso(data As IDictionary(Of String, String))
+    Friend Sub RegisterCurso(courseData As IDictionary(Of String, String))
+        Dim hasInsertedSucessufully = BusinessRules.Save(courseData, Table.Curso)
 
+        hasInsertedSucessufully = BusinessRules.SaveDisciplinaCurso(courseData, disciplinasCurso, Table.DisciplinaCurso)
 
-
-        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, Table.Curso)
         If hasInsertedSucessufully Then
             View.DisplayInfo("Curso adicionado com sucesso!")
         Else
@@ -41,7 +41,7 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Sub RegisterDisciplina(data As IDictionary(Of String, String))
-        Dim hasInsertedSucessufully = BusinessRules.RegisterEntity(data, Table.Disciplina)
+        Dim hasInsertedSucessufully = BusinessRules.Save(data, Table.Disciplina)
         If hasInsertedSucessufully Then
             View.DisplayInfo("Disciplina adicionado com sucesso!")
         Else
@@ -50,11 +50,11 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Sub AddDisciplinaSelecionadaAoCurso(discplina As Disciplina)
-        DisciplinasCurso.Add(discplina)
+        disciplinasCurso.Add(discplina)
     End Sub
 
     Friend Sub RemoveDisciplinaSelecionadaDoCurso(disciplina As Disciplina)
-        DisciplinasCurso.Remove(disciplina)
+        disciplinasCurso.Remove(disciplina)
     End Sub
 
     Friend Function GetAllAlunos() As IEnumerable
