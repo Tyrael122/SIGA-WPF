@@ -12,7 +12,7 @@
         End Set
     End Property
 
-    Public Overrides Function GetFieldsToParse() As String() Implements IDAO.GetFieldsToParse
+    Protected Overrides Function GetFieldsToParse() As String()
         Dim data As String() = MyBase.GetFieldsToParse()
 
         Dim additionalData As String() =

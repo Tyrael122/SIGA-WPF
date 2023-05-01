@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Diagnostics.Eventing
 
 Public Class DAL
     Implements IDAL, IDisposable
@@ -11,6 +12,9 @@ Public Class DAL
         ConnectToDatabase()
     End Sub
 
+    Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectAll
+        Return SelectFields(table, "*")
+    End Function
 
     Public Function SelectFields(table As Table, ParamArray fieldsToSelect() As String) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectFields
         Dim sql As String
@@ -19,33 +23,43 @@ Public Class DAL
         sqlCommand = New SqlCommand(sql, connection)
         sqlDataReader = sqlCommand.ExecuteReader()
 
-        Dim result As New List(Of IDictionary(Of String, String))
-        While sqlDataReader.Read()
-            Dim row As New Dictionary(Of String, String)
-            For i As Integer = 0 To sqlDataReader.FieldCount - 1
-                row.Add(sqlDataReader.GetName(i), sqlDataReader.GetValue(i))
-            Next
-            result.Add(row)
-        End While
-
+        Dim result = ParseResultIntoDictionary(sqlDataReader)
         sqlDataReader.Close()
 
         Return result
     End Function
 
-    Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectAll
-        Return SelectFields(table, "*")
+    Public Function Save(data As IDictionary, table As Table) As Boolean Implements IDAL.Save
+        sqlDataReader = SavePrivate(data, table)
+
+        Dim rowsAffected As Integer = 0
+        While sqlDataReader.Read()
+            rowsAffected += 1
+        End While
+
+        sqlDataReader.Close()
+
+        Return rowsAffected = 1
     End Function
 
-    Public Sub Save(data As IDictionary, table As Table) Implements IDAL.Save
+    Public Function SaveWithOutput(data As IDictionary, table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SaveWithOutput
+        sqlDataReader = SavePrivate(data, table)
+
+        Dim result = ParseResultIntoDictionary(sqlDataReader)
+        sqlDataReader.Close()
+
+        Return result
+    End Function
+
+    Private Function SavePrivate(data As IDictionary, table As Table) As SqlDataReader ' SavePrivate indicates that this method is private and is the one that actually saves the data.
         Dim sql As String
-        sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ")"
+        sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ") OUTPUT INSERTED.*"
         sql += " VALUES (" & GetParseableData(data) & ")"
 
         sqlCommand = New SqlCommand(sql, connection)
 
-        sqlCommand.ExecuteNonQuery() ' How do we know the insert operation succeeded?
-    End Sub
+        Return sqlCommand.ExecuteReader()
+    End Function
 
     Public Function ReadAllEntities(table As Table) As List(Of IDAO) Implements IDAL.ReadAllEntities
         Dim entitiesRead As New List(Of IDAO)
@@ -66,7 +80,7 @@ Public Class DAL
         Return String.Join(", ", temp.ToList())
     End Function
 
-    ' Evident copy and paste, refactor later.
+    ' TODO: Refactor later, maybe into parametrized SQL statements.
     Private Shared Function GetParseableData(data As IDictionary) As String
         Dim fieldsToSelect As String = Nothing
         For Each field In data.Values
@@ -81,6 +95,19 @@ Public Class DAL
         Return fieldsToSelect
     End Function
 
+    Private Function ParseResultIntoDictionary(sqlDataReader As SqlDataReader) As List(Of IDictionary(Of String, String))
+        Dim result As New List(Of IDictionary(Of String, String))
+        While sqlDataReader.Read()
+            Dim row As New Dictionary(Of String, String)
+            For i As Integer = 0 To sqlDataReader.FieldCount - 1
+                row.Add(sqlDataReader.GetName(i), sqlDataReader.GetValue(i))
+            Next
+            result.Add(row)
+        End While
+
+        Return result
+    End Function
+
     Public Sub Delete(entity As IDAO) Implements IDAL.Delete
         Throw New NotImplementedException()
     End Sub
@@ -89,7 +116,7 @@ Public Class DAL
         Throw New NotImplementedException()
     End Sub
 
-    Public Sub ConnectToDatabase()
+    Private Sub ConnectToDatabase()
         connection = New SqlConnection(Environment.GetEnvironmentVariable("StringConnection"))
         connection.Open()
     End Sub

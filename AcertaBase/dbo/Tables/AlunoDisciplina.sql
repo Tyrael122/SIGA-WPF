@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[DisciplinaAluno]
+﻿CREATE TABLE [dbo].[AlunoDisciplina]
 (
     [IdAluno] INT NOT NULL, 
 	[IdDisciplina] INT NOT NULL, 

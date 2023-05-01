@@ -22,7 +22,7 @@
         End Set
     End Property
 
-    Public Overrides Function GetFieldsToParse() As String() Implements IDAO.GetFieldsToParse
+    Protected Overrides Function GetFieldsToParse() As String()
         Return MyBase.GetFieldsToParse()
     End Function
 End Class

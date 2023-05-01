@@ -1,7 +1,7 @@
 ﻿Public MustInherit Class DAO
     Implements IDAO
 
-    Public Overridable Function GetFieldsToParse() As String() Implements IDAO.GetFieldsToParse
+    Protected Overridable Function GetFieldsToParse() As String()
         Dim fields As New List(Of String)
 
         For Each field In Me.GetType().GetProperties()
@@ -10,15 +10,6 @@
 
         Return fields.ToArray()
     End Function
-
-    Public Sub LoadFromDataRow(data() As Object) Implements IDAO.LoadFromDataRow
-        Dim i As Integer = 1
-        ' Needed to pass a dict to get the data through the field name, not an index.
-        For Each field In Me.GetFieldsToParse()
-            Me.GetType().GetProperty(field).SetValue(Me, data(i))
-            i += 1
-        Next
-    End Sub
 
     Public Sub LoadFromDictionary(data As IDictionary) Implements IDAO.LoadFromDictionary
         For Each field In Me.GetFieldsToParse()
