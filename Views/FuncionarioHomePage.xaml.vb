@@ -30,14 +30,19 @@ Public Class FuncionarioHomePage
     Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrar.Click
         Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
             {"Login", txtLogin.Text},
-            {"Password", txtPassword.Text}
+            {"Password", txtPassword.Text},
+            {"Curso", cmbCursosAluno.SelectedValue},
+            {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
         }
 
         Presenter.RegisterAluno(map)
     End Sub
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        'cmbSemestreInicio.SelectedIndex = 1
+        'cmbCursosAluno.SelectedIndex = 1
         DisciplinasCursoDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
+        cmbCursosAluno.ItemsSource = Presenter.GetAllNomeCursos()
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
@@ -88,6 +93,45 @@ Public Class FuncionarioHomePage
             Presenter.AddDisciplinaSelecionadaAoCurso(checkBox.Tag)
         Else
             Presenter.RemoveDisciplinaSelecionadaDoCurso(checkBox.Tag)
+        End If
+    End Sub
+
+    Private Sub cmbCursosAluno_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursosAluno.SelectionChanged
+        Dim semestreInicio As Integer = 0
+        If cmbSemestreInicio.SelectedValue IsNot Nothing Then
+            semestreInicio = Convert.ToInt32(cmbSemestreInicio.SelectedValue.Content)
+        End If
+
+        DisciplinasCursoAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCursoSemestreInicio(cmbCursosAluno.SelectedValue, semestreInicio)
+    End Sub
+
+    Private Sub cmbSemestreInicio_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSemestreInicio.SelectionChanged
+        Dim semestreInicio As Integer = Convert.ToInt32(cmbSemestreInicio.SelectedValue.Content)
+
+        If cmbCursosAluno.SelectedValue Is Nothing Then
+            Return
+        End If
+        DisciplinasCursoAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCursoSemestreInicio(cmbCursosAluno.SelectedValue, semestreInicio)
+
+        'For Each item As Object In DisciplinasCursoAlunoDataGrid.Items
+        '    Dim row As DataGridRow = TryCast(DisciplinasCursoAlunoDataGrid.ItemContainerGenerator.ContainerFromItem(item), DataGridRow)
+
+
+        '    'Dim checkBox As CheckBox = 
+        '    'checkBox.IsChecked = True
+        '    Debug.Write("woivniowne")
+        'Next
+
+
+        'Presenter.CheckDisciplinasSemestre(cmbSemestreInicio.SelectedValue)
+    End Sub
+
+    Private Sub CheckBoxDisciplinasAluno_Click(sender As Object, e As RoutedEventArgs)
+        Dim checkBox As CheckBox = CType(sender, CheckBox)
+        If checkBox.IsChecked Then
+            Presenter.AddDisciplinaSelecionadaAoAluno(checkBox.Tag)
+        Else
+            Presenter.RemoveDisciplinaSelecionadaDoAluno(checkBox.Tag)
         End If
     End Sub
 End Class

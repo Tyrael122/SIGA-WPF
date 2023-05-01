@@ -1,8 +1,4 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.Data.Common
-Imports System.Data.SqlClient
-Imports System.Reflection
-Imports System.Linq
+﻿Imports System.Data.SqlClient
 
 Public Class DAL
     Implements IDAL, IDisposable
@@ -31,9 +27,10 @@ Public Class DAL
             Next
             result.Add(row)
         End While
-        sqlDataReader.Close()
-        Return result
 
+        sqlDataReader.Close()
+
+        Return result
     End Function
 
     Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectAll
@@ -46,42 +43,20 @@ Public Class DAL
         sql += " VALUES (" & GetParseableData(data) & ")"
 
         sqlCommand = New SqlCommand(sql, connection)
+
         sqlCommand.ExecuteNonQuery() ' How do we know the insert operation succeeded?
     End Sub
 
     Public Function ReadAllEntities(table As Table) As List(Of IDAO) Implements IDAL.ReadAllEntities
-        Dim sql As String
-        sql = "SELECT * FROM " & table.ToString()
-
-        sqlCommand = New SqlCommand(sql, connection)
-        sqlDataReader = sqlCommand.ExecuteReader()
-
         Dim entitiesRead As New List(Of IDAO)
 
-        Dim rowData(sqlDataReader.FieldCount) As Object
-
-        While sqlDataReader.Read()
-            Dim columnsSchema As ReadOnlyCollection(Of DbColumn) = sqlDataReader.GetColumnSchema()
-            Dim columns As IEnumerable(Of String) = columnsSchema.Select(Function(dbColumn) dbColumn.ColumnName)
-
-            sqlDataReader.GetValues(rowData)
-
+        For Each dictionary In SelectAll(table)
             Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
-
-            Dim tempDict As New Dictionary(Of String, Object)
-            Dim i = 0
-            For Each column In columns
-                tempDict.Add(column, rowData(i))
-                i += 1
-            Next
-            'tempDict = columns.Zip(rowData).ToDictionary(Function(columnName) columnName)
-
-            tempEntity.LoadFromDictionary(tempDict)
+            tempEntity.LoadFromDictionary(dictionary)
 
             entitiesRead.Add(tempEntity)
-        End While
+        Next
 
-        sqlDataReader.Close()
         Return entitiesRead
     End Function
 
@@ -116,7 +91,6 @@ Public Class DAL
 
     Public Sub ConnectToDatabase()
         connection = New SqlConnection(Environment.GetEnvironmentVariable("StringConnection"))
-
         connection.Open()
     End Sub
 

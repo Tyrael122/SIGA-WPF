@@ -25,6 +25,9 @@
             If data.Contains(field) Then ' Should we throw an exception if the field is not in the dict?
                 Dim valuePassedIn As Object = data.Item(field)
                 If TypeOf valuePassedIn IsNot DBNull Then
+                    If IsNumeric(valuePassedIn) Then
+                        valuePassedIn = Convert.ToInt32(valuePassedIn)
+                    End If
                     Me.GetType().GetProperty(field).SetValue(Me, valuePassedIn)
                 End If
             Else

@@ -1,8 +1,7 @@
-﻿Imports System.Runtime.CompilerServices
-
-Public Class PresenterFuncionario
+﻿Public Class PresenterFuncionario
     Private View As IView
     Private disciplinasCurso As New List(Of Disciplina)
+    Private disciplinasExcluidasAluno As New List(Of Disciplina)
 
     Public Sub New(view As IView)
         Me.View = view
@@ -10,6 +9,10 @@ Public Class PresenterFuncionario
 
     Public Sub RegisterAluno(data As IDictionary)
         Dim hasInsertedSucessufully = BusinessRules.Save(data, UserType.Aluno)
+        Dim disciplinasAluno = BusinessRules.GetDisciplinasCurso(data.Item("Curso")).
+            Where(Function(disc) Not disciplinasExcluidasAluno.Contains(disc) And disc.Semester >= data.Item("SemestreInicio")).ToList()
+
+        hasInsertedSucessufully = BusinessRules.SaveDisciplinaAluno(data, disciplinasAluno, Table.DisciplinaAluno)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Aluno adicionado com sucesso!")
@@ -57,6 +60,18 @@ Public Class PresenterFuncionario
         disciplinasCurso.Remove(disciplina)
     End Sub
 
+    Friend Sub CheckDisciplinasSemestre(semestreInicio As Object)
+
+    End Sub
+
+    Friend Sub RemoveDisciplinaSelecionadaDoAluno(disciplina As Object)
+        disciplinasExcluidasAluno.Add(disciplina)
+    End Sub
+
+    Friend Sub AddDisciplinaSelecionadaAoAluno(disciplina As Object)
+        disciplinasExcluidasAluno.Remove(disciplina)
+    End Sub
+
     Friend Function GetAllAlunos() As IEnumerable
         Return BusinessRules.GetAllAlunos()
     End Function
@@ -69,7 +84,17 @@ Public Class PresenterFuncionario
         Return BusinessRules.GetAllCursos()
     End Function
 
-    Friend Function GetAllDisciplinas() As IEnumerable
+    Friend Function GetAllDisciplinas() As IEnumerable(Of Disciplina)
         Return BusinessRules.GetAllDisciplinas()
+    End Function
+
+    Friend Function GetAllNomeCursos() As IEnumerable
+        Return BusinessRules.GetAllNomeCursos()
+    End Function
+
+    Friend Function GetDisciplinasCursoSemestreInicio(curso As String, semestreInicio As Integer) As IEnumerable
+        Dim disciplinas = BusinessRules.GetDisciplinasCurso(curso)
+
+        Return disciplinas.Where(Function(disciplina) disciplina.Semester >= semestreInicio)
     End Function
 End Class

@@ -1,6 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-
-Public Class PresenterLogin
+﻿Public Class PresenterLogin
     Private View As IView
 
     Public Sub New(view As IView)
@@ -15,14 +13,6 @@ Public Class PresenterLogin
             window.Show()
 
             View.CloseView()
-
-            ' TODO: Log the user in
-            ' TODO: Display to the user the right plataform dependent on his userType
-            ' Problem: a switch statement would litter the method for each case
-            ' Solution: use a presenter to get the right form?
-            ' The deal is that we will need to call this chooseForm function all over the system.
-            ' I wanted something that you have to login once, then you're redirected to your user specific plataform
-
         Else
             View.DisplayInfo("The credentials are invalid.")
         End If

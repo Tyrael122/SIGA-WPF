@@ -5,4 +5,5 @@
     Curso
     Disciplina
     DisciplinaCurso
+    DisciplinaAluno
 End Enum

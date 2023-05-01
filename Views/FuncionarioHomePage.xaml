@@ -30,6 +30,28 @@
                                     <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
                                     <Button x:Name="btnCadastrar" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
                                     <Label x:Name="lblInfoCadastroAluno" Content="" HorizontalAlignment="Left" Height="29" Margin="148,84,0,0" VerticalAlignment="Top" Width="159"/>
+                                    <ComboBox x:Name="cmbCursosAluno" HorizontalAlignment="Left" Margin="394,118,0,0" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Curso:" HorizontalAlignment="Left" Margin="349,114,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+                                    <DataGrid x:Name="DisciplinasCursoAlunoDataGrid" Margin="349,149,110,110" IsTextSearchEnabled="True" SelectionMode="Extended">
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn Header="Selecionar">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Click="CheckBoxDisciplinasAluno_Click" Tag="{Binding}" IsChecked="True"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <ComboBox x:Name="cmbSemestreInicio" HorizontalAlignment="Left" Margin="394,77,0,0" VerticalAlignment="Top" Width="120">
+                                        <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                        <ComboBoxItem Content="6"/>
+                                    </ComboBox>
+                                    <Label Content="Semestre de início:" HorizontalAlignment="Left" Margin="277,73,0,0" VerticalAlignment="Top" Height="26" Width="117"/>
                                 </Grid>
                             </TabItem>
                             <TabItem x:Name="tabEditarAlunos" Header="Editar">
