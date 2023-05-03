@@ -6,8 +6,6 @@
     End Sub
 
     Public Function GetAllAlunos()
-        Return BusinessRules.GetAllAlunos()
+        Return BusinessRules.GetAll(Of Aluno)(Table.Aluno)
     End Function
-
-
 End Class

@@ -54,7 +54,7 @@
                                     <Label Content="Semestre de início:" HorizontalAlignment="Left" Margin="277,73,0,0" VerticalAlignment="Top" Height="26" Width="117"/>
                                 </Grid>
                             </TabItem>
-                            <TabItem x:Name="tabEditarAlunos" Header="Editar">
+                            <TabItem x:Name="tabEditarAlunos" Header="Editar" Margin="-2,-2,-2,2">
                                 <Grid Background="#FFE5E5E5">
                                     <DataGrid x:Name="alunosDataGrid"/>
                                 </Grid>

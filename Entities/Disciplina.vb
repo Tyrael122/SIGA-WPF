@@ -2,12 +2,12 @@
     Inherits DAO
     Implements IDAO
 
-    Private _Id As Integer
-    Public Property Id As Integer
+    Private _Id As String
+    Public Property Id As String
         Get
             Return _Id
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _Id = value
         End Set
     End Property
@@ -22,22 +22,22 @@
         End Set
     End Property
 
-    Private _Semester As Integer
-    Public Property Semester As Integer
+    Private _Semester As String
+    Public Property Semester As String
         Get
             Return _Semester
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _Semester = value
         End Set
     End Property
 
-    Private _Workload As Integer
-    Public Property Workload As Integer
+    Private _Workload As String
+    Public Property Workload As String
         Get
             Return _Workload
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _Workload = value
         End Set
     End Property

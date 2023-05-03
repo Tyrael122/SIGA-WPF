@@ -12,7 +12,7 @@
         Dim disciplinasAluno = BusinessRules.GetDisciplinasCurso(data.Item("Curso")).
             Where(Function(disc) Not disciplinasExcluidasAluno.Contains(disc) And disc.Semester >= data.Item("SemestreInicio")).ToList()
 
-        Dim hasInsertedSucessufully = BusinessRules.SaveWithRelation(data, disciplinasAluno, Table.Aluno, Table.AlunoDisciplina)
+        Dim hasInsertedSucessufully = BusinessRules.SaveEntityWithRelation(data, disciplinasAluno, Table.AlunoDisciplina)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Aluno adicionado com sucesso!")
@@ -22,7 +22,7 @@
     End Sub
 
     Friend Sub RegisterProfessor(data As IDictionary(Of String, String))
-        Dim hasInsertedSucessufully = BusinessRules.SaveWithRelation(data, disciplinasProfessor, UserType.Professor, Table.ProfessorDisciplina)
+        Dim hasInsertedSucessufully = BusinessRules.SaveEntityWithRelation(data, disciplinasProfessor, Table.ProfessorDisciplina)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Professor adicionado com sucesso!")
@@ -32,7 +32,7 @@
     End Sub
 
     Friend Sub RegisterCurso(courseData As IDictionary(Of String, String))
-        Dim hasInsertedSucessufully = BusinessRules.SaveWithRelation(courseData, disciplinasCurso, Table.Curso, Table.CursoDisciplina)
+        Dim hasInsertedSucessufully = BusinessRules.SaveEntityWithRelation(courseData, disciplinasCurso, Table.CursoDisciplina)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Curso adicionado com sucesso!")
@@ -59,38 +59,38 @@
         disciplinasCurso.Remove(disciplina)
     End Sub
 
-    Friend Sub RemoveDisciplinaSelecionadaDoAluno(disciplina As Object)
+    Friend Sub RemoveDisciplinaSelecionadaDoAluno(disciplina As Disciplina)
         disciplinasExcluidasAluno.Add(disciplina)
     End Sub
 
-    Friend Sub AddDisciplinaSelecionadaAoAluno(disciplina As Object)
+    Friend Sub AddDisciplinaSelecionadaAoAluno(disciplina As Disciplina)
         disciplinasExcluidasAluno.Remove(disciplina)
     End Sub
 
-    Friend Sub AddDisciplinaSelecionadaAoProfessor(disciplina As Object)
+    Friend Sub AddDisciplinaSelecionadaAoProfessor(disciplina As Disciplina)
         disciplinasProfessor.Add(disciplina)
     End Sub
 
-    Friend Sub RemoveDisciplinaSelecionadaDoProfessor(disciplina As Object)
+    Friend Sub RemoveDisciplinaSelecionadaDoProfessor(disciplina As Disciplina)
         disciplinasProfessor.Remove(disciplina)
     End Sub
 
-    Friend Sub ShowDisciplinaPage(disciplina As Object)
+    Friend Sub ShowDisciplinaPage(disciplina As Disciplina)
         Dim disciplinaPage As Window = New DisciplinaProfessorPage(disciplina)
 
         disciplinaPage.Show()
     End Sub
 
     Friend Function GetAllAlunos() As IEnumerable
-        Return BusinessRules.GetAllAlunos()
+        Return BusinessRules.GetAll(Of Aluno)(Table.Aluno)
     End Function
 
     Friend Function GetAllProfessores() As IEnumerable
-        Return BusinessRules.GetAllProfessores()
+        Return BusinessRules.GetAll(Of Professor)(Table.Professor)
     End Function
 
     Friend Function GetAllCursos() As IEnumerable
-        Return BusinessRules.GetAllCursos()
+        Return BusinessRules.GetAll(Of Curso)(Table.Curso)
     End Function
 
 
@@ -99,7 +99,7 @@
     End Function
 
     Friend Function GetAllDisciplinas() As IEnumerable(Of Disciplina)
-        Return BusinessRules.GetAllDisciplinas()
+        Return BusinessRules.GetAll(Of Disciplina)(Table.Disciplina)
     End Function
 
     Friend Function GetDisciplinasCursoSemestreInicio(curso As String, semestreInicio As Integer) As IEnumerable(Of Disciplina)

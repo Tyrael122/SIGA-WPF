@@ -2,12 +2,12 @@
     Inherits UserDAO
     Implements IDAO
 
-    Private _Curso As Integer
-    Public Property Curso As Integer
+    Private _Curso As String
+    Public Property Curso As String
         Get
             Return _Curso
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _Curso = value
         End Set
     End Property

@@ -23,12 +23,13 @@
     End Property
 
     Private _Turno As Turno
-    Public Property Turno As Turno
+    Public Property Turno As String
         Get
-            Return _Turno
+            Return _Turno.ToString()
         End Get
-        Set(value As Turno)
-            _Turno = value
+        Set(value As String)
+            Dim turno = Convert.ToInt32(value)
+            _Turno = turno
         End Set
     End Property
 End Class
