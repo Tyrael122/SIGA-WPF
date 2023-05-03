@@ -23,7 +23,7 @@
             Case UserType.Aluno
                 Return New AlunoHomePage()
             Case UserType.Professor
-                ' Return New ProfessorHomePage()
+                Return New ProfessorHomePage()
             Case UserType.FuncionarioAdm
                 Return New FuncionarioHomePage()
         End Select
