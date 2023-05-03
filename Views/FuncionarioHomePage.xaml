@@ -78,6 +78,17 @@
                                 <TextBox x:Name="txtPasswordProfessor" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
                                 <Button x:Name="btnCadastrarProfessor" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
                                 <Label x:Name="lblInfoCadastroProfessor" Content="" HorizontalAlignment="Left" Height="33" Margin="144,80,0,0" VerticalAlignment="Top" Width="163"/>
+                                <DataGrid x:Name="DisciplinasProfessorDataGrid" Margin="359,113,90,148" IsTextSearchEnabled="True" SelectionMode="Extended">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Selecionar">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox Click="CheckBoxDisciplinaProfessor_Click" Tag="{Binding}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="tabEditarProfessor" Header="Editar">

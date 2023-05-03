@@ -6,4 +6,5 @@
     Disciplina
     CursoDisciplina
     AlunoDisciplina
+    ProfessorDisciplina
 End Enum

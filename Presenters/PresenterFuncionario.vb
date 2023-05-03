@@ -2,6 +2,7 @@
     Private View As IView
     Private disciplinasCurso As New List(Of Disciplina)
     Private disciplinasExcluidasAluno As New List(Of Disciplina)
+    Private disciplinasProfessor As New List(Of Disciplina)
 
     Public Sub New(view As IView)
         Me.View = view
@@ -21,7 +22,7 @@
     End Sub
 
     Friend Sub RegisterProfessor(data As IDictionary(Of String, String))
-        Dim hasInsertedSucessufully = BusinessRules.Save(data, UserType.Professor)
+        Dim hasInsertedSucessufully = BusinessRules.SaveWithRelation(data, disciplinasProfessor, UserType.Professor, Table.ProfessorDisciplina)
 
         If hasInsertedSucessufully Then
             View.DisplayInfo("Professor adicionado com sucesso!")
@@ -64,6 +65,14 @@
 
     Friend Sub AddDisciplinaSelecionadaAoAluno(disciplina As Object)
         disciplinasExcluidasAluno.Remove(disciplina)
+    End Sub
+
+    Friend Sub AddDisciplinaSelecionadaAoProfessor(disciplina As Object)
+        disciplinasProfessor.Add(disciplina)
+    End Sub
+
+    Friend Sub RemoveDisciplinaSelecionadaDoProfessor(disciplina As Object)
+        disciplinasProfessor.Remove(disciplina)
     End Sub
 
     Friend Function GetAllAlunos() As IEnumerable

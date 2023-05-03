@@ -40,6 +40,7 @@ Public Class FuncionarioHomePage
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         DisciplinasCursoDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
+        DisciplinasProfessorDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
 
         For Each curso In Presenter.GetAllCursosAsDict()
             Dim comboBoxItem As New ComboBoxItem With {
@@ -127,6 +128,15 @@ Public Class FuncionarioHomePage
             Presenter.AddDisciplinaSelecionadaAoAluno(checkBox.Tag)
         Else
             Presenter.RemoveDisciplinaSelecionadaDoAluno(checkBox.Tag)
+        End If
+    End Sub
+
+    Private Sub CheckBoxDisciplinaProfessor_Click(sender As Object, e As RoutedEventArgs)
+        Dim checkBox As CheckBox = CType(sender, CheckBox)
+        If checkBox.IsChecked Then
+            Presenter.AddDisciplinaSelecionadaAoProfessor(checkBox.Tag)
+        Else
+            Presenter.RemoveDisciplinaSelecionadaDoProfessor(checkBox.Tag)
         End If
     End Sub
 End Class
