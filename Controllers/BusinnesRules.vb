@@ -1,6 +1,8 @@
 ﻿Public Class BusinessRules
     Private Shared userId As String
 
+    Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
+
     Public Shared Function GetNewEntityOf(table As Table) As IDAO
         Select Case table
             Case Table.Aluno
@@ -19,34 +21,40 @@
     End Function
 
     Friend Shared Function Save(data As IDictionary, table As Table) As Boolean
-        Dim dataBridge As IDAL = New DAL()
-
         Return dataBridge.Save(data, table)
     End Function
 
     Public Shared Function GetAll(Of T)(table As Table) As IEnumerable(Of T)
-        Dim dataBridge As New DAL
-
         Dim alunos = dataBridge.ReadAllEntities(table)
 
         Return alunos.Cast(Of T)
     End Function
 
     Friend Shared Function GetAllCursosAsDict() As List(Of IDictionary(Of String, String))
-        Dim dataBridge As New DAL
-
+        Dim dataBridge As IDAL = New DAL()
         Return dataBridge.SelectAll(Table.Curso)
     End Function
 
     Public Shared Function SaveEntityWithRelation(entityData As IDictionary(Of String, String), entitiesToRelate As IEnumerable(Of Object), relationTable As Table) As Boolean
         Dim entityTable = GenerateEntityTable(relationTable)
 
-        Dim outputData = saveWithOutput(entityData, entityTable)
+        Dim outputData = dataBridge.SaveWithOutput(entityData, entityTable)
 
         Dim entityId = outputData.First()("Id")
 
+        Dim uniqueEntityColumn = "Id" + relationTable.ToString().Replace(entityTable.ToString(), "")
+        Dim multipleEntityColumn = "Id" + entityTable.ToString()
+
         For Each entity In entitiesToRelate
-            SaveRelation(entity, entityId, GenerateRelationalColumnNames(entityTable, relationTable), relationTable)
+            Dim dataDict As New Dictionary(Of String, String) From {
+                {uniqueEntityColumn, entityId},
+                {multipleEntityColumn, entity.Id}
+            }
+
+            Dim isInsertSucessefull = dataBridge.Save(dataDict, relationTable)
+            If Not isInsertSucessefull Then
+                Return False
+            End If
         Next
 
         Return True
@@ -68,46 +76,13 @@
         Return [Enum].Parse(Table.Aluno.GetType(), entityTable)
     End Function
 
-    Private Shared Function GenerateRelationalColumnNames(entityTable As Table, relationTable As Table) As IDictionary(Of String, String)
-        Dim possessedColumn = "Id" + relationTable.ToString().Replace(entityTable.ToString(), "")
-        Dim possessorColumn = "Id" + entityTable.ToString()
-
-        Return New Dictionary(Of String, String) From {
-                {"UniqueEntityColumn", possessedColumn},
-                {"MultipleEntityColumn", possessorColumn}
-            }
-    End Function
-
-    Private Shared Sub SaveRelation(entity As Object, entityId As String, columnNames As IDictionary(Of String, String), relationTable As Table)
-        Dim dataBridge = New DAL()
-
-        Dim dataDict As New Dictionary(Of String, String) From {
-                {columnNames("UniqueEntityColumn"), entityId},
-                {columnNames("MultipleEntityColumn"), entity.Id}
-            }
-
-        Dim isInsertSucessefull = dataBridge.Save(dataDict, relationTable)
-        'If Not isInsertSucessefull Then
-        '    Return False
-        'End If
-    End Sub
-
-    Private Shared Function saveWithOutput(entityData As IDictionary(Of String, String), entityTable As Table) As List(Of IDictionary(Of String, String))
-        Dim dataBridge As IDAL = New DAL()
-        Return dataBridge.SaveWithOutput(entityData, entityTable)
-    End Function
-
     Friend Shared Function GetDisciplinasCurso(idCurso As String) As IEnumerable(Of Disciplina)
-        Dim dataBridge As New DAL()
-
         Dim idDisciplinasCurso = dataBridge.SelectAll(Table.CursoDisciplina).Where(Function(dict) dict.Item("IdCurso") = idCurso).Select(Function(dict) dict.Item("IdDisciplina"))
 
         Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinasCurso.Contains(disciplina.Id))
     End Function
 
     Friend Shared Function GetDisciplinasProfessor() As Object
-        Dim dataBridge As New DAL()
-
         Dim idDisciplinasProfessor = dataBridge.SelectAll(Table.ProfessorDisciplina).Where(Function(dict) dict.Item("IdProfessor") = userId).Select(Function(dict) dict.Item("IdDisciplina"))
 
         Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinasProfessor.Contains(disciplina.Id))
