@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         Title="ProfessorHomePage" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="DisciplinasDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="388,84,78,119"/>
-
+        <DataGrid x:Name="DisciplinasDataGrid" Margin="388,84,78,119">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Ver disciplina">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="VerDisciplina_Click" Tag="{Binding}" Content="Ver"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

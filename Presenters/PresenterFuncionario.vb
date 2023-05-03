@@ -75,6 +75,12 @@
         disciplinasProfessor.Remove(disciplina)
     End Sub
 
+    Friend Sub ShowDisciplinaPage(disciplina As Object)
+        Dim disciplinaPage As Window = New DisciplinaProfessorPage(disciplina)
+
+        disciplinaPage.Show()
+    End Sub
+
     Friend Function GetAllAlunos() As IEnumerable
         Return BusinessRules.GetAllAlunos()
     End Function

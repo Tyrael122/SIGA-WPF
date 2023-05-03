@@ -18,4 +18,11 @@
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         DisciplinasDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas()
     End Sub
+
+    Public Sub VerDisciplina_Click(sender As Object, e As EventArgs)
+        Dim button As Button = CType(sender, Button)
+
+        Presenter.ShowDisciplinaPage(button.Tag)
+
+    End Sub
 End Class
