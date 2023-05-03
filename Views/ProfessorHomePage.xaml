@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ProfessorHomePage" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="AlunosDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="388,84,78,119"/>
+        <DataGrid x:Name="DisciplinasDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="388,84,78,119"/>
 
     </Grid>
 </Window>

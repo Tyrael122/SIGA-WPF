@@ -101,4 +101,8 @@
 
         Return disciplinas.Where(Function(disciplina) disciplina.Semester >= semestreInicio)
     End Function
+
+    Friend Function GetDisciplinasCadastradas() As IEnumerable
+        Return BusinessRules.GetDisciplinasProfessor()
+    End Function
 End Class

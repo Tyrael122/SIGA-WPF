@@ -1,4 +1,6 @@
 ﻿Public Class BusinessRules
+    Private Shared userId As String
+
     Public Shared Function GetNewEntityOf(table As Table) As IDAO
         Select Case table
             Case Table.Aluno
@@ -91,4 +93,16 @@
 
         Return GetAllDisciplinas().Where(Function(disciplina) idDisciplinasCurso.Contains(disciplina.Id))
     End Function
+
+    Friend Shared Function GetDisciplinasProfessor() As Object
+        Dim dataBridge As New DAL()
+
+        Dim idDisciplinasProfessor = dataBridge.SelectAll(Table.ProfessorDisciplina).Where(Function(dict) dict.Item("IdProfessor") = userId).Select(Function(dict) dict.Item("IdDisciplina"))
+
+        Return GetAllDisciplinas().Where(Function(disciplina) idDisciplinasProfessor.Contains(disciplina.Id))
+    End Function
+
+    Friend Shared Sub SaveUserId(userId As String)
+        BusinessRules.userId = userId
+    End Sub
 End Class

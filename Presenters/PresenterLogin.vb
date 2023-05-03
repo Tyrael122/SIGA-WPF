@@ -6,9 +6,12 @@
     End Sub
 
     Public Sub TryLogin(username As String, password As String, userType As UserType) 'Implements IPresenter.TryLogin
-        Dim isCredentialsCorrect As Boolean = LoginRules.ValidateCredentials(username, password, userType)
+        Dim user = LoginRules.GetUserByCredentials(username, password, userType)
+        Dim isCredentialsCorrect = user.Count() = 1
 
         If isCredentialsCorrect Then
+            BusinessRules.SaveUserId(user.First()("Id"))
+
             Dim window As Window = ChooseWindow(userType)
             window.Show()
 

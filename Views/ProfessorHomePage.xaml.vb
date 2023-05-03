@@ -16,6 +16,6 @@
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        AlunosDataGrid.ItemsSource = Presenter.GetAllAlunos()
+        DisciplinasDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas()
     End Sub
 End Class
