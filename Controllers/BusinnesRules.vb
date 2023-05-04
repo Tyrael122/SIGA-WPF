@@ -16,7 +16,7 @@
             Case Table.Disciplina
                 Return New Disciplina()
             Case Else
-                Throw New ArgumentOutOfRangeException(NameOf(UserType), "The table is not bound to any valid entity.")
+                Throw New ArgumentOutOfRangeException(NameOf(table), "The table is not bound to any valid entity.")
         End Select
     End Function
 
@@ -35,57 +35,22 @@
         Return dataBridge.SelectAll(Table.Curso)
     End Function
 
-    Public Shared Function SaveEntityWithRelation(entityData As IDictionary(Of String, String), entitiesToRelate As IEnumerable(Of Object), relationTable As Table) As Boolean
-        Dim entityTable = GenerateEntityTable(relationTable)
-
-        Dim outputData = dataBridge.SaveWithOutput(entityData, entityTable)
-
-        Dim entityId = outputData.First()("Id")
-
-        Dim uniqueEntityColumn = "Id" + relationTable.ToString().Replace(entityTable.ToString(), "")
-        Dim multipleEntityColumn = "Id" + entityTable.ToString()
-
-        For Each entity In entitiesToRelate
-            Dim dataDict As New Dictionary(Of String, String) From {
-                {uniqueEntityColumn, entityId},
-                {multipleEntityColumn, entity.Id}
-            }
-
-            Dim isInsertSucessefull = dataBridge.Save(dataDict, relationTable)
-            If Not isInsertSucessefull Then
-                Return False
-            End If
-        Next
-
-        Return True
-    End Function
-
-    Private Shared Function GenerateEntityTable(relationTable As Table) As Table
-        Dim chars = relationTable.ToString().Where(
-                                            Function(c)
-                                                If c.ToString().ToLower() = c Then
-                                                    Return False
-                                                End If
-                                                Return True
-                                            End Function)
-
-        Dim start = relationTable.ToString().IndexOf(chars.First())
-        Dim upTo = relationTable.ToString().IndexOf(chars.Last())
-
-        Dim entityTable = relationTable.ToString().Substring(start, upTo)
-        Return [Enum].Parse(Table.Aluno.GetType(), entityTable)
-    End Function
-
-    Friend Shared Function GetDisciplinasCurso(idCurso As String) As IEnumerable(Of Disciplina)
-        Dim idDisciplinasCurso = dataBridge.SelectAll(Table.CursoDisciplina).Where(Function(dict) dict.Item("IdCurso") = idCurso).Select(Function(dict) dict.Item("IdDisciplina"))
-
-        Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinasCurso.Contains(disciplina.Id))
-    End Function
-
     Friend Shared Function GetDisciplinasProfessor() As Object
         Dim idDisciplinasProfessor = dataBridge.SelectAll(Table.ProfessorDisciplina).Where(Function(dict) dict.Item("IdProfessor") = userId).Select(Function(dict) dict.Item("IdDisciplina"))
 
         Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinasProfessor.Contains(disciplina.Id))
+    End Function
+
+    Friend Shared Function GetDisciplinas(Of T As IDAO)(idEntity As String) As IEnumerable(Of Disciplina)
+        Dim relation As New Relation(Of T, Disciplina)
+
+        Dim relationColumns = relation.GetRelationColumns()
+
+        Dim idDisciplinas = dataBridge.SelectAll(relation.GetRelationTable()).
+            Where(Function(dict) dict(relationColumns.uniqueEntity) = idEntity).
+            Select(Function(dict) dict(relationColumns.multipleEntity))
+
+        Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinas.Contains(disciplina.Id))
     End Function
 
     Friend Shared Sub SaveUserId(userId As String)

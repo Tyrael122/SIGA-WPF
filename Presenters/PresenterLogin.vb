@@ -5,14 +5,14 @@
         Me.View = view
     End Sub
 
-    Public Sub TryLogin(username As String, password As String, userType As UserType) 'Implements IPresenter.TryLogin
-        Dim user = LoginRules.GetUserByCredentials(username, password, userType)
+    Public Sub TryLogin(username As String, password As String, table As Table) 'Implements IPresenter.TryLogin
+        Dim user = LoginRules.GetUserByCredentials(username, password, table)
         Dim isCredentialsCorrect = user.Count() = 1
 
         If isCredentialsCorrect Then
             BusinessRules.SaveUserId(user.First()("Id"))
 
-            Dim window As Window = ChooseWindow(userType)
+            Dim window As Window = ChooseWindow(table)
             window.Show()
 
             View.CloseView()
@@ -21,13 +21,13 @@
         End If
     End Sub
 
-    Private Function ChooseWindow(userType As UserType) As Window
-        Select Case (userType)
-            Case UserType.Aluno
+    Private Function ChooseWindow(table As Table) As Window
+        Select Case (table)
+            Case Table.Aluno
                 Return New AlunoHomePage()
-            Case UserType.Professor
+            Case Table.Professor
                 Return New ProfessorHomePage()
-            Case UserType.FuncionarioAdm
+            Case Table.FuncionarioAdm
                 Return New FuncionarioHomePage()
         End Select
 

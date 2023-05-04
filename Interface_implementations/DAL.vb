@@ -112,7 +112,7 @@ Public Class DAL
         Throw New NotImplementedException()
     End Sub
 
-    Public Sub Edit(entity As IDAO, table As UserType) Implements IDAL.Edit
+    Public Sub Edit(entity As IDAO, table As Table) Implements IDAL.Edit
         Throw New NotImplementedException()
     End Sub
 

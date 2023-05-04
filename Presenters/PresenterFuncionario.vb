@@ -9,11 +9,15 @@
     End Sub
 
     Public Sub RegisterAluno(data As IDictionary)
-        Dim disciplinasAluno = BusinessRules.GetDisciplinasCurso(data.Item("Curso")).
+        Dim disciplinasAluno = BusinessRules.GetDisciplinas(Of Curso)(data.Item("Curso")).
             Where(Function(disc) Not disciplinasExcluidasAluno.Contains(disc) And disc.Semester >= data.Item("SemestreInicio")).ToList()
 
-        Dim hasInsertedSucessufully = BusinessRules.SaveEntityWithRelation(data, disciplinasAluno, Table.AlunoDisciplina)
+        Dim relation As New Relation(Of Aluno, Disciplina) With {
+            .uniqueEntityData = data,
+            .entitiesToRelate = disciplinasAluno
+        }
 
+        Dim hasInsertedSucessufully = relation.Save()
         If hasInsertedSucessufully Then
             View.DisplayInfo("Aluno adicionado com sucesso!")
         Else
@@ -22,8 +26,12 @@
     End Sub
 
     Friend Sub RegisterProfessor(data As IDictionary(Of String, String))
-        Dim hasInsertedSucessufully = BusinessRules.SaveEntityWithRelation(data, disciplinasProfessor, Table.ProfessorDisciplina)
+        Dim relation As New Relation(Of Aluno, Disciplina) With {
+            .uniqueEntityData = data,
+            .entitiesToRelate = disciplinasProfessor
+        }
 
+        Dim hasInsertedSucessufully = relation.Save()
         If hasInsertedSucessufully Then
             View.DisplayInfo("Professor adicionado com sucesso!")
         Else
@@ -32,8 +40,12 @@
     End Sub
 
     Friend Sub RegisterCurso(courseData As IDictionary(Of String, String))
-        Dim hasInsertedSucessufully = BusinessRules.SaveEntityWithRelation(courseData, disciplinasCurso, Table.CursoDisciplina)
+        Dim relation As New Relation(Of Aluno, Disciplina) With {
+            .uniqueEntityData = courseData,
+            .entitiesToRelate = disciplinasCurso
+        }
 
+        Dim hasInsertedSucessufully = relation.Save()
         If hasInsertedSucessufully Then
             View.DisplayInfo("Curso adicionado com sucesso!")
         Else

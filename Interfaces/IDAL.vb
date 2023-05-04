@@ -4,6 +4,6 @@
     Function ReadAllEntities(table As Table) As List(Of IDAO)
     Function Save(data As IDictionary, table As Table) As Boolean
     Function SaveWithOutput(data As IDictionary, table As Table) As List(Of IDictionary(Of String, String))
-    Sub Edit(entity As IDAO, table As UserType)
+    Sub Edit(entity As IDAO, table As Table)
     Sub Delete(entity As IDAO)
 End Interface
