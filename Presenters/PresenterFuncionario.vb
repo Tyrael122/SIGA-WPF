@@ -87,12 +87,6 @@
         disciplinasProfessor.Remove(disciplina)
     End Sub
 
-    Friend Sub ShowDisciplinaPage(disciplina As Disciplina)
-        Dim disciplinaPage As Window = New DisciplinaProfessorPage(disciplina)
-
-        disciplinaPage.Show()
-    End Sub
-
     Friend Function GetAllAlunos() As IEnumerable
         Return BusinessRules.GetAll(Of Aluno)(Table.Aluno)
     End Function
@@ -114,13 +108,9 @@
         Return BusinessRules.GetAll(Of Disciplina)(Table.Disciplina)
     End Function
 
-    Friend Function GetDisciplinasCursoSemestreInicio(curso As String, semestreInicio As Integer) As IEnumerable(Of Disciplina)
-        Dim disciplinas = BusinessRules.GetDisciplinasCurso(curso)
+    Friend Function GetDisciplinasCursoSemestreInicio(idCurso As String, semestreInicio As Integer) As IEnumerable(Of Disciplina)
+        Dim disciplinas = BusinessRules.GetDisciplinas(Of Curso)(idCurso)
 
         Return disciplinas.Where(Function(disciplina) disciplina.Semester >= semestreInicio)
-    End Function
-
-    Friend Function GetDisciplinasCadastradas() As IEnumerable
-        Return BusinessRules.GetDisciplinasProfessor()
     End Function
 End Class

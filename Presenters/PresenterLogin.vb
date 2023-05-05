@@ -10,7 +10,7 @@
         Dim isCredentialsCorrect = user.Count() = 1
 
         If isCredentialsCorrect Then
-            BusinessRules.SaveUserId(user.First()("Id"))
+            SessionCookie.userData = user.First()
 
             Dim window As Window = ChooseWindow(table)
             window.Show()

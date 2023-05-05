@@ -1,6 +1,4 @@
 ﻿Public Class BusinessRules
-    Private Shared userId As String
-
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
     Public Shared Function GetNewEntityOf(table As Table) As IDAO
@@ -35,12 +33,6 @@
         Return dataBridge.SelectAll(Table.Curso)
     End Function
 
-    Friend Shared Function GetDisciplinasProfessor() As Object
-        Dim idDisciplinasProfessor = dataBridge.SelectAll(Table.ProfessorDisciplina).Where(Function(dict) dict.Item("IdProfessor") = userId).Select(Function(dict) dict.Item("IdDisciplina"))
-
-        Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinasProfessor.Contains(disciplina.Id))
-    End Function
-
     Friend Shared Function GetDisciplinas(Of T As IDAO)(idEntity As String) As IEnumerable(Of Disciplina)
         Dim relation As New Relation(Of T, Disciplina)
 
@@ -52,8 +44,4 @@
 
         Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinas.Contains(disciplina.Id))
     End Function
-
-    Friend Shared Sub SaveUserId(userId As String)
-        BusinessRules.userId = userId
-    End Sub
 End Class

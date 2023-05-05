@@ -1,7 +1,7 @@
 ﻿Public Class ProfessorHomePage
     Implements IView
 
-    Private Presenter As PresenterFuncionario = New PresenterFuncionario(Me)
+    Private Presenter As PresenterProfessor = New PresenterProfessor(Me)
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         Throw New NotImplementedException()
@@ -23,6 +23,5 @@
         Dim button As Button = CType(sender, Button)
 
         Presenter.ShowDisciplinaPage(button.Tag)
-
     End Sub
 End Class

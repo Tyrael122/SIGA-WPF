@@ -3,38 +3,37 @@
     ''' The first type is the unique entity type, the second is the multiple entity type.
     ''' </summary>
 
+    Private ReadOnly dataBridge As IDAL = New DAL()
     Public uniqueEntityData As IDictionary(Of String, String)
     Public entitiesToRelate As IEnumerable(Of Object)
 
     Public Function GetRelationColumns() As RelationColumn
         Dim relationStruct = New RelationColumn With {
-            .uniqueEntity = NameOf(T),
-            .multipleEntity = NameOf(V)
+            .uniqueEntity = "Id" + GetType(T).Name,
+            .multipleEntity = "Id" + GetType(V).Name
         }
 
         Return relationStruct
     End Function
 
     Public Function GetRelationTable() As Table
-        Dim relationTableString = NameOf(T) + NameOf(V)
+        Dim relationTableString = GetType(T).Name + GetType(V).Name
         Return [Enum].Parse(Table.Aluno.GetType(), relationTableString)
     End Function
 
     Public Function GetUniqueEntityTable() As Table
-        Dim relationTableString = NameOf(T)
+        Dim relationTableString = GetType(T).Name
         Return [Enum].Parse(Table.Aluno.GetType(), relationTableString)
     End Function
 
 
     Public Function GetMultipleEntityTable() As Table
-        Dim relationTableString = NameOf(V)
+        Dim relationTableString = GetType(V).Name
         Return [Enum].Parse(Table.Aluno.GetType(), relationTableString)
     End Function
 
     Public Function Save() As Boolean
         Dim uniqueEntityTable = GetUniqueEntityTable()
-
-        Dim dataBridge As IDAL = New DAL()
 
         Dim outputData = dataBridge.SaveWithOutput(uniqueEntityData, uniqueEntityTable)
         Dim entityId = outputData.First()("Id")
