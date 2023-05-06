@@ -25,6 +25,23 @@
                     <Button x:Name="btnCadastrarProva" Content="Cadastrar" HorizontalAlignment="Left" Margin="255,203,0,0" VerticalAlignment="Top" Height="26" Width="62"/>
                 </Grid>
             </TabItem>
+            <TabItem HorizontalAlignment="Center" Height="20" Header="Lançamento de notas" VerticalAlignment="Top" Width="129" Margin="0,-1,0,0">
+                <Grid Background="#FFE5E5E5">
+                    <ComboBox x:Name="cmbProva" HorizontalAlignment="Left" Margin="18,26,0,0" VerticalAlignment="Top" Width="120"/>
+                    <DataGrid x:Name="NotasAlunosDataGrid" Margin="67,76,208,127">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Nota">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Name="textBoxName" Tag="{Binding}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnLancarNotas" Content="Lançar notas" HorizontalAlignment="Left" Margin="270,305,0,0" VerticalAlignment="Top" Height="36" Width="85"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

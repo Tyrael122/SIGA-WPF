@@ -28,9 +28,8 @@
         Return alunos.Cast(Of T)
     End Function
 
-    Friend Shared Function GetAllCursosAsDict() As List(Of IDictionary(Of String, String))
-        Dim dataBridge As IDAL = New DAL()
-        Return dataBridge.SelectAll(Table.Curso)
+    Friend Shared Function GetAllAsDict(table As Table) As List(Of IDictionary(Of String, String))
+        Return dataBridge.SelectAll(table)
     End Function
 
     Friend Shared Function GetDisciplinas(Of T As IDAO)(idEntity As String) As IEnumerable(Of Disciplina)

@@ -62,6 +62,12 @@
     End Function
 
     Public Function GetAllMultipleEntitiesById(uniqueEntityId As String) As IEnumerable(Of V)
+        Dim multipleEntities = GetAllMultipleEntitiesByIdAsDict(uniqueEntityId)
+
+        Return EntityParser.ParseListOfDict(Of V)(multipleEntities)
+    End Function
+
+    Public Function GetAllMultipleEntitiesByIdAsDict(uniqueEntityId As String) As IEnumerable(Of IDictionary(Of String, String))
         Dim relationColumns = GetRelationColumns()
         Dim relationTable = GetRelationTable()
 
@@ -71,8 +77,6 @@
             Where(Function(dict) dict(relationColumns.uniqueEntity) = uniqueEntityId).
             Select(Function(dict) dict(relationColumns.multipleEntity))
 
-        Dim multipleEntities = dataBridge.SelectAll(GetMultipleEntityTable()).Where(Function(dict) idList.Contains(dict("Id")))
-
-        Return EntityParser.ParseListOfDict(Of V)(multipleEntities)
+        Return dataBridge.SelectAll(GetMultipleEntityTable()).Where(Function(dict) idList.Contains(dict("Id")))
     End Function
 End Class

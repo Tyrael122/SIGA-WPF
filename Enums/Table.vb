@@ -8,4 +8,5 @@
     AlunoDisciplina
     ProfessorDisciplina
     Prova
+    Nota
 End Enum

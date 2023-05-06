@@ -1,6 +1,16 @@
 ﻿Public MustInherit Class DAO
     Implements IDAO
 
+    Private _Id As String
+    Public Property Id As String
+        Get
+            Return _Id
+        End Get
+        Set(value As String)
+            _Id = value
+        End Set
+    End Property
+
     Protected Overridable Function GetFieldsToParse() As String()
         Dim fields As New List(Of String)
 
@@ -13,13 +23,13 @@
 
     Public Sub LoadFromDictionary(data As IDictionary) Implements IDAO.LoadFromDictionary
         For Each field In Me.GetFieldsToParse()
-            If data.Contains(field) Then ' Should we throw an exception if the field is not in the dict?
+            If data.Contains(field) Then
                 Dim valuePassedIn As Object = data.Item(field)
+
                 If TypeOf valuePassedIn IsNot DBNull Then
                     Me.GetType().GetProperty(field).SetValue(Me, valuePassedIn)
                 End If
             Else
-                ' TODO: Should only throw exception for required fields
                 Throw New ArgumentException("The field " & field & " wasn't found in the dictionary")
             End If
         Next

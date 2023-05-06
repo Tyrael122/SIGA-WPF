@@ -101,7 +101,7 @@
 
 
     Friend Function GetAllCursosAsDict() As List(Of IDictionary(Of String, String))
-        Return BusinessRules.GetAllCursosAsDict()
+        Return BusinessRules.GetAllAsDict(Table.Curso)
     End Function
 
     Friend Function GetAllDisciplinas() As IEnumerable(Of Disciplina)
