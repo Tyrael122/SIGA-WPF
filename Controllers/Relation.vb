@@ -55,16 +55,18 @@
         Return True
     End Function
 
-    'Public Function GetAllMultipleEntitiesBasedOn(uniqueEntityId As String) As IEnumerable(Of V)
-    '    Dim relationColumns = GetRelationColumns()
-    '    Dim relationTable = GetRelationTable()
+    Public Function GetAllMultipleEntitiesById(uniqueEntityId As String) As IEnumerable(Of V)
+        Dim relationColumns = GetRelationColumns()
+        Dim relationTable = GetRelationTable()
 
-    '    Dim dataBridge As IDAL = New DAL()
+        Dim dataBridge As IDAL = New DAL()
 
-    '    Dim idList = dataBridge.SelectAll(relationTable).
-    '        Where(Function(dict) dict(relationColumns.uniqueEntity) = uniqueEntityId).
-    '        Select(Function(dict) dict(relationColumns.multipleEntity))
+        Dim idList = dataBridge.SelectAll(relationTable).
+            Where(Function(dict) dict(relationColumns.uniqueEntity) = uniqueEntityId).
+            Select(Function(dict) dict(relationColumns.multipleEntity))
 
-    '    Return BusinessRules.GetAll(Of V)(relationTable).Where(Function(multipleEntity) idList.Contains(multipleEntity.Id))
-    'End Function
+        Dim multipleEntities = dataBridge.SelectAll(GetMultipleEntityTable()).Where(Function(dict) idList.Contains(dict("Id")))
+
+        Return EntityParser.ParseListOfDict(Of V)(multipleEntities)
+    End Function
 End Class

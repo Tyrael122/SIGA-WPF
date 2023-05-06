@@ -88,15 +88,15 @@
     End Sub
 
     Friend Function GetAllAlunos() As IEnumerable
-        Return BusinessRules.GetAll(Of Aluno)(Table.Aluno)
+        Return BusinessRules.GetAll(Of Aluno)
     End Function
 
     Friend Function GetAllProfessores() As IEnumerable
-        Return BusinessRules.GetAll(Of Professor)(Table.Professor)
+        Return BusinessRules.GetAll(Of Professor)()
     End Function
 
     Friend Function GetAllCursos() As IEnumerable
-        Return BusinessRules.GetAll(Of Curso)(Table.Curso)
+        Return BusinessRules.GetAll(Of Curso)()
     End Function
 
 
@@ -105,7 +105,7 @@
     End Function
 
     Friend Function GetAllDisciplinas() As IEnumerable(Of Disciplina)
-        Return BusinessRules.GetAll(Of Disciplina)(Table.Disciplina)
+        Return BusinessRules.GetAll(Of Disciplina)()
     End Function
 
     Friend Function GetDisciplinasCursoSemestreInicio(idCurso As String, semestreInicio As Integer) As IEnumerable(Of Disciplina)

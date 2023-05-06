@@ -1,4 +1,6 @@
-﻿Public Class BusinessRules
+﻿Imports System.Linq
+
+Public Class BusinessRules
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
     Public Shared Function GetNewEntityOf(table As Table) As IDAO
@@ -22,8 +24,8 @@
         Return dataBridge.Save(data, table)
     End Function
 
-    Public Shared Function GetAll(Of T)(table As Table) As IEnumerable(Of T)
-        Dim alunos = dataBridge.ReadAllEntities(table)
+    Public Shared Function GetAll(Of T As IDAO)() As IEnumerable(Of T)
+        Dim alunos = dataBridge.ReadAllEntities(Of T)
 
         Return alunos.Cast(Of T)
     End Function
@@ -42,6 +44,6 @@
             Where(Function(dict) dict(relationColumns.uniqueEntity) = idEntity).
             Select(Function(dict) dict(relationColumns.multipleEntity))
 
-        Return GetAll(Of Disciplina)(Table.Disciplina).Where(Function(disciplina) idDisciplinas.Contains(disciplina.Id))
+        Return GetAll(Of Disciplina)().Where(Function(disciplina) idDisciplinas.Contains(disciplina.Id))
     End Function
 End Class

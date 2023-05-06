@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Diagnostics.Eventing
 
 Public Class DAL
     Implements IDAL, IDisposable
@@ -61,17 +60,17 @@ Public Class DAL
         Return sqlCommand.ExecuteReader()
     End Function
 
-    Public Function ReadAllEntities(table As Table) As List(Of IDAO) Implements IDAL.ReadAllEntities
-        Dim entitiesRead As New List(Of IDAO)
+    Public Function ReadAllEntities(Of T As IDAO)() As List(Of T) Implements IDAL.ReadAllEntities
+        'Dim entitiesRead As New List(Of IDAO)
 
-        For Each dictionary In SelectAll(table)
-            Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
-            tempEntity.LoadFromDictionary(dictionary)
+        'For Each dictionary In SelectAll(table)
+        '    Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
+        '    tempEntity.LoadFromDictionary(dictionary)
 
-            entitiesRead.Add(tempEntity)
-        Next
-
-        Return entitiesRead
+        '    entitiesRead.Add(tempEntity)
+        'Next
+        Dim entityTable = [Enum].Parse(Table.Aluno.GetType(), GetType(T).Name)
+        Return EntityParser.ParseListOfDict(Of T)(SelectAll(entityTable))
     End Function
 
     Private Shared Function GetParseableFields(data As IDictionary) As String
