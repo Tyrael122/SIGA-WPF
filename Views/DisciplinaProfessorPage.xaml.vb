@@ -46,8 +46,6 @@
     End Sub
 
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click
-        Dim items = NotasAlunosDataGrid.Items
-
         Dim notas As New List(Of IDictionary(Of String, String))
 
         For rowIndex As Integer = 0 To NotasAlunosDataGrid.Items.Count - 1

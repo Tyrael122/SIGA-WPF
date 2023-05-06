@@ -29,4 +29,10 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\DisciplinaAlunoPage.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
