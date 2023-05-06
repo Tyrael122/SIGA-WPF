@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIGAWPF"
         mc:Ignorable="d"
-        Title="DisciplinaProfessorPage" Height="450" Width="800">
+        Title="DisciplinaProfessorPage" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Label x:Name="txtDisciplinaNome" HorizontalAlignment="Left" Margin="218,112,0,0" VerticalAlignment="Top" Height="36" Width="79"/>
+        <TabControl>
+            <TabItem Header="Alunos">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="AlunosDataGrid" Margin="88,38,88,64"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Cadastro de provas">
+                <Grid Background="#FFE5E5E5">
+                    <DatePicker x:Name="dataProva" HorizontalAlignment="Left" Margin="147,55,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbTipoProva" HorizontalAlignment="Left" Margin="330,67,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="P1"/>
+                        <ComboBoxItem Content="P2"/>
+                        <ComboBoxItem Content="P3"/>
+                    </ComboBox>
+                    <Button x:Name="btnCadastrarProva" Content="Cadastrar" HorizontalAlignment="Left" Margin="255,203,0,0" VerticalAlignment="Top" Height="26" Width="62"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

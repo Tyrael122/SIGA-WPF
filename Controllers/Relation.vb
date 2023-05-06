@@ -18,18 +18,24 @@
 
     Public Function GetRelationTable() As Table
         Dim relationTableString = GetType(T).Name + GetType(V).Name
-        Return [Enum].Parse(Table.Aluno.GetType(), relationTableString)
+        Try
+            Return [Enum].Parse(GetType(Table), relationTableString)
+        Catch ex As ArgumentException
+            relationTableString = GetType(V).Name + GetType(T).Name
+
+            Return [Enum].Parse(GetType(Table), relationTableString)
+        End Try
     End Function
 
     Public Function GetUniqueEntityTable() As Table
         Dim relationTableString = GetType(T).Name
-        Return [Enum].Parse(Table.Aluno.GetType(), relationTableString)
+        Return [Enum].Parse(GetType(Table), relationTableString)
     End Function
 
 
     Public Function GetMultipleEntityTable() As Table
         Dim relationTableString = GetType(V).Name
-        Return [Enum].Parse(Table.Aluno.GetType(), relationTableString)
+        Return [Enum].Parse(GetType(Table), relationTableString)
     End Function
 
     Public Function Save() As Boolean

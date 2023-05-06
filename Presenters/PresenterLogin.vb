@@ -10,7 +10,7 @@
         Dim isCredentialsCorrect = user.Count() = 1
 
         If isCredentialsCorrect Then
-            SessionCookie.userData = user.First()
+            SessionCookie.AddCookie("userId", user.First()("Id"))
 
             Dim window As Window = ChooseWindow(table)
             window.Show()
@@ -22,7 +22,7 @@
     End Sub
 
     Private Function ChooseWindow(table As Table) As Window
-        Select Case (table)
+        Select Case table
             Case Table.Aluno
                 Return New AlunoHomePage()
             Case Table.Professor

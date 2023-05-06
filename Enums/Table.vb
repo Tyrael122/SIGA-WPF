@@ -7,4 +7,5 @@
     CursoDisciplina
     AlunoDisciplina
     ProfessorDisciplina
+    Prova
 End Enum

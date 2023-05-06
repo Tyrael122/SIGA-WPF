@@ -70,6 +70,7 @@
     <Build Include="dbo\Tables\Curso.sql" />
     <Build Include="dbo\Tables\CursoDisciplina.sql" />
     <Build Include="dbo\Tables\ProfessorDisciplina.sql" />
+    <Build Include="dbo\Tables\Prova.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AcertaBase.publish.xml" />

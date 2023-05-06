@@ -3,6 +3,20 @@
 
     Private Presenter As PresenterFuncionario = New PresenterFuncionario(Me)
 
+    Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        DisciplinasCursoDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
+        DisciplinasProfessorDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
+
+        For Each curso In Presenter.GetAllCursosAsDict()
+            Dim comboBoxItem As New ComboBoxItem With {
+                .Content = curso("Nome"),
+                .Tag = curso("Id")
+            }
+
+            cmbCursosAluno.Items.Add(comboBoxItem)
+        Next
+    End Sub
+
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         lblInfo.Content = infoMessage
 
@@ -27,27 +41,13 @@
 
     Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrar.Click
         Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-            {"Login", txtLogin.Text},
-            {"Password", txtPassword.Text},
-            {"Curso", cmbCursosAluno.SelectedValue.Tag},
-            {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
-        }
-
-        Presenter.RegisterAluno(map)
-    End Sub
-
-    Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        DisciplinasCursoDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
-        DisciplinasProfessorDataGrid.ItemsSource = Presenter.GetAllDisciplinas()
-
-        For Each curso In Presenter.GetAllCursosAsDict()
-            Dim comboBoxItem As New ComboBoxItem With {
-                .Content = curso("Nome"),
-                .Tag = curso("Id")
+                {"Login", txtLogin.Text},
+                {"Password", txtPassword.Text},
+                {"Curso", cmbCursosAluno.SelectedValue.Tag},
+                {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
             }
 
-            cmbCursosAluno.Items.Add(comboBoxItem)
-        Next
+        Presenter.RegisterAluno(map)
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click

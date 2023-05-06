@@ -8,7 +8,8 @@ Public Class DAL
     Private sqlDataReader As SqlDataReader
 
     Public Sub New()
-        ConnectToDatabase()
+        connection = New SqlConnection(Environment.GetEnvironmentVariable("StringConnection"))
+        connection.Open()
     End Sub
 
     Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectAll
@@ -50,27 +51,17 @@ Public Class DAL
         Return result
     End Function
 
+    Public Function ReadAllEntities(Of T As IDAO)() As List(Of T) Implements IDAL.ReadAllEntities
+        Dim entityTable = [Enum].Parse(Table.Aluno.GetType(), GetType(T).Name)
+        Return EntityParser.ParseListOfDict(Of T)(SelectAll(entityTable))
+    End Function
+
     Private Function SavePrivate(data As IDictionary, table As Table) As SqlDataReader ' SavePrivate indicates that this method is private and is the one that actually saves the data.
         Dim sql As String
         sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ") OUTPUT INSERTED.*"
         sql += " VALUES (" & GetParseableData(data) & ")"
 
-        sqlCommand = New SqlCommand(sql, connection)
-
-        Return sqlCommand.ExecuteReader()
-    End Function
-
-    Public Function ReadAllEntities(Of T As IDAO)() As List(Of T) Implements IDAL.ReadAllEntities
-        'Dim entitiesRead As New List(Of IDAO)
-
-        'For Each dictionary In SelectAll(table)
-        '    Dim tempEntity As IDAO = BusinessRules.GetNewEntityOf(table)
-        '    tempEntity.LoadFromDictionary(dictionary)
-
-        '    entitiesRead.Add(tempEntity)
-        'Next
-        Dim entityTable = [Enum].Parse(Table.Aluno.GetType(), GetType(T).Name)
-        Return EntityParser.ParseListOfDict(Of T)(SelectAll(entityTable))
+        Return New SqlCommand(sql, connection).ExecuteReader()
     End Function
 
     Private Shared Function GetParseableFields(data As IDictionary) As String
@@ -90,8 +81,7 @@ Public Class DAL
             End If
         Next
 
-        fieldsToSelect = fieldsToSelect.Remove(fieldsToSelect.Length - 2)
-        Return fieldsToSelect
+        Return fieldsToSelect.Remove(fieldsToSelect.Length - 2)
     End Function
 
     Private Function ParseResultIntoDictionary(sqlDataReader As SqlDataReader) As List(Of IDictionary(Of String, String))
@@ -113,11 +103,6 @@ Public Class DAL
 
     Public Sub Edit(entity As IDAO, table As Table) Implements IDAL.Edit
         Throw New NotImplementedException()
-    End Sub
-
-    Private Sub ConnectToDatabase()
-        connection = New SqlConnection(Environment.GetEnvironmentVariable("StringConnection"))
-        connection.Open()
     End Sub
 
     Public Sub Dispose() Implements IDisposable.Dispose
