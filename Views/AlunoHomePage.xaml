@@ -15,7 +15,7 @@
                             <DataGridTemplateColumn Header="Ver disciplina">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Click="VerDisciplina_Click" Tag="{Binding}" Content="Ver"/>
+                                        <Button Click="VerDisciplina_Click" Tag="{Binding Id}" Content="Ver"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

@@ -4,7 +4,7 @@
     [Password] VARCHAR (255) NULL,
     [Curso] INT NULL, 
     [SemestreInicio] TINYINT NULL, 
-    PRIMARY KEY CLUSTERED ([ID] ASC), 
+    PRIMARY KEY CLUSTERED ([Id] ASC), 
     CONSTRAINT [IdCursoAluno] FOREIGN KEY ([Curso]) REFERENCES [Curso]([Id])
 );
 

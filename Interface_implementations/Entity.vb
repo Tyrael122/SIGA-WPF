@@ -1,5 +1,5 @@
-﻿Public MustInherit Class DAO
-    Implements IDAO
+﻿Public MustInherit Class Entity
+    Implements IEntity
 
     Private _Id As String
     Public Property Id As String
@@ -21,7 +21,7 @@
         Return fields.ToArray()
     End Function
 
-    Public Sub LoadFromDictionary(data As IDictionary) Implements IDAO.LoadFromDictionary
+    Public Sub LoadFromDictionary(data As IDictionary) Implements IEntity.LoadFromDictionary
         For Each field In Me.GetFieldsToParse()
             If data.Contains(field) Then
                 Dim valuePassedIn As Object = data.Item(field)

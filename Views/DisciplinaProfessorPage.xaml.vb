@@ -25,7 +25,7 @@
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        Dim alunosCadastrados = Presenter.GetAllAlunosCadastrados()
+        Dim alunosCadastrados = Presenter.GetAllAlunosCadastrados().DefaultView
 
         AlunosDataGrid.ItemsSource = alunosCadastrados
         NotasAlunosDataGrid.ItemsSource = alunosCadastrados

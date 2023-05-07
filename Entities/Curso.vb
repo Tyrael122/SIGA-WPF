@@ -1,6 +1,6 @@
 ﻿Public Class Curso
-    Inherits DAO
-    Implements IDAO
+    Inherits Entity
+    Implements IEntity
 
     Private _Nome As String
     Public Property Nome As String

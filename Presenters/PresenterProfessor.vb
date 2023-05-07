@@ -1,29 +1,34 @@
-﻿Public Class PresenterProfessor
+﻿Imports System.Data
+
+Public Class PresenterProfessor
     Private View As IView
 
     Public Sub New(view As IView)
         Me.View = view
     End Sub
 
-    Friend Sub ShowDisciplinaPage(disciplina As Disciplina)
-        SessionCookie.AddCookie("disciplina", disciplina)
+    Friend Sub ShowDisciplinaPage(idDisciplina As String)
+        SessionCookie.AddCookie("idDisciplina", idDisciplina)
 
         Call New DisciplinaProfessorPage().Show()
     End Sub
 
-    Friend Function GetDisciplinasCadastradas() As IEnumerable(Of Disciplina)
-        Return BusinessRules.GetDisciplinas(Of Professor)(SessionCookie.GetCookie("userId"))
+    Friend Function GetDisciplinasCadastradas() As DataTable
+        Dim disciplinas = BusinessRules.GetDisciplinas(Of Professor)(SessionCookie.GetCookie("userId"))
+        Return ConvertDictionariesToDataTable(disciplinas)
     End Function
 
-    Public Function GetAllAlunosCadastrados() As IEnumerable(Of Aluno)
-        Dim idDisciplina = SessionCookie.GetCookie(Of Disciplina)("disciplina").Id
+    Public Function GetAllAlunosCadastrados() As DataTable
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim entityRelation = New Relation(Of Disciplina, Aluno)
-        Return entityRelation.GetAllMultipleEntitiesById(idDisciplina)
+
+        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesByIdAsDict(idDisciplina)
+        Return ConvertDictionariesToDataTable(alunosCadastrados)
     End Function
 
     Public Function GetAllAlunosCadastradosAsDict() As IEnumerable(Of IDictionary(Of String, String))
-        Dim idDisciplina = SessionCookie.GetCookie(Of Disciplina)("disciplina").Id
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim entityRelation = New Relation(Of Disciplina, Aluno)
         Return entityRelation.GetAllMultipleEntitiesByIdAsDict(idDisciplina)
@@ -35,14 +40,14 @@
 
         data("Tipo") = [Enum].Parse(GetType(TipoProva), data("Tipo"))
 
-        data.Add("IdDisciplina", SessionCookie.GetCookie(Of Disciplina)("disciplina").Id)
+        data.Add("IdDisciplina", SessionCookie.GetCookie("idDisciplina"))
         BusinessRules.Save(data, Table.Prova)
     End Sub
 
     Friend Function GetAllProvasAsDict() As IEnumerable(Of IDictionary(Of String, String))
-        Dim provas = BusinessRules.GetAllAsDict(Table.Prova)
+        Dim provas = BusinessRules.GetAll(Table.Prova)
 
-        Dim idDisciplina = SessionCookie.GetCookie(Of Disciplina)("disciplina").Id
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Return provas.Where(Function(dict) dict("IdDisciplina") = idDisciplina)
     End Function
@@ -60,6 +65,5 @@
 
             BusinessRules.Save(savebleData, Table.Nota)
         Next
-
     End Sub
 End Class

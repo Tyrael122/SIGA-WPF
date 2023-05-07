@@ -51,10 +51,10 @@ Public Class DAL
         Return result
     End Function
 
-    Public Function ReadAllEntities(Of T As IDAO)() As List(Of T) Implements IDAL.ReadAllEntities
-        Dim entityTable = [Enum].Parse(Table.Aluno.GetType(), GetType(T).Name)
-        Return EntityParser.ParseListOfDict(Of T)(SelectAll(entityTable))
-    End Function
+    'Public Function ReadAllEntities(Of T As IEntity)() As List(Of T) Implements IDAL.ReadAllEntities
+    '    Dim entityTable = [Enum].Parse(Table.Aluno.GetType(), GetType(T).Name)
+    '    Return ParseListOfDict(Of T)(SelectAll(entityTable))
+    'End Function
 
     Private Function SavePrivate(data As IDictionary, table As Table) As SqlDataReader ' SavePrivate indicates that this method is private and is the one that actually saves the data.
         Dim sql As String
@@ -97,11 +97,11 @@ Public Class DAL
         Return result
     End Function
 
-    Public Sub Delete(entity As IDAO) Implements IDAL.Delete
+    Public Sub Delete(entity As IEntity) Implements IDAL.Delete
         Throw New NotImplementedException()
     End Sub
 
-    Public Sub Edit(entity As IDAO, table As Table) Implements IDAL.Edit
+    Public Sub Edit(entity As IEntity, table As Table) Implements IDAL.Edit
         Throw New NotImplementedException()
     End Sub
 

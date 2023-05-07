@@ -1,4 +1,4 @@
 ﻿Public Class Professor
-    Inherits UserDAO
-    Implements IDAO
+    Inherits UserEntity
+    Implements IEntity
 End Class

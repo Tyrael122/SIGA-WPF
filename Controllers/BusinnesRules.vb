@@ -1,7 +1,7 @@
 ﻿Public Class BusinessRules
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
-    Public Shared Function GetNewEntityOf(table As Table) As IDAO
+    Public Shared Function GetNewEntityOf(table As Table) As IEntity
         Select Case table
             Case Table.Aluno
                 Return New Aluno()
@@ -13,6 +13,8 @@
                 Return New Curso()
             Case Table.Disciplina
                 Return New Disciplina()
+            Case Table.Prova
+                Return New Prova()
             Case Else
                 Throw New ArgumentOutOfRangeException(NameOf(table), "The table is not bound to any valid entity.")
         End Select
@@ -22,17 +24,17 @@
         Return dataBridge.Save(data, table)
     End Function
 
-    Public Shared Function GetAll(Of T As IDAO)() As IEnumerable(Of T)
-        Dim alunos = dataBridge.ReadAllEntities(Of T)
+    'Public Shared Function GetAll(Of T As IEntity)() As IEnumerable(Of T)
+    '    Dim alunos = dataBridge.ReadAllEntities(Of T)
 
-        Return alunos.Cast(Of T)
-    End Function
+    '    Return alunos.Cast(Of T)
+    'End Function
 
-    Friend Shared Function GetAllAsDict(table As Table) As List(Of IDictionary(Of String, String))
+    Friend Shared Function GetAll(table As Table) As List(Of IDictionary(Of String, String))
         Return dataBridge.SelectAll(table)
     End Function
 
-    Friend Shared Function GetDisciplinas(Of T As IDAO)(idEntity As String) As IEnumerable(Of Disciplina)
+    Friend Shared Function GetDisciplinas(Of T As IEntity)(idEntity As String) As IEnumerable(Of IDictionary(Of String, String))
         Dim relation As New Relation(Of T, Disciplina)
 
         Dim relationColumns = relation.GetRelationColumns()
@@ -41,6 +43,6 @@
             Where(Function(dict) dict(relationColumns.uniqueEntity) = idEntity).
             Select(Function(dict) dict(relationColumns.multipleEntity))
 
-        Return GetAll(Of Disciplina)().Where(Function(disciplina) idDisciplinas.Contains(disciplina.Id))
+        Return GetAll(Table.Disciplina).Where(Function(disciplina) idDisciplinas.Contains(disciplina("Id")))
     End Function
 End Class

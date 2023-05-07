@@ -1,4 +1,4 @@
-﻿Public Class Relation(Of T As IDAO, V As IDAO)
+﻿Public Class Relation(Of T As IEntity, V As IEntity)
     ''' <summary>
     ''' The first type is the unique entity type, the second is the multiple entity type.
     ''' </summary>
@@ -64,7 +64,7 @@
     Public Function GetAllMultipleEntitiesById(uniqueEntityId As String) As IEnumerable(Of V)
         Dim multipleEntities = GetAllMultipleEntitiesByIdAsDict(uniqueEntityId)
 
-        Return EntityParser.ParseListOfDict(Of V)(multipleEntities)
+        Return ParseListOfDict(Of V)(multipleEntities)
     End Function
 
     Public Function GetAllMultipleEntitiesByIdAsDict(uniqueEntityId As String) As IEnumerable(Of IDictionary(Of String, String))

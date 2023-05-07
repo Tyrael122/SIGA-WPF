@@ -4,7 +4,7 @@
     Private Presenter As New PresenterAluno(Me)
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        DisciplinasAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas()
+        DisciplinasAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas().DefaultView
     End Sub
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo

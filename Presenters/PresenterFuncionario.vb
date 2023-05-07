@@ -1,4 +1,6 @@
-﻿Public Class PresenterFuncionario
+﻿Imports System.Data
+
+Public Class PresenterFuncionario
     Private View As IView
     Private disciplinasCurso As New List(Of Disciplina)
     Private disciplinasExcluidasAluno As New List(Of Disciplina)
@@ -10,7 +12,7 @@
 
     Public Sub RegisterAluno(data As IDictionary)
         Dim disciplinasAluno = BusinessRules.GetDisciplinas(Of Curso)(data.Item("Curso")).
-            Where(Function(disc) Not disciplinasExcluidasAluno.Contains(disc) And disc.Semester >= data.Item("SemestreInicio")).ToList()
+            Where(Function(disc) Not disciplinasExcluidasAluno.Contains(disc) And disc("Semester") >= data.Item("SemestreInicio")).ToList()
 
         Dim relation As New Relation(Of Aluno, Disciplina) With {
             .uniqueEntityData = data,
@@ -63,8 +65,8 @@
         End If
     End Sub
 
-    Friend Sub AddDisciplinaSelecionadaAoCurso(discplina As Disciplina)
-        disciplinasCurso.Add(discplina)
+    Friend Sub AddDisciplinaSelecionadaAoCurso(disciplina As Disciplina)
+        disciplinasCurso.Add(disciplina)
     End Sub
 
     Friend Sub RemoveDisciplinaSelecionadaDoCurso(disciplina As Disciplina)
@@ -87,30 +89,35 @@
         disciplinasProfessor.Remove(disciplina)
     End Sub
 
-    Friend Function GetAllAlunos() As IEnumerable
-        Return BusinessRules.GetAll(Of Aluno)
+    Friend Function GetAllAlunos() As DataTable
+        Dim alunos = BusinessRules.GetAll(Table.Aluno)
+        Return ConvertDictionariesToDataTable(alunos)
     End Function
 
-    Friend Function GetAllProfessores() As IEnumerable
-        Return BusinessRules.GetAll(Of Professor)()
+    Friend Function GetAllProfessores() As DataTable
+        Dim professores = BusinessRules.GetAll(Table.Professor)
+        Return ConvertDictionariesToDataTable(professores)
     End Function
 
-    Friend Function GetAllCursos() As IEnumerable
-        Return BusinessRules.GetAll(Of Curso)()
+    Friend Function GetAllCursos() As DataTable
+        Dim cursos = BusinessRules.GetAll(Table.Curso)
+        Return ConvertDictionariesToDataTable(cursos)
     End Function
-
 
     Friend Function GetAllCursosAsDict() As List(Of IDictionary(Of String, String))
-        Return BusinessRules.GetAllAsDict(Table.Curso)
+        Return BusinessRules.GetAll(Table.Curso)
     End Function
 
-    Friend Function GetAllDisciplinas() As IEnumerable(Of Disciplina)
-        Return BusinessRules.GetAll(Of Disciplina)()
+    Friend Function GetAllDisciplinas() As DataTable
+        Dim disciplinas = BusinessRules.GetAll(Table.Disciplina)
+        Return ConvertDictionariesToDataTable(disciplinas)
     End Function
 
-    Friend Function GetDisciplinasCursoSemestreInicio(idCurso As String, semestreInicio As Integer) As IEnumerable(Of Disciplina)
+    Friend Function GetDisciplinasCursoSemestreInicio(idCurso As String, semestreInicio As Integer) As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Of Curso)(idCurso)
 
-        Return disciplinas.Where(Function(disciplina) disciplina.Semester >= semestreInicio)
+        disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") >= semestreInicio)
+
+        Return ConvertDictionariesToDataTable(disciplinas)
     End Function
 End Class

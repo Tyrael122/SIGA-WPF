@@ -1,6 +1,6 @@
 ﻿Public Class Aluno
-    Inherits UserDAO
-    Implements IDAO
+    Inherits UserEntity
+    Implements IEntity
 
     Private _Curso As String
     Public Property Curso As String

@@ -1,6 +1,6 @@
-﻿Public MustInherit Class UserDAO
-    Inherits DAO
-    Implements IDAO
+﻿Public MustInherit Class UserEntity
+    Inherits Entity
+    Implements IEntity
 
     Private _Login As String
     Public Property Login As String

@@ -1,16 +1,6 @@
 ﻿Public Class Disciplina
-    Inherits DAO
-    Implements IDAO
-
-    Private _Id As String
-    Public Property Id As String
-        Get
-            Return _Id
-        End Get
-        Set(value As String)
-            _Id = value
-        End Set
-    End Property
+    Inherits Entity
+    Implements IEntity
 
     Private _Name As String
     Public Property Name As String

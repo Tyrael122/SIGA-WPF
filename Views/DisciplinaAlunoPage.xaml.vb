@@ -15,6 +15,10 @@
         Throw New NotImplementedException()
     End Sub
 
+    Private Sub DisciplinaAlunoPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        NotasDisciplinaDataGrid.ItemsSource = Presenter.GetNotasDisciplina().DefaultView
+    End Sub
+
     Private Function FindVisualChild(Of T As DependencyObject)(parent As DependencyObject) As T
         If parent IsNot Nothing Then
             Dim count As Integer = VisualTreeHelper.GetChildrenCount(parent)

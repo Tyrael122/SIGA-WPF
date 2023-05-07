@@ -16,7 +16,7 @@
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        DisciplinasDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas()
+        DisciplinasDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas().DefaultView
     End Sub
 
     Public Sub VerDisciplina_Click(sender As Object, e As EventArgs)
