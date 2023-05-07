@@ -2,21 +2,23 @@
 
 Public Class PresenterFuncionario
     Private View As IView
-    Private disciplinasCurso As New List(Of Disciplina)
-    Private disciplinasExcluidasAluno As New List(Of Disciplina)
-    Private disciplinasProfessor As New List(Of Disciplina)
+    Private idDisciplinasCurso As New List(Of String)
+    Private idDisciplinasExcluidasAluno As New List(Of String)
+    Private idDisciplinasProfessor As New List(Of String)
 
     Public Sub New(view As IView)
         Me.View = view
     End Sub
 
     Public Sub RegisterAluno(data As IDictionary)
-        Dim disciplinasAluno = BusinessRules.GetDisciplinas(Of Curso)(data.Item("Curso")).
-            Where(Function(disc) Not disciplinasExcluidasAluno.Contains(disc) And disc("Semester") >= data.Item("SemestreInicio")).ToList()
+        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Of Curso)(data("Curso")).
+            Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= data("SemestreInicio")).
+            Select(Function(disciplina) disciplina("Id")).
+            ToList()
 
         Dim relation As New Relation(Of Aluno, Disciplina) With {
             .uniqueEntityData = data,
-            .entitiesToRelate = disciplinasAluno
+            .idEntitiesToRelate = idDisciplinasAluno
         }
 
         Dim hasInsertedSucessufully = relation.Save()
@@ -28,9 +30,9 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Sub RegisterProfessor(data As IDictionary(Of String, String))
-        Dim relation As New Relation(Of Aluno, Disciplina) With {
+        Dim relation As New Relation(Of Professor, Disciplina) With {
             .uniqueEntityData = data,
-            .entitiesToRelate = disciplinasProfessor
+            .idEntitiesToRelate = idDisciplinasProfessor
         }
 
         Dim hasInsertedSucessufully = relation.Save()
@@ -42,9 +44,9 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Sub RegisterCurso(courseData As IDictionary(Of String, String))
-        Dim relation As New Relation(Of Aluno, Disciplina) With {
+        Dim relation As New Relation(Of Curso, Disciplina) With {
             .uniqueEntityData = courseData,
-            .entitiesToRelate = disciplinasCurso
+            .idEntitiesToRelate = idDisciplinasCurso
         }
 
         Dim hasInsertedSucessufully = relation.Save()
@@ -65,28 +67,28 @@ Public Class PresenterFuncionario
         End If
     End Sub
 
-    Friend Sub AddDisciplinaSelecionadaAoCurso(disciplina As Disciplina)
-        disciplinasCurso.Add(disciplina)
+    Friend Sub AddDisciplinaSelecionadaAoCurso(idDisciplina As String)
+        idDisciplinasCurso.Add(idDisciplina)
     End Sub
 
-    Friend Sub RemoveDisciplinaSelecionadaDoCurso(disciplina As Disciplina)
-        disciplinasCurso.Remove(disciplina)
+    Friend Sub RemoveDisciplinaSelecionadaDoCurso(idDisciplina As String)
+        idDisciplinasCurso.Remove(idDisciplina)
     End Sub
 
-    Friend Sub RemoveDisciplinaSelecionadaDoAluno(disciplina As Disciplina)
-        disciplinasExcluidasAluno.Add(disciplina)
+    Friend Sub RemoveDisciplinaSelecionadaDoAluno(idDisciplina As String)
+        idDisciplinasExcluidasAluno.Add(idDisciplina)
     End Sub
 
-    Friend Sub AddDisciplinaSelecionadaAoAluno(disciplina As Disciplina)
-        disciplinasExcluidasAluno.Remove(disciplina)
+    Friend Sub AddDisciplinaSelecionadaAoAluno(idDisciplina As String)
+        idDisciplinasExcluidasAluno.Remove(idDisciplina)
     End Sub
 
-    Friend Sub AddDisciplinaSelecionadaAoProfessor(disciplina As Disciplina)
-        disciplinasProfessor.Add(disciplina)
+    Friend Sub AddDisciplinaSelecionadaAoProfessor(idDisciplina As String)
+        idDisciplinasProfessor.Add(idDisciplina)
     End Sub
 
-    Friend Sub RemoveDisciplinaSelecionadaDoProfessor(disciplina As Disciplina)
-        disciplinasProfessor.Remove(disciplina)
+    Friend Sub RemoveDisciplinaSelecionadaDoProfessor(idDisciplina As String)
+        idDisciplinasProfessor.Remove(idDisciplina)
     End Sub
 
     Friend Function GetAllAlunos() As DataTable

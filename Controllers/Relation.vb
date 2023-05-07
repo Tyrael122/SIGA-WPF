@@ -5,7 +5,7 @@
 
     Private ReadOnly dataBridge As IDAL = New DAL()
     Public uniqueEntityData As IDictionary(Of String, String)
-    Public entitiesToRelate As IEnumerable(Of Object)
+    Public idEntitiesToRelate As IEnumerable(Of String)
 
     Public Function GetRelationColumns() As RelationColumn
         Dim relationStruct = New RelationColumn With {
@@ -46,10 +46,10 @@
 
         Dim columns = GetRelationColumns()
 
-        For Each entity In entitiesToRelate
+        For Each id In idEntitiesToRelate
             Dim dataDict As New Dictionary(Of String, String) From {
                 {columns.uniqueEntity, entityId},
-                {columns.multipleEntity, entity.Id}
+                {columns.multipleEntity, id}
             }
 
             Dim isInsertSucessefull = dataBridge.Save(dataDict, GetRelationTable())

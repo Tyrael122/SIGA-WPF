@@ -37,7 +37,7 @@
                                             <DataGridTemplateColumn Header="Selecionar">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <CheckBox Click="CheckBoxDisciplinasAluno_Click" Tag="{Binding}" IsChecked="True"/>
+                                                        <CheckBox Click="CheckBoxDisciplinasAluno_Click" Tag="{Binding Id}" IsChecked="True"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
@@ -83,7 +83,7 @@
                                         <DataGridTemplateColumn Header="Selecionar">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <CheckBox Click="CheckBoxDisciplinaProfessor_Click" Tag="{Binding}"/>
+                                                    <CheckBox Click="CheckBoxDisciplinaProfessor_Click" Tag="{Binding Id}"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -121,7 +121,7 @@
                                         <DataGridTemplateColumn Header="Selecionar">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <CheckBox Click="CheckBox_Click" Tag="{Binding}"/>
+                                                    <CheckBox Click="CheckBox_Click" Tag="{Binding Id}"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
