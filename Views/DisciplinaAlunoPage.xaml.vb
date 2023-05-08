@@ -18,22 +18,4 @@
     Private Sub DisciplinaAlunoPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         NotasDisciplinaDataGrid.ItemsSource = Presenter.GetNotasDisciplina().DefaultView
     End Sub
-
-    Private Function FindVisualChild(Of T As DependencyObject)(parent As DependencyObject) As T
-        If parent IsNot Nothing Then
-            Dim count As Integer = VisualTreeHelper.GetChildrenCount(parent)
-            For i As Integer = 0 To count - 1
-                Dim child As DependencyObject = VisualTreeHelper.GetChild(parent, i)
-                If child IsNot Nothing AndAlso TypeOf child Is T Then
-                    Return child
-                Else
-                    Dim foundChild As T = FindVisualChild(Of T)(child)
-                    If foundChild IsNot Nothing Then
-                        Return foundChild
-                    End If
-                End If
-            Next
-        End If
-        Return Nothing
-    End Function
 End Class

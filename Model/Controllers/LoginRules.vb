@@ -4,6 +4,6 @@
 
         Return dataBridge.
                 SelectAll(table).
-                Where(Function(dict) dict.Item("Login") = username And dict.Item("Password") = password)
+                Where(Function(dict) dict("Login") = username And dict("Password") = password)
     End Function
 End Class
