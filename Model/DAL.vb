@@ -3,7 +3,7 @@
 Public Class DAL
     Implements IDAL, IDisposable
 
-    Private connection As SqlConnection
+    Private ReadOnly connection As SqlConnection
     Private sqlCommand As SqlCommand
     Private sqlDataReader As SqlDataReader
 
@@ -17,8 +17,7 @@ Public Class DAL
     End Function
 
     Public Function SelectFields(table As Table, ParamArray fieldsToSelect() As String) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectFields
-        Dim sql As String
-        sql = "SELECT " & String.Join(", ", fieldsToSelect) & " FROM " & table.ToString()
+        Dim sql = "SELECT " & String.Join(", ", fieldsToSelect) & " FROM " & table.ToString()
 
         sqlCommand = New SqlCommand(sql, connection)
         sqlDataReader = sqlCommand.ExecuteReader()
@@ -52,21 +51,19 @@ Public Class DAL
     End Function
 
     Private Function SavePrivate(data As IDictionary, table As Table) As SqlDataReader ' SavePrivate indicates that this method is private and is the one that actually saves the data.
-        Dim sql As String
-        sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ") OUTPUT INSERTED.*"
-        sql += " VALUES (" & GetParseableData(data) & ")"
+        Dim sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ") OUTPUT INSERTED.* "
+        sql += "VALUES (" & GetParseableData(data) & ")"
 
         Return New SqlCommand(sql, connection).ExecuteReader()
     End Function
 
-    Private Shared Function GetParseableFields(data As IDictionary) As String
+    Private Function GetParseableFields(data As IDictionary) As String
         Dim temp As ICollection(Of String) = data.Keys
 
         Return String.Join(", ", temp.ToList())
     End Function
 
-    ' TODO: Refactor later, maybe into parametrized SQL statements.
-    Private Shared Function GetParseableData(data As IDictionary) As String
+    Private Function GetParseableData(data As IDictionary(Of String, String)) As String
         Dim fieldsToSelect As String = Nothing
         For Each field In data.Values
             If Not IsNumeric(field) Then
