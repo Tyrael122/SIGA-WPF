@@ -30,19 +30,7 @@
         AlunosDataGrid.ItemsSource = alunosCadastrados
         NotasAlunosDataGrid.ItemsSource = alunosCadastrados
 
-        LoadCmbProva()
-    End Sub
-
-    Private Sub LoadCmbProva()
-        cmbProva.Items.Clear()
-        For Each prova In Presenter.GetAllProvas()
-            Dim comboBoxItem As New ComboBoxItem With {
-                .Content = prova("Data"),
-                .Tag = prova("Id")
-            }
-
-            cmbProva.Items.Add(comboBoxItem)
-        Next
+        cmbProva.ItemsSource = Presenter.LoadProvasComboBox()
     End Sub
 
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click

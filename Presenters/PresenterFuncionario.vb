@@ -1,4 +1,6 @@
 ﻿Imports System.Data
+Imports System.Data.Common
+Imports System.Security.Principal
 
 Public Class PresenterFuncionario
     Inherits Presenter
@@ -99,5 +101,9 @@ Public Class PresenterFuncionario
         disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") >= semestreInicio)
 
         Return ConvertDictionariesToDataTable(disciplinas)
+    End Function
+
+    Friend Function LoadCursosAlunoComboBox() As IEnumerable
+        Return LoadComboBox(Function() GetAll(Table.Curso), "Nome", "Id")
     End Function
 End Class

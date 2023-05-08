@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Data
-Imports System.Dynamic
+﻿Imports System.Data
 
 Public Class PresenterAluno
     Inherits Presenter

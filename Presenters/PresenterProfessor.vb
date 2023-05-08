@@ -15,6 +15,10 @@ Public Class PresenterProfessor
         Call New DisciplinaProfessorPage().Show()
     End Sub
 
+    Function LoadProvasComboBox() As IEnumerable(Of ComboBoxItem)
+        Return LoadComboBox(Function() GetAllProvas(), "Data", "Id")
+    End Function
+
     Friend Function GetDisciplinasCadastradas() As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Professor, SessionCookie.GetCookie("userId"))
         Return ConvertDictionariesToDataTable(disciplinas)

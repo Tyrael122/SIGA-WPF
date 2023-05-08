@@ -22,7 +22,21 @@ Public Class Presenter
         Return dataTable
     End Function
 
-    Protected Function GetAll(table As Table) As List(Of IDictionary(Of String, String))
+    Protected Function LoadComboBox(selector As Func(Of IEnumerable(Of IDictionary(Of String, String))), content As String, tag As String) As IEnumerable(Of ComboBoxItem)
+        Dim comboBoxItems As New List(Of ComboBoxItem)
+
+        For Each dict In selector()
+            Dim comboBoxItem As New ComboBoxItem With {
+                .Content = dict(content),
+                .Tag = dict(tag)
+            }
+            comboBoxItems.Add(comboBoxItem)
+        Next
+
+        Return comboBoxItems
+    End Function
+
+    Protected Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, String))
         Return BusinessRules.GetAll(table)
     End Function
 
@@ -31,7 +45,7 @@ Public Class Presenter
         Return ConvertDictionariesToDataTable(data)
     End Function
 
-    Public Function GetAll(tableStr As String) As List(Of IDictionary(Of String, String))
+    Public Function GetAll(tableStr As String) As IEnumerable(Of IDictionary(Of String, String))
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
         Return GetAll(table)
     End Function

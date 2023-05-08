@@ -5,7 +5,7 @@
         Return dataBridge.Save(data, table)
     End Function
 
-    Friend Shared Function GetAll(table As Table) As List(Of IDictionary(Of String, String))
+    Friend Shared Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, String))
         Return dataBridge.SelectAll(table)
     End Function
 

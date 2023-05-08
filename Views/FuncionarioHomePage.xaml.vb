@@ -8,14 +8,7 @@
         DisciplinasCursoDataGrid.ItemsSource = disciplinas
         DisciplinasProfessorDataGrid.ItemsSource = disciplinas
 
-        For Each curso In Presenter.GetAll("Curso")
-            Dim comboBoxItem As New ComboBoxItem With {
-                .Content = curso("Nome"),
-                .Tag = curso("Id")
-            }
-
-            cmbCursosAluno.Items.Add(comboBoxItem)
-        Next
+        cmbCursosAluno.ItemsSource = Presenter.LoadCursosAlunoComboBox()
     End Sub
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
