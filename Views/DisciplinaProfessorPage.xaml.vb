@@ -35,7 +35,7 @@
 
     Private Sub LoadCmbProva()
         cmbProva.Items.Clear()
-        For Each prova In Presenter.GetAllProvasAsDict()
+        For Each prova In Presenter.GetAllProvas()
             Dim comboBoxItem As New ComboBoxItem With {
                 .Content = prova("Data"),
                 .Tag = prova("Id")
@@ -48,14 +48,14 @@
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click
         Dim notas As New List(Of IDictionary(Of String, String))
 
-        For rowIndex As Integer = 0 To NotasAlunosDataGrid.Items.Count - 1
-            Dim rowItem As Aluno = TryCast(NotasAlunosDataGrid.Items(rowIndex), Aluno)
+        For rowIndex As Integer = 0 To NotasAlunosDataGrid.Items.Count - 2
+            Dim rowItem = NotasAlunosDataGrid.Items(rowIndex)
             If rowItem IsNot Nothing Then
                 Dim cellContent As Object = NotasAlunosDataGrid.Columns(0).GetCellContent(rowItem)
                 Dim textBox As TextBox = FindVisualChild(Of TextBox)(cellContent)
                 If textBox IsNot Nothing Then
                     Dim content As String = textBox.Text
-                    Dim idAluno = rowItem.Id
+                    Dim idAluno = rowItem.Row.ItemArray(0)
 
                     Dim nota As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
                         {"IdAluno", idAluno},

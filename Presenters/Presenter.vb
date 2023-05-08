@@ -1,7 +1,7 @@
 ﻿Imports System.Data
 
-Module Presenter
-    Function ConvertDictionariesToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
+Public Class Presenter
+    Protected Function ConvertDictionariesToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
         Dim dataTable As New DataTable()
 
         ' Add columns to DataTable based on the keys of the first dictionary in the list
@@ -21,4 +21,23 @@ Module Presenter
 
         Return dataTable
     End Function
-End Module
+
+    Protected Function GetAll(table As Table) As List(Of IDictionary(Of String, String))
+        Return BusinessRules.GetAll(table)
+    End Function
+
+    Protected Function GetDataTable(table As Table) As DataTable
+        Dim data = GetAll(table)
+        Return ConvertDictionariesToDataTable(data)
+    End Function
+
+    Public Function GetAll(tableStr As String) As List(Of IDictionary(Of String, String))
+        Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
+        Return GetAll(table)
+    End Function
+
+    Public Function GetDataTable(tableStr As String) As DataTable
+        Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
+        Return GetDataTable(table)
+    End Function
+End Class

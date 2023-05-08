@@ -4,10 +4,11 @@
     Private Presenter As PresenterFuncionario = New PresenterFuncionario(Me)
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        DisciplinasCursoDataGrid.ItemsSource = Presenter.GetAllDisciplinas().DefaultView
-        DisciplinasProfessorDataGrid.ItemsSource = Presenter.GetAllDisciplinas().DefaultView
+        Dim disciplinas = Presenter.GetDataTable("Disciplina").DefaultView
+        DisciplinasCursoDataGrid.ItemsSource = disciplinas
+        DisciplinasProfessorDataGrid.ItemsSource = disciplinas
 
-        For Each curso In Presenter.GetAllCursosAsDict()
+        For Each curso In Presenter.GetAll("Curso")
             Dim comboBoxItem As New ComboBoxItem With {
                 .Content = curso("Nome"),
                 .Tag = curso("Id")
@@ -60,11 +61,11 @@
     End Sub
 
     Private Sub tabEditarProfessor_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarProfessor.GotFocus
-        professorDataGrid.ItemsSource = Presenter.GetAllProfessores().DefaultView
+        professorDataGrid.ItemsSource = Presenter.GetDataTable("Professor").DefaultView
     End Sub
 
     Private Sub tabEditarAlunos_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarAlunos.GotFocus
-        alunosDataGrid.ItemsSource = Presenter.GetAllAlunos().DefaultView
+        alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
     End Sub
 
     Private Sub btnCadastrarCurso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarCurso.Click
@@ -78,7 +79,7 @@
     End Sub
 
     Private Sub tabEditarCurso_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarCurso.GotFocus
-        cursoDataGrid.ItemsSource = Presenter.GetAllCursos().DefaultView
+        cursoDataGrid.ItemsSource = Presenter.GetDataTable("Curso").DefaultView
     End Sub
 
     Private Sub btnCadastrarDisciplina_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarDisciplina.Click

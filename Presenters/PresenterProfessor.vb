@@ -1,6 +1,8 @@
 ﻿Imports System.Data
 
 Public Class PresenterProfessor
+    Inherits Presenter
+
     Private View As IView
 
     Public Sub New(view As IView)
@@ -14,24 +16,17 @@ Public Class PresenterProfessor
     End Sub
 
     Friend Function GetDisciplinasCadastradas() As DataTable
-        Dim disciplinas = BusinessRules.GetDisciplinas(Of Professor)(SessionCookie.GetCookie("userId"))
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Professor, SessionCookie.GetCookie("userId"))
         Return ConvertDictionariesToDataTable(disciplinas)
     End Function
 
     Public Function GetAllAlunosCadastrados() As DataTable
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
-        Dim entityRelation = New Relation(Of Disciplina, Aluno)
+        Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
+        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
 
-        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesByIdAsDict(idDisciplina)
         Return ConvertDictionariesToDataTable(alunosCadastrados)
-    End Function
-
-    Public Function GetAllAlunosCadastradosAsDict() As IEnumerable(Of IDictionary(Of String, String))
-        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
-
-        Dim entityRelation = New Relation(Of Disciplina, Aluno)
-        Return entityRelation.GetAllMultipleEntitiesByIdAsDict(idDisciplina)
     End Function
 
     Friend Sub RegisterProva(data As IDictionary(Of String, String))
@@ -44,8 +39,8 @@ Public Class PresenterProfessor
         BusinessRules.Save(data, Table.Prova)
     End Sub
 
-    Friend Function GetAllProvasAsDict() As IEnumerable(Of IDictionary(Of String, String))
-        Dim provas = BusinessRules.GetAll(Table.Prova)
+    Friend Function GetAllProvas() As IEnumerable(Of IDictionary(Of String, String))
+        Dim provas = GetAll(Table.Prova)
 
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 

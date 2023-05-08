@@ -1,41 +1,16 @@
 ﻿Public Class BusinessRules
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
-    Public Shared Function GetNewEntityOf(table As Table) As IEntity
-        Select Case table
-            Case Table.Aluno
-                Return New Aluno()
-            Case Table.Professor
-                Return New Professor()
-            Case Table.FuncionarioAdm
-                Return New FuncionarioAdministrativo()
-            Case Table.Curso
-                Return New Curso()
-            Case Table.Disciplina
-                Return New Disciplina()
-            Case Table.Prova
-                Return New Prova()
-            Case Else
-                Throw New ArgumentOutOfRangeException(NameOf(table), "The table is not bound to any valid entity.")
-        End Select
-    End Function
-
     Friend Shared Function Save(data As IDictionary, table As Table) As Boolean
         Return dataBridge.Save(data, table)
     End Function
-
-    'Public Shared Function GetAll(Of T As IEntity)() As IEnumerable(Of T)
-    '    Dim alunos = dataBridge.ReadAllEntities(Of T)
-
-    '    Return alunos.Cast(Of T)
-    'End Function
 
     Friend Shared Function GetAll(table As Table) As List(Of IDictionary(Of String, String))
         Return dataBridge.SelectAll(table)
     End Function
 
-    Friend Shared Function GetDisciplinas(Of T As IEntity)(idEntity As String) As IEnumerable(Of IDictionary(Of String, String))
-        Dim relation As New Relation(Of T, Disciplina)
+    Friend Shared Function GetDisciplinas(table As Table, idEntity As String) As IEnumerable(Of IDictionary(Of String, String))
+        Dim relation As New Relation(table, Table.Disciplina)
 
         Dim relationColumns = relation.GetRelationColumns()
 

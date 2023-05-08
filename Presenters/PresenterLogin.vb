@@ -30,7 +30,5 @@
             Case Table.FuncionarioAdm
                 Return New FuncionarioHomePage()
         End Select
-
-        Throw New NotImplementedException() ' TODO: Should choose the right form based on the userType
     End Function
 End Class

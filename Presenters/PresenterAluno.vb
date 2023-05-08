@@ -3,6 +3,8 @@ Imports System.Data
 Imports System.Dynamic
 
 Public Class PresenterAluno
+    Inherits Presenter
+
     Private View As IView
 
     Public Sub New(view As IView)
@@ -10,7 +12,7 @@ Public Class PresenterAluno
     End Sub
 
     Friend Function GetDisciplinasCadastradas() As DataTable
-        Dim disciplinas = BusinessRules.GetDisciplinas(Of Aluno)(SessionCookie.GetCookie("userId"))
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, SessionCookie.GetCookie("userId"))
 
         Return ConvertDictionariesToDataTable(disciplinas)
     End Function
