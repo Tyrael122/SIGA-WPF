@@ -1,4 +1,6 @@
 ﻿Public Class PresenterLogin
+    Inherits Presenter
+
     Private View As IView
 
     Public Sub New(view As IView)
@@ -16,9 +18,11 @@
 
         SessionCookie.AddCookie("userId", user.First()("Id"))
 
-        ChooseWindow(table).Show()
+        ShowWindowAndCloseCurrent(ChooseWindow(table), View)
+    End Sub
 
-        View.CloseView()
+    Public Sub ShowChangePasswordScreen()
+        ShowWindowAndCloseCurrent(New ChangePasswordScreen, View)
     End Sub
 
     Private Function ChooseWindow(table As Table) As Window

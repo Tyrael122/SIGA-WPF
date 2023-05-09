@@ -3,49 +3,95 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LoginScreenWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="338" Width="337" Background="#FF7C33AF">
-    <Grid Margin="23,0,39,5" RenderTransformOrigin="0.5,0.5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="302*"/>
-        </Grid.RowDefinitions>
-        <Grid.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-                <SkewTransform/>
-                <RotateTransform Angle="-0.111"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Grid.RenderTransform>
-        <Label Content="Login" HorizontalAlignment="Left" Margin="82,144,0,0" VerticalAlignment="Top" Foreground="White" Grid.Row="1"/>
-        <TextBox x:Name="txtLogin" HorizontalAlignment="Left" Margin="125,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFAEAEAE" BorderThickness="0,0,0,2" Padding="16,0,0,0" Grid.Row="1">
-            <TextBox.Background>
-                <ImageBrush Stretch="None" AlignmentX="Left"/>
-            </TextBox.Background>
-        </TextBox>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="60,181,0,0" VerticalAlignment="Top" Foreground="White" Grid.Row="1"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="125,185,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FFAEAEAE" BorderThickness="0,0,0,2" Padding="16,0,0,0" Grid.Row="1">
-            <PasswordBox.Background>
-                <ImageBrush Stretch="None" AlignmentX="Left"/>
-            </PasswordBox.Background>
-        </PasswordBox>
-        <ComboBox x:Name="cmbUserType" HorizontalAlignment="Left" Margin="125,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" Grid.Row="1">
+        Title="SIGA" 
+        Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+        Width="{x:Static SystemParameters.PrimaryScreenWidth}" WindowState="Maximized">
+
+    <!-- Place holder para passwordBox-->
+    <Window.Resources>
+        <Style x:Key="PlaceholderTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                        Focusable="false"
+                                        HorizontalScrollBarVisibility="Hidden"
+                                        VerticalScrollBarVisibility="Hidden"/>
+                            </Border>
+                            <TextBlock x:Name="placeholder"
+                                Text="Digite o seu usuário"
+                                Foreground="Gray"
+                                Visibility="Collapsed"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="placeholder" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="/Views/5137894.jpg"/>
+    </Window.Background>
+
+
+    <!-- Body -->
+    <Grid Height="1080" Margin="302,0,318,-232">
+        <Rectangle HorizontalAlignment="Left" Height="598" Stroke="Black" VerticalAlignment="Top" Width="794" Fill="#FF252525" RadiusX="30" RadiusY="30" Margin="62,212,0,0"/>
+        <Label Content="Selecione o tipo de usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="152,352,442,688"/>
+        <ComboBox x:Name="cmbUserType" Width="260" HorizontalAlignment="Left" Margin="159,397,0,649" Background="#00000000" BorderBrush="#00000000" FontSize="18">
             <ComboBoxItem Content="Aluno"/>
             <ComboBoxItem Content="Professor"/>
             <ComboBoxItem Content="Funcionário administrativo"/>
         </ComboBox>
-        <Label Content="Tipo de usuário" HorizontalAlignment="Left" Margin="27,106,0,0" VerticalAlignment="Top" Foreground="White" Grid.Row="1"/>
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="159,223,0,0" VerticalAlignment="Top" Width="48" Height="23" BorderThickness="0,0,0,0" RenderTransformOrigin="0.463,-0.082" Foreground="White" Grid.Row="1">
+        <Label Content="Email ou usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="152,448,532,592"/>
+        <TextBox Style="{StaticResource PlaceholderTextBox}" x:Name="txtLogin" HorizontalAlignment="Left" Margin="156,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="599" Height="35" Background="#FF252525" BorderBrush="White" BorderThickness="0,0,0,1" Cursor="" FontSize="20" Foreground="#FF8C8C8C"/>
+        <Label Content="Senha:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="152,552,659,488"/>
+        <Button x:Name="btnLogin" Content="Entrar" HorizontalAlignment="Left" Margin="144,691,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FF0A78BE" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="7" Background="#FF507FA7">
+                    <Border CornerRadius="32" Background="#FF009CFF">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Label x:Name="lblInfo" Content="" HorizontalAlignment="Left" Margin="36,73,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="208" Foreground="White"/>
+        <Button x:Name="btnChangePassword" Content="Esqueceu sua senha?" HorizontalAlignment="Left" Margin="558,547,0,0" VerticalAlignment="Top" Width="207" Height="35" FontFamily="Arial" Foreground="#FFCABDBD" BorderBrush="#FF252525" Background="#FF252525" FontSize="18"/>
+        <Rectangle HorizontalAlignment="Left" Height="238" Margin="255,0,0,0" VerticalAlignment="Top" Width="396">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/Views/FatecLogo.png"/>
+            </Rectangle.Fill>
+            <Rectangle.Stroke>
+                <ImageBrush/>
+            </Rectangle.Stroke>
+        </Rectangle>
+        <Label x:Name="lblInfo" HorizontalAlignment="Left" Margin="153,633,0,0" VerticalAlignment="Top" Height="53" Width="588" Foreground="White" FontSize="18"/>
+        <TextBox x:Name="txtVisiblePassword" HorizontalAlignment="Left" Margin="159,592,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="Transparent" BorderBrush="#FFABADB3" Foreground="#FF888888" FontSize="20" BorderThickness="0,0,0,1"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="159,592,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20"/>
+        <Button x:Name="btnViewPassword" HorizontalAlignment="Left" Margin="709,592,0,0" VerticalAlignment="Top" Width="32" Height="28" Padding="0,0,0,0" BorderBrush="#FF252525" RenderTransformOrigin="0.25,0.573">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/ViewPassword.png"/>
+            </Button.Background>
+        </Button>
+        <Label Content="Bem vindo (a)" HorizontalAlignment="Left" Margin="370,227,0,0" VerticalAlignment="Top" Width="172" Background="Transparent" FontFamily="Arial" Height="50" FontSize="24" Foreground="#FF929292"/>
+        <Label HorizontalAlignment="Left" Margin="264,277,0,0" VerticalAlignment="Top" Height="51" Width="398" Content="Faça o Login em sua conta" Background="Transparent" FontFamily="Arial" FontSize="30" Foreground="White" FontWeight="Bold"/>
     </Grid>
 </Window>
+
