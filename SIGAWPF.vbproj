@@ -11,6 +11,8 @@
     <None Remove="Icons8-Windows-8-Users-Name.512.png" />
     <None Remove="key-icon.png" />
     <None Remove="user-icon.png" />
+    <None Remove="Views\5137894 %281%29.jpg" />
+    <None Remove="Views\5137894.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +35,10 @@
     <Compile Update="Views\DisciplinaAlunoPage.xaml.vb">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\BackGround\5137894.jpg" />
   </ItemGroup>
 
 </Project>

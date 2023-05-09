@@ -17,7 +17,7 @@
     End Sub
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
-        lblInfo.Content = infoMessage
+        'lblInfo.Content = infoMessage
     End Sub
 
     Public Sub DisplayError() Implements IView.DisplayError
@@ -31,4 +31,15 @@
     Private Sub LoginForm_Initialized(sender As Object, e As EventArgs) Handles LoginForm.Initialized
         cmbUserType.SelectedIndex = 0
     End Sub
+
+    Private Sub btnViewPassword_Click(sender As Object, e As RoutedEventArgs) Handles btnViewPassword.Click
+        txtPassword.PasswordChar = ""
+    End Sub
+
+    Private Sub btnChancePassword_Click(sender As Object, e As RoutedEventArgs) Handles btnChancePassword.Click
+        Dim changeScreen As New ChancePasswordScreen()
+        changeScreen.Show()
+    End Sub
 End Class
+
+
