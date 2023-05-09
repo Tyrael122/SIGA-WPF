@@ -2,11 +2,6 @@
     Implements IView
 
     Private Presenter As PresenterLogin = New PresenterLogin(Me)
-    Private originalZIndex As Integer
-
-    Private Sub ComboBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-
-    End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As RoutedEventArgs) Handles btnLogin.Click
         If String.IsNullOrEmpty(txtLogin.Text) Or String.IsNullOrEmpty(txtPassword.Password) Then
@@ -34,12 +29,25 @@
     End Sub
 
     Private Sub btnViewPassword_Click(sender As Object, e As RoutedEventArgs) Handles btnViewPassword.Click
-        If Panel.GetZIndex(txtPassword) = originalZIndex Then
-            Panel.SetZIndex(txtPassword, -1)
+        Dim isPasswordVisible = Panel.GetZIndex(txtVisiblePassword) > Panel.GetZIndex(txtPassword)
+
+        If isPasswordVisible Then
+            HidePassword()
         Else
-            Panel.SetZIndex(txtPassword, originalZIndex)
+            ShowPassword()
         End If
-        visiblePassword.Text = txtPassword.Password
+
+        txtVisiblePassword.Text = txtPassword.Password
+    End Sub
+
+    Private Sub HidePassword()
+        Panel.SetZIndex(txtPassword, 1)
+        Panel.SetZIndex(txtVisiblePassword, 0)
+    End Sub
+
+    Private Sub ShowPassword()
+        Panel.SetZIndex(txtVisiblePassword, 1)
+        Panel.SetZIndex(txtPassword, 0)
     End Sub
 
     Private Sub btnChancePassword_Click(sender As Object, e As RoutedEventArgs) Handles btnChangePassword.Click
