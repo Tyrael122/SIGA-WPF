@@ -13,6 +13,8 @@
     <None Remove="user-icon.png" />
     <None Remove="Views\5137894 %281%29.jpg" />
     <None Remove="Views\5137894.jpg" />
+    <None Remove="Views\FatecLogo.png" />
+    <None Remove="Views\ViewPassword.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\5137894.jpg" />
     <Resource Include="Views\BackGround\5137894.jpg" />
+    <Resource Include="Views\FatecLogo.png" />
+    <Resource Include="Views\ViewPassword.png" />
   </ItemGroup>
 
 </Project>

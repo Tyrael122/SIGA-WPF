@@ -17,7 +17,7 @@
     End Sub
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
-        'lblInfo.Content = infoMessage
+        lblInfo.Content = infoMessage
     End Sub
 
     Public Sub DisplayError() Implements IView.DisplayError
