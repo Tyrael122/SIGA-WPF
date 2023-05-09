@@ -36,9 +36,8 @@
         txtPassword.PasswordChar = ""
     End Sub
 
-    Private Sub btnChancePassword_Click(sender As Object, e As RoutedEventArgs) Handles btnChancePassword.Click
-        Dim changeScreen As New ChancePasswordScreen()
-        changeScreen.Show()
+    Private Sub btnChancePassword_Click(sender As Object, e As RoutedEventArgs) Handles btnChangePassword.Click
+        Presenter.ShowChangePasswordScreen()
     End Sub
 End Class
 

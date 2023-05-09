@@ -1,3 +1,3 @@
-﻿Public Class ChancePasswordScreen
+﻿Public Class ChangePasswordScreen
 
 End Class

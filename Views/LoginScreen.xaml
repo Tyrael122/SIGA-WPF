@@ -110,7 +110,7 @@
                 <ImageBrush ImageSource="/Views/ViewPassword.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="btnChancePassword" Content="Esqueceu sua senha ?" HorizontalAlignment="Left" Margin="654,699,0,0" VerticalAlignment="Top" Width="138" Height="24" FontFamily="Arial" Foreground="#FFCABDBD" BorderBrush="#FF252525" Background="#FF252525"/>
+        <Button x:Name="btnChangePassword" Content="Esqueceu sua senha ?" HorizontalAlignment="Left" Margin="654,699,0,0" VerticalAlignment="Top" Width="138" Height="24" FontFamily="Arial" Foreground="#FFCABDBD" BorderBrush="#FF252525" Background="#FF252525"/>
         <Rectangle HorizontalAlignment="Left" Height="238" Margin="254,34,0,0" VerticalAlignment="Top" Width="396">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/Views/FatecLogo.png"/>
