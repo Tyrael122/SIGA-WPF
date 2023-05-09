@@ -54,4 +54,10 @@ Public Class Presenter
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
         Return GetDataTable(table)
     End Function
+
+    Protected Function GetAllDisciplinasPorSemestre(idCurso As String, semestre As Integer) As IEnumerable(Of IDictionary(Of String, String))
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
+
+        Return disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
+    End Function
 End Class

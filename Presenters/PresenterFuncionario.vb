@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Data.Common
+Imports System.Security.AccessControl
 Imports System.Security.Principal
 
 Public Class PresenterFuncionario
@@ -95,10 +96,15 @@ Public Class PresenterFuncionario
         idDisciplinasProfessor.Remove(idDisciplina)
     End Sub
 
-    Friend Function GetDisciplinasCursoSemestreInicio(idCurso As String, semestreInicio As Integer) As DataTable
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
+    Friend Sub ShowCursoPage(idCurso As String)
+        SessionCookie.AddCookie("IdCurso", idCurso)
 
-        disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") >= semestreInicio)
+        Call New CursoPage().Show()
+    End Sub
+
+    Friend Function GetDisciplinasPorSemestreDataTable(idCurso As String, semestre As Integer) As DataTable
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
+        disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
 
         Return ConvertDictionariesToDataTable(disciplinas)
     End Function

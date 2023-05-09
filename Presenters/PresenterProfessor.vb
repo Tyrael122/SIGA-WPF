@@ -40,6 +40,7 @@ Public Class PresenterProfessor
         data("Tipo") = [Enum].Parse(GetType(TipoProva), data("Tipo"))
 
         data.Add("IdDisciplina", SessionCookie.GetCookie("idDisciplina"))
+        data.Add("IdProfessor", SessionCookie.GetCookie("userId"))
         BusinessRules.Save(data, Table.Prova)
     End Sub
 

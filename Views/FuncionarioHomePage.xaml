@@ -131,7 +131,17 @@
                         </TabItem>
                         <TabItem x:Name="tabEditarCurso" Header="Editar">
                             <Grid Background="#FFE5E5E5">
-                                <DataGrid x:Name="cursoDataGrid"/>
+                                <DataGrid x:Name="cursoDataGrid">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Ver Curso">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Click="VerCurso_Click" Tag="{Binding Id}" Content="Ver"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
                             </Grid>
                         </TabItem>
                     </TabControl>

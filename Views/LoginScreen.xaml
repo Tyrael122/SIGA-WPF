@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoginScreenWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="338" Width="337" Background="#FF5156A6">
+        Title="MainWindow" Height="338" Width="337" Background="#FF7C33AF">
     <Grid Margin="23,0,39,5" RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>

@@ -9,6 +9,7 @@
         DisciplinasProfessorDataGrid.ItemsSource = disciplinas
 
         cmbCursosAluno.ItemsSource = Presenter.LoadCursosAlunoComboBox()
+        cursoDataGrid.ItemsSource = Presenter.GetDataTable("Curso").DefaultView
     End Sub
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
@@ -71,10 +72,6 @@
         Presenter.RegisterCurso(map)
     End Sub
 
-    Private Sub tabEditarCurso_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarCurso.GotFocus
-        cursoDataGrid.ItemsSource = Presenter.GetDataTable("Curso").DefaultView
-    End Sub
-
     Private Sub btnCadastrarDisciplina_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarDisciplina.Click
         Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
             {"Name", txtNomeDisciplina.Text},
@@ -87,12 +84,19 @@
     End Sub
 
     Private Sub CheckBox_Click(sender As Object, e As RoutedEventArgs)
+
         Dim checkBox As CheckBox = CType(sender, CheckBox)
         If checkBox.IsChecked Then
             Presenter.AddDisciplinaSelecionadaAoCurso(checkBox.Tag)
         Else
             Presenter.RemoveDisciplinaSelecionadaDoCurso(checkBox.Tag)
         End If
+    End Sub
+
+    Private Sub VerCurso_Click(sender As Object, e As EventArgs)
+        Dim button As Button = CType(sender, Button)
+
+        Presenter.ShowCursoPage(button.Tag)
     End Sub
 
     Private Sub cmbCursosAluno_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursosAluno.SelectionChanged
@@ -102,7 +106,7 @@
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasCursoSemestreInicio(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
+            Presenter.GetDisciplinasPorSemestreDataTable(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub cmbSemestreInicio_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSemestreInicio.SelectionChanged
@@ -113,7 +117,7 @@
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasCursoSemestreInicio(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
+            Presenter.GetDisciplinasPorSemestreDataTable(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub CheckBoxDisciplinasAluno_Click(sender As Object, e As RoutedEventArgs)
