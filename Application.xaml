@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:LoginScreenWPF"
              StartupUri="Views\LoginScreen.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
 </Application>

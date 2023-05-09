@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LoginScreenWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
 
@@ -26,7 +25,7 @@
                                         VerticalScrollBarVisibility="Hidden"/>
                             </Border>
                             <TextBlock x:Name="placeholder"
-                                Text="Digite o seu usuário: "
+                                Text="Digite o seu usuário"
                                 Foreground="Gray"
                                 Visibility="Collapsed"/>
                         </Grid>
@@ -86,16 +85,16 @@
                 </Label.RenderTransform>
             </Label>
         </StackPanel>
-        <Label Content="Selecione o tipo de usuário:" FontFamily="Arial" FontSize="20" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,414,-108,636"/>
-        <ComboBox x:Name="cmbUserType" Width="196" HorizontalAlignment="Left" Margin="153,459,0,600" Background="#00000000" BorderBrush="#00000000">
+        <Label Content="Selecione o tipo de usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,414,448,626"/>
+        <ComboBox x:Name="cmbUserType" Width="260" HorizontalAlignment="Left" Margin="153,459,0,587" Background="#00000000" BorderBrush="#00000000" FontSize="18">
             <ComboBoxItem Content="Aluno"/>
             <ComboBoxItem Content="Professor"/>
             <ComboBoxItem Content="Funcionário administrativo"/>
         </ComboBox>
-        <Label Content="Email ou usuário:" FontFamily="Arial" FontSize="20" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,510,-108,540"/>
-        <TextBox Style="{StaticResource PlaceholderTextBox}" x:Name="txtLogin" HorizontalAlignment="Left" Margin="150,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="599" Height="35" Background="#FF252525" BorderBrush="White" BorderThickness="0,0,0,1" Cursor="" FontSize="16" Foreground="#FF8C8C8C"/>
-        <Label Content="Senha:" FontFamily="Arial" FontSize="20" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,614,-108,436"/>
-        <Button x:Name="btnLogin" Content="Entrar" HorizontalAlignment="Center" Margin="0,745,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FF009CFF" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="#FFE0E0E0">
+        <Label Content="Email ou usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,510,538,530"/>
+        <TextBox Style="{StaticResource PlaceholderTextBox}" x:Name="txtLogin" HorizontalAlignment="Left" Margin="150,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="599" Height="35" Background="#FF252525" BorderBrush="White" BorderThickness="0,0,0,1" Cursor="" FontSize="20" Foreground="#FF8C8C8C"/>
+        <Label Content="Senha:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,609,665,431"/>
+        <Button x:Name="btnLogin" Content="Entrar" HorizontalAlignment="Center" Margin="0,745,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FF0A78BE" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="32" Background="#FF009CFF">
@@ -104,7 +103,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="btnChangePassword" Content="Esqueceu sua senha ?" HorizontalAlignment="Left" Margin="654,699,0,0" VerticalAlignment="Top" Width="138" Height="24" FontFamily="Arial" Foreground="#FFCABDBD" BorderBrush="#FF252525" Background="#FF252525"/>
+        <Button x:Name="btnChangePassword" Content="Esqueceu sua senha?" HorizontalAlignment="Left" Margin="546,702,0,0" VerticalAlignment="Top" Width="207" Height="35" FontFamily="Arial" Foreground="#FFCABDBD" BorderBrush="#FF252525" Background="#FF252525" FontSize="18"/>
         <Rectangle HorizontalAlignment="Left" Height="238" Margin="254,34,0,0" VerticalAlignment="Top" Width="396">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/Views/FatecLogo.png"/>
@@ -114,8 +113,8 @@
             </Rectangle.Stroke>
         </Rectangle>
         <Label x:Name="lblInfo" Content="" HorizontalAlignment="Left" Margin="153,699,0,0" VerticalAlignment="Top" Height="38" Width="393" Foreground="White" FontSize="18"/>
-        <TextBox x:Name="visiblePassword" HorizontalAlignment="Left" Margin="153,654,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="Transparent" BorderBrush="Transparent" Foreground="#FF888888"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="153,654,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36"/>
+        <TextBox x:Name="visiblePassword" HorizontalAlignment="Left" Margin="153,654,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="Transparent" BorderBrush="#FFABADB3" Foreground="#FF888888" FontSize="20" BorderThickness="0,0,0,1"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="153,654,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20"/>
         <Button x:Name="btnViewPassword" Content="" HorizontalAlignment="Left" Margin="697,658,0,0" VerticalAlignment="Top" Width="32" Height="28" Padding="0,0,0,0" BorderBrush="#FF252525" RenderTransformOrigin="0.25,0.573">
             <Button.Background>
                 <ImageBrush ImageSource="/Views/ViewPassword.png"/>
