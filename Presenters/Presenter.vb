@@ -1,7 +1,7 @@
 ﻿Imports System.Data
 
 Public Class Presenter
-    Protected Shared Sub ShowWindowAndCloseCurrent(window As Window, view As IView)
+    Protected Sub ShowWindowAndCloseCurrent(window As Window, view As IView)
         window.Show()
         view.CloseView()
     End Sub

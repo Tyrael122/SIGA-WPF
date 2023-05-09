@@ -11,7 +11,6 @@
         cmbCursosAluno.ItemsSource = Presenter.LoadCursosAlunoComboBox()
         cursoDataGrid.ItemsSource = Presenter.GetDataTable("Curso").DefaultView
     End Sub
-
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         lblInfo.Content = infoMessage
 
