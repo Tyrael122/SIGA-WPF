@@ -52,49 +52,17 @@
 
     <!-- Body -->
     <Grid Height="1080" Width="900">
-        <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Center" Width="728" Fill="#FF252525" RadiusX="30" RadiusY="30"/>
-        <StackPanel Margin="0,277,0,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="54">
-            <StackPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </StackPanel.RenderTransform>
-            <Label Content="Bem vindo (a)" Width="158" Background="Transparent" FontFamily="Arial" Height="52" FontSize="24" Foreground="#FF929292" RenderTransformOrigin="0.5,0.5">
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.RenderTransform>
-            </Label>
-        </StackPanel>
-        <StackPanel Margin="0,304,0,675" Height="80">
-            <Label Content="Faça o Login em sua conta" Width="398" Background="Transparent" FontFamily="Arial" Height="52" FontSize="30" Foreground="White" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.RenderTransform>
-            </Label>
-        </StackPanel>
-        <Label Content="Selecione o tipo de usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,414,448,626"/>
-        <ComboBox x:Name="cmbUserType" Width="260" HorizontalAlignment="Left" Margin="153,459,0,587" Background="#00000000" BorderBrush="#00000000" FontSize="18">
+        <Rectangle HorizontalAlignment="Center" Height="699" Stroke="Black" VerticalAlignment="Center" Width="719" Fill="#FF252525" RadiusX="30" RadiusY="30"/>
+        <Label Content="Selecione o tipo de usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="152,352,442,688"/>
+        <ComboBox x:Name="cmbUserType" Width="260" HorizontalAlignment="Left" Margin="159,397,0,649" Background="#00000000" BorderBrush="#00000000" FontSize="18">
             <ComboBoxItem Content="Aluno"/>
             <ComboBoxItem Content="Professor"/>
             <ComboBoxItem Content="Funcionário administrativo"/>
         </ComboBox>
-        <Label Content="Email ou usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,510,538,530"/>
-        <TextBox Style="{StaticResource PlaceholderTextBox}" x:Name="txtLogin" HorizontalAlignment="Left" Margin="150,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="599" Height="35" Background="#FF252525" BorderBrush="White" BorderThickness="0,0,0,1" Cursor="" FontSize="20" Foreground="#FF8C8C8C"/>
-        <Label Content="Senha:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="146,609,665,431"/>
-        <Button x:Name="btnLogin" Content="Entrar" HorizontalAlignment="Center" Margin="0,745,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FF0A78BE" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
+        <Label Content="Email ou usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="152,448,532,592"/>
+        <TextBox Style="{StaticResource PlaceholderTextBox}" x:Name="txtLogin" HorizontalAlignment="Left" Margin="156,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="599" Height="35" Background="#FF252525" BorderBrush="White" BorderThickness="0,0,0,1" Cursor="" FontSize="20" Foreground="#FF8C8C8C"/>
+        <Label Content="Senha:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="152,552,659,488"/>
+        <Button x:Name="btnLogin" Content="Entrar" HorizontalAlignment="Left" Margin="144,691,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FF0A78BE" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="32" Background="#FF009CFF">
@@ -103,8 +71,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="btnChangePassword" Content="Esqueceu sua senha?" HorizontalAlignment="Left" Margin="546,702,0,0" VerticalAlignment="Top" Width="207" Height="35" FontFamily="Arial" Foreground="#FFCABDBD" BorderBrush="#FF252525" Background="#FF252525" FontSize="18"/>
-        <Rectangle HorizontalAlignment="Left" Height="238" Margin="254,34,0,0" VerticalAlignment="Top" Width="396">
+        <Button x:Name="btnChangePassword" Content="Esqueceu sua senha?" HorizontalAlignment="Left" Margin="558,547,0,0" VerticalAlignment="Top" Width="207" Height="35" FontFamily="Arial" Foreground="#FFCABDBD" BorderBrush="#FF252525" Background="#FF252525" FontSize="18"/>
+        <Rectangle HorizontalAlignment="Left" Height="238" Margin="255,0,0,0" VerticalAlignment="Top" Width="396">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/Views/FatecLogo.png"/>
             </Rectangle.Fill>
@@ -112,14 +80,16 @@
                 <ImageBrush/>
             </Rectangle.Stroke>
         </Rectangle>
-        <Label x:Name="lblInfo" HorizontalAlignment="Left" Margin="153,699,0,0" VerticalAlignment="Top" Height="38" Width="393" Foreground="White" FontSize="18"/>
-        <TextBox x:Name="txtVisiblePassword" HorizontalAlignment="Left" Margin="153,654,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="Transparent" BorderBrush="#FFABADB3" Foreground="#FF888888" FontSize="20" BorderThickness="0,0,0,1"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="153,654,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20"/>
-        <Button x:Name="btnViewPassword" Content="" HorizontalAlignment="Left" Margin="697,658,0,0" VerticalAlignment="Top" Width="32" Height="28" Padding="0,0,0,0" BorderBrush="#FF252525" RenderTransformOrigin="0.25,0.573">
+        <Label x:Name="lblInfo" HorizontalAlignment="Left" Margin="153,633,0,0" VerticalAlignment="Top" Height="53" Width="588" Foreground="White" FontSize="18"/>
+        <TextBox x:Name="txtVisiblePassword" HorizontalAlignment="Left" Margin="159,592,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="Transparent" BorderBrush="#FFABADB3" Foreground="#FF888888" FontSize="20" BorderThickness="0,0,0,1"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="159,592,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20"/>
+        <Button x:Name="btnViewPassword" HorizontalAlignment="Left" Margin="709,592,0,0" VerticalAlignment="Top" Width="32" Height="28" Padding="0,0,0,0" BorderBrush="#FF252525" RenderTransformOrigin="0.25,0.573">
             <Button.Background>
                 <ImageBrush ImageSource="/Views/ViewPassword.png"/>
             </Button.Background>
         </Button>
+        <Label Content="Bem vindo (a)" HorizontalAlignment="Left" Margin="350,227,0,0" VerticalAlignment="Top" Width="172" Background="Transparent" FontFamily="Arial" Height="50" FontSize="24" Foreground="#FF929292"/>
+        <Label HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Height="51" Width="398" Content="Faça o Login em sua conta" Background="Transparent" FontFamily="Arial" FontSize="30" Foreground="White" FontWeight="Bold"/>
     </Grid>
 </Window>
 
