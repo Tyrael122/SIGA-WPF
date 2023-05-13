@@ -9,4 +9,5 @@
     ProfessorDisciplina
     Prova
     Nota
+    Horario
 End Enum

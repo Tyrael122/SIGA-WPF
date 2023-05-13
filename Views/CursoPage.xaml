@@ -21,7 +21,7 @@
                     <Label Content="Semestre:" HorizontalAlignment="Left" Margin="152,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
                     <ComboBox x:Name="cmbDisciplinas" HorizontalAlignment="Left" Margin="218,52,0,0" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Disciplinas:" HorizontalAlignment="Left" Margin="145,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="440,21,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox x:Name="cmbDiaSemana" HorizontalAlignment="Left" Margin="440,21,0,0" VerticalAlignment="Top" Width="120">
                         <ComboBoxItem Content="Segunda"/>
                         <ComboBoxItem Content="Terça"/>
                         <ComboBoxItem Content="Quarta"/>
@@ -30,20 +30,21 @@
                         <ComboBoxItem Content="Sábado"/>
                     </ComboBox>
                     <Label Content="Dia da semana:" HorizontalAlignment="Left" Margin="350,19,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="442,54,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="cmbProfessor" HorizontalAlignment="Left" Margin="442,54,0,0" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Professor:" HorizontalAlignment="Center" Margin="0,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="218,102,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox x:Name="cmbHorarioInicio" HorizontalAlignment="Left" Margin="218,102,0,0" VerticalAlignment="Top" Width="120">
                         <ComboBoxItem Content="7:00"/>
                         <ComboBoxItem Content="9:00"/>
                         <ComboBoxItem Content="11:00"/>
                     </ComboBox>
                     <Label Content="Horário de Início:" HorizontalAlignment="Left" Margin="112,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="218,133,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox x:Name="cmbHorarioFim" HorizontalAlignment="Left" Margin="218,133,0,0" VerticalAlignment="Top" Width="120">
                         <ComboBoxItem Content="8:40"/>
                         <ComboBoxItem Content="10:40"/>
                         <ComboBoxItem Content="12:00"/>
                     </ComboBox>
                     <Label Content="Horário de Fim:" HorizontalAlignment="Left" Margin="112,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
+                    <Button x:Name="btnCadastrarHorarioCurso" Content="Cadastrar horário" HorizontalAlignment="Left" Margin="218,183,0,0" VerticalAlignment="Top" Height="28" Width="107"/>
                 </Grid>
             </TabItem>
         </TabControl>
