@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="SIGA" 
+        Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+        Width="{x:Static SystemParameters.PrimaryScreenWidth}" WindowState="Maximized">
 
     <!-- Place holder para passwordBox-->
     <Window.Resources>
@@ -51,8 +53,8 @@
 
 
     <!-- Body -->
-    <Grid Height="1080" Width="900">
-        <Rectangle HorizontalAlignment="Center" Height="699" Stroke="Black" VerticalAlignment="Center" Width="719" Fill="#FF252525" RadiusX="30" RadiusY="30"/>
+    <Grid Height="1080" Margin="302,0,318,-232">
+        <Rectangle HorizontalAlignment="Left" Height="598" Stroke="Black" VerticalAlignment="Top" Width="794" Fill="#FF252525" RadiusX="30" RadiusY="30" Margin="62,212,0,0"/>
         <Label Content="Selecione o tipo de usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="152,352,442,688"/>
         <ComboBox x:Name="cmbUserType" Width="260" HorizontalAlignment="Left" Margin="159,397,0,649" Background="#00000000" BorderBrush="#00000000" FontSize="18">
             <ComboBoxItem Content="Aluno"/>
@@ -88,8 +90,8 @@
                 <ImageBrush ImageSource="/Views/ViewPassword.png"/>
             </Button.Background>
         </Button>
-        <Label Content="Bem vindo (a)" HorizontalAlignment="Left" Margin="350,227,0,0" VerticalAlignment="Top" Width="172" Background="Transparent" FontFamily="Arial" Height="50" FontSize="24" Foreground="#FF929292"/>
-        <Label HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Height="51" Width="398" Content="Faça o Login em sua conta" Background="Transparent" FontFamily="Arial" FontSize="30" Foreground="White" FontWeight="Bold"/>
+        <Label Content="Bem vindo (a)" HorizontalAlignment="Left" Margin="370,227,0,0" VerticalAlignment="Top" Width="172" Background="Transparent" FontFamily="Arial" Height="50" FontSize="24" Foreground="#FF929292"/>
+        <Label HorizontalAlignment="Left" Margin="264,277,0,0" VerticalAlignment="Top" Height="51" Width="398" Content="Faça o Login em sua conta" Background="Transparent" FontFamily="Arial" FontSize="30" Foreground="White" FontWeight="Bold"/>
     </Grid>
 </Window>
 
