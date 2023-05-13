@@ -30,18 +30,23 @@
 
     Private Sub btnViewPassword_Click(sender As Object, e As RoutedEventArgs) Handles btnViewPassword.Click
         Dim isPasswordVisible = Panel.GetZIndex(txtVisiblePassword) > Panel.GetZIndex(txtPassword)
-
         If isPasswordVisible Then
             HidePassword()
         Else
             ShowPassword()
         End If
+
+        AssureViewPasswordButtonIsVisible()
         txtVisiblePassword.Text = txtPassword.Password
     End Sub
 
+    Private Sub AssureViewPasswordButtonIsVisible()
+        Panel.SetZIndex(btnViewPassword, 1)
+    End Sub
+
     Private Sub HidePassword()
-        Panel.SetZIndex(txtPassword, 1)
         Panel.SetZIndex(txtVisiblePassword, 0)
+        Panel.SetZIndex(txtPassword, 1)
     End Sub
 
     Private Sub ShowPassword()

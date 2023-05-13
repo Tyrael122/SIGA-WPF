@@ -83,15 +83,15 @@
             </Rectangle.Stroke>
         </Rectangle>
         <Label x:Name="lblInfo" HorizontalAlignment="Left" Margin="153,633,0,0" VerticalAlignment="Top" Height="53" Width="588" Foreground="White" FontSize="18"/>
-        <TextBox x:Name="txtVisiblePassword" HorizontalAlignment="Left" Margin="159,592,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="Transparent" BorderBrush="#FFABADB3" Foreground="#FF888888" FontSize="20" BorderThickness="0,0,0,1"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="159,592,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20"/>
+        <TextBox x:Name="txtVisiblePassword" HorizontalAlignment="Left" Margin="159,592,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="#FF252525" BorderBrush="#FFABADB3" Foreground="#FF888888" FontSize="20" BorderThickness="0,0,0,1"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="159,592,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderBrush="#FFABADB3" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20"/>
+        <Label Content="Bem vindo (a)" HorizontalAlignment="Left" Margin="370,227,0,0" VerticalAlignment="Top" Width="172" Background="Transparent" FontFamily="Arial" Height="50" FontSize="24" Foreground="#FF929292"/>
+        <Label HorizontalAlignment="Left" Margin="264,277,0,0" VerticalAlignment="Top" Height="51" Width="398" Content="Faça o Login em sua conta" Background="Transparent" FontFamily="Arial" FontSize="30" Foreground="White" FontWeight="Bold"/>
         <Button x:Name="btnViewPassword" HorizontalAlignment="Left" Margin="709,592,0,0" VerticalAlignment="Top" Width="32" Height="28" Padding="0,0,0,0" BorderBrush="#FF252525" RenderTransformOrigin="0.25,0.573">
             <Button.Background>
                 <ImageBrush ImageSource="/Views/ViewPassword.png"/>
             </Button.Background>
         </Button>
-        <Label Content="Bem vindo (a)" HorizontalAlignment="Left" Margin="370,227,0,0" VerticalAlignment="Top" Width="172" Background="Transparent" FontFamily="Arial" Height="50" FontSize="24" Foreground="#FF929292"/>
-        <Label HorizontalAlignment="Left" Margin="264,277,0,0" VerticalAlignment="Top" Height="51" Width="398" Content="Faça o Login em sua conta" Background="Transparent" FontFamily="Arial" FontSize="30" Foreground="White" FontWeight="Bold"/>
     </Grid>
 </Window>
 
