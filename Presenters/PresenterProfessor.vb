@@ -3,6 +3,7 @@
 Public Class PresenterProfessor
     Inherits Presenter
 
+    Private IdAlunosFaltantes As New List(Of String)
     Private View As IView
 
     Public Sub New(view As IView)
@@ -64,6 +65,77 @@ Public Class PresenterProfessor
             }
 
             BusinessRules.Save(savebleData, Table.Nota)
+        Next
+    End Sub
+
+    Friend Function LoadDiaAulaComoBox() As IEnumerable(Of ComboBoxItem)
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
+
+        Dim selector = Function()
+                           Return BusinessRules.GetAll(Table.Horario).
+                                                Where(Function(horario) horario("IdDisciplina") = idDisciplina)
+                       End Function
+
+        Dim comboBoxItems As New List(Of ComboBoxItem)
+
+        For Each dict In selector()
+            Dim diaSemana = [Enum].Parse(GetType(DiaSemana), dict("DiaSemana"))
+
+            Dim comboBoxItem As New ComboBoxItem With {
+                .Content = diaSemana,
+                .Tag = dict("Id")
+            }
+            comboBoxItems.Add(comboBoxItem)
+        Next
+
+        Return comboBoxItems
+    End Function
+
+    Friend Function LoadHorariosComboBox(diaSemana As String) As IEnumerable(Of ComboBoxItem)
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
+
+        Dim diaSemanaEnum = [Enum].Parse(GetType(DiaSemana), diaSemana)
+
+        Dim selector = Function()
+                           Return BusinessRules.GetAll(Table.Horario).
+                                                Where(Function(horario) horario("IdDisciplina") = idDisciplina And
+                                                horario("DiaSemana") = diaSemanaEnum)
+                       End Function
+
+        Dim comboBoxItems As New List(Of ComboBoxItem)
+
+        For Each dict In selector()
+            Dim comboBoxItem As New ComboBoxItem With {
+                .Content = dict("HorarioInicio") & " - " & dict("HorarioFim"),
+                .Tag = dict("DiaSemana")
+            }
+            comboBoxItems.Add(comboBoxItem)
+        Next
+
+        Return comboBoxItems
+    End Function
+
+    Friend Sub DarFaltaParaAluno(idAluno As String)
+        IdAlunosFaltantes.Add(idAluno)
+    End Sub
+
+    Friend Sub DarPresencaParaAluno(idAluno As String)
+        IdAlunosFaltantes.Remove(idAluno)
+    End Sub
+
+    Friend Sub RegisterPresencas(map As Dictionary(Of String, String))
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
+        map("IdDisciplina") = idDisciplina
+
+        Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
+        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
+
+        For Each aluno In alunosCadastrados
+            Dim isAlunoPresente = Not IdAlunosFaltantes.Contains(aluno("Id"))
+            If isAlunoPresente Then
+                map("IdAluno") = aluno("Id")
+                BusinessRules.Save(map, Table.Presenca)
+            End If
         Next
     End Sub
 End Class

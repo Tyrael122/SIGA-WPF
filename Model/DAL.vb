@@ -79,11 +79,15 @@ Public Class DAL
     Private Function ParseResultIntoDictionary(sqlDataReader As SqlDataReader) As List(Of IDictionary(Of String, String))
         Dim result As New List(Of IDictionary(Of String, String))
         While sqlDataReader.Read()
-            Dim row As New Dictionary(Of String, String)
-            For i As Integer = 0 To sqlDataReader.FieldCount - 1
-                row.Add(sqlDataReader.GetName(i), sqlDataReader.GetValue(i))
+            Dim rowData As New Dictionary(Of String, String)
+
+            Dim columns = sqlDataReader.GetColumnSchema()
+            For Each column In columns
+                Dim rowValue = sqlDataReader(column.ColumnName)
+                rowData.Add(column.ColumnName, rowValue.ToString())
             Next
-            result.Add(row)
+
+            result.Add(rowData)
         End While
 
         Return result
