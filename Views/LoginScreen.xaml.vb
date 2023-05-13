@@ -36,7 +36,6 @@
         Else
             ShowPassword()
         End If
-
         txtVisiblePassword.Text = txtPassword.Password
     End Sub
 
