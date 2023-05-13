@@ -31,6 +31,8 @@
         NotasAlunosDataGrid.ItemsSource = alunosCadastrados
 
         cmbProva.ItemsSource = Presenter.LoadProvasComboBox()
+
+        cmbAulas.ItemsSource = Presenter.LoadAulasComboBox()
     End Sub
 
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click

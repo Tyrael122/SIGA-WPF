@@ -21,7 +21,66 @@ Public Class PresenterProfessor
 
     Friend Function GetDisciplinasCadastradas() As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Professor, SessionCookie.GetCookie("userId"))
-        Return ConvertDictionariesToDataTable(disciplinas)
+        'Dim cursos = BusinessRules.GetAll(Table.Curso)
+
+        'Dim disciplinasCursos = BusinessRules.GetAll(Table.CursoDisciplina)
+
+        'Dim selectorFunction = Function(disciplinaId, cursoId)
+        '                           Return disciplinasCursos.Where(Function(dict) dict("IdCurso") = cursoId And
+        '                                                              dict("IdDisciplina") = disciplinaId).First() IsNot Nothing
+        '                       End Function
+
+
+
+
+        'Dim data = disciplinas.Join(cursos, Function(disciplina) disciplina("Id"), Function(curso) curso("Id"), selectorFunction)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Dim idDisciplinas = disciplinas.Select(Function(dict) dict("Id"))
+
+        'Dim idCursos = BusinessRules.GetAll(Table.CursoDisciplina).Where(Function(curso) idDisciplinas.Contains(curso("IdDisciplina"))).
+        '                                                Select(Function(dict) dict("IdCurso"))
+
+        'Dim cursos = BusinessRules.GetAll(Table.Curso).Where(Function(curso) idCursos.Contains(curso("Id"))).
+        '                                                Select(Function(dict)
+        '                                                           Return New Dictionary(Of String, String) From {
+        '                                                                {"Id", dict("Id")},
+        '                                                                {"Nome", dict("Nome")}
+        '                                                           }
+        '                                                       End Function)
+
+        'Dim finalData = disciplinas.Select(Function(disciplina)
+        '                                       Return New Dictionary(Of String, String) From {
+        '                                           {"Id", disciplina("Id")},
+        '                                           {"Name", disciplina("Name")},
+        '                                           {"IdCurso", cursos.Where(Function(curso) idCursos.Contains(curso("Id"))).First()("Nome")},
+        '                                           {"NomeCurso", cursos.First(Function(curso) curso("Id") = disciplina("IdCurso"))("Nome")}
+        '                                       }
+        '                                   End Function)
+
+        Return ConvertDictionariesToDataTable(BusinessRules.GetJoin(String.Join(", ", idDisciplinas)))
     End Function
 
     Public Function GetAllAlunosCadastrados() As DataTable
@@ -66,4 +125,10 @@ Public Class PresenterProfessor
             BusinessRules.Save(savebleData, Table.Nota)
         Next
     End Sub
+
+    Friend Function LoadAulasComboBox() As IEnumerable(Of ComboBoxItem)
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
+
+
+    End Function
 End Class

@@ -76,7 +76,7 @@ Public Class DAL
         Return fieldsToSelect.Remove(fieldsToSelect.Length - 2)
     End Function
 
-    Private Function ParseResultIntoDictionary(sqlDataReader As SqlDataReader) As List(Of IDictionary(Of String, String))
+    Public Function ParseResultIntoDictionary(sqlDataReader As SqlDataReader) As List(Of IDictionary(Of String, String))
         Dim result As New List(Of IDictionary(Of String, String))
         While sqlDataReader.Read()
             Dim row As New Dictionary(Of String, String)

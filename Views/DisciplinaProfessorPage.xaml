@@ -42,6 +42,11 @@
                     <Button x:Name="btnLancarNotas" Content="Lançar notas" HorizontalAlignment="Left" Margin="270,305,0,0" VerticalAlignment="Top" Height="36" Width="85"/>
                 </Grid>
             </TabItem>
+            <TabItem HorizontalAlignment="Center" Height="20" Header="Cadastro de presença" VerticalAlignment="Top" Width="130" Margin="0,-1,0,0">
+                <Grid Background="#FFE5E5E5">
+                    <ComboBox x:Name="cmbAulas" HorizontalAlignment="Left" Margin="39,17,0,0" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

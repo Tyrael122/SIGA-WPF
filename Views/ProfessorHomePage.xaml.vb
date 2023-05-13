@@ -22,6 +22,10 @@
     Public Sub VerDisciplina_Click(sender As Object, e As EventArgs)
         Dim button As Button = CType(sender, Button)
 
+        If button.Tag Is Nothing Then
+            Throw New NullReferenceException("The button tag is null")
+        End If
+
         Presenter.ShowDisciplinaPage(button.Tag)
     End Sub
 End Class
