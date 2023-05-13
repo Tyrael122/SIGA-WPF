@@ -42,6 +42,24 @@
                     <Button x:Name="btnLancarNotas" Content="Lançar notas" HorizontalAlignment="Left" Margin="270,305,0,0" VerticalAlignment="Top" Height="36" Width="85"/>
                 </Grid>
             </TabItem>
+            <TabItem HorizontalAlignment="Center" Height="20" Header="Cadastro de presença" VerticalAlignment="Top" Width="134" Margin="0,-1,0,0">
+                <Grid Background="#FFE5E5E5">
+                    <ComboBox x:Name="cmbDiaAula" HorizontalAlignment="Left" Margin="73,25,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="cmbHorario" HorizontalAlignment="Left" Margin="217,20,0,0" VerticalAlignment="Top" Width="120"/>
+                    <DataGrid x:Name="PresencaAlunosDataGrid" Margin="35,80,183,150" Height="NaN" Width="NaN">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Selecionar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Click="CheckBoxPresencaAluno_Click" Tag="{Binding Id}" IsChecked="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="cmbLancarPresencas" Content="Lançar presenças" HorizontalAlignment="Left" Margin="236,288,0,0" VerticalAlignment="Top" Height="23" Width="101"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

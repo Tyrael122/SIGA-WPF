@@ -1,10 +1,12 @@
 ﻿CREATE TABLE [dbo].[Horario]
 (
-	[IdDisciplina] INT NOT NULL PRIMARY KEY, 
-    [IdCurso] NCHAR(10) NOT NULL, 
-    [IdProfessor] NCHAR(10) NOT NULL, 
-    [Semestre] NCHAR(10) NULL, 
+	[IdDisciplina] INT NOT NULL , 
+    [IdCurso] INT NOT NULL, 
+    [IdProfessor] INT NOT NULL, 
+    [Semestre] INT NULL, 
     [DiaSemana] TINYINT NULL, 
     [HorarioInicio] TIME NULL, 
-    [HorarioFim] TIME NULL
+    [HorarioFim] TIME NULL, 
+    [Id] INT NOT NULL IDENTITY, 
+    CONSTRAINT [PK_Horario] PRIMARY KEY ([Id])
 )

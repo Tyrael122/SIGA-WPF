@@ -10,4 +10,5 @@
     Prova
     Nota
     Horario
+    Presenca
 End Enum

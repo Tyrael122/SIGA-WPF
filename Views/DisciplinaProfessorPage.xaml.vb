@@ -1,4 +1,6 @@
-﻿Public Class DisciplinaProfessorPage
+﻿Imports System.Text.Json
+
+Public Class DisciplinaProfessorPage
     Implements IView
 
     Private Presenter As New PresenterProfessor(Me)
@@ -15,11 +17,19 @@
         Throw New NotImplementedException()
     End Sub
 
+    Private Sub cmbDiaAula_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDiaAula.SelectionChanged
+        Dim comboBox = CType(sender, ComboBox)
+
+        Dim diaAula = comboBox.SelectedItem.Content
+
+        cmbHorario.ItemsSource = Presenter.LoadHorariosComboBox(diaAula)
+    End Sub
+
     Private Sub btnCadastrarProva_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProva.Click
         Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-            {"Data", dataProva.SelectedDate},
-            {"Tipo", cmbTipoProva.SelectedValue.Content}
-        }
+                {"Data", dataProva.SelectedDate},
+                {"Tipo", cmbTipoProva.SelectedValue.Content}
+            }
 
         Presenter.RegisterProva(map)
     End Sub
@@ -31,6 +41,7 @@
         NotasAlunosDataGrid.ItemsSource = alunosCadastrados
 
         cmbProva.ItemsSource = Presenter.LoadProvasComboBox()
+        cmbDiaAula.ItemsSource = Presenter.LoadDiaAulaComoBox()
     End Sub
 
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click
@@ -80,4 +91,25 @@
         End If
         Return Nothing
     End Function
+
+    Private Sub cmbHorario_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbHorario.SelectionChanged
+        PresencaAlunosDataGrid.ItemsSource = Presenter.GetAllAlunosCadastrados().DefaultView
+    End Sub
+
+    Private Sub CheckBoxPresencaAluno_Click(sender As Object, e As RoutedEventArgs)
+        Dim checkBox As CheckBox = CType(sender, CheckBox)
+        If checkBox.IsChecked Then
+            Presenter.DarPresencaParaAluno(checkBox.Tag)
+        Else
+            Presenter.DarFaltaParaAluno(checkBox.Tag)
+        End If
+    End Sub
+
+    Private Sub cmbLancarPresencas_Click(sender As Object, e As RoutedEventArgs) Handles cmbLancarPresencas.Click
+        Dim map As New Dictionary(Of String, String) From {
+            {"IdHorario", cmbDiaAula.SelectedValue.Tag}
+        }
+
+        Presenter.RegisterPresencas(map)
+    End Sub
 End Class
