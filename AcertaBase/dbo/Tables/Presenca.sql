@@ -4,5 +4,5 @@
     [IdAluno] INT NOT NULL, 
     [IdCurso] INT NULL, 
     [IdHorario] INT NOT NULL, 
-    [Data] DATETIME NULL
+    [Data] DATE NULL
 )

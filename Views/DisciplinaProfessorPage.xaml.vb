@@ -20,7 +20,7 @@ Public Class DisciplinaProfessorPage
     Private Sub cmbDiaAula_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDiaAula.SelectionChanged
         Dim comboBox = CType(sender, ComboBox)
 
-        Dim diaAula = comboBox.SelectedItem.Content
+        Dim diaAula = cmbDiaAula.SelectedItem
 
         cmbHorario.ItemsSource = Presenter.LoadHorariosComboBox(diaAula)
     End Sub
@@ -107,7 +107,8 @@ Public Class DisciplinaProfessorPage
 
     Private Sub cmbLancarPresencas_Click(sender As Object, e As RoutedEventArgs) Handles cmbLancarPresencas.Click
         Dim map As New Dictionary(Of String, String) From {
-            {"IdHorario", cmbDiaAula.SelectedValue.Tag}
+            {"IdHorario", cmbHorario.SelectedValue.Tag},
+            {"Data", cmbDiaAula.SelectedValue}
         }
 
         Presenter.RegisterPresencas(map)

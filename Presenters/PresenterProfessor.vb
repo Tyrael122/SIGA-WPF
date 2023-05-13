@@ -68,38 +68,53 @@ Public Class PresenterProfessor
         Next
     End Sub
 
-    Friend Function LoadDiaAulaComoBox() As IEnumerable(Of ComboBoxItem)
+    Friend Function LoadDiaAulaComoBox() As IEnumerable(Of String)
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
-        Dim selector = Function()
-                           Return BusinessRules.GetAll(Table.Horario).
-                                                Where(Function(horario) horario("IdDisciplina") = idDisciplina)
-                       End Function
+        Dim horarios = BusinessRules.GetAll(Table.Horario).
+                             Where(Function(horario) horario("IdDisciplina") = idDisciplina)
 
-        Dim comboBoxItems As New List(Of ComboBoxItem)
+        Dim startDate As Date = Date.Now
+        Dim endDate As New DateTime(2023, 6, 30)
 
-        For Each dict In selector()
-            Dim diaSemana = [Enum].Parse(GetType(DiaSemana), dict("DiaSemana"))
+        Dim targetDates As IEnumerable(Of DayOfWeek) = horarios.Select(Of DayOfWeek)(Function(dict) [Enum].Parse(GetType(DayOfWeek), dict("DiaSemana")))
 
-            Dim comboBoxItem As New ComboBoxItem With {
-                .Content = diaSemana,
-                .Tag = dict("Id")
-            }
-            comboBoxItems.Add(comboBoxItem)
-        Next
+        Dim currentDate As Date = startDate
+        Dim matchedDates As New List(Of Date)()
 
-        Return comboBoxItems
+        While currentDate <= endDate
+            If targetDates.Contains(currentDate.DayOfWeek) Then
+                matchedDates.Add(currentDate)
+            End If
+
+            currentDate = currentDate.AddDays(1)
+        End While
+
+        Return matchedDates.Select(Function(matchedDate) matchedDate.ToString("dd-MM-yyyy"))
+
+        'Dim comboBoxItems As New List(Of ComboBoxItem)
+
+        'For Each matchedDate In matchedDates
+        '    Dim diaSemana = [Enum].Parse(GetType(DiaSemana), matchedDate.DayOfWeek)
+
+        '    Dim comboBoxItem As New ComboBoxItem With {
+        '        .Content = matchedDate.ToString("dd-MM-yyyy")
+        '    }
+        '    comboBoxItems.Add(comboBoxItem)
+        'Next
+
+        'Return comboBoxItems
     End Function
 
-    Friend Function LoadHorariosComboBox(diaSemana As String) As IEnumerable(Of ComboBoxItem)
+    Friend Function LoadHorariosComboBox(data As String) As IEnumerable(Of ComboBoxItem)
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
-        Dim diaSemanaEnum = [Enum].Parse(GetType(DiaSemana), diaSemana)
+        Dim dayOfWeek = Date.Parse(data).DayOfWeek
 
         Dim selector = Function()
                            Return BusinessRules.GetAll(Table.Horario).
                                                 Where(Function(horario) horario("IdDisciplina") = idDisciplina And
-                                                horario("DiaSemana") = diaSemanaEnum)
+                                                horario("DiaSemana") = dayOfWeek)
                        End Function
 
         Dim comboBoxItems As New List(Of ComboBoxItem)
@@ -107,7 +122,7 @@ Public Class PresenterProfessor
         For Each dict In selector()
             Dim comboBoxItem As New ComboBoxItem With {
                 .Content = dict("HorarioInicio") & " - " & dict("HorarioFim"),
-                .Tag = dict("DiaSemana")
+                .Tag = dict("Id")
             }
             comboBoxItems.Add(comboBoxItem)
         Next
@@ -126,6 +141,8 @@ Public Class PresenterProfessor
     Friend Sub RegisterPresencas(map As Dictionary(Of String, String))
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
         map("IdDisciplina") = idDisciplina
+
+        map("Data") = Date.Parse(map("Data")).ToString("yyyy-MM-dd")
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
         Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
