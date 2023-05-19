@@ -17,5 +17,6 @@
 
     Private Sub DisciplinaAlunoPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         NotasDisciplinaDataGrid.ItemsSource = Presenter.GetNotasDisciplina().DefaultView
+        PresencaDisciplinaDataGrid.ItemsSource = Presenter.GetPresencaDisciplina().DefaultView
     End Sub
 End Class

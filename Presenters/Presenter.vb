@@ -9,7 +9,6 @@ Public Class Presenter
     Protected Function ConvertDictionariesToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
         Dim dataTable As New DataTable()
 
-
         If Not data.Any() Then
             Return dataTable
         End If
@@ -56,6 +55,11 @@ Public Class Presenter
     Public Function GetAll(tableStr As String) As IEnumerable(Of IDictionary(Of String, String))
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
         Return GetAll(table)
+    End Function
+
+    Public Function GetAllById(id As String, tableStr As String) As IEnumerable(Of IDictionary(Of String, String))
+        Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
+        Return BusinessRules.GetAllById(id, table)
     End Function
 
     Public Function GetDataTable(tableStr As String) As DataTable

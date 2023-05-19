@@ -41,6 +41,42 @@ Public Class DAL
         Return rowsAffected = 1
     End Function
 
+    Public Sub Delete(idEntity As String, table As Table) Implements IDAL.Delete
+        Delete(idEntity, "Id", table)
+    End Sub
+
+    Public Sub Delete(idEntity As String, whereField As String, table As Table) Implements IDAL.Delete
+        Dim sql = "DELETE FROM " & table.ToString() & " WHERE " & whereField & " = " & idEntity
+
+        sqlCommand = New SqlCommand(sql, connection)
+        sqlCommand.ExecuteNonQuery()
+    End Sub
+
+    Public Sub Update(data As IDictionary, table As Table) Implements IDAL.Update
+        Dim sql = "UPDATE " & table.ToString() & " SET " & GetUpdateData(data) & " WHERE Id = " & data("Id")
+
+        sqlCommand = New SqlCommand(sql, connection)
+        sqlCommand.ExecuteNonQuery()
+    End Sub
+
+    Private Function GetUpdateData(data As IDictionary) As String
+        Dim returnString = ""
+        For Each key In data.Keys
+            If key = "Id" Then
+                Continue For
+            End If
+
+            If IsNumeric(data(key)) Then
+                returnString += key & " = " & data(key) & ", "
+            Else
+                returnString += key & " = '" & data(key) & "', "
+            End If
+
+        Next
+
+        Return returnString.Remove(returnString.Length - 2)
+    End Function
+
     Public Function SaveWithOutput(data As IDictionary, table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SaveWithOutput
         sqlDataReader = SavePrivate(data, table)
 
@@ -57,7 +93,7 @@ Public Class DAL
         Return New SqlCommand(sql, connection).ExecuteReader()
     End Function
 
-    Private Function GetParseableFields(data As IDictionary) As String
+    Private Function GetParseableFields(data As IDictionary(Of String, String)) As String
         Dim temp As ICollection(Of String) = data.Keys
 
         Return String.Join(", ", temp.ToList())
@@ -93,17 +129,6 @@ Public Class DAL
         Return result
     End Function
 
-    Public Sub Edit(data As IDictionary, table As Table) Implements IDAL.Edit
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub Delete(entity As IDictionary, table As Table) Implements IDAL.Delete
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub Delete(id As String, table As Table) Implements IDAL.Delete
-        Throw New NotImplementedException()
-    End Sub
 
     Public Sub Dispose() Implements IDisposable.Dispose
         connection.Close()

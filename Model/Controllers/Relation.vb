@@ -65,4 +65,22 @@
 
         Return dataBridge.SelectAll(MultipleEntityTable).Where(Function(dict) idList.Contains(dict("Id")))
     End Function
+
+    Friend Function Update(idAluno As String) As Object
+        dataBridge.Update(uniqueEntityData, UniqueEntityTable)
+        Dim entityId = idAluno
+
+        Dim columns = GetRelationColumns()
+
+        For Each id In idEntitiesToRelate
+            Dim dataDict As New Dictionary(Of String, String) From {
+                {columns.uniqueEntity, entityId},
+                {columns.multipleEntity, id}
+            }
+
+            dataBridge.Save(dataDict, GetRelationTable())
+        Next
+
+        Return True
+    End Function
 End Class

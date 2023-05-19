@@ -21,7 +21,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label x:Name="lblInfo" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="88,68,0,0" VerticalAlignment="Top" Height="24" Width="127"/>
-                        <TabControl Grid.ColumnSpan="2">
+                        <TabControl x:Name="tabControlAluno" Grid.ColumnSpan="2">
                             <TabItem x:Name="tabCadastroAluno" Header="Cadastro" Height="22" Margin="-2,-2,-2,0" VerticalAlignment="Top">
                                 <Grid Background="#FFE5E5E5">
                                     <Label Content="Login:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
@@ -37,7 +37,7 @@
                                             <DataGridTemplateColumn Header="Selecionar">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <CheckBox Click="CheckBoxDisciplinasAluno_Click" Tag="{Binding Id}" IsChecked="True"/>
+                                                        <CheckBox Click="CheckBoxDisciplinasAluno_Click" Tag="{Binding Id}" IsChecked="{Binding IsChecked}"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
@@ -56,7 +56,24 @@
                             </TabItem>
                             <TabItem x:Name="tabEditarAlunos" Header="Editar" Margin="-2,-2,-2,2">
                                 <Grid Background="#FFE5E5E5">
-                                    <DataGrid x:Name="alunosDataGrid"/>
+                                    <DataGrid x:Name="alunosDataGrid" Height="NaN" Margin="18,8,223,119" Width="NaN">
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn Header="Deletar">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button Click="DeletarAluno_Click" Tag="{Binding Id}" Content="Deletar"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Editar">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button Click="EditarAluno_Click" Tag="{Binding Id}" Content="Editar"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
                                 </Grid>
                             </TabItem>
                         </TabControl>
