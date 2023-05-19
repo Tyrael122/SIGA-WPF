@@ -23,9 +23,6 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Notas">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -15,7 +15,7 @@ Public Class PresenterFuncionario
         Me.View = view
     End Sub
 
-    Public Sub RegisterAluno(data As IDictionary)
+    Public Sub UpdateAluno(data As IDictionary)
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Curso, data("Curso")).
             Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= data("SemestreInicio")).
             Select(Function(disciplina) disciplina("Id")).
@@ -102,9 +102,30 @@ Public Class PresenterFuncionario
         Call New CursoPage().Show()
     End Sub
 
+    Friend Sub DeleteAluno(idAluno As String)
+        BusinessRules.DeleteAluno(idAluno)
+    End Sub
+
+    Friend Sub EditarAluno(tag As Object)
+        Throw New NotImplementedException()
+    End Sub
+
     Friend Function GetDisciplinasPorSemestreDataTable(idCurso As String, semestre As Integer) As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
         disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
+
+        Return ConvertDictionariesToDataTable(disciplinas)
+    End Function
+
+    Friend Function GetDisciplinasAluno(idCurso As String, semestre As Integer, idAluno As String) As DataTable
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
+        disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") >= semestre)
+
+        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+
+        For Each disciplina In disciplinas
+            disciplina("IsChecked") = idDisciplinasAluno.Contains(disciplina("Id"))
+        Next
 
         Return ConvertDictionariesToDataTable(disciplinas)
     End Function

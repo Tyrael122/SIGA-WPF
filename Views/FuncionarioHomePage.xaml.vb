@@ -10,6 +10,7 @@
 
         cmbCursosAluno.ItemsSource = Presenter.LoadCursosAlunoComboBox()
         cursoDataGrid.ItemsSource = Presenter.GetDataTable("Curso").DefaultView
+        alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
     End Sub
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         lblInfo.Content = infoMessage
@@ -41,7 +42,18 @@
                 {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
             }
 
-        Presenter.RegisterAluno(map)
+        Presenter.UpdateAluno(map)
+    End Sub
+
+    Private Sub btnEditar_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrar.Click
+        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
+                {"Login", txtLogin.Text},
+                {"Password", txtPassword.Text},
+                {"Curso", cmbCursosAluno.SelectedValue.Tag},
+                {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
+            }
+
+        Presenter.UpdateAluno(map)
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
@@ -55,10 +67,6 @@
 
     Private Sub tabEditarProfessor_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarProfessor.GotFocus
         professorDataGrid.ItemsSource = Presenter.GetDataTable("Professor").DefaultView
-    End Sub
-
-    Private Sub tabEditarAlunos_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarAlunos.GotFocus
-        alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
     End Sub
 
     Private Sub btnCadastrarCurso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarCurso.Click
@@ -135,5 +143,41 @@
         Else
             Presenter.RemoveDisciplinaSelecionadaDoProfessor(checkBox.Tag)
         End If
+    End Sub
+
+    Private Sub DeletarAluno_Click(sender As Object, e As EventArgs)
+        Dim button As Button = CType(sender, Button)
+
+        Presenter.DeleteAluno(button.Tag)
+
+        alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
+    End Sub
+
+    Private Sub EditarAluno_Click(sender As Object, e As EventArgs)
+        Dim button As Button = CType(sender, Button)
+        Dim idAluno = button.Tag
+
+        tabControlAluno.SelectedIndex = 0
+
+        Dim data = Presenter.GetAllById(idAluno, "Aluno").First()
+
+        txtLogin.Text = data("Login")
+        txtPassword.Text = data("Password")
+        cmbCursosAluno.SelectedValue = data("Curso")
+        cmbSemestreInicio.SelectedValue = data("SemestreInicio")
+
+        ' TODO: Carregar dataGrid com todas as disciplinas do curso a partir do semestre de inicio
+
+        DisciplinasCursoAlunoDataGrid.ItemsSource =
+            Presenter.GetDisciplinasAluno(data("Curso"), data("SemestreInicio"), idAluno).DefaultView
+
+        RemoveHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
+        AddHandler btnCadastrar.Click, AddressOf btnEditar_Click
+
+        btnCadastrar.Content = "Editar"
+    End Sub
+
+    Private Sub alunosDataGrid_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles alunosDataGrid.SelectionChanged
+
     End Sub
 End Class
