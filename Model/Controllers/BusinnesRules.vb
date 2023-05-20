@@ -2,7 +2,6 @@
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
     Friend Shared Sub DeleteAluno(idAluno As String)
-        ' TODO: Delete from notas table where the IdAluno = Id passed in
         dataBridge.Delete(idAluno, "IdAluno", Table.Nota)
 
         dataBridge.Delete(idAluno, Table.Aluno)

@@ -66,9 +66,8 @@
         Return dataBridge.SelectAll(MultipleEntityTable).Where(Function(dict) idList.Contains(dict("Id")))
     End Function
 
-    Friend Function Update(idAluno As String) As Object
-        dataBridge.Update(uniqueEntityData, UniqueEntityTable)
-        Dim entityId = idAluno
+    Friend Function Update(entityId As String) As Object
+        dataBridge.Update(entityId, uniqueEntityData, UniqueEntityTable)
 
         Dim columns = GetRelationColumns()
 

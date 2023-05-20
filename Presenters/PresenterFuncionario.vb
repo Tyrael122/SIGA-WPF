@@ -1,11 +1,9 @@
 ﻿Imports System.Data
-Imports System.Data.Common
-Imports System.Security.AccessControl
-Imports System.Security.Principal
 
 Public Class PresenterFuncionario
     Inherits Presenter
 
+    Private ViewModel As New AlunoViewModel()
     Private View As IView
     Private idDisciplinasCurso As New List(Of String)
     Private idDisciplinasExcluidasAluno As New List(Of String)
@@ -156,5 +154,10 @@ Public Class PresenterFuncionario
 
     Friend Function LoadCursosAlunoComboBox() As IEnumerable
         Return LoadComboBox(Function() GetAll(Table.Curso), "Nome", "Id")
+    End Function
+
+    Friend Function GetWindowDataContext() As Object
+        ViewModel.Login = "Bananas"
+        Return ViewModel
     End Function
 End Class

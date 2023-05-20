@@ -1,7 +1,7 @@
 ﻿Public Class FuncionarioHomePage
     Implements IView
 
-    Private Presenter As PresenterFuncionario = New PresenterFuncionario(Me)
+    Private ReadOnly Presenter As New PresenterFuncionario(Me)
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Dim disciplinas = Presenter.GetDataTable("Disciplina").DefaultView
@@ -13,6 +13,8 @@
         alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
 
         AddHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
+
+        DataContext = Presenter.GetWindowDataContext()
     End Sub
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         lblInfo.Content = infoMessage
@@ -192,9 +194,6 @@
             End If
         Next
 
-        'cmbCursosAluno.SelectedValue = data("Curso")
-        'cmbSemestreInicio.SelectedValue = data("SemestreInicio")
-
         DisciplinasCursoAlunoDataGrid.ItemsSource =
             Presenter.GetDisciplinasAluno(data("Curso"), data("SemestreInicio"), idAluno).DefaultView
 
@@ -202,9 +201,5 @@
         AddHandler btnCadastrar.Click, AddressOf btnEditar_Click
 
         btnCadastrar.Content = "Editar"
-    End Sub
-
-    Private Sub alunosDataGrid_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles alunosDataGrid.SelectionChanged
-
     End Sub
 End Class

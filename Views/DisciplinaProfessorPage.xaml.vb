@@ -1,6 +1,4 @@
-﻿Imports System.Text.Json
-
-Public Class DisciplinaProfessorPage
+﻿Public Class DisciplinaProfessorPage
     Implements IView
 
     Private Presenter As New PresenterProfessor(Me)
