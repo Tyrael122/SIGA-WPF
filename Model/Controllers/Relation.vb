@@ -4,7 +4,7 @@
     Private ReadOnly MultipleEntityTable As Table
 
     Public uniqueEntityData As IDictionary(Of String, String)
-    Public idEntitiesToRelate As IEnumerable(Of String)
+    Public idRelatedEntites As IEnumerable(Of String)
 
     Public Sub New(uniqueEntityTable As Table, multipleEntityTable As Table)
         Me.UniqueEntityTable = uniqueEntityTable
@@ -38,7 +38,7 @@
 
         Dim columns = GetRelationColumns()
 
-        For Each id In idEntitiesToRelate
+        For Each id In idRelatedEntites
             Dim dataDict As New Dictionary(Of String, String) From {
                 {columns.uniqueEntity, entityId},
                 {columns.multipleEntity, id}
@@ -66,13 +66,12 @@
         Return dataBridge.SelectAll(MultipleEntityTable).Where(Function(dict) idList.Contains(dict("Id")))
     End Function
 
-    Friend Function Update(idAluno As String) As Object
-        dataBridge.Update(uniqueEntityData, UniqueEntityTable)
-        Dim entityId = idAluno
+    Friend Function Update(entityId As String) As Object
+        dataBridge.Update(entityId, uniqueEntityData, UniqueEntityTable)
 
         Dim columns = GetRelationColumns()
 
-        For Each id In idEntitiesToRelate
+        For Each id In idRelatedEntites
             Dim dataDict As New Dictionary(Of String, String) From {
                 {columns.uniqueEntity, entityId},
                 {columns.multipleEntity, id}
@@ -82,5 +81,14 @@
         Next
 
         Return True
+    End Function
+
+    Public Shared Function SaveRelation(uniqueEntityTable As Table, relatedEntitiesTable As Table, idRelatedEntities As List(Of String), uniqueEntityData As Dictionary(Of String, String)) As Boolean
+        Dim relation As New Relation(uniqueEntityTable, relatedEntitiesTable) With {
+            .uniqueEntityData = uniqueEntityData,
+            .idRelatedEntites = idRelatedEntities
+        }
+
+        Return relation.Save()
     End Function
 End Class

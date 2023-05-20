@@ -1,22 +1,27 @@
 ﻿Friend Class PresenterCurso
     Inherits Presenter
 
-    Private View As IView
+    Private ViewModelHorarioCurso As New HorarioCursoViewModel
 
-    Public Sub New(View As IView)
+    Public Sub New(View As IViewModel)
         Me.View = View
+
+        View.SetDataContext(ViewModelHorarioCurso)
     End Sub
 
-    Friend Sub RegisterHorarioCurso(map As Dictionary(Of String, String))
-        map("DiaSemana") = [Enum].Parse(GetType(DiaSemana), map("DiaSemana"))
-        map("IdCurso") = SessionCookie.GetCookie("IdCurso")
+    Friend Sub RegisterHorarioCurso()
+        Dim data = ViewModelHorarioCurso.ConvertToDictionary()
 
-        BusinessRules.Save(map, Table.Horario)
+        data("DiaSemana") = [Enum].Parse(GetType(DiaSemana), data("DiaSemana"))
+        data("IdCurso") = SessionCookie.GetCookie("IdCurso")
+
+        BusinessRules.Save(data, Table.Horario)
     End Sub
 
     Public Function LoadDisciplinasPorSemestre(semestre As Integer) As IEnumerable(Of ComboBoxItem)
         Dim idCurso = SessionCookie.GetCookie("IdCurso")
-        Return LoadComboBox(Function() GetAllDisciplinasPorSemestre(idCurso, semestre), "Name", "Id")
+
+        Return GenerateComboBoxItems(Function() GetAllDisciplinasPorSemestre(idCurso, semestre), "Name", "Id")
     End Function
 
     Friend Function LoadProfessoresPorDisciplina(idDisciplina As Object) As IEnumerable(Of ComboBoxItem)
@@ -25,6 +30,6 @@
         Dim relation = New Relation(Table.Disciplina, Table.Professor)
         Dim professores = relation.GetAllMultipleEntitiesById(idDisciplina)
 
-        Return LoadComboBox(Function() relation.GetAllMultipleEntitiesById(idDisciplina), "Login", "Id")
+        Return GenerateComboBoxItems(Function() relation.GetAllMultipleEntitiesById(idDisciplina), "Login", "Id")
     End Function
 End Class

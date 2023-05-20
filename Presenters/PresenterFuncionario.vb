@@ -1,99 +1,47 @@
 ﻿Imports System.Data
-Imports System.Data.Common
-Imports System.Security.AccessControl
-Imports System.Security.Principal
 
 Public Class PresenterFuncionario
     Inherits Presenter
 
-    Private View As IView
-    Private idDisciplinasCurso As New List(Of String)
-    Private idDisciplinasExcluidasAluno As New List(Of String)
-    Private idDisciplinasProfessor As New List(Of String)
+    Private ViewModelAluno As New AlunoViewModel()
+    Private ViewModelProfessor As New ProfessorViewModel()
+    Private ViewModelDisciplina As New DisciplinaViewModel()
+    Private ViewModelCurso As New CursoViewModel()
 
-    Public Sub New(view As IView)
+    Public Sub New(view As IViewModel)
         Me.View = view
+
+        view.SetDataContext(ViewModelDisciplina)
     End Sub
 
-    Public Sub RegisterAluno(data As IDictionary)
-        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Curso, data("Curso")).
-            Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= data("SemestreInicio")).
-            Select(Function(disciplina) disciplina("Id")).
-            ToList()
+    Public Sub RegisterAluno(idsDisciplinasAluno As List(Of String))
+        Dim data = ViewModelAluno.ConvertToDictionary()
 
-        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
-            .uniqueEntityData = data,
-            .idEntitiesToRelate = idDisciplinasAluno
-        }
-
-        Dim hasInsertedSucessufully = relation.Save()
-        If hasInsertedSucessufully Then
-            View.DisplayInfo("Aluno adicionado com sucesso!")
-        Else
-            View.DisplayInfo("Erro ao adicionar aluno.")
-        End If
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Aluno")
     End Sub
 
-    Friend Sub RegisterProfessor(data As IDictionary(Of String, String))
-        Dim relation As New Relation(Table.Professor, Table.Disciplina) With {
-            .uniqueEntityData = data,
-            .idEntitiesToRelate = idDisciplinasProfessor
-        }
+    Friend Sub RegisterProfessor(idsDisciplinasProfessor As List(Of String))
+        Dim data = ViewModelProfessor.ConvertToDictionary()
 
-        Dim hasInsertedSucessufully = relation.Save()
-        If hasInsertedSucessufully Then
-            View.DisplayInfo("Professor adicionado com sucesso!")
-        Else
-            View.DisplayInfo("Erro ao adicionar professor.")
-        End If
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Professor")
     End Sub
 
-    Friend Sub RegisterCurso(courseData As IDictionary(Of String, String))
-        Dim relation As New Relation(Table.Curso, Table.Disciplina) With {
-            .uniqueEntityData = courseData,
-            .idEntitiesToRelate = idDisciplinasCurso
-        }
+    Friend Sub RegisterCurso(idsDisciplinasCurso As List(Of String))
+        Dim data = ViewModelCurso.ConvertToDictionary()
 
-        Dim hasInsertedSucessufully = relation.Save()
-        If hasInsertedSucessufully Then
-            View.DisplayInfo("Curso adicionado com sucesso!")
-        Else
-            View.DisplayInfo("Erro ao adicionar curso.")
-        End If
+        data("Turno") = [Enum].Parse(GetType(Turno), data("Turno"))
+
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Curso")
     End Sub
 
-    Friend Sub RegisterDisciplina(data As IDictionary(Of String, String))
+    Friend Sub RegisterDisciplina()
+        Dim data = ViewModelDisciplina.ConvertToDictionary()
+
         Dim hasInsertedSucessufully = BusinessRules.Save(data, Table.Disciplina)
-
-        If hasInsertedSucessufully Then
-            View.DisplayInfo("Disciplina adicionado com sucesso!")
-        Else
-            View.DisplayInfo("Erro ao adicionar disciplina.")
-        End If
-    End Sub
-
-    Friend Sub AddDisciplinaSelecionadaAoCurso(idDisciplina As String)
-        idDisciplinasCurso.Add(idDisciplina)
-    End Sub
-
-    Friend Sub RemoveDisciplinaSelecionadaDoCurso(idDisciplina As String)
-        idDisciplinasCurso.Remove(idDisciplina)
-    End Sub
-
-    Friend Sub RemoveDisciplinaSelecionadaDoAluno(idDisciplina As String)
-        idDisciplinasExcluidasAluno.Add(idDisciplina)
-    End Sub
-
-    Friend Sub AddDisciplinaSelecionadaAoAluno(idDisciplina As String)
-        idDisciplinasExcluidasAluno.Remove(idDisciplina)
-    End Sub
-
-    Friend Sub AddDisciplinaSelecionadaAoProfessor(idDisciplina As String)
-        idDisciplinasProfessor.Add(idDisciplina)
-    End Sub
-
-    Friend Sub RemoveDisciplinaSelecionadaDoProfessor(idDisciplina As String)
-        idDisciplinasProfessor.Remove(idDisciplina)
+        ShowInfoMessage(hasInsertedSucessufully, "Disciplina")
     End Sub
 
     Friend Sub ShowCursoPage(idCurso As String)
@@ -106,55 +54,78 @@ Public Class PresenterFuncionario
         BusinessRules.DeleteAluno(idAluno)
     End Sub
 
-    Friend Sub EditarAluno(tag As Object)
-        Throw New NotImplementedException()
-    End Sub
-
-    Friend Sub UpdateAluno(data As IDictionary(Of String, String))
-        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Curso, data("Curso")).
-                Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= data("SemestreInicio")).
-                Select(Function(disciplina) disciplina("Id")).
-                ToList()
-
-        Dim idAluno = SessionCookie.GetCookie("idAluno")
-        data("Id") = idAluno
+    Friend Sub UpdateAluno(idsDisciplinasAluno As List(Of String))
+        Dim idAluno = SessionCookie.GetCookie("IdAluno")
 
         BusinessRules.DeleteDisciplinasAluno(idAluno)
 
-        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
-            .uniqueEntityData = data,
-            .idEntitiesToRelate = idDisciplinasAluno
-        }
+        Dim data = ViewModelAluno.ConvertToDictionary()
 
-        Dim hasInsertedSucessufully = relation.Update(idAluno)
-        If hasInsertedSucessufully Then
-            View.DisplayInfo("Aluno atualizado com sucesso!")
-        Else
-            View.DisplayInfo("Erro ao atualizar aluno.")
-        End If
+        data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = data("Curso")).First()("Id")
+
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Aluno")
+
+        ViewModelAluno.Clear()
     End Sub
 
-    Friend Function GetDisciplinasPorSemestreDataTable(idCurso As String, semestre As Integer) As DataTable
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
-        disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
+    Public Sub CarregarAlunoParaEdicao(idAluno As String)
+        Dim alunoData = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
 
-        Return ConvertDictionariesToDataTable(disciplinas)
-    End Function
+        ViewModelAluno.LoadFromDictionary(alunoData)
 
-    Friend Function GetDisciplinasAluno(idCurso As String, semestre As Integer, idAluno As String) As DataTable
+        Dim nomeCurso = BusinessRules.GetAllById(alunoData("Curso"), Table.Curso).First()("Nome")
+        ViewModelAluno.Curso = nomeCurso
+
+        SessionCookie.AddCookie("IdAluno", idAluno)
+    End Sub
+
+    Friend Function GetDisciplinasAcimaSemestre(idCurso As String, semestre As Integer) As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
         disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") >= semestre)
 
+        For Each disciplina In disciplinas
+            disciplina("IsChecked") = True
+        Next
+
+        Return ConvertDictionaryToDataTable(disciplinas)
+    End Function
+
+    Friend Function GetDisciplinasAluno(idAluno As String) As DataTable
+        Dim aluno = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
+
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, aluno("Curso")).
+                                    Where(Function(disciplina) disciplina("Semester") >= aluno("SemestreInicio"))
 
         For Each disciplina In disciplinas
             disciplina("IsChecked") = idDisciplinasAluno.Contains(disciplina("Id"))
         Next
 
-        Return ConvertDictionariesToDataTable(disciplinas)
+        Return ConvertDictionaryToDataTable(disciplinas)
     End Function
 
+
+    Private Sub ShowInfoMessage(hasInsertedSucessfully As Boolean, keyWord As String)
+        If hasInsertedSucessfully Then
+            View.DisplayInfo(keyWord & " adicionado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao adicionar " & keyWord.ToLower())
+        End If
+    End Sub
+
     Friend Function LoadCursosAlunoComboBox() As IEnumerable
-        Return LoadComboBox(Function() GetAll(Table.Curso), "Nome", "Id")
+        Return GenerateComboBoxItems(Function() GetAll(Table.Curso), "Nome", "Id")
+    End Function
+
+    Friend Function GetDataTableWithCheckboxColumn(table As String) As Object
+        Dim data = GetAll(table)
+
+        For Each dict In data
+            dict("IsChecked") = False
+        Next
+
+        Return ConvertDictionaryToDataTable(data)
     End Function
 End Class

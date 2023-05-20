@@ -11,4 +11,5 @@
     Nota
     Horario
     Presenca
+    Aula
 End Enum

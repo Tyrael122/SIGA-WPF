@@ -1,7 +1,7 @@
 ﻿Public Class ProfessorHomePage
-    Implements IView
+    Implements IViewModel
 
-    Private Presenter As PresenterProfessor = New PresenterProfessor(Me)
+    Private Presenter As PresenterProfessorHomePage = New PresenterProfessorHomePage(Me)
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         Throw New NotImplementedException()
@@ -23,5 +23,9 @@
         Dim button As Button = CType(sender, Button)
 
         Presenter.ShowDisciplinaPage(button.Tag)
+    End Sub
+
+    Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext
+        DataContext = viewModel
     End Sub
 End Class

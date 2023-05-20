@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\DisciplinaAlunoPage.xaml.vb">
+    <Compile Update="Views\Aluno\DisciplinaAlunoPage.xaml.vb">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -43,7 +43,7 @@
   <ItemGroup>
     <Resource Include="Views\5137894.jpg" />
     <Resource Include="Views\ArrowBack.png" />
-    <Resource Include="Views\BackGround\5137894.jpg" />
+    <Resource Include="Views\Static\Background\5137894.jpg" />
     <Resource Include="Views\FatecLogo.png" />
     <Resource Include="Views\ViewPassword.png" />
   </ItemGroup>

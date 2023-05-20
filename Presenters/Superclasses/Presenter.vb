@@ -1,12 +1,14 @@
 ﻿Imports System.Data
 
-Public Class Presenter
+Public MustInherit Class Presenter
+    Protected View As IView
+
     Protected Sub ShowWindowAndCloseCurrent(window As Window, view As IView)
         window.Show()
         view.CloseView()
     End Sub
 
-    Protected Function ConvertDictionariesToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
+    Protected Function ConvertDictionaryToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
         Dim dataTable As New DataTable()
 
         If Not data.Any() Then
@@ -18,18 +20,18 @@ Public Class Presenter
         Next
 
         For Each dict In data
-            Dim dataRow As DataRow = dataTable.NewRow()
+            Dim newRow As DataRow = dataTable.NewRow()
             For Each keyValuePair In dict
-                dataRow(keyValuePair.Key) = keyValuePair.Value
+                newRow(keyValuePair.Key) = keyValuePair.Value
             Next
 
-            dataTable.Rows.Add(dataRow)
+            dataTable.Rows.Add(newRow)
         Next
 
         Return dataTable
     End Function
 
-    Protected Function LoadComboBox(selector As Func(Of IEnumerable(Of IDictionary(Of String, String))), content As String, tag As String) As IEnumerable(Of ComboBoxItem)
+    Protected Function GenerateComboBoxItems(selector As Func(Of IEnumerable(Of IDictionary(Of String, String))), content As String, tag As String) As IEnumerable(Of ComboBoxItem)
         Dim comboBoxItems As New List(Of ComboBoxItem)
 
         For Each dict In selector()
@@ -49,7 +51,7 @@ Public Class Presenter
 
     Protected Function GetDataTable(table As Table) As DataTable
         Dim data = GetAll(table)
-        Return ConvertDictionariesToDataTable(data)
+        Return ConvertDictionaryToDataTable(data)
     End Function
 
     Public Function GetAll(tableStr As String) As IEnumerable(Of IDictionary(Of String, String))

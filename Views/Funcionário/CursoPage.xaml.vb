@@ -1,17 +1,13 @@
 ﻿Public Class CursoPage
-    Implements IView
+    Inherits WindowModel
 
     Private Presenter As New PresenterCurso(Me)
 
-    Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
+    Public Overrides Sub DisplayInfo(infoMessage As String)
         Throw New NotImplementedException()
     End Sub
 
-    Public Sub DisplayError() Implements IView.DisplayError
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub CloseView() Implements IView.CloseView
+    Public Overrides Sub DisplayError()
         Throw New NotImplementedException()
     End Sub
 
@@ -30,15 +26,6 @@
     End Sub
 
     Private Sub btnCadastrarHorarioCurso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarHorarioCurso.Click
-        Dim map As New Dictionary(Of String, String) From {
-            {"IdDisciplina", cmbDisciplinas.SelectedItem.Tag},
-            {"IdProfessor", cmbProfessor.SelectedItem.Tag},
-            {"Semestre", cmbSemestre.SelectedItem.Content},
-            {"DiaSemana", cmbDiaSemana.SelectedItem.Content},
-            {"HorarioInicio", cmbHorarioInicio.SelectedItem.Content},
-            {"HorarioFim", cmbHorarioFim.SelectedItem.Content}
-        }
-
-        Presenter.RegisterHorarioCurso(map)
+        Presenter.RegisterHorarioCurso()
     End Sub
 End Class
