@@ -15,7 +15,7 @@ Public Class PresenterFuncionario
         Me.View = view
     End Sub
 
-    Public Sub UpdateAluno(data As IDictionary)
+    Public Sub RegisterAluno(data As IDictionary)
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Curso, data("Curso")).
             Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= data("SemestreInicio")).
             Select(Function(disciplina) disciplina("Id")).
@@ -108,6 +108,30 @@ Public Class PresenterFuncionario
 
     Friend Sub EditarAluno(tag As Object)
         Throw New NotImplementedException()
+    End Sub
+
+    Friend Sub UpdateAluno(data As IDictionary(Of String, String))
+        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Curso, data("Curso")).
+                Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= data("SemestreInicio")).
+                Select(Function(disciplina) disciplina("Id")).
+                ToList()
+
+        Dim idAluno = SessionCookie.GetCookie("idAluno")
+        data("Id") = idAluno
+
+        BusinessRules.DeleteDisciplinasAluno(idAluno)
+
+        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
+            .uniqueEntityData = data,
+            .idEntitiesToRelate = idDisciplinasAluno
+        }
+
+        Dim hasInsertedSucessufully = relation.Update(idAluno)
+        If hasInsertedSucessufully Then
+            View.DisplayInfo("Aluno atualizado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao atualizar aluno.")
+        End If
     End Sub
 
     Friend Function GetDisciplinasPorSemestreDataTable(idCurso As String, semestre As Integer) As DataTable

@@ -11,6 +11,8 @@
         cmbCursosAluno.ItemsSource = Presenter.LoadCursosAlunoComboBox()
         cursoDataGrid.ItemsSource = Presenter.GetDataTable("Curso").DefaultView
         alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
+
+        AddHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
     End Sub
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         lblInfo.Content = infoMessage
@@ -34,7 +36,7 @@
         Me.Close()
     End Sub
 
-    Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrar.Click
+    Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs)
         Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
                 {"Login", txtLogin.Text},
                 {"Password", txtPassword.Text},
@@ -42,10 +44,10 @@
                 {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
             }
 
-        Presenter.UpdateAluno(map)
+        Presenter.RegisterAluno(map)
     End Sub
 
-    Private Sub btnEditar_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrar.Click
+    Private Sub btnEditar_Click(sender As Object, e As RoutedEventArgs)
         Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
                 {"Login", txtLogin.Text},
                 {"Password", txtPassword.Text},
@@ -54,6 +56,12 @@
             }
 
         Presenter.UpdateAluno(map)
+
+
+        RemoveHandler btnCadastrar.Click, AddressOf btnEditar_Click
+        AddHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
+
+        btnCadastrar.Content = "Cadastrar"
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
@@ -161,12 +169,31 @@
 
         Dim data = Presenter.GetAllById(idAluno, "Aluno").First()
 
+        SessionCookie.AddCookie("idAluno", idAluno)
+
         txtLogin.Text = data("Login")
         txtPassword.Text = data("Password")
-        cmbCursosAluno.SelectedValue = data("Curso")
-        cmbSemestreInicio.SelectedValue = data("SemestreInicio")
 
-        ' TODO: Carregar dataGrid com todas as disciplinas do curso a partir do semestre de inicio
+        For Each item In cmbCursosAluno.Items
+            Dim comboBoxItem = CType(item, ComboBoxItem)
+
+            If comboBoxItem.Tag = data("Curso") Then
+                cmbCursosAluno.SelectedItem = comboBoxItem
+                Exit For
+            End If
+        Next
+
+        For Each item In cmbSemestreInicio.Items
+            Dim comboBoxItem = CType(item, ComboBoxItem)
+
+            If comboBoxItem.Content = data("SemestreInicio") Then
+                cmbSemestreInicio.SelectedItem = comboBoxItem
+                Exit For
+            End If
+        Next
+
+        'cmbCursosAluno.SelectedValue = data("Curso")
+        'cmbSemestreInicio.SelectedValue = data("SemestreInicio")
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
             Presenter.GetDisciplinasAluno(data("Curso"), data("SemestreInicio"), idAluno).DefaultView

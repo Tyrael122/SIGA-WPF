@@ -8,6 +8,10 @@
         dataBridge.Delete(idAluno, Table.Aluno)
     End Sub
 
+    Friend Shared Sub DeleteDisciplinasAluno(id As String)
+        dataBridge.Delete(id, "IdAluno", Table.AlunoDisciplina)
+    End Sub
+
     Friend Shared Function Save(data As IDictionary, table As Table) As Boolean
         Return dataBridge.Save(data, table)
     End Function

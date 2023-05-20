@@ -52,6 +52,31 @@ Public Class DAL
         sqlCommand.ExecuteNonQuery()
     End Sub
 
+    Public Sub Update(data As IDictionary, table As Table) Implements IDAL.Update
+        Dim sql = "UPDATE " & table.ToString() & " SET " & GetUpdateData(data) & " WHERE Id = " & data("Id")
+
+        sqlCommand = New SqlCommand(sql, connection)
+        sqlCommand.ExecuteNonQuery()
+    End Sub
+
+    Private Function GetUpdateData(data As IDictionary) As String
+        Dim returnString = ""
+        For Each key In data.Keys
+            If key = "Id" Then
+                Continue For
+            End If
+
+            If IsNumeric(data(key)) Then
+                returnString += key & " = " & data(key) & ", "
+            Else
+                returnString += key & " = '" & data(key) & "', "
+            End If
+
+        Next
+
+        Return returnString.Remove(returnString.Length - 2)
+    End Function
+
     Public Function SaveWithOutput(data As IDictionary, table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SaveWithOutput
         sqlDataReader = SavePrivate(data, table)
 
@@ -104,9 +129,6 @@ Public Class DAL
         Return result
     End Function
 
-    Public Sub Edit(data As IDictionary, table As Table) Implements IDAL.Edit
-        Throw New NotImplementedException()
-    End Sub
 
     Public Sub Dispose() Implements IDisposable.Dispose
         connection.Close()
