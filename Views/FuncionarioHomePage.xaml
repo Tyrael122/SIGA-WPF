@@ -14,22 +14,18 @@
         <TabControl>
             <TabItem Header="Alunos" Margin="-2,-2,-2,2">
                 <Grid Background="#FFE5E5E5">
-                    <Grid Background="#FFE5E5E5" Grid.ColumnSpan="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <Grid Background="#FFE5E5E5">
                         <Label x:Name="lblInfo" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="88,68,0,0" VerticalAlignment="Top" Height="24" Width="127"/>
-                        <TabControl x:Name="tabControlAluno" Grid.ColumnSpan="2">
+                        <TabControl x:Name="tabControlAluno">
                             <TabItem x:Name="tabCadastroAluno" Header="Cadastro" Height="22" Margin="-2,-2,-2,0" VerticalAlignment="Top">
                                 <Grid Background="#FFE5E5E5">
                                     <Label Content="Login:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
                                     <TextBox x:Name="txtLogin" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Text="{Binding Login, Mode=TwoWay}"/>
                                     <Label Content="Senha:" HorizontalAlignment="Left" Margin="139,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                                    <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                    <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Text="{Binding Password, Mode=TwoWay}"/>
                                     <Button x:Name="btnCadastrar" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
                                     <Label x:Name="lblInfoCadastroAluno" Content="" HorizontalAlignment="Left" Height="29" Margin="148,84,0,0" VerticalAlignment="Top" Width="159"/>
-                                    <ComboBox x:Name="cmbCursosAluno" HorizontalAlignment="Left" Margin="394,118,0,0" VerticalAlignment="Top" Width="120"/>
+                                    <ComboBox x:Name="cmbCursosAluno" HorizontalAlignment="Left" Margin="394,118,0,0" VerticalAlignment="Top" Width="120" Text="{Binding Curso, Mode=TwoWay}"/>
                                     <Label Content="Curso:" HorizontalAlignment="Left" Margin="349,114,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
                                     <DataGrid x:Name="DisciplinasCursoAlunoDataGrid" Margin="349,149,110,110" IsTextSearchEnabled="True" SelectionMode="Extended">
                                         <DataGrid.Columns>
@@ -40,9 +36,11 @@
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
+                                            <!--TODO: Iterate through the items in the DataGrid and extract the id and if the subject is checked-->
+                                            <DataGridCheckBoxColumn Header="Selecionar 2" Binding="{Binding IsChecked, Mode=TwoWay}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
-                                    <ComboBox x:Name="cmbSemestreInicio" HorizontalAlignment="Left" Margin="394,77,0,0" VerticalAlignment="Top" Width="120">
+                                    <ComboBox x:Name="cmbSemestreInicio" HorizontalAlignment="Left" Margin="394,77,0,0" VerticalAlignment="Top" Width="120" Text="{Binding SemestreInicio, Mode=TwoWay}">
                                         <ComboBoxItem Content="1"/>
                                         <ComboBoxItem Content="2"/>
                                         <ComboBoxItem Content="3"/>

@@ -39,26 +39,11 @@
     End Sub
 
     Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs)
-        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-                {"Login", txtLogin.Text},
-                {"Password", txtPassword.Text},
-                {"Curso", cmbCursosAluno.SelectedValue.Tag},
-                {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
-            }
-
-        Presenter.RegisterAluno(map)
+        Presenter.RegisterAluno()
     End Sub
 
     Private Sub btnEditar_Click(sender As Object, e As RoutedEventArgs)
-        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-                {"Login", txtLogin.Text},
-                {"Password", txtPassword.Text},
-                {"Curso", cmbCursosAluno.SelectedValue.Tag},
-                {"SemestreInicio", cmbSemestreInicio.SelectedValue.Content}
-            }
-
-        Presenter.UpdateAluno(map)
-
+        Presenter.UpdateAluno()
 
         RemoveHandler btnCadastrar.Click, AddressOf btnEditar_Click
         AddHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
@@ -67,12 +52,7 @@
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
-        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-            {"Login", txtLoginProfessor.Text},
-            {"Password", txtPasswordProfessor.Text}
-        }
-
-        Presenter.RegisterProfessor(map)
+        Presenter.RegisterProfessor()
     End Sub
 
     Private Sub tabEditarProfessor_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarProfessor.GotFocus
@@ -80,28 +60,14 @@
     End Sub
 
     Private Sub btnCadastrarCurso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarCurso.Click
-        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-            {"Nome", txtNomeCurso.Text},
-            {"Sigla", txtSigla.Text},
-            {"Turno", cmbTurno.SelectedIndex}
-        }
-
-        Presenter.RegisterCurso(map)
+        Presenter.RegisterCurso()
     End Sub
 
     Private Sub btnCadastrarDisciplina_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarDisciplina.Click
-        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-            {"Name", txtNomeDisciplina.Text},
-            {"Semester", txtSemestre.Text},
-            {"Workload", txtCargaHoraria.Text},
-            {"Description", txtDescricao.Text}
-        }
-
-        Presenter.RegisterDisciplina(map)
+        Presenter.RegisterDisciplina()
     End Sub
 
     Private Sub CheckBox_Click(sender As Object, e As RoutedEventArgs)
-
         Dim checkBox As CheckBox = CType(sender, CheckBox)
         If checkBox.IsChecked Then
             Presenter.AddDisciplinaSelecionadaAoCurso(checkBox.Tag)
@@ -119,22 +85,22 @@
     Private Sub cmbCursosAluno_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursosAluno.SelectionChanged
         Dim semestreInicio As Integer = 0
         If cmbSemestreInicio.SelectedValue IsNot Nothing Then
-            semestreInicio = Convert.ToInt32(cmbSemestreInicio.SelectedValue.Content)
+            semestreInicio = Convert.ToInt32(cmbSemestreInicio.SelectedItem.Content)
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasPorSemestreDataTable(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
+            Presenter.GetDisciplinasAcimaSemestreDataTable(cmbCursosAluno.SelectedItem.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub cmbSemestreInicio_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSemestreInicio.SelectionChanged
-        Dim semestreInicio As Integer = Convert.ToInt32(cmbSemestreInicio.SelectedValue.Content)
+        Dim semestreInicio As Integer = Convert.ToInt32(cmbSemestreInicio.SelectedItem.Content)
 
         If cmbCursosAluno.SelectedValue Is Nothing Then
             Return
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasPorSemestreDataTable(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
+            Presenter.GetDisciplinasAcimaSemestreDataTable(cmbCursosAluno.SelectedItem.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub CheckBoxDisciplinasAluno_Click(sender As Object, e As RoutedEventArgs)
@@ -167,32 +133,14 @@
         Dim button As Button = CType(sender, Button)
         Dim idAluno = button.Tag
 
+        Presenter.CarregarAlunoParaEdicao(idAluno)
+
         tabControlAluno.SelectedIndex = 0
 
         Dim data = Presenter.GetAllById(idAluno, "Aluno").First()
 
-        SessionCookie.AddCookie("idAluno", idAluno)
-
-        txtLogin.Text = data("Login")
-        txtPassword.Text = data("Password")
-
-        For Each item In cmbCursosAluno.Items
-            Dim comboBoxItem = CType(item, ComboBoxItem)
-
-            If comboBoxItem.Tag = data("Curso") Then
-                cmbCursosAluno.SelectedItem = comboBoxItem
-                Exit For
-            End If
-        Next
-
-        For Each item In cmbSemestreInicio.Items
-            Dim comboBoxItem = CType(item, ComboBoxItem)
-
-            If comboBoxItem.Content = data("SemestreInicio") Then
-                cmbSemestreInicio.SelectedItem = comboBoxItem
-                Exit For
-            End If
-        Next
+        ' TODO: The loading of the DataGrid should be in the Presenter,
+        ' through binding or some other mechanism.
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
             Presenter.GetDisciplinasAluno(data("Curso"), data("SemestreInicio"), idAluno).DefaultView

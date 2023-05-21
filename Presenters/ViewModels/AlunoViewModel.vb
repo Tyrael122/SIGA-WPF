@@ -1,29 +1,8 @@
 ﻿Imports System.ComponentModel
 
 Public Class AlunoViewModel
+    Inherits UserViewModel
     Implements INotifyPropertyChanged
-
-    Private _login As String
-    Public Property Login As String
-        Get
-            Return _login
-        End Get
-        Set(value As String)
-            _login = value
-            OnPropertyChanged(NameOf(Login))
-        End Set
-    End Property
-
-    Private _password As String
-    Public Property Password As String
-        Get
-            Return _password
-        End Get
-        Set(value As String)
-            _password = value
-            OnPropertyChanged(NameOf(Password))
-        End Set
-    End Property
 
     Private _curso As String
     Public Property Curso As String
@@ -47,9 +26,14 @@ Public Class AlunoViewModel
         End Set
     End Property
 
-    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-
-    Protected Overridable Sub OnPropertyChanged(propertyName As String)
-        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-    End Sub
+    Private _idDisciplinas As List(Of String)
+    Public Property IdDisciplinas As List(Of String)
+        Get
+            Return _idDisciplinas
+        End Get
+        Set(value As List(Of String))
+            _idDisciplinas = value
+            OnPropertyChanged(NameOf(IdDisciplinas))
+        End Set
+    End Property
 End Class
