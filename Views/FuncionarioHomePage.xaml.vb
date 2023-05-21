@@ -1,4 +1,6 @@
-﻿Public Class FuncionarioHomePage
+﻿Imports System.Data.Common
+
+Public Class FuncionarioHomePage
     Implements IView
 
     Private ReadOnly Presenter As New PresenterFuncionario(Me)
@@ -39,11 +41,27 @@
     End Sub
 
     Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs)
-        Presenter.RegisterAluno()
+        Dim idsDisciplinasAluno As New List(Of String)
+
+        For Each row In DisciplinasCursoAlunoDataGrid.Items
+            If row("IsChecked") Then
+                idsDisciplinasAluno.Add(row("Id"))
+            End If
+        Next
+
+        Presenter.RegisterAluno(idsDisciplinasAluno)
     End Sub
 
     Private Sub btnEditar_Click(sender As Object, e As RoutedEventArgs)
-        Presenter.UpdateAluno()
+        Dim idsDisciplinasAluno As New List(Of String)
+
+        For Each row In DisciplinasCursoAlunoDataGrid.Items
+            If row("IsChecked") Then
+                idsDisciplinasAluno.Add(row("Id"))
+            End If
+        Next
+
+        Presenter.UpdateAluno(idsDisciplinasAluno)
 
         RemoveHandler btnCadastrar.Click, AddressOf btnEditar_Click
         AddHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
@@ -89,7 +107,7 @@
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasAcimaSemestreDataTable(cmbCursosAluno.SelectedItem.Tag, semestreInicio).DefaultView
+            Presenter.GetDisciplinasAcimaSemestre(cmbCursosAluno.SelectedItem.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub cmbSemestreInicio_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSemestreInicio.SelectionChanged
@@ -100,16 +118,7 @@
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasAcimaSemestreDataTable(cmbCursosAluno.SelectedItem.Tag, semestreInicio).DefaultView
-    End Sub
-
-    Private Sub CheckBoxDisciplinasAluno_Click(sender As Object, e As RoutedEventArgs)
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.AddDisciplinaSelecionadaAoAluno(checkBox.Tag)
-        Else
-            Presenter.RemoveDisciplinaSelecionadaDoAluno(checkBox.Tag)
-        End If
+            Presenter.GetDisciplinasAcimaSemestre(cmbCursosAluno.SelectedItem.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub CheckBoxDisciplinaProfessor_Click(sender As Object, e As RoutedEventArgs)
@@ -124,26 +133,22 @@
     Private Sub DeletarAluno_Click(sender As Object, e As EventArgs)
         Dim button As Button = CType(sender, Button)
 
-        Presenter.DeleteAluno(button.Tag)
+        Dim idAluno = button.Tag
+        Presenter.DeleteAluno(idAluno)
 
         alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
     End Sub
 
     Private Sub EditarAluno_Click(sender As Object, e As EventArgs)
         Dim button As Button = CType(sender, Button)
-        Dim idAluno = button.Tag
 
+        Dim idAluno = button.Tag
         Presenter.CarregarAlunoParaEdicao(idAluno)
 
         tabControlAluno.SelectedIndex = 0
 
-        Dim data = Presenter.GetAllById(idAluno, "Aluno").First()
-
-        ' TODO: The loading of the DataGrid should be in the Presenter,
-        ' through binding or some other mechanism.
-
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasAluno(data("Curso"), data("SemestreInicio"), idAluno).DefaultView
+            Presenter.GetDisciplinasAluno(idAluno).DefaultView
 
         RemoveHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
         AddHandler btnCadastrar.Click, AddressOf btnEditar_Click

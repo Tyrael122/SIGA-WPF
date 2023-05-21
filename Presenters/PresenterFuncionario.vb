@@ -1,5 +1,4 @@
 ﻿Imports System.Data
-Imports System.Runtime.CompilerServices
 
 Public Class PresenterFuncionario
     Inherits Presenter
@@ -10,19 +9,13 @@ Public Class PresenterFuncionario
     Private ViewModelCurso As New CursoViewModel()
     Private View As IView
     Private idDisciplinasCurso As New List(Of String)
-    Private idDisciplinasExcluidasAluno As New List(Of String)
     Private idDisciplinasProfessor As New List(Of String)
 
     Public Sub New(view As IView)
         Me.View = view
     End Sub
 
-    Public Sub RegisterAluno()
-        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Curso, ViewModelAluno.Curso).
-            Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= ViewModelAluno.SemestreInicio).
-            Select(Function(disciplina) disciplina("Id")).
-            ToList()
-
+    Public Sub RegisterAluno(idsDisciplinasAluno As List(Of String))
         'TODO: Refactor relation class to accept complex relation tables, and join clauses.
 
         'Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
@@ -88,14 +81,6 @@ Public Class PresenterFuncionario
         idDisciplinasCurso.Remove(idDisciplina)
     End Sub
 
-    Friend Sub RemoveDisciplinaSelecionadaDoAluno(idDisciplina As String)
-        idDisciplinasExcluidasAluno.Add(idDisciplina)
-    End Sub
-
-    Friend Sub AddDisciplinaSelecionadaAoAluno(idDisciplina As String)
-        idDisciplinasExcluidasAluno.Remove(idDisciplina)
-    End Sub
-
     Friend Sub AddDisciplinaSelecionadaAoProfessor(idDisciplina As String)
         idDisciplinasProfessor.Add(idDisciplina)
     End Sub
@@ -114,12 +99,7 @@ Public Class PresenterFuncionario
         BusinessRules.DeleteAluno(idAluno)
     End Sub
 
-    Friend Sub UpdateAluno()
-        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Curso, ViewModelAluno.Curso).
-                Where(Function(disciplina) Not idDisciplinasExcluidasAluno.Contains(disciplina("Id")) And disciplina("Semester") >= ViewModelAluno.SemestreInicio).
-                Select(Function(disciplina) disciplina("Id")).
-                ToList()
-
+    Friend Sub UpdateAluno(idsDisciplinasAluno As List(Of String))
         Dim idAluno = SessionCookie.GetCookie("IdAluno")
 
         BusinessRules.DeleteDisciplinasAluno(idAluno)
@@ -152,20 +132,24 @@ Public Class PresenterFuncionario
         SessionCookie.AddCookie("IdAluno", idAluno)
     End Sub
 
-    Friend Function GetDisciplinasAcimaSemestreDataTable(idCurso As String, semestre As Integer) As DataTable
+    Friend Function GetDisciplinasAcimaSemestre(idCurso As String, semestre As Integer) As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
         disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") >= semestre)
+
+        For Each disciplina In disciplinas
+            disciplina("IsChecked") = True
+        Next
 
         Return ConvertDictionariesToDataTable(disciplinas)
     End Function
 
-    Friend Function GetDisciplinasAluno(idCurso As String, semestre As Integer, idAluno As String) As DataTable
-        idDisciplinasExcluidasAluno = New List(Of String)
+    Friend Function GetDisciplinasAluno(idAluno As String) As DataTable
+        Dim aluno = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
 
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso).
-                                    Where(Function(disciplina) disciplina("Semester") >= semestre)
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, aluno("IdCurso")).
+                                    Where(Function(disciplina) disciplina("Semester") >= aluno("SemestreInicio"))
 
         For Each disciplina In disciplinas
             disciplina("IsChecked") = idDisciplinasAluno.Contains(disciplina("Id"))

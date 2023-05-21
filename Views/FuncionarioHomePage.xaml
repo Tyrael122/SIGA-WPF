@@ -27,17 +27,9 @@
                                     <Label x:Name="lblInfoCadastroAluno" Content="" HorizontalAlignment="Left" Height="29" Margin="148,84,0,0" VerticalAlignment="Top" Width="159"/>
                                     <ComboBox x:Name="cmbCursosAluno" HorizontalAlignment="Left" Margin="394,118,0,0" VerticalAlignment="Top" Width="120" Text="{Binding Curso, Mode=TwoWay}"/>
                                     <Label Content="Curso:" HorizontalAlignment="Left" Margin="349,114,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                                    <DataGrid x:Name="DisciplinasCursoAlunoDataGrid" Margin="349,149,110,110" IsTextSearchEnabled="True" SelectionMode="Extended">
+                                    <DataGrid x:Name="DisciplinasCursoAlunoDataGrid" Margin="349,149,110,110" IsTextSearchEnabled="True" SelectionMode="Extended" CanUserAddRows="False">
                                         <DataGrid.Columns>
-                                            <DataGridTemplateColumn Header="Selecionar">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <CheckBox Click="CheckBoxDisciplinasAluno_Click" Tag="{Binding Id}" IsChecked="{Binding IsChecked}"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <!--TODO: Iterate through the items in the DataGrid and extract the id and if the subject is checked-->
-                                            <DataGridCheckBoxColumn Header="Selecionar 2" Binding="{Binding IsChecked, Mode=TwoWay}"/>
+                                            <DataGridCheckBoxColumn Header="Selecionar" Binding="{Binding IsChecked, Mode=TwoWay}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
                                     <ComboBox x:Name="cmbSemestreInicio" HorizontalAlignment="Left" Margin="394,77,0,0" VerticalAlignment="Top" Width="120" Text="{Binding SemestreInicio, Mode=TwoWay}">

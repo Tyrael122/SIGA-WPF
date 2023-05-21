@@ -18,12 +18,12 @@ Public Class Presenter
         Next
 
         For Each dict In data
-            Dim dataRow As DataRow = dataTable.NewRow()
+            Dim newRow As DataRow = dataTable.NewRow()
             For Each keyValuePair In dict
-                dataRow(keyValuePair.Key) = keyValuePair.Value
+                newRow(keyValuePair.Key) = keyValuePair.Value
             Next
 
-            dataTable.Rows.Add(dataRow)
+            dataTable.Rows.Add(newRow)
         Next
 
         Return dataTable
