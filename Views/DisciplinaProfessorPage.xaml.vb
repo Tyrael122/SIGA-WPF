@@ -58,22 +58,19 @@
         PresencaAlunosDataGrid.ItemsSource = Presenter.GetAllAlunosCadastrados().DefaultView
     End Sub
 
-    Private Sub CheckBoxPresencaAluno_Click(sender As Object, e As RoutedEventArgs)
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.DarPresencaParaAluno(checkBox.Tag)
-        Else
-            Presenter.DarFaltaParaAluno(checkBox.Tag)
-        End If
-    End Sub
-
     Private Sub cmbLancarPresencas_Click(sender As Object, e As RoutedEventArgs) Handles cmbLancarPresencas.Click
-        Dim map As New Dictionary(Of String, String) From {
-            {"IdHorario", cmbHorario.SelectedValue.Tag},
-            {"Data", cmbDiaAula.SelectedValue}
-        }
+        Dim presencas As New List(Of IDictionary(Of String, String))
 
-        Presenter.RegisterPresencas(map)
+        For Each row In NotasAlunosDataGrid.Items
+            Dim presenca As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
+                        {"IdAluno", row("IdAluno")},
+                        {"IsPresente", row("IsPresente")}
+                    }
+
+            presencas.Add(presenca)
+        Next
+
+        Presenter.RegisterPresencas(presencas)
     End Sub
 
     Private Sub cmbProva_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbProva.SelectionChanged

@@ -2,5 +2,5 @@
 (
 	[IdAula] INT NOT NULL , 
     [IdAluno] INT NOT NULL, 
-    [EstaPresente] BIT NOT NULL 
+    [IsPresente] BIT NOT NULL 
 )

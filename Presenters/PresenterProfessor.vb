@@ -3,7 +3,7 @@
 Public Class PresenterProfessor
     Inherits Presenter
 
-    Private IdAlunosFaltantes As New List(Of String)
+    Private ViewModelAula As New AulaViewModel()
     Private View As IView
 
     Public Sub New(view As IView)
@@ -30,6 +30,19 @@ Public Class PresenterProfessor
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
         Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
+
+        Dim idProfessor = SessionCookie.GetCookie("userId")
+
+
+        Dim idAula = BusinessRules.GetAll(Table.Aula).Where(Function(dict) dict("Id") = ViewModelAula.IdHorario And
+                                                                dict("IdProfessor") = idProfessor And
+                                                                dict("IdDisciplina") = idDisciplina).First()("Id")
+
+        For Each aluno In alunosCadastrados
+            aluno("IsPresente") = BusinessRules.GetAll(Table.Presenca).Where(Function(dict) dict("IdAula") = idAula And
+                                                                                 dict("IdAluno") = aluno("Id")).
+                                                                                 First()("EstaPresente")
+        Next
 
         Return ConvertDictionariesToDataTable(alunosCadastrados)
     End Function
@@ -130,41 +143,21 @@ Public Class PresenterProfessor
         Return comboBoxItems
     End Function
 
-    Friend Sub DarFaltaParaAluno(idAluno As String)
-        IdAlunosFaltantes.Add(idAluno)
-    End Sub
-
-    Friend Sub DarPresencaParaAluno(idAluno As String)
-        IdAlunosFaltantes.Remove(idAluno)
-    End Sub
-
-    Friend Sub RegisterPresencas(map As Dictionary(Of String, String))
-        ' TODO: Change this to use ViewModels.
-
+    Friend Sub RegisterPresencas(presencas As List(Of IDictionary(Of String, String)))
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
         Dim aulaData = New Dictionary(Of String, String) From {
                 {"IdDisciplina", idDisciplina},
-                {"IdHorario", map("IdHorario")},
-                {"Data", Date.Parse(map("Data")).ToString("yyyy-MM-dd")},
+                {"IdHorario", ViewModelAula.IdHorario},
+                {"Data", Date.Parse(ViewModelAula.Data).ToString("yyyy-MM-dd")},
                 {"IdProfessor", SessionCookie.GetCookie("userId")}
             }
 
         Dim idAula = BusinessRules.SaveWithOutput(aulaData, Table.Aula).First()("Id")
 
-        map("IdAula") = idAula
+        For Each presenca In presencas
+            presenca("IdAula") = idAula
 
-        map.Remove("Data")
-        map.Remove("IdHorario")
-
-        Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
-        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
-
-        For Each aluno In alunosCadastrados
-            Dim isAlunoPresente = Not IdAlunosFaltantes.Contains(aluno("Id"))
-            map("IdAluno") = aluno("Id")
-            map("EstaPresente") = isAlunoPresente
-
-            BusinessRules.Save(map, Table.Presenca)
+            BusinessRules.Save(presenca, Table.Presenca)
         Next
     End Sub
 

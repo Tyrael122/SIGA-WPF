@@ -2,9 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sigawpf="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=sigawpf:NotasViewModel}"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:SIGAWPF"
         mc:Ignorable="d"
         Title="DisciplinaProfessorPage" Height="450" Width="800" Loaded="Window_Loaded">
+    
+    <Window.DataContext>
+        <local:AlunoViewModel/>
+    </Window.DataContext>
+    
     <Grid>
         <Label x:Name="txtDisciplinaNome" HorizontalAlignment="Left" Margin="218,112,0,0" VerticalAlignment="Top" Height="36" Width="79"/>
         <TabControl>
@@ -43,17 +48,11 @@
             </TabItem>
             <TabItem HorizontalAlignment="Center" Height="20" Header="Cadastro de presença" VerticalAlignment="Top" Width="134" Margin="0,-1,0,0">
                 <Grid Background="#FFE5E5E5">
-                    <ComboBox x:Name="cmbDiaAula" HorizontalAlignment="Left" Margin="73,25,0,0" VerticalAlignment="Top" Width="120"/>
-                    <ComboBox x:Name="cmbHorario" HorizontalAlignment="Left" Margin="217,20,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="cmbDiaAula" HorizontalAlignment="Left" Margin="73,25,0,0" VerticalAlignment="Top" Width="120" Text="{Binding Data}"/>
+                    <ComboBox x:Name="cmbHorario" HorizontalAlignment="Left" Margin="217,20,0,0" VerticalAlignment="Top" Width="120" Tag="{Binding IdHorario}"/>
                     <DataGrid x:Name="PresencaAlunosDataGrid" Margin="35,80,183,150" Height="NaN" Width="NaN">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Selecionar">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Click="CheckBoxPresencaAluno_Click" Tag="{Binding Id}" IsChecked="True"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridCheckBoxColumn Header="Presente" Binding="{Binding IsPresente, Mode=TwoWay}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="cmbLancarPresencas" Content="Lançar presenças" HorizontalAlignment="Left" Margin="236,288,0,0" VerticalAlignment="Top" Height="23" Width="101"/>
