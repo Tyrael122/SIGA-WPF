@@ -104,19 +104,6 @@ Public Class PresenterProfessor
         End While
 
         Return matchedDates.Select(Function(matchedDate) matchedDate.ToString("dd-MM-yyyy"))
-
-        'Dim comboBoxItems As New List(Of ComboBoxItem)
-
-        'For Each matchedDate In matchedDates
-        '    Dim diaSemana = [Enum].Parse(GetType(DiaSemana), matchedDate.DayOfWeek)
-
-        '    Dim comboBoxItem As New ComboBoxItem With {
-        '        .Content = matchedDate.ToString("dd-MM-yyyy")
-        '    }
-        '    comboBoxItems.Add(comboBoxItem)
-        'Next
-
-        'Return comboBoxItems
     End Function
 
     Friend Function LoadHorariosComboBox(data As String) As IEnumerable(Of ComboBoxItem)
