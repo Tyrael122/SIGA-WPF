@@ -33,7 +33,7 @@
                             <DataGridTemplateColumn Header="Nota">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Name="textBoxName" Tag="{Binding}"/>
+                                        <TextBox Name="textBoxName" Tag="{Binding}" Text="{Binding Nota}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

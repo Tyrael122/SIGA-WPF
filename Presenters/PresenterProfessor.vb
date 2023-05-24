@@ -156,7 +156,7 @@ Public Class PresenterProfessor
         Next
     End Sub
 
-    Friend Function GetAllNotasAlunosCadastrados() As Object
+    Friend Function GetAllNotasAlunosCadastrados(idProva As String) As Object
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
@@ -164,8 +164,9 @@ Public Class PresenterProfessor
 
         For Each aluno In alunosCadastrados
             Dim idAluno = aluno("Id")
-            Dim notas = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = idAluno)
-            aluno("Nota") = 
+            Dim dadosNota = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = idAluno And
+                                                                                dict("IdProva") = idProva).First()
+            aluno("Nota") = dadosNota("Nota")
         Next
 
         Return ConvertDictionariesToDataTable(alunosCadastrados)
