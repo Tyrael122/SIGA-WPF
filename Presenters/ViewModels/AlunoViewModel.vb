@@ -1,8 +1,5 @@
-﻿Imports System.ComponentModel
-
-Public Class AlunoViewModel
+﻿Public Class AlunoViewModel
     Inherits UserViewModel
-    Implements INotifyPropertyChanged
 
     Private _curso As String
     Public Property Curso As String

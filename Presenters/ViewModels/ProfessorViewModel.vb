@@ -1,5 +1,3 @@
-﻿Imports System.ComponentModel
-
-Public Class ProfessorViewModel
+﻿Public Class ProfessorViewModel
     Inherits UserViewModel
 End Class

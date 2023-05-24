@@ -1,7 +1,6 @@
 ﻿Public Class DisciplinaViewModel
     Inherits ViewModel
 
-
     Private _name As String
     Public Property Name As String
         Get
