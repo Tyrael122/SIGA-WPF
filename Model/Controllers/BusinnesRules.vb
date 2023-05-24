@@ -11,6 +11,10 @@
         dataBridge.Delete(id, "IdAluno", Table.AlunoDisciplina)
     End Sub
 
+    Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, String), table As Table) As List(Of IDictionary(Of String, String))
+        Return dataBridge.SaveWithOutput(aulaData, table)
+    End Function
+
     Friend Shared Function Save(data As IDictionary, table As Table) As Boolean
         Return dataBridge.Save(data, table)
     End Function

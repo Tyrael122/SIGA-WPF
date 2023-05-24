@@ -1,8 +1,6 @@
 ﻿CREATE TABLE [dbo].[Presenca]
 (
-	[IdDisciplina] INT NOT NULL , 
+	[IdAula] INT NOT NULL , 
     [IdAluno] INT NOT NULL, 
-    [IdCurso] INT NULL, 
-    [IdHorario] INT NOT NULL, 
-    [Data] DATE NULL
+    [EstaPresente] BIT NOT NULL 
 )

@@ -139,10 +139,23 @@ Public Class PresenterProfessor
     End Sub
 
     Friend Sub RegisterPresencas(map As Dictionary(Of String, String))
-        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
-        map("IdDisciplina") = idDisciplina
+        ' TODO: Save the info in the Aula table
+        ' TODO: Save the reference in the Presenca table
 
-        map("Data") = Date.Parse(map("Data")).ToString("yyyy-MM-dd")
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
+        Dim aulaData = New Dictionary(Of String, String) From {
+                {"IdDisciplina", idDisciplina},
+                {"IdHorario", map("IdHorario")},
+                {"Data", Date.Parse(map("Data")).ToString("yyyy-MM-dd")},
+                {"IdProfessor", SessionCookie.GetCookie("userId")}
+            }
+
+        Dim idAula = BusinessRules.SaveWithOutput(aulaData, Table.Aula).First()("Id")
+
+        map("IdAula") = idAula
+
+        map.Remove("Data")
+        map.Remove("IdHorario")
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
         Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
@@ -165,7 +178,7 @@ Public Class PresenterProfessor
         For Each aluno In alunosCadastrados
             Dim idAluno = aluno("Id")
             Dim dadosNota = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = idAluno And
-                                                                                dict("IdProva") = idProva).First()
+                                                                                dict("IdProva") = idProva).FirstOrDefault()
             aluno("Nota") = dadosNota("Nota")
         Next
 
