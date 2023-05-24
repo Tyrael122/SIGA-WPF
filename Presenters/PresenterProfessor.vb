@@ -139,8 +139,7 @@ Public Class PresenterProfessor
     End Sub
 
     Friend Sub RegisterPresencas(map As Dictionary(Of String, String))
-        ' TODO: Save the info in the Aula table
-        ' TODO: Save the reference in the Presenca table
+        ' TODO: Change this to use ViewModels.
 
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
         Dim aulaData = New Dictionary(Of String, String) From {
@@ -162,10 +161,10 @@ Public Class PresenterProfessor
 
         For Each aluno In alunosCadastrados
             Dim isAlunoPresente = Not IdAlunosFaltantes.Contains(aluno("Id"))
-            If isAlunoPresente Then
-                map("IdAluno") = aluno("Id")
-                BusinessRules.Save(map, Table.Presenca)
-            End If
+            map("IdAluno") = aluno("Id")
+            map("EstaPresente") = isAlunoPresente
+
+            BusinessRules.Save(map, Table.Presenca)
         Next
     End Sub
 
