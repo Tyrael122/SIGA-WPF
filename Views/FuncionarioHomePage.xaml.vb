@@ -1,6 +1,4 @@
-﻿Imports System.Data.Common
-
-Public Class FuncionarioHomePage
+﻿Public Class FuncionarioHomePage
     Implements IView
 
     Private ReadOnly Presenter As New PresenterFuncionario(Me)

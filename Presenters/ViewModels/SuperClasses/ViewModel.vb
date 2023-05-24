@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 
-Public Class ViewModel
+Public MustInherit Class ViewModel
     Implements INotifyPropertyChanged
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged

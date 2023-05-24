@@ -37,6 +37,8 @@
 
         cmbProva.ItemsSource = Presenter.LoadProvasComboBox()
         cmbDiaAula.ItemsSource = Presenter.LoadDiaAulaComoBox()
+
+        DataContext = Presenter.GetWindowDataContext()
     End Sub
 
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click

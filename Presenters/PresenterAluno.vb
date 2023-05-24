@@ -3,7 +3,6 @@
 Public Class PresenterAluno
     Inherits Presenter
 
-    Private ReadOnly View As IView
     Private ReadOnly idAluno As String
 
     Public Sub New(view As IView)

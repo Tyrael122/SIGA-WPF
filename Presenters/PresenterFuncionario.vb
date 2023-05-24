@@ -7,12 +7,12 @@ Public Class PresenterFuncionario
     Private ViewModelProfessor As New ProfessorViewModel()
     Private ViewModelDisciplina As New DisciplinaViewModel()
     Private ViewModelCurso As New CursoViewModel()
-    Private View As IView
     Private idDisciplinasCurso As New List(Of String)
     Private idDisciplinasProfessor As New List(Of String)
 
     Public Sub New(view As IView)
         Me.View = view
+        ViewModel = ViewModelAluno
     End Sub
 
     Public Sub RegisterAluno(idsDisciplinasAluno As List(Of String))
@@ -61,8 +61,8 @@ Public Class PresenterFuncionario
 
     Friend Sub RegisterDisciplina()
         ' TODO: Presenter should pass the treated data to the business rules, in form of a dictionary.
-        ' Where should the mechanism to convert a ViewModel to a dictionary be,
-        ' as to be used by the DAL? In the ViewModel itself? In the businessRules layer?
+        ' Where should the mechanism to convert a ViewModel to a dictionary as to be used by the DAL?
+        ' In the ViewModel itself? In the businessRules layer?
         ' Ask ChatGPT about it. Maybe it should be at the ViewModel itself.
         Dim hasInsertedSucessufully = BusinessRules.Save(ViewModelDisciplina, Table.Disciplina)
 
@@ -160,10 +160,5 @@ Public Class PresenterFuncionario
 
     Friend Function LoadCursosAlunoComboBox() As IEnumerable
         Return LoadComboBox(Function() GetAll(Table.Curso), "Nome", "Id")
-    End Function
-
-    Friend Function GetWindowDataContext() As Object
-        ViewModelAluno.Login = "Bananas"
-        Return ViewModelAluno
     End Function
 End Class

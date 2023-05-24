@@ -4,10 +4,10 @@ Public Class PresenterProfessor
     Inherits Presenter
 
     Private ViewModelAula As New AulaViewModel()
-    Private View As IView
 
     Public Sub New(view As IView)
         Me.View = view
+        ViewModel = New AulaViewModel()
     End Sub
 
     Friend Sub ShowDisciplinaPage(idDisciplina As String)

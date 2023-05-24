@@ -1,6 +1,13 @@
 ﻿Imports System.Data
 
-Public Class Presenter
+Public MustInherit Class Presenter
+    Protected View As IView
+    Protected ViewModel As ViewModel
+
+    Public Function GetWindowDataContext() As ViewModel
+        Return ViewModel
+    End Function
+
     Protected Sub ShowWindowAndCloseCurrent(window As Window, view As IView)
         window.Show()
         view.CloseView()

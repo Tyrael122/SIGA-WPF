@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-
-Public Class UserViewModel
+﻿Public MustInherit Class UserViewModel
     Inherits ViewModel
 
     Private _login As String
