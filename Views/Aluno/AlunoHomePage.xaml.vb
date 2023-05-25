@@ -1,7 +1,7 @@
 ﻿Public Class AlunoHomePage
     Implements IView
 
-    Private Presenter As New PresenterAluno(Me)
+    Private Presenter As New PresenterAlunoHomePage(Me)
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         DisciplinasAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas().DefaultView

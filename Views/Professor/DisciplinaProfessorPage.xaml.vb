@@ -1,7 +1,7 @@
 ﻿Public Class DisciplinaProfessorPage
     Implements IView
 
-    Private Presenter As New PresenterProfessor(Me)
+    Private Presenter As New PresenterProfessorDisciplina(Me)
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         Throw New NotImplementedException()

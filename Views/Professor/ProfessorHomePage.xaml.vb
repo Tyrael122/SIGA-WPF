@@ -1,7 +1,7 @@
 ﻿Public Class ProfessorHomePage
     Implements IView
 
-    Private Presenter As PresenterProfessor = New PresenterProfessor(Me)
+    Private Presenter As PresenterProfessorHomePage = New PresenterProfessorHomePage(Me)
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         Throw New NotImplementedException()

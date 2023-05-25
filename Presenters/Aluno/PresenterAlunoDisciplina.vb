@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class PresenterAluno
+Public Class PresenterAlunoDisciplina
     Inherits Presenter
 
     Private ReadOnly idAluno As String
@@ -9,17 +9,6 @@ Public Class PresenterAluno
         Me.View = view
 
         idAluno = SessionCookie.GetCookie("userId")
-    End Sub
-
-    Friend Function GetDisciplinasCadastradas() As DataTable
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, SessionCookie.GetCookie("userId"))
-
-        Return ConvertDictionariesToDataTable(disciplinas)
-    End Function
-
-    Friend Sub ShowDisciplinaPage(idDisciplina As String)
-        SessionCookie.AddCookie("idDisciplina", idDisciplina)
-        Call New DisciplinaAlunoPage().Show()
     End Sub
 
     Friend Function GetNotasDisciplina() As DataTable
