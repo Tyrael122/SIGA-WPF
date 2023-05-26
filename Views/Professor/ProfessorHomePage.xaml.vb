@@ -1,5 +1,5 @@
 ﻿Public Class ProfessorHomePage
-    Implements IView
+    Implements IViewModel
 
     Private Presenter As PresenterProfessorHomePage = New PresenterProfessorHomePage(Me)
 
@@ -23,5 +23,9 @@
         Dim button As Button = CType(sender, Button)
 
         Presenter.ShowDisciplinaPage(button.Tag)
+    End Sub
+
+    Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext
+        DataContext = viewModel
     End Sub
 End Class

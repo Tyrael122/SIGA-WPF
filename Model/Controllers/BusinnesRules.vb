@@ -38,4 +38,14 @@
     Friend Shared Function GetAllById(id As String, tableStr As Table) As IEnumerable(Of IDictionary(Of String, String))
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
+
+    Public Shared Function ConvertViewModelToDictionary(viewModel As ViewModel) As Dictionary(Of String, String)
+        Dim dict As New Dictionary(Of String, String)
+
+        For Each viewModelProperty In viewModel.GetType().GetProperties()
+            dict(viewModelProperty.Name) = viewModelProperty.GetValue(viewModel).ToString()
+        Next
+
+        Return dict
+    End Function
 End Class

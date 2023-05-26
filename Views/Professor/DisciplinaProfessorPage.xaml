@@ -5,11 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:SIGAWPF"
         mc:Ignorable="d"
         Title="DisciplinaProfessorPage" Height="450" Width="800" Loaded="Window_Loaded">
-    
-    <Window.DataContext>
-        <local:AlunoViewModel/>
-    </Window.DataContext>
-    
+        
     <Grid>
         <Label x:Name="txtDisciplinaNome" HorizontalAlignment="Left" Margin="218,112,0,0" VerticalAlignment="Top" Height="36" Width="79"/>
         <TabControl>
@@ -20,8 +16,8 @@
             </TabItem>
             <TabItem Header="Cadastro de provas">
                 <Grid Background="#FFE5E5E5">
-                    <DatePicker x:Name="dataProva" HorizontalAlignment="Left" Margin="147,55,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cmbTipoProva" HorizontalAlignment="Left" Margin="330,67,0,0" VerticalAlignment="Top" Width="120">
+                    <DatePicker x:Name="dataProva" HorizontalAlignment="Left" Margin="147,55,0,0" VerticalAlignment="Top" SelectedDate="{Binding Data, Mode=TwoWay}"/>
+                    <ComboBox x:Name="cmbTipoProva" HorizontalAlignment="Left" Margin="330,67,0,0" VerticalAlignment="Top" Width="120" Text="{Binding Tipo}">
                         <ComboBoxItem Content="P1"/>
                         <ComboBoxItem Content="P2"/>
                         <ComboBoxItem Content="P3"/>

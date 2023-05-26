@@ -10,14 +10,13 @@ Public Class PresenterFuncionario
     Private idDisciplinasCurso As New List(Of String)
     Private idDisciplinasProfessor As New List(Of String)
 
-    Public Sub New(view As IView)
+    Public Sub New(view As IViewModel)
         Me.View = view
-        ViewModel = ViewModelAluno
+
+        view.SetDataContext(ViewModelAluno)
     End Sub
 
     Public Sub RegisterAluno(idsDisciplinasAluno As List(Of String))
-        'TODO: Refactor relation class to accept complex relation tables, and join clauses.
-
         'Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
         '    .uniqueEntityData = data,
         '    .idEntitiesToRelate = idDisciplinasAluno
@@ -104,17 +103,23 @@ Public Class PresenterFuncionario
 
         BusinessRules.DeleteDisciplinasAluno(idAluno)
 
-        'Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
-        '    .uniqueEntityData = Data,
-        '    .idEntitiesToRelate = idDisciplinasAluno
-        '}
+        Dim data = BusinessRules.ConvertViewModelToDictionary(ViewModelAluno)
 
-        'Dim hasInsertedSucessufully = relation.Update(idAluno)
-        'If hasInsertedSucessufully Then
-        '    View.DisplayInfo("Aluno atualizado com sucesso!")
-        'Else
-        '    View.DisplayInfo("Erro ao atualizar aluno.")
-        'End If
+        data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = data("Curso")).First()("Id")
+
+        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
+            .uniqueEntityData = data,
+            .idEntitiesToRelate = idsDisciplinasAluno
+        }
+
+        Dim hasInsertedSucessufully = relation.Update(idAluno)
+        If hasInsertedSucessufully Then
+            View.DisplayInfo("Aluno atualizado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao atualizar aluno.")
+        End If
+
+        ViewModelAluno.Clear()
     End Sub
 
     Public Sub CarregarAlunoParaEdicao(idAluno As String)
@@ -148,7 +153,7 @@ Public Class PresenterFuncionario
 
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, aluno("IdCurso")).
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, aluno("Curso")).
                                     Where(Function(disciplina) disciplina("Semester") >= aluno("SemestreInicio"))
 
         For Each disciplina In disciplinas

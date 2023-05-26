@@ -1,5 +1,5 @@
 ﻿Public Class FuncionarioHomePage
-    Implements IView
+    Implements IViewModel
 
     Private ReadOnly Presenter As New PresenterFuncionario(Me)
 
@@ -13,8 +13,6 @@
         alunosDataGrid.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
 
         AddHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
-
-        DataContext = Presenter.GetWindowDataContext()
     End Sub
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         lblInfo.Content = infoMessage
@@ -100,6 +98,11 @@
 
     Private Sub cmbCursosAluno_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursosAluno.SelectionChanged
         Dim semestreInicio As Integer = 0
+
+        If cmbCursosAluno.SelectedItem Is Nothing Then
+            Return
+        End If
+
         If cmbSemestreInicio.SelectedValue IsNot Nothing Then
             semestreInicio = Convert.ToInt32(cmbSemestreInicio.SelectedItem.Content)
         End If
@@ -109,6 +112,10 @@
     End Sub
 
     Private Sub cmbSemestreInicio_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSemestreInicio.SelectionChanged
+        If cmbSemestreInicio.SelectedItem Is Nothing Then
+            Return
+        End If
+
         Dim semestreInicio As Integer = Convert.ToInt32(cmbSemestreInicio.SelectedItem.Content)
 
         If cmbCursosAluno.SelectedValue Is Nothing Then
@@ -152,5 +159,9 @@
         AddHandler btnCadastrar.Click, AddressOf btnEditar_Click
 
         btnCadastrar.Content = "Editar"
+    End Sub
+
+    Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext
+        DataContext = viewModel
     End Sub
 End Class

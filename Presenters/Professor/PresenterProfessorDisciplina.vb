@@ -4,10 +4,12 @@ Public Class PresenterProfessorDisciplina
     Inherits Presenter
 
     Private ViewModelAula As New AulaViewModel()
+    Private ViewModelProva As New ProvaViewModel()
 
-    Public Sub New(view As IView)
+    Public Sub New(view As IViewModel)
         Me.View = view
-        ViewModel = New AulaViewModel()
+
+        view.SetDataContext(ViewModelProva)
     End Sub
 
     Function LoadProvasComboBox() As IEnumerable(Of ComboBoxItem)
@@ -20,12 +22,26 @@ Public Class PresenterProfessorDisciplina
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
         Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
 
+        Return ConvertDictionariesToDataTable(alunosCadastrados)
+    End Function
+
+    Public Function GetAllPresencaAlunosCadastrados() As DataTable
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
+
+        Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
+        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
+
         Dim idProfessor = SessionCookie.GetCookie("userId")
 
 
-        Dim idAula = BusinessRules.GetAll(Table.Aula).Where(Function(dict) dict("Id") = ViewModelAula.IdHorario And
+        Dim aulas = BusinessRules.GetAll(Table.Aula).Where(Function(dict) dict("Id") = ViewModelAula.IdHorario And
                                                                 dict("IdProfessor") = idProfessor And
-                                                                dict("IdDisciplina") = idDisciplina).First()("Id")
+                                                                dict("IdDisciplina") = idDisciplina)
+        Dim idAula = Nothing
+        If aulas.Any() Then
+            idAula = aulas.First()("Id")
+        End If
+
 
         For Each aluno In alunosCadastrados
             aluno("IsPresente") = BusinessRules.GetAll(Table.Presenca).Where(Function(dict) dict("IdAula") = idAula And
@@ -36,14 +52,16 @@ Public Class PresenterProfessorDisciplina
         Return ConvertDictionariesToDataTable(alunosCadastrados)
     End Function
 
-    Friend Sub RegisterProva(data As IDictionary(Of String, String))
-        Dim dataProva As Date = data("Data")
-        data("Data") = dataProva.ToString("yyyy-MM-dd")
+    Friend Sub RegisterProva()
+        Dim dataProva As Date = ViewModelProva.Data
 
-        data("Tipo") = [Enum].Parse(GetType(TipoProva), data("Tipo"))
+        Dim data As New Dictionary(Of String, String) From {
+            {"Data", ViewModelProva.Data.ToString("yyyy-MM-dd")},
+            {"Tipo", ViewModelProva.Tipo},
+            {"IdDisciplina", SessionCookie.GetCookie("idDisciplina")},
+            {"IdProfessor", SessionCookie.GetCookie("userId")}
+        }
 
-        data.Add("IdDisciplina", SessionCookie.GetCookie("idDisciplina"))
-        data.Add("IdProfessor", SessionCookie.GetCookie("userId"))
         BusinessRules.Save(data, Table.Prova)
     End Sub
 

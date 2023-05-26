@@ -8,4 +8,12 @@ Public MustInherit Class ViewModel
     Protected Overridable Sub OnPropertyChanged(propertyName As String)
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
     End Sub
+
+    Public Sub Clear()
+        For Each prop In Me.GetType().GetProperties()
+            If prop.PropertyType Is GetType(String) Then
+                prop.SetValue(Me, Nothing)
+            End If
+        Next
+    End Sub
 End Class

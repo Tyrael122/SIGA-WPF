@@ -22,15 +22,4 @@
             OnPropertyChanged(NameOf(SemestreInicio))
         End Set
     End Property
-
-    Private _idDisciplinas As List(Of String)
-    Public Property IdDisciplinas As List(Of String)
-        Get
-            Return _idDisciplinas
-        End Get
-        Set(value As List(Of String))
-            _idDisciplinas = value
-            OnPropertyChanged(NameOf(IdDisciplinas))
-        End Set
-    End Property
 End Class

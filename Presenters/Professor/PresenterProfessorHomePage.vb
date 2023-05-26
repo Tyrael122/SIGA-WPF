@@ -3,9 +3,12 @@
 Public Class PresenterProfessorHomePage
     Inherits Presenter
 
-    Public Sub New(view As IView)
+    Private ViewModelAula As New AulaViewModel()
+
+    Public Sub New(view As IViewModel)
         Me.View = view
-        ViewModel = New AulaViewModel()
+
+        view.SetDataContext(ViewModelAula)
     End Sub
 
     Friend Sub ShowDisciplinaPage(idDisciplina As String)

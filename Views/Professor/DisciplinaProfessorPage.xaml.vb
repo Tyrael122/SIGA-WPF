@@ -1,5 +1,5 @@
 ﻿Public Class DisciplinaProfessorPage
-    Implements IView
+    Implements IViewModel
 
     Private Presenter As New PresenterProfessorDisciplina(Me)
 
@@ -15,6 +15,10 @@
         Throw New NotImplementedException()
     End Sub
 
+    Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext
+        DataContext = viewModel
+    End Sub
+
     Private Sub cmbDiaAula_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDiaAula.SelectionChanged
         Dim diaAula = cmbDiaAula.SelectedItem
 
@@ -22,23 +26,14 @@
     End Sub
 
     Private Sub btnCadastrarProva_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProva.Click
-        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-                {"Data", dataProva.SelectedDate},
-                {"Tipo", cmbTipoProva.SelectedValue.Content}
-            }
-
-        Presenter.RegisterProva(map)
+        Presenter.RegisterProva()
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        Dim alunosCadastrados = Presenter.GetAllAlunosCadastrados().DefaultView
-
         AlunosDataGrid.ItemsSource = Presenter.GetAllAlunosCadastrados().DefaultView
 
         cmbProva.ItemsSource = Presenter.LoadProvasComboBox()
         cmbDiaAula.ItemsSource = Presenter.LoadDiaAulaComoBox()
-
-        DataContext = Presenter.GetWindowDataContext()
     End Sub
 
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click
@@ -57,7 +52,7 @@
     End Sub
 
     Private Sub cmbHorario_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbHorario.SelectionChanged
-        PresencaAlunosDataGrid.ItemsSource = Presenter.GetAllAlunosCadastrados().DefaultView
+        PresencaAlunosDataGrid.ItemsSource = Presenter.GetAllPresencaAlunosCadastrados().DefaultView
     End Sub
 
     Private Sub cmbLancarPresencas_Click(sender As Object, e As RoutedEventArgs) Handles cmbLancarPresencas.Click
