@@ -18,6 +18,9 @@
             Return _idHorario
         End Get
         Set(value As Object)
+            If value Is Nothing Then
+                Exit Property
+            End If
             _idHorario = value.Tag
             OnPropertyChanged(NameOf(IdHorario))
         End Set

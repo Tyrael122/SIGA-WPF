@@ -1,5 +1,5 @@
 ﻿Public MustInherit Class WindowModel
-    Inherits View
+    Inherits SuperWindow
     Implements IViewModel
 
     Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext

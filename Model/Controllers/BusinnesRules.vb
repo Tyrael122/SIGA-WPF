@@ -38,4 +38,18 @@
     Friend Shared Function GetAllById(id As String, tableStr As Table) As IEnumerable(Of IDictionary(Of String, String))
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
+
+    Friend Shared Function SalvarAula(aula As Dictionary(Of String, String)) As String
+        Dim aulaMatched = GetAll(Table.Aula).Where(Function(dict) Date.Parse(dict("Data")) = Date.Parse(aula("Data")))
+
+        If aulaMatched.Any() Then
+            Dim idAula = aulaMatched.First()("Id")
+
+            dataBridge.Delete(idAula, "IdAula", Table.Presenca)
+
+            Return idAula
+        End If
+
+        Return SaveWithOutput(aula, Table.Aula).First()("Id")
+    End Function
 End Class

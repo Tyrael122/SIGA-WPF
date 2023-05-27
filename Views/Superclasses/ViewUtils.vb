@@ -1,15 +1,5 @@
-﻿Public MustInherit Class View
-    Inherits Window
-    Implements IView
-
-    Public MustOverride Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
-    Public MustOverride Sub DisplayError() Implements IView.DisplayError
-
-    Public Sub CloseView() Implements IView.CloseView
-        Close()
-    End Sub
-
-    Protected Function LoadIdsFromSelectedRows(dataGrid As DataGrid) As List(Of String)
+﻿Module ViewUtils
+    Function LoadIdsFromSelectedRows(dataGrid As DataGrid) As List(Of String)
         Dim idSelectedRows As New List(Of String)
 
         For Each row In dataGrid.Items
@@ -21,7 +11,7 @@
         Return idSelectedRows
     End Function
 
-    Protected Function LoadReferenceFromSelectedRows(dataGrid As DataGrid, idColumnName As String, referenceColumnName As String) As List(Of IDictionary(Of String, String))
+    Function LoadReferenceFromSelectedRows(dataGrid As DataGrid, idColumnName As String, referenceColumnName As String) As List(Of IDictionary(Of String, String))
         Dim list As New List(Of IDictionary(Of String, String))
 
         For Each row In dataGrid.Items
@@ -35,4 +25,4 @@
 
         Return list
     End Function
-End Class
+End Module
