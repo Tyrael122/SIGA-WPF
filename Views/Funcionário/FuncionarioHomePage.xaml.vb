@@ -5,7 +5,7 @@
     Private ReadOnly Presenter As New PresenterFuncionario(Me)
 
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        Dim disciplinas = Presenter.GetDataTable("Disciplina").DefaultView
+        Dim disciplinas = Presenter.GetDataTableWithCheckboxColumn("Disciplina").DefaultView
         DisciplinasCursoDataGrid.ItemsSource = disciplinas
         DisciplinasProfessorDataGrid.ItemsSource = disciplinas
 
@@ -131,9 +131,5 @@
         AddHandler btnCadastrar.Click, AddressOf btnEditar_Click
 
         btnCadastrar.Content = "Editar"
-    End Sub
-
-    Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext
-        DataContext = viewModel
     End Sub
 End Class

@@ -14,7 +14,7 @@ Public Class PresenterAlunoHomePage
     Friend Function GetDisciplinasCadastradas() As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, idAluno)
 
-        Return ConvertDictionariesToDataTable(disciplinas)
+        Return ConvertDictionaryToDataTable(disciplinas)
     End Function
 
     Friend Sub ShowDisciplinaPage(idDisciplina As String)

@@ -22,7 +22,7 @@ Public Class PresenterProfessorDisciplina
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
         Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
 
-        Return ConvertDictionariesToDataTable(alunosCadastrados)
+        Return ConvertDictionaryToDataTable(alunosCadastrados)
     End Function
 
     Public Function GetAllPresencaAlunosCadastrados() As DataTable
@@ -48,7 +48,7 @@ Public Class PresenterProfessorDisciplina
                                                                                  First()("EstaPresente")
         Next
 
-        Return ConvertDictionariesToDataTable(alunosCadastrados)
+        Return ConvertDictionaryToDataTable(alunosCadastrados)
     End Function
 
     Friend Sub RegisterProva()
@@ -167,6 +167,6 @@ Public Class PresenterProfessorDisciplina
             aluno("Nota") = dadosNota("Nota")
         Next
 
-        Return ConvertDictionariesToDataTable(alunosCadastrados)
+        Return ConvertDictionaryToDataTable(alunosCadastrados)
     End Function
 End Class

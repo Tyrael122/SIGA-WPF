@@ -8,7 +8,7 @@ Public MustInherit Class Presenter
         view.CloseView()
     End Sub
 
-    Protected Function ConvertDictionariesToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
+    Protected Function ConvertDictionaryToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
         Dim dataTable As New DataTable()
 
         If Not data.Any() Then
@@ -51,7 +51,7 @@ Public MustInherit Class Presenter
 
     Protected Function GetDataTable(table As Table) As DataTable
         Dim data = GetAll(table)
-        Return ConvertDictionariesToDataTable(data)
+        Return ConvertDictionaryToDataTable(data)
     End Function
 
     Public Function GetAll(tableStr As String) As IEnumerable(Of IDictionary(Of String, String))

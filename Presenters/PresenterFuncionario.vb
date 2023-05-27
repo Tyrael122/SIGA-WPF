@@ -11,7 +11,7 @@ Public Class PresenterFuncionario
     Public Sub New(view As IViewModel)
         Me.View = view
 
-        view.SetDataContext(ViewModelAluno)
+        view.SetDataContext(ViewModelDisciplina)
     End Sub
 
     Public Sub RegisterAluno(idsDisciplinasAluno As List(Of String))
@@ -30,6 +30,8 @@ Public Class PresenterFuncionario
 
     Friend Sub RegisterCurso(idsDisciplinasCurso As List(Of String))
         Dim data = ViewModelCurso.ConvertToDictionary()
+
+        data("Turno") = [Enum].Parse(GetType(Turno), data("Turno"))
 
         Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
         ShowInfoMessage(hasInsertedSucessfully, "Curso")
@@ -86,7 +88,7 @@ Public Class PresenterFuncionario
             disciplina("IsChecked") = True
         Next
 
-        Return ConvertDictionariesToDataTable(disciplinas)
+        Return ConvertDictionaryToDataTable(disciplinas)
     End Function
 
     Friend Function GetDisciplinasAluno(idAluno As String) As DataTable
@@ -101,7 +103,7 @@ Public Class PresenterFuncionario
             disciplina("IsChecked") = idDisciplinasAluno.Contains(disciplina("Id"))
         Next
 
-        Return ConvertDictionariesToDataTable(disciplinas)
+        Return ConvertDictionaryToDataTable(disciplinas)
     End Function
 
 
@@ -115,5 +117,15 @@ Public Class PresenterFuncionario
 
     Friend Function LoadCursosAlunoComboBox() As IEnumerable
         Return LoadComboBox(Function() GetAll(Table.Curso), "Nome", "Id")
+    End Function
+
+    Friend Function GetDataTableWithCheckboxColumn(table As String) As Object
+        Dim data = GetAll(table)
+
+        For Each dict In data
+            dict("IsChecked") = False
+        Next
+
+        Return ConvertDictionaryToDataTable(data)
     End Function
 End Class

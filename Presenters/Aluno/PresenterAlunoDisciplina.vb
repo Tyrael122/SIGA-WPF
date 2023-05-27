@@ -24,7 +24,7 @@ Public Class PresenterAlunoDisciplina
         Dim rawData = notas.Where(Function(dict) dict("IdAluno") = idAluno And
                                 idProvasDaDisciplina.Contains(dict("IdProva")))
 
-        Return ConvertDictionariesToDataTable(rawData)
+        Return ConvertDictionaryToDataTable(rawData)
     End Function
 
     Friend Function GetPresencaDisciplina() As DataTable
@@ -34,6 +34,6 @@ Public Class PresenterAlunoDisciplina
                                         Where(Function(presenca) presenca("IdDisciplina") = idDisciplina And
                                                             presenca("IdAluno") = idAluno)
 
-        Return ConvertDictionariesToDataTable(presencasDaDisciplina)
+        Return ConvertDictionaryToDataTable(presencasDaDisciplina)
     End Function
 End Class

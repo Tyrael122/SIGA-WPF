@@ -21,8 +21,13 @@ Public MustInherit Class ViewModel
         Dim dict As New Dictionary(Of String, String)
 
         For Each viewModelProperty In Me.GetType().GetProperties()
-            dict(viewModelProperty.Name) = viewModelProperty.GetValue(Me).ToString()
+            Try
+                dict(viewModelProperty.Name) = viewModelProperty.GetValue(Me).ToString()
+            Catch ex As NullReferenceException
+                Continue For
+            End Try
         Next
+
 
         Return dict
     End Function
