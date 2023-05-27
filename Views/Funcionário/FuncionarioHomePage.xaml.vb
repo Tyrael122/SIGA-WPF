@@ -1,5 +1,5 @@
 ﻿Partial Public Class FuncionarioHomePage
-    Inherits View
+    Inherits WindowModel
     Implements IViewModel
 
     Private ReadOnly Presenter As New PresenterFuncionario(Me)

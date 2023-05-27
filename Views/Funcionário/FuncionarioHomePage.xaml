@@ -1,4 +1,4 @@
-﻿<src:View
+﻿<src:WindowModel
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,9 +8,9 @@
     x:Class="FuncionarioHomePage"
     mc:Ignorable="d"
     Title="FuncionarioHomePage" Height="450" Width="800">
-    <src:View.DataContext>
+    <src:WindowModel.DataContext>
         <local:ProfessorViewModel/>
-    </src:View.DataContext>
+    </src:WindowModel.DataContext>
     
     <Grid>
         <TabControl>
@@ -168,4 +168,4 @@
             </TabItem>
         </TabControl>
     </Grid>
-</src:View>
+</src:WindowModel>
