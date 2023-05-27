@@ -1,12 +1,17 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SIGAWPF"
-        x:Class="FuncionarioHomePage"
-        mc:Ignorable="d"
-        Title="FuncionarioHomePage" Height="450" Width="800">
+﻿<src:View
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:SIGAWPF"
+    xmlns:src="clr-namespace:SIGAWPF"
+    x:Class="FuncionarioHomePage"
+    mc:Ignorable="d"
+    Title="FuncionarioHomePage" Height="450" Width="800">
+    <src:View.DataContext>
+        <local:ProfessorViewModel/>
+    </src:View.DataContext>
+    
     <Grid>
         <TabControl>
             <TabItem Header="Alunos" Margin="-2,-2,-2,2">
@@ -76,20 +81,14 @@
                         <TabItem x:Name="tabCadastroProfessor" Header="Cadastrar">
                             <Grid Background="#FFE5E5E5">
                                 <Label Content="Login:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                                <TextBox x:Name="txtLoginProfessor" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <TextBox x:Name="txtLoginProfessor" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Text="{Binding Login}"/>
                                 <Label Content="Senha:" HorizontalAlignment="Left" Margin="139,149,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                                <TextBox x:Name="txtPasswordProfessor" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+                                <TextBox x:Name="txtPasswordProfessor" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Text="{Binding Password}"/>
                                 <Button x:Name="btnCadastrarProfessor" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
                                 <Label x:Name="lblInfoCadastroProfessor" Content="" HorizontalAlignment="Left" Height="33" Margin="144,80,0,0" VerticalAlignment="Top" Width="163"/>
                                 <DataGrid x:Name="DisciplinasProfessorDataGrid" Margin="359,113,90,148" IsTextSearchEnabled="True" SelectionMode="Extended">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Header="Selecionar">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <CheckBox Click="CheckBoxDisciplinaProfessor_Click" Tag="{Binding Id}"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
+                                        <DataGridCheckBoxColumn Header="Selecionar" Binding="{Binding IsChecked, Mode=TwoWay}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -121,13 +120,7 @@
                                 </ComboBox>
                                 <DataGrid x:Name="DisciplinasCursoDataGrid" Margin="313,72,144,189" IsTextSearchEnabled="True" SelectionMode="Extended" Grid.Column="1">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Header="Selecionar">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <CheckBox Click="CheckBox_Click" Tag="{Binding Id}"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
+                                        <DataGridCheckBoxColumn Header="Selecionar" Binding="{Binding IsChecked, Mode=TwoWay}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -175,4 +168,4 @@
             </TabItem>
         </TabControl>
     </Grid>
-</Window>
+</src:View>

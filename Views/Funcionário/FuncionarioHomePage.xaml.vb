@@ -1,4 +1,5 @@
-﻿Public Class FuncionarioHomePage
+﻿Partial Public Class FuncionarioHomePage
+    Inherits View
     Implements IViewModel
 
     Private ReadOnly Presenter As New PresenterFuncionario(Me)
@@ -14,7 +15,8 @@
 
         AddHandler btnCadastrar.Click, AddressOf btnCadastrar_Click
     End Sub
-    Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
+
+    Public Overrides Sub DisplayInfo(infoMessage As String)
         lblInfo.Content = infoMessage
 
         If tabCadastroProfessor.IsSelected Then
@@ -28,34 +30,18 @@
         End If
     End Sub
 
-    Public Sub DisplayError() Implements IView.DisplayError
+    Public Overrides Sub DisplayError() Implements IView.DisplayError
         Throw New NotImplementedException()
     End Sub
 
-    Public Sub CloseView() Implements IView.CloseView
-        Me.Close()
-    End Sub
-
     Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs)
-        Dim idsDisciplinasAluno As New List(Of String)
-
-        For Each row In DisciplinasCursoAlunoDataGrid.Items
-            If row("IsChecked") Then
-                idsDisciplinasAluno.Add(row("Id"))
-            End If
-        Next
+        Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(DisciplinasCursoAlunoDataGrid)
 
         Presenter.RegisterAluno(idsDisciplinasAluno)
     End Sub
 
     Private Sub btnEditar_Click(sender As Object, e As RoutedEventArgs)
-        Dim idsDisciplinasAluno As New List(Of String)
-
-        For Each row In DisciplinasCursoAlunoDataGrid.Items
-            If row("IsChecked") Then
-                idsDisciplinasAluno.Add(row("Id"))
-            End If
-        Next
+        Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(DisciplinasCursoAlunoDataGrid)
 
         Presenter.UpdateAluno(idsDisciplinasAluno)
 
@@ -66,7 +52,9 @@
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
-        Presenter.RegisterProfessor()
+        Dim idsDisciplinasProfessor = LoadIdsFromSelectedRows(DisciplinasProfessorDataGrid)
+
+        Presenter.RegisterProfessor(idsDisciplinasProfessor)
     End Sub
 
     Private Sub tabEditarProfessor_GotFocus(sender As Object, e As RoutedEventArgs) Handles tabEditarProfessor.GotFocus
@@ -74,20 +62,13 @@
     End Sub
 
     Private Sub btnCadastrarCurso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarCurso.Click
-        Presenter.RegisterCurso()
+        Dim idsDisciplinasSelecionadas = LoadIdsFromSelectedRows(DisciplinasCursoDataGrid)
+
+        Presenter.RegisterCurso(idsDisciplinasSelecionadas)
     End Sub
 
     Private Sub btnCadastrarDisciplina_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarDisciplina.Click
         Presenter.RegisterDisciplina()
-    End Sub
-
-    Private Sub CheckBox_Click(sender As Object, e As RoutedEventArgs)
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.AddDisciplinaSelecionadaAoCurso(checkBox.Tag)
-        Else
-            Presenter.RemoveDisciplinaSelecionadaDoCurso(checkBox.Tag)
-        End If
     End Sub
 
     Private Sub VerCurso_Click(sender As Object, e As EventArgs)
@@ -124,15 +105,6 @@
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
             Presenter.GetDisciplinasAcimaSemestre(cmbCursosAluno.SelectedItem.Tag, semestreInicio).DefaultView
-    End Sub
-
-    Private Sub CheckBoxDisciplinaProfessor_Click(sender As Object, e As RoutedEventArgs)
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.AddDisciplinaSelecionadaAoProfessor(checkBox.Tag)
-        Else
-            Presenter.RemoveDisciplinaSelecionadaDoProfessor(checkBox.Tag)
-        End If
     End Sub
 
     Private Sub DeletarAluno_Click(sender As Object, e As EventArgs)

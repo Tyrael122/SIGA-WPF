@@ -7,8 +7,6 @@ Public Class PresenterFuncionario
     Private ViewModelProfessor As New ProfessorViewModel()
     Private ViewModelDisciplina As New DisciplinaViewModel()
     Private ViewModelCurso As New CursoViewModel()
-    Private idDisciplinasCurso As New List(Of String)
-    Private idDisciplinasProfessor As New List(Of String)
 
     Public Sub New(view As IViewModel)
         Me.View = view
@@ -17,75 +15,31 @@ Public Class PresenterFuncionario
     End Sub
 
     Public Sub RegisterAluno(idsDisciplinasAluno As List(Of String))
-        'Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
-        '    .uniqueEntityData = data,
-        '    .idEntitiesToRelate = idDisciplinasAluno
-        '}
+        Dim data = ViewModelAluno.ConvertToDictionary()
 
-        'Dim hasInsertedSucessufully = relation.Save()
-        'If hasInsertedSucessufully Then
-        '    View.DisplayInfo("Aluno adicionado com sucesso!")
-        'Else
-        '    View.DisplayInfo("Erro ao adicionar aluno.")
-        'End If
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Aluno")
     End Sub
 
-    Friend Sub RegisterProfessor()
-        'Dim relation As New Relation(Table.Professor, Table.Disciplina) With {
-        '    .uniqueEntityData = Data,
-        '    .idEntitiesToRelate = idDisciplinasProfessor
-        '}
+    Friend Sub RegisterProfessor(idsDisciplinasProfessor As List(Of String))
+        Dim data = ViewModelProfessor.ConvertToDictionary()
 
-        'Dim hasInsertedSucessufully = relation.Save()
-        'If hasInsertedSucessufully Then
-        '    View.DisplayInfo("Professor adicionado com sucesso!")
-        'Else
-        '    View.DisplayInfo("Erro ao adicionar professor.")
-        'End If
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Professor")
     End Sub
 
-    Friend Sub RegisterCurso()
-        'Dim relation As New Relation(Table.Curso, Table.Disciplina) With {
-        '    .uniqueEntityData = courseData,
-        '    .idEntitiesToRelate = idDisciplinasCurso
-        '}
+    Friend Sub RegisterCurso(idsDisciplinasCurso As List(Of String))
+        Dim data = ViewModelCurso.ConvertToDictionary()
 
-        'Dim hasInsertedSucessufully = relation.Save()
-        'If hasInsertedSucessufully Then
-        '    View.DisplayInfo("Curso adicionado com sucesso!")
-        'Else
-        '    View.DisplayInfo("Erro ao adicionar curso.")
-        'End If
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Curso")
     End Sub
 
     Friend Sub RegisterDisciplina()
-        ' TODO: Presenter should pass the treated data to the business rules, in form of a dictionary.
-        ' Where should the mechanism to convert a ViewModel to a dictionary as to be used by the DAL?
-        ' In the ViewModel itself? In the businessRules layer?
-        ' Ask ChatGPT about it. Maybe it should be at the ViewModel itself.
-        Dim hasInsertedSucessufully = BusinessRules.Save(ViewModelDisciplina, Table.Disciplina)
+        Dim data = ViewModelDisciplina.ConvertToDictionary()
 
-        If hasInsertedSucessufully Then
-            View.DisplayInfo("Disciplina adicionado com sucesso!")
-        Else
-            View.DisplayInfo("Erro ao adicionar disciplina.")
-        End If
-    End Sub
-
-    Friend Sub AddDisciplinaSelecionadaAoCurso(idDisciplina As String)
-        idDisciplinasCurso.Add(idDisciplina)
-    End Sub
-
-    Friend Sub RemoveDisciplinaSelecionadaDoCurso(idDisciplina As String)
-        idDisciplinasCurso.Remove(idDisciplina)
-    End Sub
-
-    Friend Sub AddDisciplinaSelecionadaAoProfessor(idDisciplina As String)
-        idDisciplinasProfessor.Add(idDisciplina)
-    End Sub
-
-    Friend Sub RemoveDisciplinaSelecionadaDoProfessor(idDisciplina As String)
-        idDisciplinasProfessor.Remove(idDisciplina)
+        Dim hasInsertedSucessufully = BusinessRules.Save(data, Table.Disciplina)
+        ShowInfoMessage(hasInsertedSucessufully, "Disciplina")
     End Sub
 
     Friend Sub ShowCursoPage(idCurso As String)
@@ -103,21 +57,12 @@ Public Class PresenterFuncionario
 
         BusinessRules.DeleteDisciplinasAluno(idAluno)
 
-        Dim data = BusinessRules.ConvertViewModelToDictionary(ViewModelAluno)
+        Dim data = ViewModelAluno.ConvertToDictionary()
 
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = data("Curso")).First()("Id")
 
-        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
-            .uniqueEntityData = data,
-            .idEntitiesToRelate = idsDisciplinasAluno
-        }
-
-        Dim hasInsertedSucessufully = relation.Update(idAluno)
-        If hasInsertedSucessufully Then
-            View.DisplayInfo("Aluno atualizado com sucesso!")
-        Else
-            View.DisplayInfo("Erro ao atualizar aluno.")
-        End If
+        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
+        ShowInfoMessage(hasInsertedSucessfully, "Aluno")
 
         ViewModelAluno.Clear()
     End Sub
@@ -125,11 +70,7 @@ Public Class PresenterFuncionario
     Public Sub CarregarAlunoParaEdicao(idAluno As String)
         Dim alunoData = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
 
-        ' TODO: Create method to convert ViewModel to a Dictionary and vice-versa.
-
-        ViewModelAluno.Login = alunoData("Login")
-        ViewModelAluno.Password = alunoData("Password")
-        ViewModelAluno.SemestreInicio = alunoData("SemestreInicio")
+        ViewModelAluno.LoadFromDictionary(alunoData)
 
         Dim nomeCurso = BusinessRules.GetAllById(alunoData("Curso"), Table.Curso).First()("Nome")
         ViewModelAluno.Curso = nomeCurso
@@ -162,6 +103,15 @@ Public Class PresenterFuncionario
 
         Return ConvertDictionariesToDataTable(disciplinas)
     End Function
+
+
+    Private Sub ShowInfoMessage(hasInsertedSucessfully As Boolean, keyWord As String)
+        If hasInsertedSucessfully Then
+            View.DisplayInfo(keyWord & " adicionado com sucesso!")
+        Else
+            View.DisplayInfo("Erro ao adicionar " & keyWord.ToLower())
+        End If
+    End Sub
 
     Friend Function LoadCursosAlunoComboBox() As IEnumerable
         Return LoadComboBox(Function() GetAll(Table.Curso), "Nome", "Id")

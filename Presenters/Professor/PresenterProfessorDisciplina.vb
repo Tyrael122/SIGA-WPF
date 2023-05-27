@@ -33,7 +33,6 @@ Public Class PresenterProfessorDisciplina
 
         Dim idProfessor = SessionCookie.GetCookie("userId")
 
-
         Dim aulas = BusinessRules.GetAll(Table.Aula).Where(Function(dict) dict("Id") = ViewModelAula.IdHorario And
                                                                 dict("IdProfessor") = idProfessor And
                                                                 dict("IdDisciplina") = idDisciplina)

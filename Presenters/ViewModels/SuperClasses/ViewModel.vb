@@ -16,4 +16,24 @@ Public MustInherit Class ViewModel
             End If
         Next
     End Sub
+
+    Public Function ConvertToDictionary() As Dictionary(Of String, String)
+        Dim dict As New Dictionary(Of String, String)
+
+        For Each viewModelProperty In Me.GetType().GetProperties()
+            dict(viewModelProperty.Name) = viewModelProperty.GetValue(Me).ToString()
+        Next
+
+        Return dict
+    End Function
+
+    Public Sub LoadFromDictionary(dict As Dictionary(Of String, String))
+        For Each viewModelProperty In Me.GetType().GetProperties()
+            Try
+                viewModelProperty.SetValue(Me, dict(viewModelProperty.Name))
+            Catch ex As KeyNotFoundException
+                Continue For
+            End Try
+        Next
+    End Sub
 End Class
