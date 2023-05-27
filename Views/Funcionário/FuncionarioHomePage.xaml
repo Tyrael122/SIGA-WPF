@@ -8,11 +8,6 @@
     x:Class="FuncionarioHomePage"
     mc:Ignorable="d"
     Title="FuncionarioHomePage" Height="450" Width="800">
-
-    <!--<Window.DataContext>
-        <src:DisciplinaViewModel/>
-    </Window.DataContext>-->
-    
     <Grid>
         <TabControl>
             <TabItem Header="Alunos" Margin="-2,-2,-2,2">
