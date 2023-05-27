@@ -2,23 +2,23 @@
     Inherits ViewModel
 
     Private _idDisciplina As String
-    Public Property IdDisciplina As String
+    Public Property IdDisciplina As Object
         Get
             Return _idDisciplina
         End Get
-        Set(value As String)
-            _idDisciplina = value
+        Set(value As Object)
+            _idDisciplina = value.Tag
             OnPropertyChanged(NameOf(IdDisciplina))
         End Set
     End Property
 
     Private _idProfessor As String
-    Public Property IdProfessor As String
+    Public Property IdProfessor As Object
         Get
             Return _idProfessor
         End Get
-        Set(value As String)
-            _idProfessor = value
+        Set(value As Object)
+            _idProfessor = value.Tag
             OnPropertyChanged(NameOf(IdProfessor))
         End Set
     End Property
@@ -63,17 +63,6 @@
         Set(value As String)
             _horarioFim = value
             OnPropertyChanged(NameOf(HorarioFim))
-        End Set
-    End Property
-
-    Private _idCurso As String
-    Public Property IdCurso As String
-        Get
-            Return _idCurso
-        End Get
-        Set(value As String)
-            _idCurso = value
-            OnPropertyChanged(NameOf(IdCurso))
         End Set
     End Property
 End Class

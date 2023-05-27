@@ -1,27 +1,18 @@
 ﻿Public Class DisciplinaProfessorPage
-    Implements IViewModel
+    Inherits WindowModel
 
     Private Presenter As New PresenterProfessorDisciplina(Me)
 
-    Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
+    Public Overrides Sub DisplayInfo(infoMessage As String)
         Throw New NotImplementedException()
     End Sub
 
-    Public Sub DisplayError() Implements IView.DisplayError
+    Public Overrides Sub DisplayError()
         Throw New NotImplementedException()
-    End Sub
-
-    Public Sub CloseView() Implements IView.CloseView
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext
-        DataContext = viewModel
     End Sub
 
     Private Sub cmbDiaAula_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDiaAula.SelectionChanged
         Dim diaAula = cmbDiaAula.SelectedItem
-
         cmbHorario.ItemsSource = Presenter.LoadHorariosComboBox(diaAula)
     End Sub
 
@@ -37,16 +28,7 @@
     End Sub
 
     Private Sub btnLancarNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarNotas.Click
-        Dim notas As New List(Of IDictionary(Of String, String))
-
-        For Each row In NotasAlunosDataGrid.Items
-            Dim nota As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-                        {"IdAluno", row("IdAluno")},
-                        {"Nota", row("Nota")}
-                    }
-
-            notas.Add(nota)
-        Next
+        Dim notas = LoadReferenceFromSelectedRows(NotasAlunosDataGrid, "Id", "Nota")
 
         Presenter.RegisterNotas(notas)
     End Sub
@@ -56,16 +38,7 @@
     End Sub
 
     Private Sub cmbLancarPresencas_Click(sender As Object, e As RoutedEventArgs) Handles cmbLancarPresencas.Click
-        Dim presencas As New List(Of IDictionary(Of String, String))
-
-        For Each row In NotasAlunosDataGrid.Items
-            Dim presenca As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-                        {"IdAluno", row("IdAluno")},
-                        {"IsPresente", row("IsPresente")}
-                    }
-
-            presencas.Add(presenca)
-        Next
+        Dim presencas = LoadReferenceFromSelectedRows(PresencaAlunosDataGrid, "Id", "IsPresente")
 
         Presenter.RegisterPresencas(presencas)
     End Sub

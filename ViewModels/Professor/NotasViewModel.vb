@@ -2,12 +2,12 @@
     Inherits ViewModel
 
     Private _idProva As String
-    Public Property IdProva As String
+    Public Property IdProva As Object
         Get
             Return _idProva
         End Get
-        Set(value As String)
-            _idProva = value
+        Set(value As Object)
+            _idProva = value.Tag
             OnPropertyChanged(NameOf(IdProva))
         End Set
     End Property

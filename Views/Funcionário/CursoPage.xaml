@@ -20,7 +20,7 @@
                         <ComboBoxItem Content="6"/>
                     </ComboBox>
                     <Label Content="Semestre:" HorizontalAlignment="Left" Margin="152,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
-                    <ComboBox x:Name="cmbDisciplinas" HorizontalAlignment="Left" Margin="218,52,0,0" VerticalAlignment="Top" Width="120" Text="{Binding IdDisciplina}"/>
+                    <ComboBox x:Name="cmbDisciplinas" HorizontalAlignment="Left" Margin="218,52,0,0" VerticalAlignment="Top" Width="120" SelectedValue="{Binding IdDisciplina}"/>
                     <Label Content="Disciplinas:" HorizontalAlignment="Left" Margin="145,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
                     <ComboBox x:Name="cmbDiaSemana" HorizontalAlignment="Left" Margin="440,21,0,0" VerticalAlignment="Top" Width="120" Text="{Binding DiaSemana}">
                         <ComboBoxItem Content="Segunda"/>
@@ -31,7 +31,7 @@
                         <ComboBoxItem Content="Sábado"/>
                     </ComboBox>
                     <Label Content="Dia da semana:" HorizontalAlignment="Left" Margin="350,19,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
-                    <ComboBox x:Name="cmbProfessor" HorizontalAlignment="Left" Margin="442,54,0,0" VerticalAlignment="Top" Width="120" Text="{Binding IdProfessor}"/>
+                    <ComboBox x:Name="cmbProfessor" HorizontalAlignment="Left" Margin="442,54,0,0" VerticalAlignment="Top" Width="120" SelectedValue="{Binding IdProfessor}"/>
                     <Label Content="Professor:" HorizontalAlignment="Center" Margin="0,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.337,0.057"/>
                     <ComboBox x:Name="cmbHorarioInicio" HorizontalAlignment="Left" Margin="218,102,0,0" VerticalAlignment="Top" Width="120" Text="{Binding HorarioInicio}">
                         <ComboBoxItem Content="7:00"/>

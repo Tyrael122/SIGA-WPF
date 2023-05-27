@@ -31,7 +31,7 @@ Public MustInherit Class Presenter
         Return dataTable
     End Function
 
-    Protected Function LoadComboBox(selector As Func(Of IEnumerable(Of IDictionary(Of String, String))), content As String, tag As String) As IEnumerable(Of ComboBoxItem)
+    Protected Function GenerateComboBoxItems(selector As Func(Of IEnumerable(Of IDictionary(Of String, String))), content As String, tag As String) As IEnumerable(Of ComboBoxItem)
         Dim comboBoxItems As New List(Of ComboBoxItem)
 
         For Each dict In selector()

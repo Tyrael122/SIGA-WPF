@@ -116,7 +116,7 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Function LoadCursosAlunoComboBox() As IEnumerable
-        Return LoadComboBox(Function() GetAll(Table.Curso), "Nome", "Id")
+        Return GenerateComboBoxItems(Function() GetAll(Table.Curso), "Nome", "Id")
     End Function
 
     Friend Function GetDataTableWithCheckboxColumn(table As String) As Object
