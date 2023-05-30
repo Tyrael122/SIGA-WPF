@@ -12,6 +12,15 @@
     <None Remove="key-icon.png" />
     <None Remove="user-icon.png" />
     <None Remove="Views\5137894 %281%29.jpg" />
+    <None Remove="Views\5137894.jpg" />
+    <None Remove="Views\ArrowBack.png" />
+    <None Remove="Views\fatec-identidade-removebg-preview.png" />
+    <None Remove="Views\FatecLogo.png" />
+    <None Remove="Views\Icons\ArrowBack.png" />
+    <None Remove="Views\Icons\ViewPassword.png" />
+    <None Remove="Views\menu-icon.png" />
+    <None Remove="Views\user-icon-removebg-preview.png" />
+    <None Remove="Views\ViewPassword.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +36,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Aluno\DisciplinaAlunoPage.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\5137894.jpg" />
+    <Resource Include="Views\BackGround\5137894.jpg" />
+    <Resource Include="Views\Icons\ArrowBack.png" />
+    <Resource Include="Views\Icons\ViewPassword.png" />
+    <Resource Include="Views\Images\fatec-identidade-removebg-preview.png" />
+    <Resource Include="Views\Images\FatecLogo.png" />
+    <Resource Include="Views\Icons\menu-icon.png" />
+    <Resource Include="Views\Icons\user-icon-removebg-preview.png" />
   </ItemGroup>
 
 </Project>

@@ -74,4 +74,8 @@ Public MustInherit Class Presenter
 
         Return disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
     End Function
+
+    Protected Function DisplayImageFromDataBase()
+
+    End Function
 End Class

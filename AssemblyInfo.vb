@@ -7,3 +7,4 @@
 '(used if a resource is not found in the page,
 'app, and any theme specific resource dictionaries)
 <Assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)>
+

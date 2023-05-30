@@ -28,6 +28,7 @@ Public Class DAL
         Return result
     End Function
 
+
     Public Function Save(data As IDictionary, table As Table) As Boolean Implements IDAL.Save
         sqlDataReader = ExecuteInsertQuery(data, table)
 
@@ -128,4 +129,6 @@ Public Class DAL
     Public Sub Dispose() Implements IDisposable.Dispose
         connection.Close()
     End Sub
+
+
 End Class

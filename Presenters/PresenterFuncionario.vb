@@ -1,4 +1,8 @@
 ﻿Imports System.Data
+Imports System.Data.Common
+Imports System.IO
+Imports System.Security.AccessControl
+Imports System.Security.Principal
 
 Public Class PresenterFuncionario
     Inherits Presenter
