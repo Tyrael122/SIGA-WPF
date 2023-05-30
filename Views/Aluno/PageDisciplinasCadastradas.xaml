@@ -1,0 +1,24 @@
+﻿<Page x:Name="PageDisciplinasCadastradas" x:Class="PageDisciplinasCadastradas"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SIGAWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="1070" d:DesignWidth="1520"
+      Title="DisciplinasCadastradas" Background="White">
+    <Grid Width="1520" Height="1070">
+        <DataGrid x:Name="DisciplinasAlunoDataGrid" Margin="360,235,360,235" Width="800" Height="600">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Ver disciplina">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="VerDisciplina_Click" Tag="{Binding Id}" Content="Ver"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

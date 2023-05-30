@@ -5,6 +5,7 @@
     Private DAL As New DAL()
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+
         DisciplinasAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas().DefaultView
 
         Dim campo As String = "Foto"
@@ -42,6 +43,10 @@
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+        contentFrame.Content = New PageInicio()
+    End Sub
 
+    Private Sub btnPlano_Click(sender As Object, e As RoutedEventArgs) Handles btnPlano.Click
+        contentFrame.Content = New PageDisciplinasCadastradas()
     End Sub
 End Class
