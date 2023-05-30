@@ -19,8 +19,9 @@
     <None Remove="Views\Icons\ArrowBack.png" />
     <None Remove="Views\Icons\ViewPassword.png" />
     <None Remove="Views\menu-icon.png" />
+    <None Remove="Views\Segurança\FatecLogo.png" />
+    <None Remove="Views\Segurança\ViewPassword.png" />
     <None Remove="Views\user-icon-removebg-preview.png" />
-    <None Remove="Views\ViewPassword.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,11 +51,13 @@
     <Resource Include="Views\5137894.jpg" />
     <Resource Include="Views\BackGround\5137894.jpg" />
     <Resource Include="Views\Icons\ArrowBack.png" />
-    <Resource Include="Views\Icons\ViewPassword.png" />
+    <Resource Include="Views\Segurança\ViewPassword.png" />
+    <Resource Include="Views\ViewPassword.png" />
     <Resource Include="Views\Images\fatec-identidade-removebg-preview.png" />
     <Resource Include="Views\Images\FatecLogo.png" />
     <Resource Include="Views\Icons\menu-icon.png" />
     <Resource Include="Views\Icons\user-icon-removebg-preview.png" />
+    <Resource Include="Views\Segurança\FatecLogo.png" />
   </ItemGroup>
 
 </Project>
