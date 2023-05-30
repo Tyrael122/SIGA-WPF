@@ -6,7 +6,7 @@
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
 
-        DisciplinasAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas().DefaultView
+
 
         Dim campo As String = "Foto"
         Dim result = DAL.SelectFields(Table.Aluno, campo)

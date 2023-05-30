@@ -218,31 +218,4 @@
 
     </Grid>
 
-
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="49*"/>
-            <ColumnDefinition Width="351*"/>
-        </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="2">
-            <TabItem Header="Disciplinas">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DisciplinasAlunoDataGrid" Margin="66,58,328,81">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Ver disciplina">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Click="VerDisciplina_Click" Tag="{Binding Id}" Content="Ver"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Notas">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
-    </Grid>-->
 </Window>
