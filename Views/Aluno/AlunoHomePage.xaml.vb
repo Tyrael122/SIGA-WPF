@@ -5,14 +5,6 @@
     Private DAL As New DAL()
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        Dim campo As String = "Foto"
-        Dim result = DAL.SelectFields(Table.Aluno, campo)
-        If result.Count > 0 AndAlso result(0).ContainsKey(campo) Then
-            Dim imageString As String = result(0)(campo)
-            Dim imageByte As Byte() = Presenter.ConvertStringToBytes(imageString)
-            Presenter.DisplayImage(imageByte, imgPerfil)
-        End If
-
         Dim loginCampo As String = "Login"
         Dim user = DAL.SelectFields(Table.Aluno, loginCampo)
         If user.Count > 0 AndAlso user(0).ContainsKey(loginCampo) Then

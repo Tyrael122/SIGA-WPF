@@ -19,7 +19,6 @@
     <None Remove="key-icon.png" />
     <None Remove="user-icon.png" />
     <None Remove="Views\5137894 %281%29.jpg" />
-    <None Remove="Views\5137894.jpg" />
     <None Remove="Views\Aluno\Books-2-icon.png" />
     <None Remove="Views\Aluno\Books-icon.png" />
     <None Remove="Views\Aluno\Home-2-icon.png" />
@@ -35,6 +34,7 @@
     <None Remove="Views\Icons\ArrowBack.png" />
     <None Remove="Views\Icons\ViewPassword.png" />
     <None Remove="Views\menu-icon.png" />
+    <None Remove="Views\Segurança\5137894.jpg" />
     <None Remove="Views\Segurança\FatecLogo.png" />
     <None Remove="Views\Segurança\ViewPassword.png" />
     <None Remove="Views\user-icon-removebg-preview.png" />
@@ -73,6 +73,7 @@
     <Resource Include="Views\Aluno\user-icon-removebg-preview.png" />
     <Resource Include="Views\Aluno\User-Interface-Logout-icon.png" />
     <Resource Include="Views\Funcionario\ViewPassword.png" />
+    <Resource Include="Views\Segurança\5137894.jpg" />
     <Resource Include="Views\Segurança\ViewPassword.png" />
     <Resource Include="Views\ViewPassword.png" />
     <Resource Include="Views\Images\fatec-identidade-removebg-preview.png" />

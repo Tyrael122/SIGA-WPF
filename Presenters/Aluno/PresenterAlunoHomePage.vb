@@ -21,12 +21,4 @@ Public Class PresenterAlunoHomePage
         SessionCookie.AddCookie("idDisciplina", idDisciplina)
         Call New DisciplinaAlunoPage().Show()
     End Sub
-
-    Friend Function ConvertStringToBytes(imageString As String) As Byte()
-        Throw New NotImplementedException()
-    End Function
-
-    Friend Sub DisplayImage(imageByte() As Byte, imgPerfil As Ellipse)
-        Throw New NotImplementedException()
-    End Sub
 End Class

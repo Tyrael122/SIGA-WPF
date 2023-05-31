@@ -46,7 +46,7 @@
         </Style>
     </Window.Resources>
     <Window.Background>
-        <ImageBrush ImageSource="/Views/5137894.jpg"/>
+        <ImageBrush ImageSource="/Views/Segurança/5137894.jpg"/>
     </Window.Background>
 
     <!-- Body -->

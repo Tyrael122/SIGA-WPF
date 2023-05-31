@@ -2,7 +2,7 @@
 Imports Microsoft.Win32
 
 Public Class FuncionarioHomePage
-    Implements IView
+    Implements IViewModel
 
     Private Presenter As PresenterFuncionario = New PresenterFuncionario(Me)
     Dim imageSource As New BitmapImage
@@ -214,5 +214,9 @@ Public Class FuncionarioHomePage
 
             imageTestComponent.Source = imageSource
         End If
+    End Sub
+
+    Public Sub SetDataContext(viewModel As Object) Implements IViewModel.SetDataContext
+        DataContext = viewModel
     End Sub
 End Class
