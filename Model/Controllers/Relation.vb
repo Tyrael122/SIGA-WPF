@@ -3,7 +3,7 @@
     Private ReadOnly UniqueEntityTable As Table
     Private ReadOnly MultipleEntityTable As Table
 
-    Public uniqueEntityData As IDictionary(Of String, String)
+    Public uniqueEntityData As IDictionary(Of String, Object)
     Public idRelatedEntites As IEnumerable(Of String)
 
     Public Sub New(uniqueEntityTable As Table, multipleEntityTable As Table)
@@ -83,7 +83,7 @@
         Return True
     End Function
 
-    Public Shared Function SaveRelation(uniqueEntityTable As Table, relatedEntitiesTable As Table, idRelatedEntities As List(Of String), uniqueEntityData As Dictionary(Of String, String)) As Boolean
+    Public Shared Function SaveRelation(uniqueEntityTable As Table, relatedEntitiesTable As Table, idRelatedEntities As List(Of String), uniqueEntityData As Dictionary(Of String, Object)) As Boolean
         Dim relation As New Relation(uniqueEntityTable, relatedEntitiesTable) With {
             .uniqueEntityData = uniqueEntityData,
             .idRelatedEntites = idRelatedEntities

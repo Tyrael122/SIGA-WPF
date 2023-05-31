@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Text
 
 Public Class DAL
     Implements IDAL, IDisposable
@@ -28,7 +29,6 @@ Public Class DAL
         Return result
     End Function
 
-
     Public Function Save(data As IDictionary, table As Table) As Boolean Implements IDAL.Save
         sqlDataReader = ExecuteInsertQuery(data, table)
 
@@ -55,25 +55,60 @@ Public Class DAL
         Delete(idEntity, "Id", table)
     End Sub
 
-    Public Sub Delete(idEntity As String, idField As String, table As Table) Implements IDAL.Delete
-        Dim sql = "DELETE FROM " & table.ToString() & " WHERE " & idField & " = " & idEntity
+    Public Sub Delete(idEntity As String, whereField As String, table As Table) Implements IDAL.Delete
+        Dim sql = "DELETE FROM " & table.ToString() & " WHERE " & whereField & " = " & idEntity
 
         sqlCommand = New SqlCommand(sql, connection)
         sqlCommand.ExecuteNonQuery()
     End Sub
 
-    Public Sub Update(id As String, data As IDictionary, table As Table) Implements IDAL.Update
-        Dim sql = "UPDATE " & table.ToString() & " SET " & GenerateUpdatePairs(data) & " WHERE Id = " & id
+    Public Sub Update(idEntity As String, data As IDictionary, table As Table) Implements IDAL.Update
+        Dim sql = "UPDATE " & table.ToString() & " SET " & GenerateUpdateParametersString(data) & " WHERE Id = " & idEntity
 
         sqlCommand = New SqlCommand(sql, connection)
+
+        AddParameters(data, sqlCommand.Parameters)
+
         sqlCommand.ExecuteNonQuery()
     End Sub
 
     Private Function ExecuteInsertQuery(data As IDictionary, table As Table) As SqlDataReader
         Dim sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ") OUTPUT INSERTED.* "
-        sql += "VALUES (" & GetParseableData(data) & ")"
+        sql += "VALUES (" & GenerateParametersString(data) & ")"
 
-        Return New SqlCommand(sql, connection).ExecuteReader()
+        sqlCommand = New SqlCommand(sql, connection)
+
+        AddParameters(data, sqlCommand.Parameters)
+
+        Return sqlCommand.ExecuteReader()
+    End Function
+
+    Private Sub AddParameters(data As IDictionary, sqlParameters As SqlParameterCollection)
+        For Each parameterName As String In GenerateParameters(data)
+            Dim sqlParameter = New SqlParameter(parameterName, data(parameterName.Replace("@", "")))
+
+            sqlParameters.Add(sqlParameter)
+        Next
+    End Sub
+
+    Private Function GenerateParameters(data As IDictionary(Of String, Object)) As IEnumerable(Of String)
+        Dim retorno = New List(Of String)
+        For Each key In data.Keys
+            retorno.Add("@" & key)
+        Next
+
+        Return retorno
+    End Function
+
+    Private Function GenerateParametersString(data As IDictionary(Of String, Object)) As String
+        Dim parameters = GenerateParameters(data)
+
+        Return String.Join(", ", parameters)
+    End Function
+
+    Private Function GenerateUpdateParametersString(data As IDictionary) As String
+        Dim parameters = GenerateParameters(data)
+        Return ParseParametersIntoUpdateString(parameters)
     End Function
 
 
@@ -94,41 +129,23 @@ Public Class DAL
         Return result
     End Function
 
-    Private Function GenerateUpdatePairs(data As IDictionary) As String
-        Dim returnString = ""
-        For Each key In data.Keys
-            returnString += key & " = " & ParseSqlValue(data(key)) & ", "
-        Next
-
-        Return returnString.Remove(returnString.Length - 2)
-    End Function
-
-    Private Function GetParseableFields(data As IDictionary(Of String, String)) As String
+    Private Function GetParseableFields(data As IDictionary(Of String, Object)) As String
         Dim temp As ICollection(Of String) = data.Keys
 
         Return String.Join(", ", temp.ToList())
     End Function
 
-    Private Function GetParseableData(data As IDictionary(Of String, String)) As String
-        Dim fieldsToSelect As String = Nothing
-        For Each field In data.Values
-            fieldsToSelect += ParseSqlValue(field) & ", "
+    Private Shared Function ParseParametersIntoUpdateString(parameters As IEnumerable(Of String)) As String
+        Dim returnString = New StringBuilder()
+        For Each value In parameters
+            Dim column = value.Replace("@", "")
+            returnString.Append(column & " = " & value & ", ")
         Next
 
-        Return fieldsToSelect.Remove(fieldsToSelect.Length - 2)
-    End Function
-
-    Private Function ParseSqlValue(value As String) As String
-        If IsNumeric(value) Then
-            Return value
-        Else
-            Return "'" & value & "'"
-        End If
+        Return returnString.Remove(returnString.Length - 2, returnString.Length).ToString()
     End Function
 
     Public Sub Dispose() Implements IDisposable.Dispose
         connection.Close()
     End Sub
-
-
 End Class
