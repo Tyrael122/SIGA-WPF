@@ -39,6 +39,6 @@
             {"HorarioFim", cmbHorarioFim.SelectedItem.Content}
         }
 
-        Presenter.RegisterHorarioCurso(map)
+        Presenter.RegisterHorarioCurso()
     End Sub
 End Class

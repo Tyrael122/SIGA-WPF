@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\BackGround\**" />
+    <EmbeddedResource Remove="Views\BackGround\**" />
+    <None Remove="Views\BackGround\**" />
+    <Page Remove="Views\BackGround\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Icons8-Windows-8-Users-Name.512.png" />
     <None Remove="key-icon.png" />
     <None Remove="user-icon.png" />
@@ -57,7 +64,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\5137894.jpg" />
     <Resource Include="Views\Aluno\Books-2-icon.png" />
     <Resource Include="Views\Aluno\Books-icon.png" />
     <Resource Include="Views\Aluno\Home-2-icon.png" />
@@ -66,9 +72,7 @@
     <Resource Include="Views\Aluno\menu-icon.png" />
     <Resource Include="Views\Aluno\user-icon-removebg-preview.png" />
     <Resource Include="Views\Aluno\User-Interface-Logout-icon.png" />
-    <Resource Include="Views\BackGround\5137894.jpg" />
     <Resource Include="Views\Funcionario\ViewPassword.png" />
-    <Resource Include="Views\Icons\ArrowBack.png" />
     <Resource Include="Views\Segurança\ViewPassword.png" />
     <Resource Include="Views\ViewPassword.png" />
     <Resource Include="Views\Images\fatec-identidade-removebg-preview.png" />

@@ -1,9 +1,7 @@
-﻿Imports System.Text.Json
-
-Public Class DisciplinaProfessorPage
+﻿Public Class DisciplinaProfessorPage
     Implements IView
 
-    Private Presenter As New PresenterProfessor(Me)
+    Private Presenter As New PresenterProfessorDisciplina(Me)
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         Throw New NotImplementedException()
@@ -31,7 +29,7 @@ Public Class DisciplinaProfessorPage
                 {"Tipo", cmbTipoProva.SelectedValue.Content}
             }
 
-        Presenter.RegisterProva(map)
+        Presenter.RegisterProva()
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
@@ -97,12 +95,12 @@ Public Class DisciplinaProfessorPage
     End Sub
 
     Private Sub CheckBoxPresencaAluno_Click(sender As Object, e As RoutedEventArgs)
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.DarPresencaParaAluno(checkBox.Tag)
-        Else
-            Presenter.DarFaltaParaAluno(checkBox.Tag)
-        End If
+        'Dim checkBox As CheckBox = CType(sender, CheckBox)
+        'If checkBox.IsChecked Then
+        '    Presenter.DarPresencaParaAluno(checkBox.Tag)
+        'Else
+        '    Presenter.DarFaltaParaAluno(checkBox.Tag)
+        'End If
     End Sub
 
     Private Sub cmbLancarPresencas_Click(sender As Object, e As RoutedEventArgs) Handles cmbLancarPresencas.Click
@@ -110,6 +108,6 @@ Public Class DisciplinaProfessorPage
             {"IdHorario", cmbDiaAula.SelectedValue.Tag}
         }
 
-        Presenter.RegisterPresencas(map)
+        'Presenter.RegisterPresencas()
     End Sub
 End Class

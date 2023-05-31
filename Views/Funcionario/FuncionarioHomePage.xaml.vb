@@ -108,17 +108,17 @@ Public Class FuncionarioHomePage
         }
 
 
-        Presenter.RegisterDisciplina(map)
+        Presenter.RegisterDisciplina()
     End Sub
 
     Private Sub CheckBox_Click(sender As Object, e As RoutedEventArgs)
 
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.AddDisciplinaSelecionadaAoCurso(checkBox.Tag)
-        Else
-            Presenter.RemoveDisciplinaSelecionadaDoCurso(checkBox.Tag)
-        End If
+        'Dim checkBox As CheckBox = CType(sender, CheckBox)
+        'If checkBox.IsChecked Then
+        '    Presenter.AddDisciplinaSelecionadaAoCurso(checkBox.Tag)
+        'Else
+        '    Presenter.RemoveDisciplinaSelecionadaDoCurso(checkBox.Tag)
+        'End If
     End Sub
 
     Private Sub VerCurso_Click(sender As Object, e As EventArgs)
@@ -134,7 +134,7 @@ Public Class FuncionarioHomePage
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasPorSemestreDataTable(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
+            Presenter.GetDisciplinasAcimaSemestre(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub cmbSemestreInicio_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbSemestreInicio.SelectionChanged
@@ -145,25 +145,25 @@ Public Class FuncionarioHomePage
         End If
 
         DisciplinasCursoAlunoDataGrid.ItemsSource =
-            Presenter.GetDisciplinasPorSemestreDataTable(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
+            Presenter.GetDisciplinasAcimaSemestre(cmbCursosAluno.SelectedValue.Tag, semestreInicio).DefaultView
     End Sub
 
     Private Sub CheckBoxDisciplinasAluno_Click(sender As Object, e As RoutedEventArgs)
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.AddDisciplinaSelecionadaAoAluno(checkBox.Tag)
-        Else
-            Presenter.RemoveDisciplinaSelecionadaDoAluno(checkBox.Tag)
-        End If
+        'Dim checkBox As CheckBox = CType(sender, CheckBox)
+        'If checkBox.IsChecked Then
+        '    Presenter.AddDisciplinaSelecionadaAoAluno(checkBox.Tag)
+        'Else
+        '    Presenter.RemoveDisciplinaSelecionadaDoAluno(checkBox.Tag)
+        'End If
     End Sub
 
     Private Sub CheckBoxDisciplinaProfessor_Click(sender As Object, e As RoutedEventArgs)
-        Dim checkBox As CheckBox = CType(sender, CheckBox)
-        If checkBox.IsChecked Then
-            Presenter.AddDisciplinaSelecionadaAoProfessor(checkBox.Tag)
-        Else
-            Presenter.RemoveDisciplinaSelecionadaDoProfessor(checkBox.Tag)
-        End If
+        'Dim checkBox As CheckBox = CType(sender, CheckBox)
+        'If checkBox.IsChecked Then
+        '    Presenter.AddDisciplinaSelecionadaAoProfessor(checkBox.Tag)
+        'Else
+        '    Presenter.RemoveDisciplinaSelecionadaDoProfessor(checkBox.Tag)
+        'End If
     End Sub
 
     Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
