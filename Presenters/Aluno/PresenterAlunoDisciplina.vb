@@ -8,11 +8,12 @@ Public Class PresenterAlunoDisciplina
 
     Public Sub New(view As IView)
         Me.View = view
+    End Sub
 
     Friend Function GetDisciplinasCadastradas() As DataTable
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, SessionCookie.GetCookie("userId"))
 
-        Return ConvertDictionariesToDataTable(disciplinas)
+        Return ConvertDictionaryToDataTable(disciplinas)
     End Function
 
 
