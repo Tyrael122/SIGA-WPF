@@ -21,7 +21,7 @@
 
             <Button  Margin="20 28 0 35" Style="{StaticResource topButton}">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/Images/menu-icon.png"/>
+                    <ImageBrush ImageSource="/Views/Aluno/menu-icon.png"/>
                 </Button.Background>
 
             </Button>
@@ -32,7 +32,7 @@
                         DockPanel.Dock="Top" HorizontalAlignment="Left" Margin=" 40 0 0 0">
                         <Ellipse x:Name="imgPerfil">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="/Views/Images/user-icon-removebg-preview.png" />
+                                <ImageBrush ImageSource="/Views/Aluno/user-icon-removebg-preview.png" />
                             </Ellipse.Fill>
                         </Ellipse>
                     </Border>
@@ -48,35 +48,35 @@
                     <StackPanel DockPanel.Dock="Top">
                         <Button x:Name="btnInicio" Style="{StaticResource menuButton}" Width="270" Foreground="White" Background="#FF7A57E0" Click="Button_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Images/Home-2-icon.png" Style="{StaticResource menuButtonIcon}" />
+                                <Image Source="/Views/Aluno/Home-2-icon.png" Style="{StaticResource menuButtonIcon}" />
                                 <TextBlock Text ="Inicio" VerticalAlignment="Center"/>
 
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnPlano" Style="{StaticResource ResourceKey=menuButton}"  Width="336">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Images/Books-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <Image Source="/Views/Aluno/Books-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Plano de Ensino" VerticalAlignment="Center" Width="168"/>
 
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnConsultas" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Images/Magnifier-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <Image Source="/Views/Aluno/Magnifier-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Consultas" VerticalAlignment="Center"/>
 
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnSolicitacoes" Style="{StaticResource ResourceKey=menuButton}" Width="270" >
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Images/mail-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <Image Source="/Views/Aluno/mail-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Solicitações" VerticalAlignment="Center"/>
 
                             </StackPanel>
                         </Button>
                         <Button Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Images/Books-2-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <Image Source="/Views/Aluno/Books-2-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Matrícula" VerticalAlignment="Center"/>
 
                             </StackPanel>
@@ -91,7 +91,7 @@
         </Grid>
         <Button Style="{StaticResource ResourceKey=menuButton}" Width="NaN" Margin="0,1001,130,19" >
             <StackPanel Orientation="Horizontal">
-                <Image Source="/Views/Images/User-Interface-Logout-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" Height="21" Width="22" />
+                <Image Source="/Views/Aluno/User-Interface-Logout-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" Height="21" Width="22" />
                 <TextBlock Text ="Sair" VerticalAlignment="Center" FontSize="19" Margin="-20 0 0 0 " />
 
             </StackPanel>

@@ -15,6 +15,8 @@ Public Class PresenterAlunoDisciplina
         Return ConvertDictionariesToDataTable(disciplinas)
     End Function
 
+
+
     Public Sub DisplayImage(imageBytes As Byte(), imageBox As Ellipse)
         If imageBytes IsNot Nothing AndAlso imageBytes.Length > 0 Then
             Dim bitmapImage As New BitmapImage()
@@ -66,5 +68,13 @@ Public Class PresenterAlunoDisciplina
                                                             presenca("IdAluno") = idAluno)
 
         Return ConvertDictionaryToDataTable(presencasDaDisciplina)
+    End Function
+
+    Friend Function CarregarImagemPerfilAluno() As Brush
+        If 1 = 1 Then
+            Return New ImageBrush()
+        Else
+            Return Brushes.Transparent
+        End If
     End Function
 End Class

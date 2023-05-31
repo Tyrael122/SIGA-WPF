@@ -132,4 +132,7 @@ Public Class PresenterFuncionario
 
         Return ConvertDictionaryToDataTable(data)
     End Function
+
+    Friend Function SelecionarImagemAluno() As ImageSource
+    End Function
 End Class

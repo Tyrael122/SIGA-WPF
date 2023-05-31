@@ -7,6 +7,7 @@
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
 
 
+        imgPerfil.Fill = Presenter.CarregarImagemPerfilAluno()
 
         Dim campo As String = "Foto"
         Dim result = DAL.SelectFields(Table.Aluno, campo)

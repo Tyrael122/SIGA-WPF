@@ -13,6 +13,14 @@
     <None Remove="user-icon.png" />
     <None Remove="Views\5137894 %281%29.jpg" />
     <None Remove="Views\5137894.jpg" />
+    <None Remove="Views\Aluno\Books-2-icon.png" />
+    <None Remove="Views\Aluno\Books-icon.png" />
+    <None Remove="Views\Aluno\Home-2-icon.png" />
+    <None Remove="Views\Aluno\Magnifier-icon.png" />
+    <None Remove="Views\Aluno\mail-icon.png" />
+    <None Remove="Views\Aluno\menu-icon.png" />
+    <None Remove="Views\Aluno\user-icon-removebg-preview.png" />
+    <None Remove="Views\Aluno\User-Interface-Logout-icon.png" />
     <None Remove="Views\ArrowBack.png" />
     <None Remove="Views\fatec-identidade-removebg-preview.png" />
     <None Remove="Views\FatecLogo.png" />
@@ -50,6 +58,14 @@
 
   <ItemGroup>
     <Resource Include="Views\5137894.jpg" />
+    <Resource Include="Views\Aluno\Books-2-icon.png" />
+    <Resource Include="Views\Aluno\Books-icon.png" />
+    <Resource Include="Views\Aluno\Home-2-icon.png" />
+    <Resource Include="Views\Aluno\Magnifier-icon.png" />
+    <Resource Include="Views\Aluno\mail-icon.png" />
+    <Resource Include="Views\Aluno\menu-icon.png" />
+    <Resource Include="Views\Aluno\user-icon-removebg-preview.png" />
+    <Resource Include="Views\Aluno\User-Interface-Logout-icon.png" />
     <Resource Include="Views\BackGround\5137894.jpg" />
     <Resource Include="Views\Funcionario\ViewPassword.png" />
     <Resource Include="Views\Icons\ArrowBack.png" />

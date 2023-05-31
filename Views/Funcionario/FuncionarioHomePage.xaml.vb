@@ -193,6 +193,9 @@ Public Class FuncionarioHomePage
     End Sub
 
     Private Sub Image_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs)
+
+        imageTestComponent.Source = Presenter.SelecionarImagemAluno()
+
         If jaAbriuFileDialog Then
             jaAbriuFileDialog = False
             Return
