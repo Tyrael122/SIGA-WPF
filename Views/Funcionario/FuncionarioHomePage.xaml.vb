@@ -9,6 +9,8 @@ Public Class FuncionarioHomePage
     Private imagePath As String
     Private imageBytes As Byte()
 
+    Private jaAbriuFileDialog = False
+
     Private Sub FuncionarioHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Dim disciplinas = Presenter.GetDataTable("Disciplina").DefaultView
         DisciplinasCursoDataGrid.ItemsSource = disciplinas
@@ -162,13 +164,28 @@ Public Class FuncionarioHomePage
     End Sub
 
     Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
-        Dim openFileDialog As New OpenFileDialog()
-        openFileDialog.Filter = "Arquivos de Imagem (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Todos os Arquivos (*.*)|*.*"
-        If openFileDialog.ShowDialog() = True Then
+        If jaAbriuFileDialog Then
+            jaAbriuFileDialog = False
+            Return
+        End If
+
+        Dim openFileDialog As New OpenFileDialog With {
+            .Filter = "Arquivos de Imagem (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Todos os Arquivos (*.*)|*.*"
+        }
+
+        Dim usuarioClicouBotaoOk = openFileDialog.ShowDialog() = True
+        If usuarioClicouBotaoOk Then
+            jaAbriuFileDialog = True
+
             imagePath = openFileDialog.FileName
             Dim imageSource As New BitmapImage(New Uri(imagePath))
             Dim button As Button = DirectCast(sender, Button)
-            button.Content = imageSource
+
+            Dim imageBrush As New ImageBrush With {
+                .ImageSource = imageSource
+            }
+
+            button.Background = imageBrush
         End If
     End Sub
 End Class

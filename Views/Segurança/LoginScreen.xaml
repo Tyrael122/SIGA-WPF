@@ -6,8 +6,6 @@
         mc:Ignorable="d" Height="1080" Width="1920" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency='True'>
 
-
-
     <!-- Place holder para passwordBox-->
     <Window.Resources>
         <Style x:Key="PlaceholderTextBox" TargetType="{x:Type TextBox}">
@@ -50,7 +48,6 @@
     <Window.Background>
         <ImageBrush ImageSource="/Views/5137894.jpg"/>
     </Window.Background>
-
 
     <!-- Body -->
     <Grid Height="1080" Margin="302,0,318,-232">
