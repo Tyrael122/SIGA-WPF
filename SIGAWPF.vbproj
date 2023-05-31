@@ -12,10 +12,6 @@
     <None Remove="key-icon.png" />
     <None Remove="user-icon.png" />
     <None Remove="Views\5137894 %281%29.jpg" />
-    <None Remove="Views\5137894.jpg" />
-    <None Remove="Views\ArrowBack.png" />
-    <None Remove="Views\FatecLogo.png" />
-    <None Remove="Views\ViewPassword.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,20 +28,6 @@
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\Aluno\DisciplinaAlunoPage.xaml.vb">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Views\5137894.jpg" />
-    <Resource Include="Views\ArrowBack.png" />
-    <Resource Include="Views\Static\Background\5137894.jpg" />
-    <Resource Include="Views\FatecLogo.png" />
-    <Resource Include="Views\ViewPassword.png" />
   </ItemGroup>
 
 </Project>
