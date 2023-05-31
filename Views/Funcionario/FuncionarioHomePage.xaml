@@ -57,6 +57,7 @@
                                             <ImageBrush ImageSource="/Views/Icons/user-icon-removebg-preview.png"/>
                                         </Button.Background>
                                     </Button>
+                                    <Image x:Name="imageTestComponent" HorizontalAlignment="Left" Height="48" Margin="81,218,0,0" VerticalAlignment="Top" Width="81" Source="/Views/Funcionario/ViewPassword.png" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
                                 </Grid>
                             </TabItem>
                             <TabItem x:Name="tabEditarAlunos" Header="Editar" Margin="-2,-2,-2,2">

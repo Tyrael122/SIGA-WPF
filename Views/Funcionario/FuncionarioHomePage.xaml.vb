@@ -43,7 +43,11 @@ Public Class FuncionarioHomePage
 
     Private Sub btnCadastrar_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrar.Click
         Dim button As Button = DirectCast(sender, Button)
-        Dim image As BitmapImage = TryCast(button.Content, BitmapImage)
+
+        'Dim imageBrush As ImageBrush = button.Background
+
+        'Dim image As BitmapImage = TryCast(imageBrush.ImageSource, BitmapImage)
+        Dim image As BitmapImage = TryCast(imageTestComponent.Source, BitmapImage)
 
         If image IsNot Nothing Then
             Dim encoder As New PngBitmapEncoder()
@@ -56,16 +60,15 @@ Public Class FuncionarioHomePage
             imageBytes = Nothing
         End If
 
-        Dim base64String As String = If(imageBytes IsNot Nothing, Convert.ToBase64String(imageBytes), Nothing)
-
-
-        Dim map As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
-            {"Name", txtNomeDisciplina.Text},
-            {"Semester", txtSemestre.Text},
-            {"Workload", txtCargaHoraria.Text},
-            {"Description", txtDescricao.Text},
-            {"Foto", base64String}
+        Dim map As IDictionary(Of String, Object) = New Dictionary(Of String, Object) From {
+            {"Login", txtLogin.Text},
+            {"Password", txtPassword.Text},
+            {"SemestreInicio", cmbSemestreInicio.SelectedItem.Content},
+            {"Curso", txtNomeCurso.Text},
+            {"Foto", imageBytes}
         }
+
+        Presenter.RegisterAluno(map)
     End Sub
 
     Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarProfessor.Click
@@ -186,6 +189,27 @@ Public Class FuncionarioHomePage
             }
 
             button.Background = imageBrush
+        End If
+    End Sub
+
+    Private Sub Image_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs)
+        If jaAbriuFileDialog Then
+            jaAbriuFileDialog = False
+            Return
+        End If
+
+        Dim openFileDialog As New OpenFileDialog With {
+            .Filter = "Arquivos de Imagem (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Todos os Arquivos (*.*)|*.*"
+        }
+
+        Dim usuarioClicouBotaoOk = openFileDialog.ShowDialog() = True
+        If usuarioClicouBotaoOk Then
+            jaAbriuFileDialog = True
+
+            imagePath = openFileDialog.FileName
+            Dim imageSource As New BitmapImage(New Uri(imagePath))
+
+            imageTestComponent.Source = imageSource
         End If
     End Sub
 End Class
