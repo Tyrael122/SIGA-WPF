@@ -1,0 +1,3 @@
+﻿Class PageConteudo
+
+End Class

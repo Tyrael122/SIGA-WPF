@@ -1,0 +1,3 @@
+﻿Class PageInicioFuncionario
+
+End Class

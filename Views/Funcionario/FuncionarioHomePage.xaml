@@ -53,7 +53,7 @@
                                     </ComboBox>
                                     <Label Content="Semestre de início:" HorizontalAlignment="Left" Margin="277,73,0,0" VerticalAlignment="Top" Height="26" Width="117"/>
                                     <Button x:Name="btnImage" Content="" HorizontalAlignment="Left" Margin="561,40,0,0" VerticalAlignment="Top" Height="100" Width="103" BorderBrush="{x:Null}" Click="btnImage_Click">
-                                    <Button.Background>
+                                        <Button.Background>
                                             <ImageBrush ImageSource="/Views/Icons/user-icon-removebg-preview.png"/>
                                         </Button.Background>
                                     </Button>
@@ -158,16 +158,20 @@
                     <TabControl>
                         <TabItem x:Name="tabCadastroDisciplina" Header="Cadastro">
                             <Grid Background="#FFE5E5E5">
-                                <Label Content="Nome:" HorizontalAlignment="Left" Margin="139,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-                                <TextBox x:Name="txtNomeDisciplina" HorizontalAlignment="Left" Margin="187,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-                                <Label Content="Semestre:" HorizontalAlignment="Left" Margin="119,149,0,0" VerticalAlignment="Top" Height="26" Width="65"/>
-                                <TextBox x:Name="txtSemestre" HorizontalAlignment="Left" Margin="187,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-                                <Button x:Name="btnCadastrarDisciplina" Content="Cadastrar" HorizontalAlignment="Left" Margin="207,188,0,0" VerticalAlignment="Top" Height="30" Width="65"/>
-                                <Label Content="Carga horária:" HorizontalAlignment="Left" Margin="324,118,0,0" VerticalAlignment="Top" Height="26" Width="86"/>
-                                <Label Content="Descrição:" HorizontalAlignment="Left" Margin="338,149,0,0" VerticalAlignment="Top" Height="26" Width="67"/>
-                                <TextBox x:Name="txtDescricao" HorizontalAlignment="Left" Margin="410,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-                                <TextBox x:Name="txtCargaHoraria" HorizontalAlignment="Left" Margin="410,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-                                <Label x:Name="lblInfoCadastroDisciplina" HorizontalAlignment="Left" Margin="307,78,0,0" VerticalAlignment="Top" Width="121" Height="28"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="22*"/>
+                                    <ColumnDefinition Width="175*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Nome:" HorizontalAlignment="Left" Margin="51,118,0,0" VerticalAlignment="Top" Height="26" Width="45" Grid.Column="1"/>
+                                <TextBox x:Name="txtNomeDisciplina" HorizontalAlignment="Left" Margin="99,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+                                <Label Content="Semestre:" HorizontalAlignment="Left" Margin="31,149,0,0" VerticalAlignment="Top" Height="26" Width="65" Grid.Column="1"/>
+                                <TextBox x:Name="txtSemestre" HorizontalAlignment="Left" Margin="99,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+                                <Button x:Name="btnCadastrarDisciplina" Content="Cadastrar" HorizontalAlignment="Left" Margin="119,188,0,0" VerticalAlignment="Top" Height="30" Width="65" Grid.Column="1"/>
+                                <Label Content="Carga horária:" HorizontalAlignment="Left" Margin="236,118,0,0" VerticalAlignment="Top" Height="26" Width="86" Grid.Column="1"/>
+                                <Label Content="Descrição:" HorizontalAlignment="Left" Margin="250,149,0,0" VerticalAlignment="Top" Height="26" Width="67" Grid.Column="1"/>
+                                <TextBox x:Name="txtDescricao" HorizontalAlignment="Left" Margin="322,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+                                <TextBox x:Name="txtCargaHoraria" HorizontalAlignment="Left" Margin="322,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+                                <Label x:Name="lblInfoCadastroDisciplina" HorizontalAlignment="Left" Margin="219,78,0,0" VerticalAlignment="Top" Width="121" Height="28" Grid.Column="1"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Editar">

@@ -1,0 +1,220 @@
+﻿<Page x:Class="PageHorario"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SIGAWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="842" d:DesignWidth="1520"
+      Title="PageHorario">
+    <Grid Background="#FFD2D2D2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="379*"/>
+            <ColumnDefinition Width="1141*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="331*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Height="329" Margin="67,73,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="424" Grid.ColumnSpan="2">
+            <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" GridLinesVisibility="None" Margin="18,110,64,60">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Horário" Binding="{Binding Horario}" Width="120" />
+                    <DataGridTextColumn Header="Disciplina" Binding="{Binding Disciplina}" Width="*" />
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Margin" Value="0 5" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="16" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="18,10,0,0" VerticalAlignment="Top" Width="342" Background="#669213D0" CornerRadius="20,20,20,20">
+                <Label Content="Segunda-Feira" HorizontalAlignment="Center" Height="56" VerticalAlignment="Center" Width="223" Foreground="White" FontSize="30" FontWeight="Bold"/>
+            </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="329" Margin="169,73,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="424" Grid.Column="1">
+            <DataGrid x:Name="dataGrid2" AutoGenerateColumns="False" GridLinesVisibility="None" Margin="18,110,64,60">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}"
+                                        SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Horário" Binding="{Binding Horario}" Width="120" />
+                    <DataGridTextColumn Header="Disciplina" Binding="{Binding Disciplina}" Width="*" />
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Margin" Value="0 5" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="16" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="18,10,0,0" VerticalAlignment="Top" Width="342" Background="#669213D0" CornerRadius="20,20,20,20">
+                <Label Content="Terça-Feira" HorizontalAlignment="Center" Height="56" VerticalAlignment="Center" Width="172" Foreground="White" FontSize="30" FontWeight="Bold"/>
+            </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="329" Margin="169,241,0,0" VerticalAlignment="Top" Width="424" Grid.Column="1" Grid.Row="1">
+            <DataGrid x:Name="dataGrid3" AutoGenerateColumns="False" GridLinesVisibility="None" Margin="18,110,64,60">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}"
+                                        SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Horário" Binding="{Binding Horario}" Width="120" />
+                    <DataGridTextColumn Header="Disciplina" Binding="{Binding Disciplina}" Width="*" />
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Margin" Value="0 5" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="16" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="18,10,0,0" VerticalAlignment="Top" Width="342" Background="#669213D0" CornerRadius="20,20,20,20">
+                <Label Content="Quinta-Feira" HorizontalAlignment="Center" Height="56" VerticalAlignment="Center" Width="189" Foreground="White" FontSize="30" FontWeight="Bold"/>
+            </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="329" Margin="67,241,0,0" VerticalAlignment="Top" Width="424" Grid.Row="1" Grid.ColumnSpan="2">
+            <DataGrid x:Name="dataGrid1" AutoGenerateColumns="False" GridLinesVisibility="None" Margin="18,110,64,60">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}"
+                                        SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Horário" Binding="{Binding Horario}" Width="120" />
+                    <DataGridTextColumn Header="Disciplina" Binding="{Binding Disciplina}" Width="*" />
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Margin" Value="0 5" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="16" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="18,10,0,0" VerticalAlignment="Top" Width="342" Background="#669213D0" CornerRadius="20,20,20,20">
+                <Label Content="Quarta-Feira" HorizontalAlignment="Center" Height="56" VerticalAlignment="Center" Width="189" Foreground="White" FontSize="30" FontWeight="Bold"/>
+            </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="330" Margin="571,76,0,0" VerticalAlignment="Top" Width="424" Grid.Column="1" Grid.Row="1">
+            <DataGrid x:Name="dataGrid4" AutoGenerateColumns="False" GridLinesVisibility="None" Margin="18,110,64,60">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}"
+                                        SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Horário" Binding="{Binding Horario}" Width="120" />
+                    <DataGridTextColumn Header="Disciplina" Binding="{Binding Disciplina}" Width="*" />
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Margin" Value="0 5" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="16" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="18,10,0,0" VerticalAlignment="Top" Width="342" Background="#669213D0" CornerRadius="20,20,20,20">
+                <Label Content="Sexta-Feira" HorizontalAlignment="Center" Height="56" VerticalAlignment="Center" Width="168" Foreground="White" FontSize="30" FontWeight="Bold"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
