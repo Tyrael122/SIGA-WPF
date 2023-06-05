@@ -9,7 +9,7 @@
       Title="PageInicio" Background="#FFECECEC">
     <Grid HorizontalAlignment="Left" Height="1070" Margin="10,0,0,0" VerticalAlignment="Center" Width="1520">
         <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="32,260,0,0" VerticalAlignment="Top" Width="1070" Background="White" CornerRadius="10,10,10,10">
-            <Button x:Name="btnCalendario" Content="• Ver Calendario" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="252" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Margin="466,30,0,0">
+            <Button x:Name="btnCalendario" Content="Avisos cadastrados pelo funcionário" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="456" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Margin="466,30,0,0">
                 <Button.Background>
                     <ImageBrush/>
                 </Button.Background>

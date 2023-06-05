@@ -1,0 +1,3 @@
+﻿Class PageCadastroProva
+
+End Class

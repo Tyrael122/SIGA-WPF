@@ -26,7 +26,7 @@
 
             </Button>
 
-            <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 100 0 60">
+            <Border Grid.Row="1" Background="#FFFF8B5F" CornerRadius="0 100 0 60">
                 <DockPanel Margin="-10,-33,10,33">
                     <Border Width="160" Height="160" Padding="6" Background="White" CornerRadius="100"
                         DockPanel.Dock="Top" HorizontalAlignment="Left" Margin=" 40 0 0 0">
@@ -37,47 +37,47 @@
                         </Ellipse>
                     </Border>
 
-                    <TextBlock x:Name="txtNomeAluno" Text="Nome do Aluno" Foreground="White" FontSize="30" FontWeight="SemiBold"
+                    <TextBlock x:Name="txtNomeAluno" Text="Nome do Funcionário" Foreground="White" FontSize="30" FontWeight="SemiBold"
                                DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
-                    <TextBlock Text="Seja Bem vindo(a)" Foreground="#d0bfff" FontSize="23" FontWeight="SemiBold"
+                    <TextBlock Text="Seja Bem vindo(a)" Foreground="#FFFFD9BF" FontSize="23" FontWeight="SemiBold"
                                DockPanel.Dock="Top" TextAlignment="Center" />
 
                     <Separator Background="#FFA995E6" Margin="50" DockPanel.Dock="Top" Height="0.8"/>
 
 
                     <StackPanel DockPanel.Dock="Top">
-                        <Button x:Name="btnInicio" Style="{StaticResource menuButton}" Width="284" Foreground="White" Background="#FF7A57E0" Click="Button_Click">
+                        <Button x:Name="btnInicio" Style="{StaticResource menuButton}" Width="284" Foreground="#FFFFBD9E" Background="#FFFFBD9E" Click="Button_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/Home-2-icon.png" Style="{StaticResource menuButtonIcon}" />
-                                <TextBlock Text ="Inicio" VerticalAlignment="Center"/>
+                                <Image Source="/Views/Aluno/casa.png" Style="{StaticResource menuButtonIcon}" />
+                                <TextBlock Text ="Cadastrar Avisos" VerticalAlignment="Center" Foreground="White"/>
 
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnPlano" Style="{StaticResource ResourceKey=menuButton}"  Width="278">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/Books-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
-                                <TextBlock Text ="Plano de Ensino" VerticalAlignment="Center" Width="168"/>
+                                <Image Source="/Views/Aluno/aluno.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <TextBlock Text ="Aluno" VerticalAlignment="Center" Width="168" Foreground="#FFFFF2ED"/>
 
                             </StackPanel>
                         </Button>
-                        <Button x:Name="btnConsultas" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
+                        <Button x:Name="btnConsultas" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FFFFBD9E">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/Magnifier-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
-                                <TextBlock Text ="Consultar Faltas" VerticalAlignment="Center" FontSize="20"/>
+                                <Image Source="/Views/Aluno/Office-Customer-Male-Light-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <TextBlock Text ="Professor" VerticalAlignment="Center" FontSize="20"/>
 
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnSolicitacoes" Style="{StaticResource ResourceKey=menuButton}" Width="270" >
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/mail-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
-                                <TextBlock Text ="Solicitações" VerticalAlignment="Center"/>
+                                <Image Source="/Views/Aluno/curso.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <TextBlock Text ="Curso " VerticalAlignment="Center" Foreground="#FFFFF2ED"/>
 
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
+                        <Button Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FFFFBD9E">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/Books-2-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
-                                <TextBlock Text ="Notas" VerticalAlignment="Center"/>
+                                <Image Source="/Views/Aluno/disciplina.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <TextBlock Text ="Disciplina" VerticalAlignment="Center"/>
 
                             </StackPanel>
                         </Button>
@@ -92,18 +92,14 @@
         <Button Style="{StaticResource ResourceKey=menuButton}" Width="NaN" Margin="0,1001,130,19" >
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Views/Aluno/User-Interface-Logout-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" Height="21" Width="22" />
-                <TextBlock Text ="Sair" VerticalAlignment="Center" FontSize="19" Margin="-20 0 0 0 " />
+                <TextBlock Text ="Sair" VerticalAlignment="Center" FontSize="19" Margin="-20 0 0 0 " Foreground="#FFFFCEC0" />
 
             </StackPanel>
         </Button>
-        <TextBlock x:Name="txtNomeAluno_Copy" Text="Ciclo:" Foreground="White" FontSize="20" FontWeight="SemiBold"
-            TextAlignment="Center" Margin="15,916,304,124"/>
         <Separator Background="#FFA995E6" Margin="50,871,50,208"/>
         <TextBlock x:Name="txtNomeAluno_Copy1" Text="RA:" Foreground="White" FontSize="20" FontWeight="SemiBold"
             TextAlignment="Center" Margin="10,961,309,79"/>
-        <TextBlock x:Name="txtSemestre" Text="Semestre" Foreground="#d0bfff" FontSize="18" FontWeight="SemiBold"
-            TextAlignment="Left" Margin="96,918,1511,123" Grid.ColumnSpan="2" />
-        <TextBlock x:Name="txtRA" Text="Numero do RA" Foreground="#d0bfff" FontSize="18" FontWeight="SemiBold"
+        <TextBlock x:Name="txtRA" Text="Numero do RA" Foreground="#FFFFD9BF" FontSize="18" FontWeight="SemiBold"
             TextAlignment="Left" Margin="96,963,1511,78" Grid.ColumnSpan="2" />
         <Grid HorizontalAlignment="Left" Height="1070" Margin="390,10,0,0" VerticalAlignment="Top" Width="1520" Grid.ColumnSpan="2" d:IsHidden="True">
             <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="32,260,0,0" VerticalAlignment="Top" Width="1070" Background="White" CornerRadius="10,10,10,10">
@@ -219,3 +215,4 @@
     </Grid>
 
 </Window>
+

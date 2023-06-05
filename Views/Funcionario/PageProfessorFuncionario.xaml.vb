@@ -1,0 +1,3 @@
+﻿Class PageProfessorFuncionario
+
+End Class

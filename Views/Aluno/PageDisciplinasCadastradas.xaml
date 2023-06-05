@@ -6,10 +6,56 @@
       xmlns:local="clr-namespace:SIGAWPF"
       mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
-      Title="DisciplinasCadastradas" Background="White">
+      Title="DisciplinasCadastradas" Background="#FFECECEC">
     <Grid Width="1520" Height="1070">
-        <DataGrid x:Name="DisciplinasAlunoDataGrid" Margin="360,235,360,235" Width="800" Height="600">
-        </DataGrid>
+        <Grid HorizontalAlignment="Left" Height="1070" Margin="10,0,0,0" VerticalAlignment="Center" Width="1520">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48*"/>
+                <ColumnDefinition Width="47*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="#FFA09F9F" BorderThickness="0,0,0,3" HorizontalAlignment="Left" Height="55" Margin="43,168,0,0" VerticalAlignment="Top" Width="1376" Background="#FFECECEC" Grid.ColumnSpan="2">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btnHorario" Content="Horario" Width="150" HorizontalContentAlignment="Center" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Foreground="#FF8C8C8C">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#FF623ED0" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button x:Name="btnDisciplinas" Content="Minhas Disciplinas" Grid.Column="1" Width="200" HorizontalContentAlignment="Center" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Foreground="#FF8C8C8C"/>
+                    <Button x:Name="btnProvas" Content="Provas" Grid.Column="2" Width="180" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Foreground="#FF8C8C8C"/>
+                </Grid>
+            </Border>
+            <Grid HorizontalAlignment="Left" Height="147" Margin="27,58,0,0" VerticalAlignment="Top" Width="1493" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="209*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="46*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="1238*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblTitulo" Content="Minhas Disciplinas" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="114" Width="736" FontSize="52" Foreground="#FB7A07B3" Grid.ColumnSpan="11"/>
+            </Grid>
+            <Image Margin="545,0,-5,934" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill" Grid.Column="1"/>
+
+        </Grid>
+        <Frame x:Name="Frame" Content="Frame" HorizontalAlignment="Center" Height="842" Margin="0,228,0,0" VerticalAlignment="Top" Width="1520"/>
 
     </Grid>
 </Page>

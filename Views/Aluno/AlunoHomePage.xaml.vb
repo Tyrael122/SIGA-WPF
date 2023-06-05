@@ -2,14 +2,17 @@
     Implements IView
 
     Private Presenter As New PresenterAlunoHomePage(Me)
-    Private DAL As New DAL()
+
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        Dim loginCampo As String = "Login"
-        Dim user = DAL.SelectFields(Table.Aluno, loginCampo)
-        If user.Count > 0 AndAlso user(0).ContainsKey(loginCampo) Then
-            Dim loginString As String = user(0)(loginCampo)
-            txtNomeAluno.Text = loginString
+        Dim valorCampo As String = Presenter.CarregarDadosDoAluno("Login")
+        txtNomeAluno.Text = valorCampo
+        Dim imageBrush As ImageBrush = Presenter.CarregarImagemPerfilAluno()
+        If imageBrush IsNot Nothing Then
+            imgPerfil.Fill = imageBrush
+        Else
+            ' Caso não haja imagem, pode exibir uma imagem padrão ou limpar a imagem existente
+            imgPerfil.Fill = Brushes.Transparent
         End If
     End Sub
 
@@ -27,7 +30,6 @@
 
     Public Sub VerDisciplina_Click(sender As Object, e As EventArgs)
         Dim button As Button = CType(sender, Button)
-
         Presenter.ShowDisciplinaPage(button.Tag)
     End Sub
 
