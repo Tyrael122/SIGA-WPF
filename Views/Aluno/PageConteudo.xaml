@@ -1,4 +1,4 @@
-﻿<Page x:Class="PageConsultas"
+﻿<Page x:Class="PageConteudo"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -32,7 +32,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding FileName}" VerticalAlignment="Center" FontSize="18" />
-                                <Button Margin="10 0" Click="DownloadButton_Click" Tag="{Binding FilePath}" VerticalAlignment="Center">
+                                <Button Margin="10 0" Tag="{Binding FilePath}" VerticalAlignment="Center">
                                     <Button.Content>
                                         <TextBlock Text="Download" Foreground="Blue" Padding="8 4" />
                                     </Button.Content>

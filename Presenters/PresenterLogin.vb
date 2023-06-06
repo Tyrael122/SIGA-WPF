@@ -28,9 +28,9 @@
             Case Table.Aluno
                 Return New AlunoHomePage()
             Case Table.Professor
-                Return New ProfessorHomePage()
+                Return New TelaProfessor()
             Case Table.FuncionarioAdm
-                Return New FuncionarioHomePage()
+                Return New TelaFuncionario()
             Case Else
                 Throw New ArgumentException("Invalid table.")
         End Select

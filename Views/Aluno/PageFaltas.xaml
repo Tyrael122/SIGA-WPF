@@ -1,4 +1,4 @@
-﻿<Page x:Class="PageConsultas"
+﻿<Page x:Class="PageFaltas"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="1238*"/>
             </Grid.ColumnDefinitions>
             <Border BorderBrush="#FF4D3DBF" BorderThickness="0,0,0,3" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="195" Margin="36,89,0,0" VerticalAlignment="Top" Width="1229">
-                <Label x:Name="lblTitulo" Content="Veja suas faltas" HorizontalAlignment="Left" VerticalAlignment="Center" Height="114" Width="736" FontSize="70" Foreground="#FB7A07B3" Margin="36,0,0,0"/>
+                <Label Content="Veja suas faltas" HorizontalAlignment="Left" VerticalAlignment="Center" Height="114" Width="736" FontSize="70" Foreground="#FB7A07B3" Margin="36,0,0,0"/>
             </Border>
 
             <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" GridLinesVisibility="None" Background="Transparent" RowBackground="White" AlternatingRowBackground="WhiteSmoke" Margin="272,454,600,245" BorderBrush="LightGray" BorderThickness="1" RowHeight="30" Grid.Column="10">

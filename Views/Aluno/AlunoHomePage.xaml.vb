@@ -5,15 +5,15 @@
 
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        Dim valorCampo As String = Presenter.CarregarDadosDoAluno("Login")
-        txtNomeAluno.Text = valorCampo
-        Dim imageBrush As ImageBrush = Presenter.CarregarImagemPerfilAluno()
-        If imageBrush IsNot Nothing Then
-            imgPerfil.Fill = imageBrush
-        Else
-            ' Caso não haja imagem, pode exibir uma imagem padrão ou limpar a imagem existente
-            imgPerfil.Fill = Brushes.Transparent
-        End If
+        'Dim valorCampo As String = Presenter.CarregarDadosDoAluno("Login")
+        'txtNomeAluno.Text = valorCampo
+        'Dim imageBrush As ImageBrush = Presenter.CarregarImagemPerfilAluno()
+        'If imageBrush IsNot Nothing Then
+        '    imgPerfil.Fill = imageBrush
+        'Else
+        '    ' Caso não haja imagem, pode exibir uma imagem padrão ou limpar a imagem existente
+        '    imgPerfil.Fill = Brushes.Transparent
+        'End If
     End Sub
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
@@ -34,10 +34,10 @@
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-        contentFrame.Content = New PageInicio()
+        'contentFrame.Content = New PageInicio()
     End Sub
 
-    Private Sub btnPlano_Click(sender As Object, e As RoutedEventArgs) Handles btnPlano.Click
-        contentFrame.Content = New PageDisciplinasCadastradas()
-    End Sub
+    'Private Sub btnPlano_Click(sender As Object, e As RoutedEventArgs) Handles btnPlano.Click
+    '    contentFrame.Content = New PageDisciplinasCadastradas()
+    'End Sub
 End Class

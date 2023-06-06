@@ -18,27 +18,29 @@ Public Class PresenterFuncionario
         view.SetDataContext(ViewModelDisciplina)
     End Sub
 
-    Public Sub RegisterAluno(idsDisciplinasAluno As List(Of String))
-        Dim data = ViewModelAluno.ConvertToDictionary()
+    Public Sub RegisterAluno(idsDisciplinasAluno As IDictionary(Of String, Object))
+        'Dim data = ViewModelAluno.ConvertToDictionary()
 
-        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
-        ShowInfoMessage(hasInsertedSucessfully, "Aluno")
+        'Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
+        'ShowInfoMessage(hasInsertedSucessfully, "Aluno")
+
+        BusinessRules.Save(idsDisciplinasAluno, Table.Aluno)
     End Sub
 
     Friend Sub RegisterProfessor(idsDisciplinasProfessor As List(Of String))
-        Dim data = ViewModelProfessor.ConvertToDictionary()
+        'Dim data = ViewModelProfessor.ConvertToDictionary()
 
-        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
-        ShowInfoMessage(hasInsertedSucessfully, "Professor")
+        'Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
+        'ShowInfoMessage(hasInsertedSucessfully, "Professor")
     End Sub
 
     Friend Sub RegisterCurso(idsDisciplinasCurso As List(Of String))
-        Dim data = ViewModelCurso.ConvertToDictionary()
+        'Dim data = ViewModelCurso.ConvertToDictionary()
 
-        data("Turno") = [Enum].Parse(GetType(Turno), data("Turno"))
+        'data("Turno") = [Enum].Parse(GetType(Turno), data("Turno"))
 
-        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
-        ShowInfoMessage(hasInsertedSucessfully, "Curso")
+        'Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
+        'ShowInfoMessage(hasInsertedSucessfully, "Curso")
     End Sub
 
     Friend Sub RegisterDisciplina()
@@ -59,18 +61,18 @@ Public Class PresenterFuncionario
     End Sub
 
     Friend Sub UpdateAluno(idsDisciplinasAluno As List(Of String))
-        Dim idAluno = SessionCookie.GetCookie("IdAluno")
+        'Dim idAluno = SessionCookie.GetCookie("IdAluno")
 
-        BusinessRules.DeleteDisciplinasAluno(idAluno)
+        'BusinessRules.DeleteDisciplinasAluno(idAluno)
 
-        Dim data = ViewModelAluno.ConvertToDictionary()
+        'Dim data = ViewModelAluno.ConvertToDictionary()
 
-        data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = data("Curso")).First()("Id")
+        'data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = data("Curso")).First()("Id")
 
-        Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
-        ShowInfoMessage(hasInsertedSucessfully, "Aluno")
+        'Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
+        'ShowInfoMessage(hasInsertedSucessfully, "Aluno")
 
-        ViewModelAluno.Clear()
+        'ViewModelAluno.Clear()
     End Sub
 
     Public Sub CarregarAlunoParaEdicao(idAluno As String)

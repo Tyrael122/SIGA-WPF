@@ -16,7 +16,7 @@
     End Sub
 
     Private Sub PageDisciplinasCadastradas_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        DisciplinasAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas().DefaultView
+        'DisciplinasAlunoDataGrid.ItemsSource = Presenter.GetDisciplinasCadastradas().DefaultView
     End Sub
 
     Private Sub PageDisciplinasCadastradas_Loaded_1(sender As Object, e As RoutedEventArgs) Handles MyBase.Loaded
