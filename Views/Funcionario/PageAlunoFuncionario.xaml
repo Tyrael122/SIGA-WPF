@@ -111,8 +111,7 @@
                         <TextBox x:Name="txtLogin1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Password}"/>
                     </Border>
                     <Label Content="Selecione o curso" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="302" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,477,0,0" FontSize="30"/>
-                    <ComboBox x:Name="cmbCursos" HorizontalAlignment="Left" Margin="226,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC" Text="{Binding Curso}">
-                    </ComboBox>
+                    <ComboBox x:Name="cmbCursos" HorizontalAlignment="Left" Margin="226,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC" SelectedItem="{Binding Curso}"/>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="960,395,0,0"/>
                     <Button x:Name="btnImage" Content="" HorizontalAlignment="Left" Margin="1034,472,0,0" VerticalAlignment="Top" Height="147" Width="186" BorderBrush="{x:Null}">
                         <Button.Background>
@@ -143,7 +142,7 @@
             <TabItem Header="Editar" Margin="676,4,-676,-4" Foreground="#FFB15225">
                 <!-- Conteúdo da aba "Editar" -->
                 <Grid Height="790" Margin="-4,0,4,0">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
+                    <DataGrid AutoGenerateColumns="False" x:Name="dataGridAlunos" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="Transparent" />
@@ -162,8 +161,8 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Nº" Binding="{Binding Numero}" Width="100"/>
-                            <DataGridTextColumn Header="Aluno" Binding="{Binding Aluno}" Width="1000" />
+                            <DataGridTextColumn Header="Nº" Binding="{Binding Id}" Width="100"/>
+                            <DataGridTextColumn Header="Aluno" Binding="{Binding Login}" Width="1000" />
                             <DataGridTemplateColumn Header="Apagar" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

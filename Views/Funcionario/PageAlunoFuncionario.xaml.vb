@@ -13,6 +13,8 @@
 
     Private Sub PageAlunoFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         cmbCursos.ItemsSource = Presenter.LoadCursosAlunoComboBox()
+
+        dataGridAlunos.ItemsSource = Presenter.GetDataTable("Aluno").DefaultView
     End Sub
 
     Private Sub cmbCursos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursos.SelectionChanged
