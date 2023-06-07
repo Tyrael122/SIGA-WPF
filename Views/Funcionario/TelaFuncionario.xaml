@@ -1,12 +1,11 @@
-﻿<Window x:Class="TelaFuncionario"
+﻿<local:WindowModel x:Class="TelaFuncionario"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIGAWPF"
         mc:Ignorable="d" Height="1080" Width="1920" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" AllowsTransparency='True' Background="#FFECECEC">
+        WindowStyle="None" AllowsTransparency='True' Background="#FFECECEC" Loaded="WindowModel_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,7 +22,6 @@
                 <Button.Background>
                     <ImageBrush ImageSource="/Views/Aluno/menu-icon.png"/>
                 </Button.Background>
-
             </Button>
 
             <Border Grid.Row="1" Background="#FFFF8B5F" CornerRadius="0 100 0 60">
@@ -43,49 +41,44 @@
                                DockPanel.Dock="Top" TextAlignment="Center" />
 
                     <Separator Background="#FFA995E6" Margin="50" DockPanel.Dock="Top" Height="0.8"/>
-
-
+                    
                     <StackPanel DockPanel.Dock="Top">
-                        <Button Style="{StaticResource menuButton}" Width="284" Foreground="#FFFFBD9E" Background="#FFFFBD9E" >
+                        <Button x:Name="btnAvisos" Style="{StaticResource menuButton}" Width="284" Foreground="#FFFFBD9E" Background="#FFFFBD9E" >
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/casa.png" Style="{StaticResource menuButtonIcon}" />
-                                <TextBlock Text ="Cadastrar Avisos" VerticalAlignment="Center" Foreground="White"/>
+                                <Image Source="/Views/Funcionario/casa.png" Style="{StaticResource menuButtonIcon}" />
+                                <TextBlock Text ="Avisos" VerticalAlignment="Center" Foreground="White"/>
 
                             </StackPanel>
                         </Button>
-                        <Button x:Name="btnPlano" Style="{StaticResource ResourceKey=menuButton}"  Width="278">
+                        <Button x:Name="btnAluno" Style="{StaticResource ResourceKey=menuButton}"  Width="278">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/aluno.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <Image Source="/Views/Funcionario/aluno.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Aluno" VerticalAlignment="Center" Width="168" Foreground="#FFFFF2ED"/>
 
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FFFFBD9E">
+                        <Button x:Name="btnProfessor" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FFFFBD9E">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/Office-Customer-Male-Light-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <Image Source="/Views/Funcionario/Funcionario.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Professor" VerticalAlignment="Center" FontSize="20"/>
 
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource ResourceKey=menuButton}" Width="270" >
+                        <Button x:Name="btnCurso" Style="{StaticResource ResourceKey=menuButton}" Width="270" >
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/curso.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
-                                <TextBlock Text ="Curso " VerticalAlignment="Center" Foreground="#FFFFF2ED"/>
+                                <Image Source="/Views/Funcionario/curso.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <TextBlock Text ="Curso" VerticalAlignment="Center" Foreground="#FFFFF2ED"/>
 
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FFFFBD9E">
+                        <Button x:Name="btnDisciplina" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FFFFBD9E">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Views/Aluno/disciplina.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <Image Source="/Views/Funcionario/disciplina.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Disciplina" VerticalAlignment="Center"/>
 
                             </StackPanel>
                         </Button>
-
-
                     </StackPanel>
-
-
                 </DockPanel>
             </Border>
         </Grid>
@@ -93,126 +86,12 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Views/Aluno/User-Interface-Logout-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" Height="21" Width="22" />
                 <TextBlock Text ="Sair" VerticalAlignment="Center" FontSize="19" Margin="-20 0 0 0 " Foreground="#FFFFCEC0" />
-
             </StackPanel>
         </Button>
         <Separator Background="#FFA995E6" Margin="50,871,50,208"/>
-        <TextBlock x:Name="txtNomeAluno_Copy1" Text="RA:" Foreground="White" FontSize="20" FontWeight="SemiBold"
+        <TextBlock x:Name="txtNomeAluno_Copy1" Text="ID:" Foreground="White" FontSize="20" FontWeight="SemiBold"
             TextAlignment="Center" Margin="10,961,309,79"/>
-        <TextBlock Text="Numero do RA" Foreground="#FFFFD9BF" FontSize="18" FontWeight="SemiBold"
-            TextAlignment="Left" Margin="96,963,1511,78" Grid.ColumnSpan="2" />
-        <Grid HorizontalAlignment="Left" Height="1070" Margin="390,10,0,0" VerticalAlignment="Top" Width="1520" Grid.ColumnSpan="2" d:IsHidden="True">
-            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="32,260,0,0" VerticalAlignment="Top" Width="1070" Background="White" CornerRadius="10,10,10,10">
-                <Button Content="• Ver Calendario" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="252" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Margin="466,30,0,0">
-                    <Button.Background>
-                        <ImageBrush/>
-                    </Button.Background>
-                </Button>
-            </Border>
-            <Label Content="Veja suas disciplinas" HorizontalAlignment="Left" Height="94" Margin="32,0,0,0" VerticalAlignment="Center" Width="493" FontSize="52"/>
-            <Button Content="• Ver Disciplinas" HorizontalAlignment="Left" Height="46" Margin="508,0,0,0" VerticalAlignment="Center" Width="252" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28">
-                <Button.Background>
-                    <ImageBrush/>
-                </Button.Background>
-            </Button>
-            <Grid HorizontalAlignment="Left" Height="147" Margin="32,113,0,0" VerticalAlignment="Top" Width="1493">
-                <Label Content="Olá" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="114" Width="126" FontSize="52"/>
-                <Label Content="Aluno" HorizontalAlignment="Left" Margin="113,0,0,0" VerticalAlignment="Center" Height="114" Width="164" FontSize="52"/>
-                <Label Content=", veja seus compromissos" HorizontalAlignment="Left" Margin="253,0,0,0" VerticalAlignment="Center" Height="114" Width="704" FontSize="52"/>
-            </Grid>
-            <Image Margin="1313,0,-5,934" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
-            <Grid HorizontalAlignment="Left" Height="180" Margin="32,587,0,0" VerticalAlignment="Top" Width="640">
-                <Border BorderThickness="1" HorizontalAlignment="Center" Height="180" VerticalAlignment="Center" Width="640" Background="White">
-                    <Rectangle HorizontalAlignment="Left" Height="179" VerticalAlignment="Center" Width="224" Fill="#FFDC8F8F" Opacity="0.6"/>
-                </Border>
-                <Label Content="Nome da Disciplina" HorizontalAlignment="Left" Margin="246,22,0,0" VerticalAlignment="Top" Width="290" Height="36" FontSize="20"/>
-                <Image HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="224" Source="/Views/Images/Tablet-ou-notebook-qual-escolher-para-estudar_-768x512-1-removebg-preview-ConversImagem.png" Opacity="0.4" Margin="0,-5,0,0"/>
-                <Label Content="Siga da Disciplina" HorizontalAlignment="Left" Height="34" Margin="246,50,0,0" VerticalAlignment="Top" Width="176" Background="White" Foreground="#FF636363" FontWeight="Bold" FontSize="14"/>
-                <Label Content="Nome do curso" HorizontalAlignment="Left" Height="32" Margin="246,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Label Content="| Tecnólogo" HorizontalAlignment="Left" Height="32" Margin="353,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Button Margin="336,120,234,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Images/calendar-icon-ConversImagem.png" Width="32" Height="32"/>
-                        <TextBlock Text="Ver Notas" HorizontalAlignment="Center" FontSize="8" Foreground="#FF8A8A8A"/>
-                    </StackPanel>
-                </Button>
-                <Button Margin="442,120,128,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Icons/Documents-icon-ConversImagem.png" Width="26" Height="32"/>
-                        <TextBlock Text="Ver Conteúdo" HorizontalAlignment="Center" FontSize="8" Foreground="#FF7D7D7D"/>
-                    </StackPanel>
-                </Button>
-            </Grid>
-            <Grid HorizontalAlignment="Left" Height="180" Margin="32,831,0,0" VerticalAlignment="Top" Width="640">
-                <Border BorderThickness="1" HorizontalAlignment="Center" Height="180" VerticalAlignment="Center" Width="640" Background="White">
-                    <Rectangle HorizontalAlignment="Left" Height="179" VerticalAlignment="Center" Width="224" Fill="#FF42653F" Opacity="0.6"/>
-                </Border>
-                <Label Content="Nome da Disciplina" HorizontalAlignment="Left" Margin="246,22,0,0" VerticalAlignment="Top" Width="290" Height="36" FontSize="20"/>
-                <Image HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="224" Source="/Views/Images/Tablet-ou-notebook-qual-escolher-para-estudar_-768x512-1-removebg-preview-ConversImagem.png" Opacity="0.4" Margin="0,-5,0,0"/>
-                <Label Content="Siga da Disciplina" HorizontalAlignment="Left" Height="34" Margin="246,50,0,0" VerticalAlignment="Top" Width="176" Background="White" Foreground="#FF636363" FontWeight="Bold" FontSize="14"/>
-                <Label Content="Nome do curso" HorizontalAlignment="Left" Height="32" Margin="246,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Label Content="| Tecnólogo" HorizontalAlignment="Left" Height="32" Margin="353,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Button Margin="336,120,234,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Images/calendar-icon-ConversImagem.png" Width="32" Height="32"/>
-                        <TextBlock Text="Ver Notas" HorizontalAlignment="Center" FontSize="8" Foreground="#FF8A8A8A"/>
-                    </StackPanel>
-                </Button>
-                <Button Margin="442,120,128,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Icons/Documents-icon-ConversImagem.png" Width="26" Height="32"/>
-                        <TextBlock Text="Ver Conteúdo" HorizontalAlignment="Center" FontSize="8" Foreground="#FF7D7D7D"/>
-                    </StackPanel>
-                </Button>
-            </Grid>
-            <Grid HorizontalAlignment="Left" Height="180" Margin="760,587,0,0" VerticalAlignment="Top" Width="640">
-                <Border BorderThickness="1" HorizontalAlignment="Center" Height="180" VerticalAlignment="Center" Width="640" Background="White">
-                    <Rectangle HorizontalAlignment="Left" Height="179" VerticalAlignment="Center" Width="224" Fill="#FFD4C76F" Opacity="0.6"/>
-                </Border>
-                <Label Content="Nome da Disciplina" HorizontalAlignment="Left" Margin="246,22,0,0" VerticalAlignment="Top" Width="290" Height="36" FontSize="20"/>
-                <Image HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="224" Source="/Views/Images/Tablet-ou-notebook-qual-escolher-para-estudar_-768x512-1-removebg-preview-ConversImagem.png" Opacity="0.4" Margin="0,-5,0,0"/>
-                <Label Content="Siga da Disciplina" HorizontalAlignment="Left" Height="34" Margin="246,50,0,0" VerticalAlignment="Top" Width="176" Background="White" Foreground="#FF636363" FontWeight="Bold" FontSize="14"/>
-                <Label Content="Nome do curso" HorizontalAlignment="Left" Height="32" Margin="246,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Label Content="| Tecnólogo" HorizontalAlignment="Left" Height="32" Margin="353,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Button Margin="336,120,234,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Images/calendar-icon-ConversImagem.png" Width="32" Height="32"/>
-                        <TextBlock Text="Ver Notas" HorizontalAlignment="Center" FontSize="8" Foreground="#FF8A8A8A"/>
-                    </StackPanel>
-                </Button>
-                <Button Margin="442,120,128,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Icons/Documents-icon-ConversImagem.png" Width="26" Height="32"/>
-                        <TextBlock Text="Ver Conteúdo" HorizontalAlignment="Center" FontSize="8" Foreground="#FF7D7D7D"/>
-                    </StackPanel>
-                </Button>
-            </Grid>
-            <Grid HorizontalAlignment="Left" Height="180" Margin="760,831,0,0" VerticalAlignment="Top" Width="640">
-                <Border BorderThickness="1" HorizontalAlignment="Center" Height="180" VerticalAlignment="Center" Width="640" Background="White">
-                    <Rectangle HorizontalAlignment="Left" Height="179" VerticalAlignment="Center" Width="224" Fill="#FF9F8FDC" Opacity="0.6"/>
-                </Border>
-                <Label Content="Nome da Disciplina" HorizontalAlignment="Left" Margin="246,22,0,0" VerticalAlignment="Top" Width="290" Height="36" FontSize="20"/>
-                <Image HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="224" Source="/Views/Images/Tablet-ou-notebook-qual-escolher-para-estudar_-768x512-1-removebg-preview-ConversImagem.png" Opacity="0.4" Margin="0,-5,0,0"/>
-                <Label Content="Siga da Disciplina" HorizontalAlignment="Left" Height="34" Margin="246,50,0,0" VerticalAlignment="Top" Width="176" Background="White" Foreground="#FF636363" FontWeight="Bold" FontSize="14"/>
-                <Label Content="Nome do curso" HorizontalAlignment="Left" Height="32" Margin="246,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Label Content="| Tecnólogo" HorizontalAlignment="Left" Height="32" Margin="353,0,0,0" VerticalAlignment="Center" Width="107" Background="White" Foreground="#FFC3C3C3" FontSize="14"/>
-                <Button Margin="336,120,234,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Images/calendar-icon-ConversImagem.png" Width="32" Height="32"/>
-                        <TextBlock Text="Ver Notas" HorizontalAlignment="Center" FontSize="8" Foreground="#FF8A8A8A"/>
-                    </StackPanel>
-                </Button>
-                <Button Margin="442,120,128,10" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Image Source="/Views/Icons/Documents-icon-ConversImagem.png" Width="26" Height="32"/>
-                        <TextBlock Text="Ver Conteúdo" HorizontalAlignment="Center" FontSize="8" Foreground="#FF7D7D7D"/>
-                    </StackPanel>
-                </Button>
-            </Grid>
-        </Grid>
-        <Frame x:Name="contentFrame" Grid.Column="1" Content="Frame" Margin="0,10,0,0"/>
-
+        <Frame x:Name="mainFrame" Grid.Column="1" Margin="0,10,0,0" NavigationUIVisibility="Hidden"/>
     </Grid>
-
-</Window>
+</local:WindowModel>
 

@@ -59,9 +59,9 @@
             <ComboBoxItem Content="Funcionário administrativo"/>
         </ComboBox>
         <Label Content="Email ou usuário:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="347,466,337,574"/>
-        <TextBox Style="{StaticResource PlaceholderTextBox}" x:Name="txtLogin" HorizontalAlignment="Center" Margin="0,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="599" Height="35" Background="#FF252525" BorderBrush="White" BorderThickness="0,0,0,1" Cursor="" FontSize="20" Foreground="#FF8C8C8C"/>
+        <TextBox Style="{StaticResource PlaceholderTextBox}" x:Name="txtLogin" HorizontalAlignment="Center" Margin="0,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="599" Height="35" Background="#FF252525" BorderBrush="White" BorderThickness="0,0,0,1" Cursor="" FontSize="20" Foreground="#FF8C8C8C" TabIndex="1"/>
         <Label Content="Senha:" FontFamily="Arial" FontSize="22" Foreground="#FFD8D8D8" FontWeight="Bold" Margin="347,570,464,470"/>
-        <Button x:Name="btnLogin" Content="Entrar" HorizontalAlignment="Left" Margin="339,709,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FF0A78BE" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
+        <Button x:Name="btnLogin" Content="Entrar" HorizontalAlignment="Left" Margin="339,709,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FF0A78BE" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White" TabIndex="3">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="32" Background="#FF009CFF">
@@ -81,7 +81,7 @@
         </Rectangle>
         <Label x:Name="lblInfo" HorizontalAlignment="Left" Margin="354,651,0,0" VerticalAlignment="Top" Height="53" Width="588" Foreground="White" FontSize="18"/>
         <TextBox x:Name="txtVisiblePassword" HorizontalAlignment="Left" Margin="360,610,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="36" Background="Transparent" BorderBrush="#FFABADB3" Foreground="#FF888888" FontSize="20" BorderThickness="0,0,0,1"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="354,610,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="354,610,0,0" VerticalAlignment="Top" Width="600" Background="#FF252525" BorderThickness="0,0,0,1" Foreground="#FF888888" Height="36" FontSize="20" TabIndex="2"/>
         <Label Content="Bem vindo (a)" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Width="172" Background="Transparent" FontFamily="Arial" Height="50" FontSize="24" Foreground="#FF929292"/>
         <Label HorizontalAlignment="Left" Margin="459,295,0,0" VerticalAlignment="Top" Height="51" Width="398" Content="Faça o Login em sua conta" Background="Transparent" FontFamily="Arial" FontSize="30" Foreground="White" FontWeight="Bold"/>
         <Button x:Name="btnViewPassword" HorizontalAlignment="Left" Margin="910,605,0,0" VerticalAlignment="Top" Width="32" Height="28" Padding="0,0,0,0" BorderBrush="#FF252525" RenderTransformOrigin="0.25,0.573">

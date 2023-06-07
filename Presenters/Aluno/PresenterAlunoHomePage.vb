@@ -19,7 +19,7 @@ Public Class PresenterAlunoHomePage
 
     Friend Sub ShowDisciplinaPage(idDisciplina As String)
         SessionCookie.AddCookie("idDisciplina", idDisciplina)
-        Call New DisciplinaAlunoPage().Show()
+        'Call New DisciplinaAlunoPage().Show()
     End Sub
 
     Friend Function CarregarDadosDoAluno(v As String) As String

@@ -42,7 +42,7 @@ Public Class PresenterAlunoDisciplina
     End Function
     Friend Sub ShowDisciplinaPage(idDisciplina As String)
         SessionCookie.AddCookie("idDisciplina", idDisciplina)
-        Call New DisciplinaAlunoPage().Show()
+        'Call New DisciplinaAlunoPage().Show()
     End Sub
 
     Friend Function GetNotasDisciplina() As DataTable

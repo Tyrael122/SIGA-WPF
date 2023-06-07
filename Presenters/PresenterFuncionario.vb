@@ -53,7 +53,7 @@ Public Class PresenterFuncionario
     Friend Sub ShowCursoPage(idCurso As String)
         SessionCookie.AddCookie("IdCurso", idCurso)
 
-        Call New CursoPage().Show()
+        'Call New CursoPage().Show()
     End Sub
 
     Friend Sub DeleteAluno(idAluno As String)

@@ -53,14 +53,14 @@
 
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource ResourceKey=menuButton}"  Width="278">
+                        <Button x:Name="btnPlanoEnsino" Style="{StaticResource ResourceKey=menuButton}"  Width="278">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Views/Aluno/Books-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Plano de Ensino" VerticalAlignment="Center" Width="168"/>
 
                             </StackPanel>
                         </Button>
-                        <Button x:Name="btnConsultas" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
+                        <Button x:Name="btnConsultarFaltas" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Views/Aluno/Magnifier-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Consultar Faltas" VerticalAlignment="Center" FontSize="20"/>
@@ -74,7 +74,7 @@
 
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
+                        <Button x:Name="btnNotas" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FF7A57E0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Views/Aluno/Books-2-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Notas" VerticalAlignment="Center"/>
@@ -214,8 +214,6 @@
                 </Button>
             </Grid>
         </Grid>
-        <Frame Grid.Column="1" Content="Frame" Margin="0,10,0,0"/>
-
+        <Frame x:Name="mainFrame" Grid.Column="1" Margin="0,10,0,0" NavigationUIVisibility="Hidden"/>
     </Grid>
-
 </Window>

@@ -1,3 +1,3 @@
-﻿Class PagePresença
+﻿Class PagePresenca
 
 End Class

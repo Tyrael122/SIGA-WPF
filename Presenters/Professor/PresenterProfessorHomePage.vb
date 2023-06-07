@@ -14,7 +14,7 @@ Public Class PresenterProfessorHomePage
     Friend Sub ShowDisciplinaPage(idDisciplina As String)
         SessionCookie.AddCookie("idDisciplina", idDisciplina)
 
-        Call New DisciplinaProfessorPage().Show()
+        'Call New DisciplinaProfessorPage().Show()
     End Sub
 
     Friend Function GetDisciplinasCadastradas() As DataTable

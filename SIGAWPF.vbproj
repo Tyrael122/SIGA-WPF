@@ -19,25 +19,57 @@
     <None Remove="key-icon.png" />
     <None Remove="user-icon.png" />
     <None Remove="Views\5137894 %281%29.jpg" />
+    <None Remove="Views\Aluno\Banner super desconto para loja online azul e branco.png" />
     <None Remove="Views\Aluno\Books-2-icon.png" />
     <None Remove="Views\Aluno\Books-icon.png" />
+    <None Remove="Views\Aluno\casa.png" />
+    <None Remove="Views\Aluno\curso.png" />
+    <None Remove="Views\Aluno\disciplina.png" />
+    <None Remove="Views\Aluno\header-tamanho-de-banner.png" />
     <None Remove="Views\Aluno\Home-2-icon.png" />
     <None Remove="Views\Aluno\Magnifier-icon.png" />
     <None Remove="Views\Aluno\mail-icon.png" />
     <None Remove="Views\Aluno\menu-icon.png" />
+    <None Remove="Views\Aluno\Office-Customer-Male-Light-icon.png" />
     <None Remove="Views\Aluno\user-icon-removebg-preview.png" />
     <None Remove="Views\Aluno\User-Interface-Logout-icon.png" />
     <None Remove="Views\ArrowBack.png" />
     <None Remove="Views\fatec-identidade-removebg-preview.png" />
     <None Remove="Views\FatecLogo.png" />
+    <None Remove="Views\Funcionario\aluno.png" />
+    <None Remove="Views\Funcionario\casa.png" />
+    <None Remove="Views\Funcionario\curso.png" />
+    <None Remove="Views\Funcionario\disciplina.png" />
+    <None Remove="Views\Funcionario\Funcionario.png" />
     <None Remove="Views\Funcionario\ViewPassword.png" />
     <None Remove="Views\Icons\ArrowBack.png" />
     <None Remove="Views\Icons\ViewPassword.png" />
     <None Remove="Views\menu-icon.png" />
-    <None Remove="Views\Login\5137894.jpg" />
-    <None Remove="Views\Login\FatecLogo.png" />
-    <None Remove="Views\Login\ViewPassword.png" />
+    <None Remove="Views\Segurança\5137894.jpg" />
+    <None Remove="Views\Segurança\FatecLogo.png" />
+    <None Remove="Views\Segurança\ViewPassword.png" />
     <None Remove="Views\user-icon-removebg-preview.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Aluno\Banner super desconto para loja online azul e branco.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\casa.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\curso.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\disciplina.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\header-tamanho-de-banner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\Office-Customer-Male-Light-icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -58,29 +90,40 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Aluno\DisciplinaAlunoPage.xaml.vb">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Views\Aluno\Books-2-icon.png" />
-    <Resource Include="Views\Aluno\Books-icon.png" />
-    <Resource Include="Views\Aluno\Home-2-icon.png" />
-    <Resource Include="Views\Aluno\Magnifier-icon.png" />
-    <Resource Include="Views\Aluno\mail-icon.png" />
-    <Resource Include="Views\Aluno\menu-icon.png" />
+    <Resource Include="Views\Aluno\Books-2-icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\Books-icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\Home-2-icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\Magnifier-icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\mail-icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Aluno\menu-icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Aluno\user-icon-removebg-preview.png" />
     <Resource Include="Views\Aluno\User-Interface-Logout-icon.png" />
+    <Resource Include="Views\Funcionario\aluno.png" />
+    <Resource Include="Views\Funcionario\casa.png" />
+    <Resource Include="Views\Funcionario\curso.png" />
+    <Resource Include="Views\Funcionario\disciplina.png" />
+    <Resource Include="Views\Funcionario\Funcionario.png" />
     <Resource Include="Views\Funcionario\ViewPassword.png" />
-    <Resource Include="Views\Login\5137894.jpg" />
-    <Resource Include="Views\Login\ViewPassword.png" />
+    <Resource Include="Views\Segurança\5137894.jpg" />
+    <Resource Include="Views\Segurança\ViewPassword.png" />
     <Resource Include="Views\ViewPassword.png" />
     <Resource Include="Views\Images\fatec-identidade-removebg-preview.png" />
     <Resource Include="Views\Images\FatecLogo.png" />
     <Resource Include="Views\Icons\menu-icon.png" />
     <Resource Include="Views\Icons\user-icon-removebg-preview.png" />
-    <Resource Include="Views\Login\FatecLogo.png" />
+    <Resource Include="Views\Segurança\FatecLogo.png" />
   </ItemGroup>
 
 </Project>

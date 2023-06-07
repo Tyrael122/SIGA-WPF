@@ -5,6 +5,8 @@
 
 
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        mainFrame.Content = New PageInicioAluno()
+
         'Dim valorCampo As String = Presenter.CarregarDadosDoAluno("Login")
         'txtNomeAluno.Text = valorCampo
         'Dim imageBrush As ImageBrush = Presenter.CarregarImagemPerfilAluno()
@@ -34,10 +36,22 @@
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-        'contentFrame.Content = New PageInicio()
+        mainFrame.Content = New PageInicioAluno()
     End Sub
 
-    'Private Sub btnPlano_Click(sender As Object, e As RoutedEventArgs) Handles btnPlano.Click
-    '    contentFrame.Content = New PageDisciplinasCadastradas()
-    'End Sub
+    Private Sub btnPlanoEnsino_Click(sender As Object, e As RoutedEventArgs) Handles btnPlanoEnsino.Click
+
+    End Sub
+
+    Private Sub btnConsultarFaltas_Click(sender As Object, e As RoutedEventArgs) Handles btnConsultarFaltas.Click
+        mainFrame.Content = New PageFaltas()
+    End Sub
+
+    Private Sub btnSolicitacoes_Click(sender As Object, e As RoutedEventArgs) Handles btnSolicitacoes.Click
+        mainFrame.Content = New PageSolicitacoes()
+    End Sub
+
+    Private Sub btnNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnNotas.Click
+        mainFrame.Content = New PageNotas()
+    End Sub
 End Class

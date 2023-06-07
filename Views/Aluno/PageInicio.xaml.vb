@@ -1,3 +1,0 @@
-﻿Class PageInicio
-
-End Class

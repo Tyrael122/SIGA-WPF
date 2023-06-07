@@ -1,3 +1,0 @@
-﻿Class PageDisciplinaFuncionario
-
-End Class
