@@ -2,12 +2,12 @@
     Inherits UserViewModel
 
     Private _curso As String
-    Public Property Curso As String
+    Public Property Curso As Object
         Get
             Return _curso
         End Get
-        Set(value As String)
-            _curso = value
+        Set(value As Object)
+            _curso = value.Tag
             OnPropertyChanged(NameOf(Curso))
         End Set
     End Property

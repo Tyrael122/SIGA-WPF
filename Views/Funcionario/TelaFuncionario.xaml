@@ -35,10 +35,10 @@
                         </Ellipse>
                     </Border>
 
-                    <TextBlock x:Name="txtNomeAluno" Text="Nome do Funcionário" Foreground="White" FontSize="30" FontWeight="SemiBold"
+                    <TextBlock Text="Nome do Funcionário" Foreground="White" FontSize="30" FontWeight="SemiBold"
                                DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
                     <TextBlock Text="Seja Bem vindo(a)" Foreground="#FFFFD9BF" FontSize="23" FontWeight="SemiBold"
-                               DockPanel.Dock="Top" TextAlignment="Center" />
+                               DockPanel.Dock="Top" TextAlignment="Center"/>
 
                     <Separator Background="#FFA995E6" Margin="50" DockPanel.Dock="Top" Height="0.8"/>
                     

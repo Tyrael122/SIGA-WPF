@@ -1,10 +1,10 @@
-﻿<Page x:Class="PageAlunoFuncionario"
+﻿<local:PageModel x:Class="PageAlunoFuncionario"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SIGAWPF"
-      mc:Ignorable="d" 
+                 mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageConsultas">
     <Grid Background="#FFECECEC">
@@ -75,7 +75,7 @@
             </TabControl.Resources>
             <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" Margin="863,195,209,419" BorderBrush="#FFCE331B">
+                    <DataGrid x:Name="dataGridDisciplinasAluno" CanUserAddRows="False" GridLinesVisibility="None" Margin="863,195,209,419" BorderBrush="#FFCE331B">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="Background" Value="Transparent" />
@@ -104,20 +104,14 @@
                     </Border>
                     <Label Content="Login:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,115,0,0"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="226,195,0,0" VerticalAlignment="Top" Width="413">
-                        <TextBox x:Name="txtLogin" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                        <TextBox x:Name="txtLogin" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Login}"/>
                     </Border>
                     <Label Content="Senha:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,292,0,0"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="46" Margin="226,0,0,0" VerticalAlignment="Center" Width="413">
-                        <TextBox x:Name="txtLogin1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                        <TextBox x:Name="txtLogin1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Password}"/>
                     </Border>
                     <Label Content="Selecione o curso" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="302" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,477,0,0" FontSize="30"/>
-                    <ComboBox x:Name="cmbSemestreInicio" HorizontalAlignment="Left" Margin="226,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC">
-                        <ComboBoxItem Content="1"/>
-                        <ComboBoxItem Content="2"/>
-                        <ComboBoxItem Content="3"/>
-                        <ComboBoxItem Content="4"/>
-                        <ComboBoxItem Content="5"/>
-                        <ComboBoxItem Content="6"/>
+                    <ComboBox x:Name="cmbCursos" HorizontalAlignment="Left" Margin="226,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC" Text="{Binding Curso}">
                     </ComboBox>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="960,395,0,0"/>
                     <Button x:Name="btnImage" Content="" HorizontalAlignment="Left" Margin="1034,472,0,0" VerticalAlignment="Top" Height="147" Width="186" BorderBrush="{x:Null}">
@@ -126,7 +120,7 @@
                         </Button.Background>
                     </Button>
                     <Label Content="Selecione o semestre de inicio:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="528" Foreground="#FFEF691B" FontWeight="Bold" Margin="576,477,0,0" FontSize="30"/>
-                    <ComboBox x:Name="cmbSemestreInicio_Copy" HorizontalAlignment="Left" Margin="576,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC">
+                    <ComboBox HorizontalAlignment="Left" Margin="576,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC" Text="{Binding SemestreInicio}">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
@@ -225,5 +219,5 @@
 
 
     </Grid>
-</Page>
+</local:PageModel>
 
