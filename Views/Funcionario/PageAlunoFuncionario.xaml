@@ -7,6 +7,39 @@
                  mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageConsultas">
+
+    <Page.Resources>
+        <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGrid">
+                        <ControlTemplate.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="#FFB15225" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="FontSize" Value="10" />
+                            </Style>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="Margin" Value="0 5" />
+                            </Style>
+                        </ControlTemplate.Resources>
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                                <Grid>
+                                    <DataGridColumnHeadersPresenter />
+                                    <ItemsPresenter />
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
             <Grid.ColumnDefinitions>
@@ -75,8 +108,11 @@
             </TabControl.Resources>
             <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
-                    <DataGrid x:Name="dataGridDisciplinasAluno" CanUserAddRows="False" GridLinesVisibility="None" Margin="863,195,209,419" BorderBrush="#FFCE331B">
-                        <DataGrid.Resources>
+                    <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
+                    <DataGrid x:Name="dataGridDisciplinasAluno" CanUserAddRows="False" GridLinesVisibility="None" 
+                              Margin="863,195,209,419" BorderBrush="#FFCE331B"
+                              Style="{StaticResource DefaultDataGridStyle}">
+                        <!--<DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="Background" Value="Transparent" />
                                 <Setter Property="Foreground" Value="#FFB15225" />
@@ -86,19 +122,12 @@
                             <Style TargetType="{x:Type DataGridCell}">
                                 <Setter Property="Margin" Value="0 5" />
                             </Style>
-                        </DataGrid.Resources>
+                        </DataGrid.Resources>-->
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Selecionar" Width="130">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsChecked="{Binding IsSelected}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridCheckBoxColumn Width="130" Header="Selecionar" Binding="{Binding IsChecked}"/>
                             <DataGridTextColumn Header="Disciplinas" Binding="{Binding Disciplina}" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
                     <Border BorderBrush="#FFDA8E58" BorderThickness="0,0,0,1" Margin="863,115,237,619">
                         <Label Content="Selecione as disciplinas:" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold"/>
                     </Border>
