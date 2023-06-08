@@ -18,16 +18,16 @@ Public Class PresenterProfessorDisciplina
         Return GenerateComboBoxItems(Function() GetAllProvas(), "Data", "Id")
     End Function
 
-    Public Function GetAllAlunosCadastrados() As DataTable
+    Public Function GetAllAlunosCadastrados() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
         Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
 
-        Return ConvertDictionaryToDataTable(alunosCadastrados)
+        Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 
-    Public Function GetAllPresencaAlunosCadastrados() As DataTable
+    Public Function GetAllPresencaAlunosCadastrados() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
@@ -55,7 +55,7 @@ Public Class PresenterProfessorDisciplina
             End If
         Next
 
-        Return ConvertDictionaryToDataTable(alunosCadastrados)
+        Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 
     Friend Sub RegisterProva()
@@ -180,6 +180,6 @@ Public Class PresenterProfessorDisciplina
             End If
         Next
 
-        Return ConvertDictionaryToDataTable(alunosCadastrados)
+        Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 End Class

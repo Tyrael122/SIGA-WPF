@@ -11,10 +11,10 @@ Public Class PresenterAlunoHomePage
         idAluno = SessionCookie.GetCookie("userId")
     End Sub
 
-    Friend Function GetDisciplinasCadastradas() As DataTable
+    Friend Function GetDisciplinasCadastradas() As DataView
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, idAluno)
 
-        Return ConvertDictionaryToDataTable(disciplinas)
+        Return ConvertDictionaryToDataView(disciplinas)
     End Function
 
     Friend Sub ShowDisciplinaPage(idDisciplina As String)

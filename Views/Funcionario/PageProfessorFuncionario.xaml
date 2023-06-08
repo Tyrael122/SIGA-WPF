@@ -75,6 +75,7 @@
             </TabControl.Resources>
             <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
+                    <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
                     <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" Margin="757,195,209,157" BorderBrush="#FFCE331B">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -98,7 +99,6 @@
                             <DataGridTextColumn Header="Disciplinas" Binding="{Binding Disciplina}" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
                     <Border BorderBrush="#FFDA8E58" BorderThickness="0,0,0,1" Margin="757,122,343,612">
                         <Label Content="Selecione as disciplinas:" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold"/>
                     </Border>

@@ -22,11 +22,11 @@
     End Function
 
     Public Function GetRelationTable() As Table
-        Dim relationTableString = UniqueEntityTable.ToString() + MultipleEntityTable.ToString()
+        Dim relationTableString = UniqueEntityTable.ToString() & MultipleEntityTable.ToString()
         Try
             Return [Enum].Parse(GetType(Table), relationTableString)
         Catch ex As ArgumentException
-            relationTableString = MultipleEntityTable.ToString() + UniqueEntityTable.ToString()
+            relationTableString = MultipleEntityTable.ToString() & UniqueEntityTable.ToString()
 
             Return [Enum].Parse(GetType(Table), relationTableString)
         End Try

@@ -17,8 +17,8 @@ Public Class PresenterProfessorHomePage
         'Call New DisciplinaProfessorPage().Show()
     End Sub
 
-    Friend Function GetDisciplinasCadastradas() As DataTable
+    Friend Function GetDisciplinasCadastradas() As DataView
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Professor, SessionCookie.GetCookie("userId"))
-        Return ConvertDictionaryToDataTable(disciplinas)
+        Return ConvertDictionaryToDataView(disciplinas)
     End Function
 End Class

@@ -11,7 +11,7 @@ Public Class PresenterCadastroPresenca
         view.SetDataContext(ViewModelAula)
     End Sub
 
-    Public Function GetAllPresencaAlunosCadastrados() As DataTable
+    Public Function GetAllPresencaAlunosCadastrados() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
@@ -39,7 +39,7 @@ Public Class PresenterCadastroPresenca
             End If
         Next
 
-        Return ConvertDictionaryToDataTable(alunosCadastrados)
+        Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 
     Friend Function LoadDiaAulaComoBox() As IEnumerable(Of String)

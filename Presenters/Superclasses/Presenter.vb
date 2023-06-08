@@ -1,14 +1,34 @@
 ﻿Imports System.Data
+Imports System.IO
 
 Public MustInherit Class Presenter
     Protected View As IView
+
+    Private Const EmptyUserImagePath As String = "C:\Users\Suporte\OneDrive - Fatec Centro Paula Souza\Programs\VB\SIGA\SIGAWPF\Views\Images\user-icon-removebg-preview.png"
+
+    Protected Function CarregarFotoVazia() As ImageSource
+        Return New BitmapImage(New Uri(EmptyUserImagePath, UriKind.Absolute))
+    End Function
+
+    Protected Function ConvertImageToByteArray(foto As ImageSource) As Byte()
+        Dim memoryStream = New MemoryStream()
+        Dim converter = New ImageSourceConverter()
+
+        converter.ConvertTo(foto, GetType(Byte()))
+
+        Return memoryStream.ToArray()
+    End Function
 
     Protected Sub ShowWindowAndCloseCurrent(window As Window, view As IView)
         window.Show()
         view.CloseView()
     End Sub
 
-    Protected Function ConvertDictionaryToDataTable(data As IEnumerable(Of IDictionary(Of String, Object))) As DataTable
+    Protected Function ConvertDictionaryToDataView(data As IEnumerable(Of IDictionary(Of String, Object))) As DataView
+        Return ConvertDictionaryToDataTable(data).DefaultView
+    End Function
+
+    Private Function ConvertDictionaryToDataTable(data As IEnumerable(Of IDictionary(Of String, Object))) As DataTable
         Dim dataTable As New DataTable()
 
         If Not data.Any() Then
@@ -73,9 +93,5 @@ Public MustInherit Class Presenter
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
 
         Return disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
-    End Function
-
-    Protected Function DisplayImageFromDataBase()
-
     End Function
 End Class

@@ -10,10 +10,10 @@ Public Class PresenterAlunoDisciplina
         Me.View = view
     End Sub
 
-    Friend Function GetDisciplinasCadastradas() As DataTable
+    Friend Function GetDisciplinasCadastradas() As DataView
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, SessionCookie.GetCookie("userId"))
 
-        Return ConvertDictionaryToDataTable(disciplinas)
+        Return ConvertDictionaryToDataView(disciplinas)
     End Function
 
 
@@ -45,7 +45,7 @@ Public Class PresenterAlunoDisciplina
         'Call New DisciplinaAlunoPage().Show()
     End Sub
 
-    Friend Function GetNotasDisciplina() As DataTable
+    Friend Function GetNotasDisciplina() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim idProvasDaDisciplina = BusinessRules.GetAll(Table.Prova).
@@ -58,17 +58,17 @@ Public Class PresenterAlunoDisciplina
         Dim rawData = notas.Where(Function(dict) dict("IdAluno") = idAluno And
                                 idProvasDaDisciplina.Contains(dict("IdProva")))
 
-        Return ConvertDictionaryToDataTable(rawData)
+        Return ConvertDictionaryToDataView(rawData)
     End Function
 
-    Friend Function GetPresencaDisciplina() As DataTable
+    Friend Function GetPresencaDisciplina() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim presencasDaDisciplina = BusinessRules.GetAll(Table.Presenca).
                                         Where(Function(presenca) presenca("IdDisciplina") = idDisciplina And
                                                             presenca("IdAluno") = idAluno)
 
-        Return ConvertDictionaryToDataTable(presencasDaDisciplina)
+        Return ConvertDictionaryToDataView(presencasDaDisciplina)
     End Function
 
     Friend Function CarregarImagemPerfilAluno() As Brush
