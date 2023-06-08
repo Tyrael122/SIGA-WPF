@@ -11,13 +11,6 @@ Public Class PresenterFuncionario
         view.SetDataContext(ViewModelDisciplina)
     End Sub
 
-    Friend Sub RegisterDisciplina()
-        Dim data = ViewModelDisciplina.ConvertToDictionary()
-
-        Dim hasInsertedSucessufully = BusinessRules.Save(data, Table.Disciplina)
-        ShowInfoMessage(hasInsertedSucessufully, "Disciplina")
-    End Sub
-
     Friend Function GetDisciplinasAcimaSemestre(idCurso As String, semestre As Integer) As DataView
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
         disciplinas = disciplinas.Where(Function(disciplina) disciplina("Semester") >= semestre)
@@ -43,7 +36,6 @@ Public Class PresenterFuncionario
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
-
 
     Private Sub ShowInfoMessage(hasInsertedSucessfully As Boolean, keyWord As String)
         If hasInsertedSucessfully Then
