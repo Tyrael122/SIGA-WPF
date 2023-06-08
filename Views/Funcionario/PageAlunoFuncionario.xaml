@@ -89,14 +89,8 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Selecionar" Width="130">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsChecked="{Binding IsSelected}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Disciplinas" Binding="{Binding Disciplina}" />
+                            <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Header="Selecinar" Width="130"/>
+                            <DataGridTextColumn Header="Disciplinas" Binding="{Binding Disciplina}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Border BorderBrush="#FFDA8E58" BorderThickness="0,0,0,1" Margin="863,115,237,619">

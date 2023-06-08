@@ -7,7 +7,6 @@ Imports System.Security.Principal
 Public Class PresenterFuncionario
     Inherits Presenter
 
-    Private ViewModelProfessor As New ProfessorViewModel()
     Private ViewModelDisciplina As New DisciplinaViewModel()
     Private ViewModelCurso As New CursoViewModel()
 
@@ -15,13 +14,6 @@ Public Class PresenterFuncionario
         Me.View = view
 
         view.SetDataContext(ViewModelDisciplina)
-    End Sub
-
-    Friend Sub RegisterProfessor(idsDisciplinasProfessor As List(Of String))
-        'Dim data = ViewModelProfessor.ConvertToDictionary()
-
-        'Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
-        'ShowInfoMessage(hasInsertedSucessfully, "Professor")
     End Sub
 
     Friend Sub RegisterCurso(idsDisciplinasCurso As List(Of String))

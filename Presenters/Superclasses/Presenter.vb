@@ -84,9 +84,13 @@ Public MustInherit Class Presenter
         Return BusinessRules.GetAllById(id, table)
     End Function
 
-    Public Function GetDataTable(tableStr As String) As DataTable
+    Private Function GetDataTable(tableStr As String) As DataTable
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
         Return GetDataTable(table)
+    End Function
+
+    Public Function GetDataView(tableStr As String) As DataView
+        Return GetDataTable(tableStr).DefaultView
     End Function
 
     Protected Function GetAllDisciplinasPorSemestre(idCurso As String, semestre As Integer) As IEnumerable(Of IDictionary(Of String, Object))
