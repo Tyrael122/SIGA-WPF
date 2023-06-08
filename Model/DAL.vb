@@ -13,11 +13,11 @@ Public Class DAL
         connection.Open()
     End Sub
 
-    Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, Object)) Implements IDAL.SelectAll
+    Public Function SelectAll(table As Table) As IEnumerable(Of IDictionary(Of String, Object)) Implements IDAL.SelectAll
         Return SelectFields(table, "*")
     End Function
 
-    Public Function SelectFields(table As Table, ParamArray fieldsToSelect() As String) As List(Of IDictionary(Of String, Object)) Implements IDAL.SelectFields
+    Public Function SelectFields(table As Table, ParamArray fieldsToSelect() As String) As IEnumerable(Of IDictionary(Of String, Object)) Implements IDAL.SelectFields
         Dim sql = "SELECT " & String.Join(", ", fieldsToSelect) & " FROM " & table.ToString()
 
         sqlCommand = New SqlCommand(sql, connection)
@@ -29,7 +29,7 @@ Public Class DAL
         Return result
     End Function
 
-    Public Function Save(data As IDictionary, table As Table) As Boolean Implements IDAL.Save
+    Public Function Save(data As IDictionary(Of String, Object), table As Table) As Boolean Implements IDAL.Save
         sqlDataReader = ExecuteInsertQuery(data, table)
 
         Dim rowsAffected As Integer = 0
@@ -42,7 +42,7 @@ Public Class DAL
         Return rowsAffected = 1
     End Function
 
-    Public Function SaveWithOutput(data As IDictionary, table As Table) As List(Of IDictionary(Of String, Object)) Implements IDAL.SaveWithOutput
+    Public Function SaveWithOutput(data As IDictionary, table As Table) As IEnumerable(Of IDictionary(Of String, Object)) Implements IDAL.SaveWithOutput
         sqlDataReader = ExecuteInsertQuery(data, table)
 
         Dim result = ParseResultIntoDictionary(sqlDataReader)
@@ -62,7 +62,7 @@ Public Class DAL
         sqlCommand.ExecuteNonQuery()
     End Sub
 
-    Public Sub Update(idEntity As String, data As IDictionary, table As Table) Implements IDAL.Update
+    Public Sub Update(idEntity As String, data As IDictionary(Of String, Object), table As Table) Implements IDAL.Update
         Dim sql = "UPDATE " & table.ToString() & " SET " & GenerateUpdateParametersString(data) & " WHERE Id = " & idEntity
 
         sqlCommand = New SqlCommand(sql, connection)
@@ -72,7 +72,7 @@ Public Class DAL
         sqlCommand.ExecuteNonQuery()
     End Sub
 
-    Private Function ExecuteInsertQuery(data As IDictionary, table As Table) As SqlDataReader
+    Private Function ExecuteInsertQuery(data As IDictionary(Of String, Object), table As Table) As SqlDataReader
         Dim sql = "INSERT INTO " & table.ToString() & " (" & GetParseableFields(data) & ") OUTPUT INSERTED.* "
         sql += "VALUES (" & GenerateParametersString(data) & ")"
 

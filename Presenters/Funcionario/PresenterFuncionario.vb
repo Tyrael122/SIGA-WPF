@@ -1,14 +1,9 @@
 ﻿Imports System.Data
-Imports System.Data.Common
-Imports System.IO
-Imports System.Security.AccessControl
-Imports System.Security.Principal
 
 Public Class PresenterFuncionario
     Inherits Presenter
 
     Private ViewModelDisciplina As New DisciplinaViewModel()
-    Private ViewModelCurso As New CursoViewModel()
 
     Public Sub New(view As IViewModel)
         Me.View = view
@@ -16,26 +11,11 @@ Public Class PresenterFuncionario
         view.SetDataContext(ViewModelDisciplina)
     End Sub
 
-    Friend Sub RegisterCurso(idsDisciplinasCurso As List(Of String))
-        'Dim data = ViewModelCurso.ConvertToDictionary()
-
-        'data("Turno") = [Enum].Parse(GetType(Turno), data("Turno"))
-
-        'Dim hasInsertedSucessfully = Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
-        'ShowInfoMessage(hasInsertedSucessfully, "Curso")
-    End Sub
-
     Friend Sub RegisterDisciplina()
         Dim data = ViewModelDisciplina.ConvertToDictionary()
 
         Dim hasInsertedSucessufully = BusinessRules.Save(data, Table.Disciplina)
         ShowInfoMessage(hasInsertedSucessufully, "Disciplina")
-    End Sub
-
-    Friend Sub ShowCursoPage(idCurso As String)
-        SessionCookie.AddCookie("IdCurso", idCurso)
-
-        'Call New CursoPage().Show()
     End Sub
 
     Friend Function GetDisciplinasAcimaSemestre(idCurso As String, semestre As Integer) As DataView
@@ -72,14 +52,4 @@ Public Class PresenterFuncionario
             View.DisplayInfo("Erro ao adicionar " & keyWord.ToLower())
         End If
     End Sub
-
-    Friend Function GetDataTableWithCheckboxColumn(table As String) As DataView
-        Dim data = GetAll(table)
-
-        For Each dict In data
-            dict("IsChecked") = False
-        Next
-
-        Return ConvertDictionaryToDataView(data)
-    End Function
 End Class
