@@ -39,7 +39,7 @@
         Dim columns = GetRelationColumns()
 
         For Each id In idRelatedEntites
-            Dim dataDict As New Dictionary(Of String, String) From {
+            Dim dataDict As New Dictionary(Of String, Object) From {
                 {columns.uniqueEntity, entityId},
                 {columns.multipleEntity, id}
             }

@@ -42,7 +42,7 @@ Public Class DAL
         Return rowsAffected = 1
     End Function
 
-    Public Function SaveWithOutput(data As IDictionary, table As Table) As IEnumerable(Of IDictionary(Of String, Object)) Implements IDAL.SaveWithOutput
+    Public Function SaveWithOutput(data As IDictionary(Of String, Object), table As Table) As IEnumerable(Of IDictionary(Of String, Object)) Implements IDAL.SaveWithOutput
         sqlDataReader = ExecuteInsertQuery(data, table)
 
         Dim result = ParseResultIntoDictionary(sqlDataReader)
