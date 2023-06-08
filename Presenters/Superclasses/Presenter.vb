@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.IO
+Imports System.Text
 
 Public MustInherit Class Presenter
     Protected View As IView
@@ -11,12 +12,18 @@ Public MustInherit Class Presenter
     End Function
 
     Protected Function ConvertImageToByteArray(foto As ImageSource) As Byte()
-        Dim memoryStream = New MemoryStream()
-        Dim converter = New ImageSourceConverter()
+        Dim bitmapSource As BitmapSource = TryCast(foto, BitmapSource)
+        If bitmapSource Is Nothing Then
+            Throw New ArgumentException("The image provided is invalid")
+        End If
 
-        converter.ConvertTo(foto, GetType(Byte()))
+        Dim encoder As New PngBitmapEncoder()
+        encoder.Frames.Add(BitmapFrame.Create(bitmapSource))
 
-        Return memoryStream.ToArray()
+        Using memoryStream As New MemoryStream()
+            encoder.Save(memoryStream)
+            Return memoryStream.ToArray()
+        End Using
     End Function
 
     Protected Sub ShowWindowAndCloseCurrent(window As Window, view As IView)
@@ -97,5 +104,15 @@ Public MustInherit Class Presenter
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
 
         Return disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
+    End Function
+
+    Public Function GetDataViewWithCheckboxColumn(tableStr As String, defaultValue As Boolean) As DataView
+        Dim data = GetAll(tableStr)
+
+        For Each dict In data
+            dict.Add("IsChecked", defaultValue)
+        Next
+
+        Return ConvertDictionaryToDataView(data)
     End Function
 End Class

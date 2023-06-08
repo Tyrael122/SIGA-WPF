@@ -89,8 +89,8 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Header="Selecinar" Width="130"/>
-                            <DataGridTextColumn Header="Disciplinas" Binding="{Binding Disciplina}"/>
+                            <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Header="Selecionar" Width="130"/>
+                            <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Border BorderBrush="#FFDA8E58" BorderThickness="0,0,0,1" Margin="863,115,237,619">

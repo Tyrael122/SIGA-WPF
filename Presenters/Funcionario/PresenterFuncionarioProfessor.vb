@@ -15,6 +15,8 @@
     Friend Sub RegisterProfessor(idsDisciplinasProfessor As IEnumerable(Of String))
         Dim data = ViewModelProfessor.ConvertToDictionary()
 
+        data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
+
         Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
     End Sub
 End Class
