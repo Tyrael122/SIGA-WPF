@@ -1,5 +1,5 @@
 ﻿Public Class LoginRules
-    Public Shared Function GetUserByCredentials(username As String, password As String, table As Table) As IEnumerable(Of IDictionary(Of String, String))
+    Public Shared Function GetUserByCredentials(username As String, password As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Dim dataBridge As IDAL = New DAL()
 
         Return dataBridge.

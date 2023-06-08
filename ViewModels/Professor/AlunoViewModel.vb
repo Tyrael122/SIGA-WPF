@@ -22,4 +22,15 @@
             OnPropertyChanged(NameOf(SemestreInicio))
         End Set
     End Property
+
+    Private _foto As ImageSource
+    Public Property Foto As ImageSource
+        Get
+            Return _foto
+        End Get
+        Set(value As ImageSource)
+            _foto = value
+            OnPropertyChanged(NameOf(Foto))
+        End Set
+    End Property
 End Class

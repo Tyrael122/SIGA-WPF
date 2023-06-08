@@ -91,7 +91,7 @@ Public Class PresenterCadastroPresenca
         Return comboBoxItems
     End Function
 
-    Friend Sub RegisterPresencas(presencas As List(Of IDictionary(Of String, String)))
+    Friend Sub RegisterPresencas(presencas As List(Of IDictionary(Of String, Object)))
         Dim data = ViewModelAula.ConvertToDictionary()
 
         data("Data") = ViewModelAula.Data.ToString("yyyy-MM-dd")

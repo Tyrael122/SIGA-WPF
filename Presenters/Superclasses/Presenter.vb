@@ -8,7 +8,7 @@ Public MustInherit Class Presenter
         view.CloseView()
     End Sub
 
-    Protected Function ConvertDictionaryToDataTable(data As IEnumerable(Of IDictionary(Of String, String))) As DataTable
+    Protected Function ConvertDictionaryToDataTable(data As IEnumerable(Of IDictionary(Of String, Object))) As DataTable
         Dim dataTable As New DataTable()
 
         If Not data.Any() Then
@@ -31,7 +31,7 @@ Public MustInherit Class Presenter
         Return dataTable
     End Function
 
-    Protected Function GenerateComboBoxItems(selector As Func(Of IEnumerable(Of IDictionary(Of String, String))), content As String, tag As String) As IEnumerable(Of ComboBoxItem)
+    Protected Function GenerateComboBoxItems(selector As Func(Of IEnumerable(Of IDictionary(Of String, Object))), content As String, tag As String) As IEnumerable(Of ComboBoxItem)
         Dim comboBoxItems As New List(Of ComboBoxItem)
 
         For Each dict In selector()
@@ -45,7 +45,7 @@ Public MustInherit Class Presenter
         Return comboBoxItems
     End Function
 
-    Protected Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, String))
+    Protected Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Return BusinessRules.GetAll(table)
     End Function
 
@@ -54,12 +54,12 @@ Public MustInherit Class Presenter
         Return ConvertDictionaryToDataTable(data)
     End Function
 
-    Public Function GetAll(tableStr As String) As IEnumerable(Of IDictionary(Of String, String))
+    Public Function GetAll(tableStr As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
         Return GetAll(table)
     End Function
 
-    Public Function GetAllById(id As String, tableStr As String) As IEnumerable(Of IDictionary(Of String, String))
+    Public Function GetAllById(id As String, tableStr As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
         Return BusinessRules.GetAllById(id, table)
     End Function
@@ -69,7 +69,7 @@ Public MustInherit Class Presenter
         Return GetDataTable(table)
     End Function
 
-    Protected Function GetAllDisciplinasPorSemestre(idCurso As String, semestre As Integer) As IEnumerable(Of IDictionary(Of String, String))
+    Protected Function GetAllDisciplinasPorSemestre(idCurso As String, semestre As Integer) As IEnumerable(Of IDictionary(Of String, Object))
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
 
         Return disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)

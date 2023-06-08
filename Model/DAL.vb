@@ -13,11 +13,11 @@ Public Class DAL
         connection.Open()
     End Sub
 
-    Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectAll
+    Public Function SelectAll(table As Table) As List(Of IDictionary(Of String, Object)) Implements IDAL.SelectAll
         Return SelectFields(table, "*")
     End Function
 
-    Public Function SelectFields(table As Table, ParamArray fieldsToSelect() As String) As List(Of IDictionary(Of String, String)) Implements IDAL.SelectFields
+    Public Function SelectFields(table As Table, ParamArray fieldsToSelect() As String) As List(Of IDictionary(Of String, Object)) Implements IDAL.SelectFields
         Dim sql = "SELECT " & String.Join(", ", fieldsToSelect) & " FROM " & table.ToString()
 
         sqlCommand = New SqlCommand(sql, connection)
@@ -42,7 +42,7 @@ Public Class DAL
         Return rowsAffected = 1
     End Function
 
-    Public Function SaveWithOutput(data As IDictionary, table As Table) As List(Of IDictionary(Of String, String)) Implements IDAL.SaveWithOutput
+    Public Function SaveWithOutput(data As IDictionary, table As Table) As List(Of IDictionary(Of String, Object)) Implements IDAL.SaveWithOutput
         sqlDataReader = ExecuteInsertQuery(data, table)
 
         Dim result = ParseResultIntoDictionary(sqlDataReader)
@@ -112,15 +112,15 @@ Public Class DAL
     End Function
 
 
-    Private Function ParseResultIntoDictionary(sqlDataReader As SqlDataReader) As List(Of IDictionary(Of String, String))
-        Dim result As New List(Of IDictionary(Of String, String))
+    Private Function ParseResultIntoDictionary(sqlDataReader As SqlDataReader) As List(Of IDictionary(Of String, Object))
+        Dim result As New List(Of IDictionary(Of String, Object))
         While sqlDataReader.Read()
-            Dim rowData As New Dictionary(Of String, String)
+            Dim rowData As New Dictionary(Of String, Object)
 
             Dim columns = sqlDataReader.GetColumnSchema()
             For Each column In columns
                 Dim rowValue = sqlDataReader(column.ColumnName)
-                rowData.Add(column.ColumnName, rowValue.ToString())
+                rowData.Add(column.ColumnName, rowValue)
             Next
 
             result.Add(rowData)

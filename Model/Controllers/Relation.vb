@@ -14,8 +14,8 @@
 
     Public Function GetRelationColumns() As RelationColumn
         Dim relationStruct = New RelationColumn With {
-            .uniqueEntity = "Id" + UniqueEntityTable.ToString(),
-            .multipleEntity = "Id" + MultipleEntityTable.ToString()
+            .uniqueEntity = "Id" & UniqueEntityTable.ToString(),
+            .multipleEntity = "Id" & MultipleEntityTable.ToString()
         }
 
         Return relationStruct
@@ -83,7 +83,7 @@
         Return True
     End Function
 
-    Public Shared Function SaveRelation(uniqueEntityTable As Table, relatedEntitiesTable As Table, idRelatedEntities As List(Of String), uniqueEntityData As Dictionary(Of String, Object)) As Boolean
+    Public Shared Function SaveRelation(uniqueEntityTable As Table, relatedEntitiesTable As Table, idRelatedEntities As IEnumerable(Of String), uniqueEntityData As IDictionary(Of String, Object)) As Boolean
         Dim relation As New Relation(uniqueEntityTable, relatedEntitiesTable) With {
             .uniqueEntityData = uniqueEntityData,
             .idRelatedEntites = idRelatedEntities

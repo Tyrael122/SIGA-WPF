@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SIGAWPF"
+      xmlns:local="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=local:AlunoViewModel}"
                  mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageConsultas">
@@ -113,9 +113,9 @@
                     <Label Content="Selecione o curso" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="302" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,477,0,0" FontSize="30"/>
                     <ComboBox x:Name="cmbCursos" HorizontalAlignment="Left" Margin="226,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC" SelectedItem="{Binding Curso}"/>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="960,395,0,0"/>
-                    <Button x:Name="btnImage" Content="" HorizontalAlignment="Left" Margin="1034,472,0,0" VerticalAlignment="Top" Height="147" Width="186" BorderBrush="{x:Null}">
+                    <Button x:Name="btnImage" Content="" HorizontalAlignment="Left" Margin="1034,472,0,0" VerticalAlignment="Top" Height="147" Width="186">
                         <Button.Background>
-                            <ImageBrush ImageSource="/Views/Icons/user-icon-removebg-preview.png"/>
+                            <ImageBrush ImageSource="{Binding Foto}"/>
                         </Button.Background>
                     </Button>
                     <Label Content="Selecione o semestre de inicio:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="528" Foreground="#FFEF691B" FontWeight="Bold" Margin="576,477,0,0" FontSize="30"/>
@@ -127,7 +127,7 @@
                         <ComboBoxItem Content="5"/>
                         <ComboBoxItem Content="6"/>
                     </ComboBox>
-                    <Button Content="Cadastrar" HorizontalAlignment="Center" Margin="0,677,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFC58849" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
+                    <Button x:Name="btnCadastrarAluno" Content="Cadastrar" HorizontalAlignment="Center" Margin="0,677,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFE4892B" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border CornerRadius="32" Background="#FFFBC8A4">

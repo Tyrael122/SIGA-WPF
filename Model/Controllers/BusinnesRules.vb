@@ -11,7 +11,7 @@
         dataBridge.Delete(id, "IdAluno", Table.AlunoDisciplina)
     End Sub
 
-    Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, String), table As Table) As List(Of IDictionary(Of String, String))
+    Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, Object), table As Table) As List(Of IDictionary(Of String, Object))
         Return dataBridge.SaveWithOutput(aulaData, table)
     End Function
 
@@ -19,11 +19,11 @@
         Return dataBridge.Save(data, table)
     End Function
 
-    Friend Shared Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, String))
+    Friend Shared Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Return dataBridge.SelectAll(table)
     End Function
 
-    Friend Shared Function GetDisciplinas(table As Table, idEntity As String) As IEnumerable(Of IDictionary(Of String, String))
+    Friend Shared Function GetDisciplinas(table As Table, idEntity As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim relation As New Relation(table, Table.Disciplina)
 
         Dim relationColumns = relation.GetRelationColumns()
@@ -39,7 +39,7 @@
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
 
-    Friend Shared Function SalvarAula(aula As Dictionary(Of String, String)) As String
+    Friend Shared Function SalvarAula(aula As IDictionary(Of String, Object)) As String
         Dim aulaMatched = GetAll(Table.Aula).Where(Function(dict) Date.Parse(dict("Data")) = Date.Parse(aula("Data")))
 
         If aulaMatched.Any() Then

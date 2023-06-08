@@ -17,8 +17,8 @@ Public MustInherit Class ViewModel
         Next
     End Sub
 
-    Public Function ConvertToDictionary() As Dictionary(Of String, String)
-        Dim dict As New Dictionary(Of String, String)
+    Public Function ConvertToDictionary() As Dictionary(Of String, Object)
+        Dim dict As New Dictionary(Of String, Object)
 
         For Each viewModelProperty In Me.GetType().GetProperties()
             Dim value = viewModelProperty.GetValue(Me)
