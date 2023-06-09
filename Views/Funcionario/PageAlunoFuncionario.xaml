@@ -115,15 +115,7 @@
                         <ComboBoxItem Content="5"/>
                         <ComboBoxItem Content="6"/>
                     </ComboBox>
-                    <Button x:Name="btnCadastrarAluno" Content="Cadastrar" HorizontalAlignment="Center" Margin="0,677,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFE4892B" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border CornerRadius="32" Background="#FFFBC8A4">
-                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                    <local:ButtonCadastrar x:Name="btnCadastrarAluno" Margin="428,670,446,50"></local:ButtonCadastrar>
                 </Grid>
                 <!-- Conteúdo da aba "Cadastro" -->
             </TabItem>

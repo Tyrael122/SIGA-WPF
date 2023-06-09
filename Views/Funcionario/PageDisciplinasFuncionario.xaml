@@ -88,15 +88,7 @@
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="800,204,0,0" VerticalAlignment="Top" Width="413">
                         <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Semester}"/>
                     </Border>
-                    <Button x:Name="btnCadastrarDisciplina" Content="Cadastrar" HorizontalAlignment="Center" Margin="0,511,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFD68835" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border CornerRadius="32" Background="#FFFBC8A4">
-                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                    <local:ButtonCadastrar x:Name="btnCadastrarDisciplina" Margin="438,502,436,218"></local:ButtonCadastrar>
                     <Label Content="Carga horária:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="793,292,0,0"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="800,380,0,0" VerticalAlignment="Top" Width="413">
                         <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Workload}"/>

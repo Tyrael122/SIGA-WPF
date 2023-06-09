@@ -89,15 +89,7 @@
                         <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Sigla}"/>
                     </Border>
                     <Label Content="Selecione o período:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="413" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,423,0,0"/>
-                    <Button x:Name="btnCadastroCurso" Content="Cadastrar" HorizontalAlignment="Center" Margin="0,677,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFC58849" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border CornerRadius="32" Background="#FFFBC8A4">
-                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                    <local:ButtonCadastrar x:Name="btnCadastroCurso" Margin="428,670,446,50"></local:ButtonCadastrar>
                     <ComboBox x:Name="cmbTurno" HorizontalAlignment="Left" Margin="226,510,0,0" VerticalAlignment="Top" Width="288" Height="70" Text="{Binding Turno}">
                         <ComboBoxItem Content="Matutino"/>
                         <ComboBoxItem Content="Vespertino"/>
