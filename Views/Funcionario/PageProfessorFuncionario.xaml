@@ -11,7 +11,8 @@
     <local:PageModel.Resources>
         <ControlTemplate x:Key="CustomTextBoxTemplate" TargetType="TextBox">
             <TextBox HorizontalAlignment="Left" BorderThickness="0,0,0,1" BorderBrush="#FFD43E1C" TextWrapping="Wrap"
-                     VerticalAlignment="Top" Width="413" Height="47" Background="Transparent"/>
+                     VerticalAlignment="Top" Width="413" Height="47" Background="Transparent"
+                     Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </ControlTemplate>
     </local:PageModel.Resources>
 
