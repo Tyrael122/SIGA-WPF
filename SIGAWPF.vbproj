@@ -52,6 +52,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Views\ResourceDictionaries\Funcionario\FuncionarioDataGridStyle.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Views\Aluno\Banner super desconto para loja online azul e branco.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -116,6 +120,7 @@
     <Resource Include="Views\Funcionario\disciplina.png" />
     <Resource Include="Views\Funcionario\Funcionario.png" />
     <Resource Include="Views\Funcionario\ViewPassword.png" />
+    <Resource Include="Views\ResourceDictionaries\Funcionario\FuncionarioDataGridStyle.xaml" />
     <Resource Include="Views\Segurança\5137894.jpg" />
     <Resource Include="Views\Segurança\ViewPassword.png" />
     <Resource Include="Views\ViewPassword.png" />
