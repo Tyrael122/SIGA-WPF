@@ -7,26 +7,19 @@
       mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageConsultas">
+
+    <local:PageModel.Resources>
+        <ControlTemplate x:Key="CustomTextBoxTemplate" TargetType="TextBox">
+            <TextBox HorizontalAlignment="Left" BorderThickness="0,0,0,1" BorderBrush="#FFD43E1C" TextWrapping="Wrap"
+                     VerticalAlignment="Top" Width="413" Height="47" Background="Transparent"/>
+        </ControlTemplate>
+    </local:PageModel.Resources>
+
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="209*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="46*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="1238*"/>
-            </Grid.ColumnDefinitions>
             <Border BorderBrush="#FFDA4803" BorderThickness="0,0,0,3" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="111" Margin="0,31,0,0" VerticalAlignment="Top" Width="1229">
                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Height="114" Width="868" FontSize="70" Foreground="#FBE62203" Margin="36,-16,0,0" Content="Cadastrar Professor"/>
             </Border>
-
-
         </Grid>
         <Image Margin="1227,-42,-54,854" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
 
@@ -81,13 +74,9 @@
                         <Label Content="Selecione as disciplinas:" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold"/>
                     </Border>
                     <Label Content="Login:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,115,0,0"/>
-                    <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="226,195,0,0" VerticalAlignment="Top" Width="413">
-                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Login}"/>
-                    </Border>
+                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="230,194,868,542" Text="{Binding Login}"></TextBox>
                     <Label Content="Senha:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,292,0,0"/>
-                    <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="46" Margin="226,362,0,0" VerticalAlignment="Top" Width="413">
-                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Password}"/>
-                    </Border>
+                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="222,351,872,386" Text="{Binding Password}"></TextBox>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,423,0,0"/>
                     <Button x:Name="btnImage" HorizontalAlignment="Left" Margin="300,486,0,0" VerticalAlignment="Top" Height="147" Width="186" BorderBrush="{x:Null}" RenderTransformOrigin="-0.489,0.702">
                         <Button.Background>
