@@ -29,7 +29,6 @@
     End Sub
 
     Private Sub btnViewPassword_Click(sender As Object, e As RoutedEventArgs) Handles btnViewPassword.Click
-
         Dim isPasswordVisible = Panel.GetZIndex(txtVisiblePassword) > Panel.GetZIndex(txtPassword)
 
         If isPasswordVisible Then
