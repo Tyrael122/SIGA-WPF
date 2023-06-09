@@ -3,10 +3,20 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=local:AlunoViewModel}"
+      xmlns:local="clr-namespace:SIGAWPF"
+                 d:DataContext="{d:DesignInstance Type=local:AlunoViewModel}"
                  mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageConsultas">
+
+    <!--<local:PageModel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Views/DataGridDisciplina.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:PageModel.Resources>-->
+
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
             <Grid.ColumnDefinitions>
@@ -76,20 +86,7 @@
             <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
                     <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
-                    <DataGrid x:Name="dataGridDisciplinasAluno" CanUserAddRows="False" GridLinesVisibility="None" Margin="863,195,209,419" BorderBrush="#FFCE331B">
-                        <DataGrid.Resources>
-                            <ResourceDictionary>
-                                <ResourceDictionary.MergedDictionaries>
-                                    <ResourceDictionary Source="/Views/Funcionario/FuncionarioDataGridStyle.xaml"/>
-                                </ResourceDictionary.MergedDictionaries>
-                            </ResourceDictionary>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Header="Selecionar" Width="130"/>
-                            <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <!--<local:DataGridDisciplina></local:DataGridDisciplina>-->
+                    <local:DataGridDisciplina x:Name="userControlDataGridDisciplinas" Margin="782,176,214,393"></local:DataGridDisciplina>
                     <Border BorderBrush="#FFDA8E58" BorderThickness="0,0,0,1" Margin="863,115,237,619">
                         <Label Content="Selecione as disciplinas:" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold"/>
                     </Border>

@@ -6,14 +6,32 @@
              xmlns:local="clr-namespace:SIGAWPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid>
         <DataGrid x:Name="MainDataGrid" AutoGenerateColumns="True" CanUserAddRows="False" GridLinesVisibility="None" BorderBrush="#FFCE331B"  d:ItemsSource="{d:SampleData}">
             <DataGrid.Resources>
-                <ResourceDictionary>
+                <!--<ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/Views/ResourceDictionaries/Funcionario/FuncionarioDataGridStyle.xaml"/>
+                        <ResourceDictionary Source="/Views/UserControls/FuncionarioDataGridStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
+                </ResourceDictionary>-->
+                <Style TargetType="{x:Type DataGrid}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="#FFB15225" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="FontSize" Value="20" />
+                </Style>
+
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="#FFB15225" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="FontSize" Value="20" />
+                </Style>
+
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Margin" Value="0 5" />
+                </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Header="Selecionar" Width="130"/>

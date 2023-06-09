@@ -132,7 +132,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\UserControls\" />
+    <Folder Include="Views\CustomControls\" />
   </ItemGroup>
 
 </Project>

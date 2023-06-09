@@ -18,11 +18,11 @@
     End Sub
 
     Private Sub cmbCursos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursos.SelectionChanged
-        dataGridDisciplinasAluno.ItemsSource = Presenter.GetDisciplinasCurso()
+        userControlDataGridDisciplinas.DataGrid.ItemsSource = Presenter.GetDisciplinasCurso()
     End Sub
 
     Private Sub btnCadastrarAluno_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarAluno.Click
-        Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(dataGridDisciplinasAluno)
+        Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(userControlDataGridDisciplinas.DataGrid)
 
         Presenter.RegisterAluno(idsDisciplinasAluno)
     End Sub
