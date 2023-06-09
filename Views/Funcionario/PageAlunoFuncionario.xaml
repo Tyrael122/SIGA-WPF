@@ -136,7 +136,7 @@
             <TabItem Header="Editar" Margin="676,4,-676,-4" Foreground="#FFB15225">
                 <!-- Conteúdo da aba "Editar" -->
                 <Grid Height="790" Margin="-4,0,4,0">
-                    <DataGrid AutoGenerateColumns="False" x:Name="dataGridAlunos" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
+                    <DataGrid AutoGenerateColumns="True" x:Name="dataGridAlunos" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="Transparent" />
@@ -155,8 +155,8 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Nº" Binding="{Binding Id}" Width="100"/>
-                            <DataGridTextColumn Header="Aluno" Binding="{Binding Login}" Width="1000" />
+                            <!--<DataGridTextColumn Header="Nº" Binding="{Binding Id}" Width="100"/>
+                            <DataGridTextColumn Header="Aluno" Binding="{Binding Login}" Width="100" />-->
                             <DataGridTemplateColumn Header="Apagar" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -185,11 +185,11 @@
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="Auto" />
                                                     </SelectiveScrollingGrid.ColumnDefinitions>
-                                                    <DataGridCellsPresenter Grid.Column="1" />
+                                                    <!--<DataGridCellsPresenter Grid.Column="1" />
                                                     <DataGridDetailsPresenter Grid.Column="1" />
                                                     <DataGridRowHeader Grid.Column="0" />
                                                     <DataGridCell Grid.Column="2" />
-                                                    <DataGridCell Grid.Column="3" />
+                                                    <DataGridCell Grid.Column="3" />-->
                                                 </SelectiveScrollingGrid>
                                             </Border>
                                         </ControlTemplate>

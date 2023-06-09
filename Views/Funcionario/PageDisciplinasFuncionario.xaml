@@ -78,17 +78,17 @@
                     <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
                     <Label Content="Nome da disciplina:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="262,115,0,0"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="260,204,0,0" VerticalAlignment="Top" Width="414">
-                        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="414" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Nome}" Margin="-4,0,0,0"/>
+                        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="414" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Name}" Margin="-4,0,0,0"/>
                     </Border>
-                    <Label Content="Carga horária:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="262,292,0,0"/>
+                    <Label Content="Descrição:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="262,292,0,0"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="260,380,0,0" VerticalAlignment="Top" Width="413">
-                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Nome}"/>
+                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Description}"/>
                     </Border>
                     <Label Content="Semestre da disciplina:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="528" Foreground="#FFEF691B" FontWeight="Bold" Margin="793,115,0,0" FontSize="35"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="800,204,0,0" VerticalAlignment="Top" Width="413">
-                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Nome}"/>
+                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Semester}"/>
                     </Border>
-                    <Button Content="Cadastrar" HorizontalAlignment="Center" Margin="0,511,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFD68835" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
+                    <Button x:Name="btnCadastrarDisciplina" Content="Cadastrar" HorizontalAlignment="Center" Margin="0,511,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFD68835" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border CornerRadius="32" Background="#FFFBC8A4">
@@ -99,7 +99,7 @@
                     </Button>
                     <Label Content="Carga horária:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="793,292,0,0"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="800,380,0,0" VerticalAlignment="Top" Width="413">
-                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Nome}"/>
+                        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Workload}"/>
                     </Border>
                 </Grid>
                 <!-- Conteúdo da aba "Cadastro" -->
@@ -107,50 +107,43 @@
             <TabItem Header="Editar" Margin="676,4,-676,-4" Foreground="#FFB15225">
                 <!-- Conteúdo da aba "Editar" -->
                 <Grid Height="790" Margin="-4,0,4,0">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" Margin="90,82,90,82" BorderBrush="#FFE45B1B">
-                        <DataGrid.Resources>
+                    <DataGrid x:Name="dataGridDisciplinas" CanUserAddRows="False" GridLinesVisibility="None" Margin="90,82,90,82" BorderBrush="#FFE45B1B">
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Padding" Value="10" />
+                                <Setter Property="Margin" Value="10" />
+                                <Setter Property="FontSize" Value="25" />
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="Transparent" />
                                 <Setter Property="Foreground" Value="#FFB15225" />
                                 <Setter Property="FontSize" Value="25" />
+                                <Setter Property="Margin" Value="5" />
                             </Style>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Padding" Value="10" />
-                                <Setter Property="Margin" Value="0 5" />
-                                <Setter Property="FontSize" Value="25" />
-                            </Style>
-                            <Style TargetType="Border" x:Key="RowBorder">
-                                <Setter Property="Background" Value="White" />
-                                <Setter Property="CornerRadius" Value="5" />
-                                <Setter Property="Margin" Value="0 5" />
-                            </Style>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Sigla" Binding="{Binding Sigla}" Width="100" />
-                            <DataGridTextColumn Header="Disciplina" Binding="{Binding Disciplina}" Width="1100" />
-                            <DataGridTemplateColumn Header="Editar">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Editar" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
+                        </DataGrid.ColumnHeaderStyle>
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="Margin" Value="0 5" />
                                 <Setter Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="DataGridRow">
-                                            <Border Style="{StaticResource RowBorder}">
+                                        <ControlTemplate TargetType="{x:Type DataGridRow}">
+                                            <Border x:Name="DGR_Border" BorderBrush="{TemplateBinding BorderBrush}" 
+                                                    CornerRadius="5">
                                                 <SelectiveScrollingGrid>
                                                     <SelectiveScrollingGrid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
                                                     </SelectiveScrollingGrid.ColumnDefinitions>
-                                                    <DataGridCellsPresenter Grid.Column="0" />
-                                                    <DataGridCellsPresenter Grid.Column="1" />
-                                                    <DataGridCell Grid.Column="2" />
+                                                    <SelectiveScrollingGrid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </SelectiveScrollingGrid.RowDefinitions>
+                                                    <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                    <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Visibility="{TemplateBinding DetailsVisibility}"/>
+                                                    <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                                                 </SelectiveScrollingGrid>
                                             </Border>
                                         </ControlTemplate>
@@ -158,19 +151,27 @@
                                 </Setter>
                             </Style>
                         </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Editar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Editar" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Deletar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Deletar" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
-
-
-
-
-
         <Border BorderBrush="#FFE2850F" BorderThickness="0,0,0,1" HorizontalAlignment="Center" Height="60" Margin="0,239,0,0" VerticalAlignment="Top" Width="1440"/>
-
-
-
     </Grid>
 </local:PageModel>
 
