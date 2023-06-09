@@ -76,23 +76,7 @@
             <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
                     <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
-                    <DataGrid x:Name="dataGridDisciplinasProfessor" AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" Margin="757,195,209,157" BorderBrush="#FFCE331B">
-                        <DataGrid.Resources>
-                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Foreground" Value="#FFB15225" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="FontSize" Value="20" />
-                            </Style>
-                            <Style TargetType="{x:Type DataGridCell}">
-                                <Setter Property="Margin" Value="0 5" />
-                            </Style>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Header="Selecionar" Width="130"/>
-                            <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <local:DataGridDisciplina x:Name="userControlDisciplinas" Margin="757,195,209,157"></local:DataGridDisciplina>
                     <Border BorderBrush="#FFDA8E58" BorderThickness="0,0,0,1" Margin="757,122,343,612">
                         <Label Content="Selecione as disciplinas:" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold"/>
                     </Border>
