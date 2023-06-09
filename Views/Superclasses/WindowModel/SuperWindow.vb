@@ -17,7 +17,7 @@
         Return ViewUtils.LoadReferenceFromSelectedRows(dataGrid, idColumnName, referenceColumnName)
     End Function
 
-    Protected Sub LoadImagePickerDialog(imageContainer As Object)
-        ViewUtils.LoadImagePickerDialog(imageContainer)
+    Protected Sub LoadImagePickerDialog()
+        ViewUtils.LoadImagePickerDialog()
     End Sub
 End Class

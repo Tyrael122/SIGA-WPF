@@ -18,10 +18,10 @@
     End Sub
 
     Private Sub PageProfessorFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        userControlDisciplinas.DataGrid.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
     End Sub
 
-    Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
-        LoadImagePickerDialog(btnImage)
-    End Sub
+    'Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
+    '    LoadImagePickerDialog(btnImage)
+    'End Sub
 End Class

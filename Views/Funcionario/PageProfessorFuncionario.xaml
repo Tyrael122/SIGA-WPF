@@ -74,15 +74,11 @@
                         <Label Content="Selecione as disciplinas:" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold"/>
                     </Border>
                     <Label Content="Login:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,115,0,0"/>
-                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="230,194,868,542" Text="{Binding Login}"></TextBox>
+                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="230,194,868,542" Text="{Binding Login}"/>
                     <Label Content="Senha:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,292,0,0"/>
-                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="222,351,872,386" Text="{Binding Password}"></TextBox>
+                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="222,351,872,386" Text="{Binding Password}"/>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,423,0,0"/>
-                    <Button x:Name="btnImage" HorizontalAlignment="Left" Margin="300,486,0,0" VerticalAlignment="Top" Height="147" Width="186" BorderBrush="{x:Null}" RenderTransformOrigin="-0.489,0.702">
-                        <Button.Background>
-                            <ImageBrush ImageSource="{Binding Foto}"/>
-                        </Button.Background>
-                    </Button>
+                    <local:ImagePicker Margin="288,483,1020,153" ImageSource="{Binding Foto}"></local:ImagePicker>
                     <local:ButtonCadastrar x:Name="btnCadastrarProfessor" Margin="428,670,446,50"></local:ButtonCadastrar>
                 </Grid>
                 <!-- Conteúdo da aba "Cadastro" -->

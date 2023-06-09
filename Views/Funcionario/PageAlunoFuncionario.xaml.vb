@@ -1,7 +1,7 @@
 ﻿Class PageAlunoFuncionario
     Inherits PageModel
 
-    Private Presenter As PresenterFuncionarioAluno = New PresenterFuncionarioAluno(Me)
+    Private Presenter As New PresenterFuncionarioAluno(Me)
 
     Public Overrides Sub DisplayInfo(infoMessage As String)
         Throw New NotImplementedException()
@@ -18,7 +18,7 @@
     End Sub
 
     Private Sub cmbCursos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursos.SelectionChanged
-        userControlDataGridDisciplinas.DataGrid.ItemsSource = Presenter.GetDisciplinasCurso()
+        userControlDataGridDisciplinas.ItemsSource = Presenter.GetDisciplinasCurso()
     End Sub
 
     Private Sub btnCadastrarAluno_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarAluno.Click
@@ -28,6 +28,10 @@
     End Sub
 
     Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
-        LoadImagePickerDialog(btnImage)
+        Dim backGround As New ImageBrush With {
+            .ImageSource = LoadImagePickerDialog()
+        }
+
+        btnImage.Background = backGround
     End Sub
 End Class

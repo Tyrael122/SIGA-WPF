@@ -18,6 +18,6 @@
     End Sub
 
     Private Sub PageCursoFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        userControlDisciplinas.DataGrid.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
     End Sub
 End Class

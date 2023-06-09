@@ -28,17 +28,15 @@ Module ViewUtils
         Return list
     End Function
 
-    Sub LoadImagePickerDialog(imageContainer As Object)
+    Function LoadImagePickerDialog() As ImageSource
         Dim fileDialog = New OpenFileDialog With {
                     .Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*"
                 }
         Dim hasUserClickedOk = fileDialog.ShowDialog() = True
         If hasUserClickedOk Then
-            Dim imageBrush = New ImageBrush With {
-                .ImageSource = New BitmapImage(New Uri(fileDialog.FileName))
-            }
-
-            imageContainer.Background = imageBrush
+            Return New BitmapImage(New Uri(fileDialog.FileName))
         End If
-    End Sub
+
+        Return Nothing
+    End Function
 End Module
