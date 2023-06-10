@@ -7,7 +7,6 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Views/ResourceDictionaries/Funcionario/FuncionarioDataGridStyle.xaml"/>
                 <ResourceDictionary Source="/Views/ResourceDictionaries/DefaultStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -23,8 +23,8 @@
         ShowWindowAndCloseCurrent(New ChangePasswordScreen, View)
     End Sub
 
-    Private Function ChooseWindow(table As Table) As Window
-        Select Case table
+    Private Function ChooseWindow(user As Table) As Window
+        Select Case user
             Case Table.Aluno
                 Return New AlunoHomePage()
             Case Table.Professor

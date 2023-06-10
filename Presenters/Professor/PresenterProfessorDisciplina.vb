@@ -4,27 +4,16 @@ Public Class PresenterProfessorDisciplina
     Inherits Presenter
 
     Private ViewModelAula As New AulaViewModel()
-    Private ViewModelProva As New ProvaViewModel()
     Private ViewModelNotas As New NotasViewModel()
 
     Public Sub New(view As IViewModel)
         Me.View = view
 
-        ViewModelProva.Data = Date.Now()
         view.SetDataContext(ViewModelAula)
     End Sub
 
     Function LoadProvasComboBox() As IEnumerable(Of ComboBoxItem)
         Return GenerateComboBoxItems(Function() GetAllProvas(), "Data", "Id")
-    End Function
-
-    Public Function GetAllAlunosCadastrados() As DataView
-        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
-
-        Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
-        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
-
-        Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 
     Public Function GetAllPresencaAlunosCadastrados() As DataView
@@ -57,19 +46,6 @@ Public Class PresenterProfessorDisciplina
 
         Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
-
-    Friend Sub RegisterProva()
-        Dim data = ViewModelProva.ConvertToDictionary()
-
-        data("Tipo") = [Enum].Parse(GetType(TipoProva), data("Tipo"))
-
-        data("IdDisciplina") = SessionCookie.GetCookie("idDisciplina")
-        data("IdProfessor") = SessionCookie.GetCookie("userId")
-
-        data("Data") = ViewModelProva.Data.ToString("yyyy-MM-dd")
-
-        BusinessRules.Save(data, Table.Prova)
-    End Sub
 
     Friend Function GetAllProvas() As IEnumerable(Of IDictionary(Of String, String))
         Dim provas = GetAll(Table.Prova)

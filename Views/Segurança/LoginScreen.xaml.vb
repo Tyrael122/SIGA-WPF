@@ -4,7 +4,7 @@
     Private Presenter As PresenterLogin = New PresenterLogin(Me)
 
     Private Sub btnLogin_Click(sender As Object, e As RoutedEventArgs) Handles btnLogin.Click
-        If String.IsNullOrEmpty(txtLogin.Text) Or String.IsNullOrEmpty(txtPassword.Password) Then
+        If String.IsNullOrEmpty(txtLogin.Text) OrElse String.IsNullOrEmpty(txtPassword.Password) Then
             DisplayInfo("The username and password fields cannot be empty.")
             Return
         End If

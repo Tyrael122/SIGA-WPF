@@ -53,7 +53,7 @@
         Return True
     End Function
 
-    Public Function GetAllMultipleEntitiesById(uniqueEntityId As String) As IEnumerable(Of IDictionary(Of String, String))
+    Public Function GetAllMultipleEntitiesById(uniqueEntityId As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim relationColumns = GetRelationColumns()
         Dim relationTable = GetRelationTable()
 

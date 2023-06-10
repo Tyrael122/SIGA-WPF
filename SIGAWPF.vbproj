@@ -53,6 +53,11 @@
 
   <ItemGroup>
     <Page Remove="Views\ResourceDictionaries\Funcionario\FuncionarioDataGridStyle.xaml" />
+    <Page Remove="Views\ResourceDictionaries\Professor\ProfessorDataGridStyle.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\ResourceDictionaries\Professor\ProfessorDataGridStyle.xaml" />
   </ItemGroup>
 
   <ItemGroup>
