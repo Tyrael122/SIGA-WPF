@@ -8,7 +8,7 @@
     End Sub
 
     Private Sub btnNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnNotas.Click
-        mainFrame.Content = New PageNotas()
+        mainFrame.Content = New PageLancarNotas()
     End Sub
 
     Private Sub btnPresenca_Click(sender As Object, e As RoutedEventArgs) Handles btnPresenca.Click

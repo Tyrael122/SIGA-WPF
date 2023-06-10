@@ -13,7 +13,7 @@
         Return ViewUtils.LoadIdsFromSelectedRows(dataGrid)
     End Function
 
-    Protected Function LoadReferenceFromSelectedRows(dataGrid As DataGrid, idColumnName As String, referenceColumnName As String) As List(Of IDictionary(Of String, String))
+    Protected Function LoadReferenceFromSelectedRows(dataGrid As DataGrid, idColumnName As String, referenceColumnName As String) As List(Of IDictionary(Of String, Object))
         Return ViewUtils.LoadReferenceFromSelectedRows(dataGrid, idColumnName, referenceColumnName)
     End Function
 

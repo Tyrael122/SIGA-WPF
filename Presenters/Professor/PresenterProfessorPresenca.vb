@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class PresenterCadastroPresenca
+Public Class PresenterProfessorPresenca
     Inherits Presenter
 
     Private ViewModelAula As New AulaViewModel()
@@ -42,22 +42,22 @@ Public Class PresenterCadastroPresenca
         Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 
-    Friend Function LoadDiaAulaComoBox() As IEnumerable(Of String)
+    Friend Function LoadDiaAulaComboBox() As IEnumerable(Of String)
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim horarios = BusinessRules.GetAll(Table.Horario).
                              Where(Function(horario) horario("IdDisciplina") = idDisciplina)
 
         Dim startDate As Date = Date.Now
-        Dim endDate As New DateTime(2023, 6, 30)
+        Dim endDate As New DateTime(2023, 11, 30)
 
-        Dim targetDates As IEnumerable(Of DayOfWeek) = horarios.Select(Of DayOfWeek)(Function(dict) [Enum].Parse(GetType(DayOfWeek), dict("DiaSemana")))
+        Dim targetDaysOfWeek As IEnumerable(Of DayOfWeek) = horarios.Select(Of DayOfWeek)(Function(dict) [Enum].Parse(GetType(DayOfWeek), dict("DiaSemana")))
 
         Dim currentDate As Date = startDate
         Dim matchedDates As New List(Of Date)()
 
         While currentDate <= endDate
-            If targetDates.Contains(currentDate.DayOfWeek) Then
+            If targetDaysOfWeek.Contains(currentDate.DayOfWeek) Then
                 matchedDates.Add(currentDate)
             End If
 
@@ -67,10 +67,10 @@ Public Class PresenterCadastroPresenca
         Return matchedDates.Select(Function(matchedDate) matchedDate.ToString("dd-MM-yyyy"))
     End Function
 
-    Friend Function LoadHorariosComboBox(data As String) As IEnumerable(Of ComboBoxItem)
+    Friend Function LoadHorariosComboBox() As IEnumerable(Of ComboBoxItem)
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
-        Dim dayOfWeek = Date.Parse(data).DayOfWeek
+        Dim dayOfWeek = Date.Parse(ViewModelAula.Data).DayOfWeek
 
         Dim selector = Function()
                            Return BusinessRules.GetAll(Table.Horario).
@@ -82,7 +82,7 @@ Public Class PresenterCadastroPresenca
 
         For Each dict In selector()
             Dim comboBoxItem As New ComboBoxItem With {
-                .Content = dict("HorarioInicio") & " - " & dict("HorarioFim"),
+                .Content = dict("HorarioInicio").ToString() & " - " & dict("HorarioFim").ToString(),
                 .Tag = dict("Id")
             }
             comboBoxItems.Add(comboBoxItem)
@@ -94,7 +94,9 @@ Public Class PresenterCadastroPresenca
     Friend Sub RegisterPresencas(presencas As List(Of IDictionary(Of String, Object)))
         Dim data = ViewModelAula.ConvertToDictionary()
 
-        data("Data") = ViewModelAula.Data.ToString("yyyy-MM-dd")
+        Dim dataAula As Date = ViewModelAula.Data
+
+        data("Data") = dataAula.ToString("yyyy-MM-dd")
         data("IdProfessor") = SessionCookie.GetCookie("userId")
         data("IdDisciplina") = SessionCookie.GetCookie("idDisciplina")
 

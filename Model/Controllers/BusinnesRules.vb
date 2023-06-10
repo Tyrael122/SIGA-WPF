@@ -15,7 +15,7 @@
         Return dataBridge.SaveWithOutput(aulaData, table)
     End Function
 
-    Friend Shared Function Save(data As IDictionary, table As Table) As Boolean
+    Friend Shared Function Save(data As IDictionary(Of String, Object), table As Table) As Boolean
         Return dataBridge.Save(data, table)
     End Function
 

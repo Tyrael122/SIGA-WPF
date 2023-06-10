@@ -52,7 +52,7 @@
 
         </Grid>
         <Image Margin="1183,-54,-10,788" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
-        <DatePicker x:Name="dataProva" Width="300" Height="60" FontSize="25" Margin="294,569,926,441" DisplayDate="{Binding Data}" />
+        <DatePicker x:Name="dataProva" Width="300" Height="60" FontSize="25" Margin="294,569,926,441" SelectedDate="{Binding Data}" />
         <ComboBox x:Name="cmbTipoProva" HorizontalAlignment="Left" Margin="760,569,0,0" VerticalAlignment="Top" Width="314" Height="66" BorderBrush="White" Text="{Binding Tipo}">
             <ComboBoxItem Content="P1"/>
             <ComboBoxItem Content="P2"/>

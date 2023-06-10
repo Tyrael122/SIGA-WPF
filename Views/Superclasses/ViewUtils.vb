@@ -13,11 +13,11 @@ Module ViewUtils
         Return idSelectedRows
     End Function
 
-    Function LoadReferenceFromSelectedRows(dataGrid As DataGrid, idColumnName As String, referenceColumnName As String) As List(Of IDictionary(Of String, String))
-        Dim list As New List(Of IDictionary(Of String, String))
+    Function LoadReferenceFromSelectedRows(dataGrid As DataGrid, idColumnName As String, referenceColumnName As String) As List(Of IDictionary(Of String, Object))
+        Dim list As New List(Of IDictionary(Of String, Object))
 
         For Each row In dataGrid.Items
-            Dim item As IDictionary(Of String, String) = New Dictionary(Of String, String) From {
+            Dim item As IDictionary(Of String, Object) = New Dictionary(Of String, Object) From {
                         {idColumnName, row(idColumnName)},
                         {referenceColumnName, row(referenceColumnName)}
                     }

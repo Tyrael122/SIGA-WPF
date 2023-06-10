@@ -2,11 +2,11 @@
     Inherits ViewModel
 
     Private _data As Date
-    Public Property Data As Date
+    Public Property Data As Object
         Get
             Return _data
         End Get
-        Set(value As Date)
+        Set(value As Object)
             _data = value
             OnPropertyChanged(NameOf(Data))
         End Set
@@ -21,6 +21,7 @@
             If value Is Nothing Then
                 Exit Property
             End If
+
             _idHorario = value.Tag
             OnPropertyChanged(NameOf(IdHorario))
         End Set
