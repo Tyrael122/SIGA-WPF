@@ -131,8 +131,4 @@
     <Resource Include="Views\Segurança\FatecLogo.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\CustomControls\" />
-  </ItemGroup>
-
 </Project>
