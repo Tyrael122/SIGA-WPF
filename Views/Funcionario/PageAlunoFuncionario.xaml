@@ -124,7 +124,7 @@
                 <Grid Height="790" Margin="-4,0,4,0">
                     <DataGrid AutoGenerateColumns="True" x:Name="dataGridAlunos" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
                         <DataGrid.Resources>
-                            <Style TargetType="DataGridColumnHeader">
+                            <!--<Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="Transparent" />
                                 <Setter Property="Foreground" Value="#FFB15225" />
                                 <Setter Property="FontSize" Value="25" />
@@ -133,32 +133,35 @@
                                 <Setter Property="Padding" Value="10" />
                                 <Setter Property="Margin" Value="0 5" />
                                 <Setter Property="FontSize" Value="25" />
-                            </Style>
-                            <Style TargetType="Border" x:Key="RowBorder">
+                            </Style>-->
+                            <!--<Style TargetType="Border" x:Key="RowBorder">
                                 <Setter Property="Background" Value="White" />
                                 <Setter Property="CornerRadius" Value="5" />
                                 <Setter Property="Margin" Value="0 5" />
-                            </Style>
+                            </Style>-->
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="/Views/ResourceDictionaries/Funcionario/FuncionarioDataGridStyle.xaml"/>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <!--<DataGridTextColumn Header="Nº" Binding="{Binding Id}" Width="100"/>
-                            <DataGridTextColumn Header="Aluno" Binding="{Binding Login}" Width="100" />-->
                             <DataGridTemplateColumn Header="Apagar" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Apagar" />
+                                        <Button x:Name="btnApagarAluno" Content="Apagar" Click="btnApagarAluno_Click" Tag="{Binding Id}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Editar" />
+                                        <Button x:Name="btnEditarAluno" Content="Editar" Click="btnEditarAluno_Click" Tag="{Binding Id}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
-                        <DataGrid.RowStyle>
+                        <!--<DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="Template">
                                     <Setter.Value>
@@ -171,18 +174,18 @@
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="Auto" />
                                                     </SelectiveScrollingGrid.ColumnDefinitions>
-                                                    <!--<DataGridCellsPresenter Grid.Column="1" />
+                                                    --><!--<DataGridCellsPresenter Grid.Column="1" />
                                                     <DataGridDetailsPresenter Grid.Column="1" />
                                                     <DataGridRowHeader Grid.Column="0" />
                                                     <DataGridCell Grid.Column="2" />
-                                                    <DataGridCell Grid.Column="3" />-->
+                                                    <DataGridCell Grid.Column="3" />--><!--
                                                 </SelectiveScrollingGrid>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-                        </DataGrid.RowStyle>
+                        </DataGrid.RowStyle>-->
                     </DataGrid>
 
                 </Grid>

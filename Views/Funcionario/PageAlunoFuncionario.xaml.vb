@@ -34,4 +34,8 @@
 
         btnImage.Background = backGround
     End Sub
+
+    Private Sub btnEditarAluno_Click(sender As Object, e As RoutedEventArgs) Handles btnEditarAluno.Click
+
+    End Sub
 End Class
