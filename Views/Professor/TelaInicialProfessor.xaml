@@ -79,36 +79,15 @@
                 </Button.Background>
             </Button>
         </Border>
-        <Label Content="Veja suas disciplinas" HorizontalAlignment="Left" Height="94" Margin="32,498,0,0" VerticalAlignment="Top" Width="493" FontSize="52" Grid.Column="1"/>
-        <Button x:Name="btnVerDisciplinas" Content="• Ver Disciplinas" HorizontalAlignment="Left" Height="46" Margin="524,524,0,0" VerticalAlignment="Top" Width="252" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Grid.Column="1">
+        <Label Content="Veja suas disciplinas" HorizontalAlignment="Left" Height="94" Margin="22,442,0,0" VerticalAlignment="Top" Width="493" FontSize="52" Grid.Column="1"/>
+        <Button x:Name="btnVerDisciplinas" Content="• Ver Disciplinas" HorizontalAlignment="Left" Height="46" Margin="518,472,0,0" VerticalAlignment="Top" Width="252" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Grid.Column="1">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <ItemsControl x:Name="itemControlDisciplinas" Margin="82,630,58,50" Grid.Column="1">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <!-- First UserControl in the first column -->
-                        <local:ButtonDisciplina Grid.Column="0" Margin="5" DataContext="{Binding}"/>
-
-                        <!-- Second UserControl in the second column -->
-                        <local:ButtonDisciplina Grid.Column="1" Margin="5" DataContext="{Binding}"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <!-- Use WrapPanel or UniformGrid with horizontal orientation -->
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <ScrollViewer Margin="36,548,38,48" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Column="1">
+            <local:DisciplinasGrid x:Name="gridDisciplinas"></local:DisciplinasGrid>
+        </ScrollViewer>
     </Grid>
 </local:WindowModel>
 

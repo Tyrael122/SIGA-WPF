@@ -16,7 +16,6 @@
     End Sub
 
     Private Sub TelaProfessor_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        SessionCookie.AddCookie("idDisciplina", "2") ' TODO: Remove this line later, and implement the logic to get the idDisciplina from the user's selection in the home page.
         mainFrame.Content = New PageAlunos()
     End Sub
 End Class

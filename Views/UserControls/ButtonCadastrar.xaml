@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SIGAWPF"
              mc:Ignorable="d">
     <Grid>
-        <Button x:Name="btnCadastrar" Content="Cadastrar" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFE4892B" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
+        <Button x:Name="btnCadastrar" Content="Cadastrar" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="White">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="32" Background="#FFFF8D3D">

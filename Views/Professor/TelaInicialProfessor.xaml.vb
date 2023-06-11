@@ -25,6 +25,6 @@ Class TelaInicialProfessor
             itemControlSource.Add(disciplinaViewModel)
         Next
 
-        itemControlDisciplinas.ItemsSource = itemControlSource
+        gridDisciplinas.GridItemsSource = itemControlSource
     End Sub
 End Class

@@ -1,6 +1,18 @@
 ﻿Public Class DisciplinaViewModel
     Inherits ViewModel
 
+
+    Private _id As String
+    Public Property Id As String
+        Get
+            Return _id
+        End Get
+        Set(value As String)
+            _id = value
+            OnPropertyChanged(NameOf(Id))
+        End Set
+    End Property
+
     Private _name As String
     Public Property Name As String
         Get

@@ -1,6 +1,4 @@
-﻿Imports System.Data
-
-Public Class PresenterProfessorHomePage
+﻿Public Class PresenterProfessorHomePage
     Inherits Presenter
 
     Private ViewModelProfessor As New ProfessorViewModel()
@@ -13,7 +11,7 @@ Public Class PresenterProfessorHomePage
         ViewModelProfessor.Foto = CarregarFotoVazia()
     End Sub
 
-    Friend Sub ShowDisciplinaPage(idDisciplina As String)
+    Public Shared Sub ShowDisciplinaPage(idDisciplina As String)
         SessionCookie.AddCookie("idDisciplina", idDisciplina)
 
         Call New TelaProfessor().Show()
