@@ -1,20 +1,20 @@
 ﻿Public Class Relation
     Private ReadOnly dataBridge As IDAL = New DAL()
-    Private ReadOnly UniqueEntityTable As Table
+    Private ReadOnly uniqueEntityTable As Table
     Private ReadOnly MultipleEntityTable As Table
 
     Public uniqueEntityData As IDictionary(Of String, Object)
     Public idRelatedEntites As IEnumerable(Of String)
 
     Public Sub New(uniqueEntityTable As Table, multipleEntityTable As Table)
-        Me.UniqueEntityTable = uniqueEntityTable
+        Me.uniqueEntityTable = uniqueEntityTable
         Me.MultipleEntityTable = multipleEntityTable
     End Sub
 
 
     Public Function GetRelationColumns() As RelationColumn
         Dim relationStruct = New RelationColumn With {
-            .uniqueEntity = "Id" & UniqueEntityTable.ToString(),
+            .uniqueEntity = "Id" & uniqueEntityTable.ToString(),
             .multipleEntity = "Id" & MultipleEntityTable.ToString()
         }
 
@@ -22,18 +22,18 @@
     End Function
 
     Public Function GetRelationTable() As Table
-        Dim relationTableString = UniqueEntityTable.ToString() & MultipleEntityTable.ToString()
+        Dim relationTableString = uniqueEntityTable.ToString() & MultipleEntityTable.ToString()
         Try
             Return [Enum].Parse(GetType(Table), relationTableString)
         Catch ex As ArgumentException
-            relationTableString = MultipleEntityTable.ToString() & UniqueEntityTable.ToString()
+            relationTableString = MultipleEntityTable.ToString() & uniqueEntityTable.ToString()
 
             Return [Enum].Parse(GetType(Table), relationTableString)
         End Try
     End Function
 
     Public Function Save() As Boolean
-        Dim outputData = dataBridge.SaveWithOutput(uniqueEntityData, UniqueEntityTable)
+        Dim outputData = dataBridge.SaveWithOutput(uniqueEntityData, uniqueEntityTable)
         Dim entityId = outputData.First()("Id")
 
         Dim columns = GetRelationColumns()
@@ -67,12 +67,12 @@
     End Function
 
     Friend Function Update(entityId As String) As Object
-        dataBridge.Update(entityId, uniqueEntityData, UniqueEntityTable)
+        dataBridge.Update(entityId, uniqueEntityData, uniqueEntityTable)
 
         Dim columns = GetRelationColumns()
 
         For Each id In idRelatedEntites
-            Dim dataDict As New Dictionary(Of String, String) From {
+            Dim dataDict As New Dictionary(Of String, Object) From {
                 {columns.uniqueEntity, entityId},
                 {columns.multipleEntity, id}
             }

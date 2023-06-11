@@ -24,7 +24,7 @@
         </Grid>
         <Image Margin="1227,-42,-54,854" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
 
-        <TabControl Background="Transparent" BorderBrush="Transparent" Margin="0,221,0,0">
+        <TabControl x:Name="tabControlEditarCadastrar" Background="Transparent" BorderBrush="Transparent" Margin="0,221,0,0">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Foreground" Value="Black" />
@@ -67,7 +67,7 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
+            <TabItem x:Name="tabCadastro" Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
                     <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
                     <local:DataGridDisciplina x:Name="userControlDisciplinas" Margin="757,195,209,157"></local:DataGridDisciplina>
@@ -80,76 +80,38 @@
                     <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="222,351,872,386" Text="{Binding Password}"/>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,423,0,0"/>
                     <local:ImagePicker Margin="288,483,1020,153" ImageSource="{Binding Foto}"></local:ImagePicker>
-                    <local:ButtonCadastrar x:Name="btnCadastrarProfessor" Margin="428,670,446,50"></local:ButtonCadastrar>
+                    <local:ButtonCadastrar x:Name="userControlCadastrar" Margin="428,670,446,50"></local:ButtonCadastrar>
                 </Grid>
                 <!-- Conteúdo da aba "Cadastro" -->
             </TabItem>
             <TabItem Header="Editar" Margin="676,4,-676,-4" Foreground="#FFB15225">
                 <!-- Conteúdo da aba "Editar" -->
                 <Grid Height="790" Margin="-4,0,4,0">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
+                    <DataGrid x:Name="dataGridProfessor" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
                         <DataGrid.Resources>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Foreground" Value="#FFB15225" />
-                                <Setter Property="FontSize" Value="25" />
-                            </Style>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Padding" Value="10" />
-                                <Setter Property="Margin" Value="0 5" />
-                                <Setter Property="FontSize" Value="25" />
-                            </Style>
-                            <Style TargetType="Border" x:Key="RowBorder">
-                                <Setter Property="Background" Value="White" />
-                                <Setter Property="CornerRadius" Value="5" />
-                                <Setter Property="Margin" Value="0 5" />
-                            </Style>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="/Views/ResourceDictionaries/Funcionario/FuncionarioDataGridStyle.xaml"/>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="RA " Binding="{Binding Numero}" Width="100"/>
-                            <DataGridTextColumn Header="Professor" Binding="{Binding Aluno}" Width="1000" />
                             <DataGridTemplateColumn Header="Apagar" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Apagar" />
+                                        <Button Content="Apagar" Click="ButtonDeletar_Click" Tag="{Binding Id}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Editar" />
+                                        <Button Content="Editar" Click="ButtonEditar_Click" Tag="{Binding Id}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
-                        <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="DataGridRow">
-                                            <Border Style="{StaticResource RowBorder}">
-                                                <SelectiveScrollingGrid>
-                                                    <SelectiveScrollingGrid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </SelectiveScrollingGrid.ColumnDefinitions>
-                                                    <DataGridCellsPresenter Grid.Column="1" />
-                                                    <DataGridDetailsPresenter Grid.Column="1" />
-                                                    <DataGridRowHeader Grid.Column="0" />
-                                                    <DataGridCell Grid.Column="2" />
-                                                    <DataGridCell Grid.Column="3" />
-                                                </SelectiveScrollingGrid>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.RowStyle>
                     </DataGrid>
-
                 </Grid>
             </TabItem>
         </TabControl>

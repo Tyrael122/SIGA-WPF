@@ -7,8 +7,21 @@
         dataBridge.Delete(idAluno, Table.Aluno)
     End Sub
 
-    Friend Shared Sub DeleteDisciplinasAluno(id As String)
-        dataBridge.Delete(id, "IdAluno", Table.AlunoDisciplina)
+    Friend Shared Sub DeleteDisciplinasAluno(idAluno As String)
+        dataBridge.Delete(idAluno, "IdAluno", Table.AlunoDisciplina)
+    End Sub
+
+    Friend Shared Sub DeleteProfessor(idProfessor As String)
+        dataBridge.Delete(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
+        dataBridge.Delete(idProfessor, "IdProfessor", Table.Prova)
+        dataBridge.Delete(idProfessor, "IdProfessor", Table.Horario)
+        dataBridge.Delete(idProfessor, "IdProfessor", Table.Aula)
+
+        dataBridge.Delete(idProfessor, Table.Professor)
+    End Sub
+
+    Friend Shared Sub DeleteDisciplinas(idEntity As String, whereField As String, table As Table)
+        dataBridge.Delete(idEntity, whereField, table)
     End Sub
 
     Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, Object), table As Table) As List(Of IDictionary(Of String, Object))
@@ -51,5 +64,17 @@
         End If
 
         Return SaveWithOutput(aula, Table.Aula).First()("Id")
+    End Function
+
+    Public Shared Function GetDisciplinasWithCheckBoxColumn(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
+        Dim idDisciplinas = GetDisciplinas(table, idEntity).Select(Function(dict) dict("Id"))
+
+        Dim disciplinas = GetAll(Table.Disciplina)
+
+        For Each disciplina In disciplinas
+            disciplina("IsChecked") = idDisciplinas.Contains(disciplina("Id"))
+        Next
+
+        Return disciplinas
     End Function
 End Class

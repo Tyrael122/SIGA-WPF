@@ -142,7 +142,7 @@ Public Class DAL
             returnString.Append(column & " = " & value & ", ")
         Next
 
-        Return returnString.Remove(returnString.Length - 2, returnString.Length).ToString()
+        Return returnString.ToString().Remove(returnString.Length - 2)
     End Function
 
     Public Sub Dispose() Implements IDisposable.Dispose

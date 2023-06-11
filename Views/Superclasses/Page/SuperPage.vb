@@ -20,4 +20,8 @@
     Protected Function LoadImagePickerDialog()
         Return ViewUtils.LoadImagePickerDialog()
     End Function
+
+    Protected Function GetIdFromButton(sender As Object)
+        Return ViewUtils.GetIdFromButton(sender)
+    End Function
 End Class

@@ -39,4 +39,10 @@ Module ViewUtils
 
         Return Nothing
     End Function
+
+    Friend Function GetIdFromButton(sender As Object) As Object
+        Dim button As Button = CType(sender, Button)
+
+        Return button.Tag
+    End Function
 End Module

@@ -8,15 +8,8 @@
                  mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageConsultas">
-
-    <!--<local:PageModel.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Views/DataGridDisciplina.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </local:PageModel.Resources>-->
-
+    
+    
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
             <Grid.ColumnDefinitions>
@@ -115,7 +108,7 @@
                         <ComboBoxItem Content="5"/>
                         <ComboBoxItem Content="6"/>
                     </ComboBox>
-                    <local:ButtonCadastrar x:Name="btnCadastrarAluno" Margin="428,670,446,50"></local:ButtonCadastrar>
+                    <local:ButtonCadastrar x:Name="userControlAluno" Margin="428,670,446,50"></local:ButtonCadastrar>
                 </Grid>
                 <!-- Conteúdo da aba "Cadastro" -->
             </TabItem>
@@ -124,21 +117,6 @@
                 <Grid Height="790" Margin="-4,0,4,0">
                     <DataGrid AutoGenerateColumns="True" x:Name="dataGridAlunos" CanUserAddRows="False" GridLinesVisibility="None" Margin="52,52,52,52" Foreground="#FFE4490F" BorderBrush="#FFD04814">
                         <DataGrid.Resources>
-                            <!--<Style TargetType="DataGridColumnHeader">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Foreground" Value="#FFB15225" />
-                                <Setter Property="FontSize" Value="25" />
-                            </Style>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Padding" Value="10" />
-                                <Setter Property="Margin" Value="0 5" />
-                                <Setter Property="FontSize" Value="25" />
-                            </Style>-->
-                            <!--<Style TargetType="Border" x:Key="RowBorder">
-                                <Setter Property="Background" Value="White" />
-                                <Setter Property="CornerRadius" Value="5" />
-                                <Setter Property="Margin" Value="0 5" />
-                            </Style>-->
                             <ResourceDictionary>
                                 <ResourceDictionary.MergedDictionaries>
                                     <ResourceDictionary Source="/Views/ResourceDictionaries/Funcionario/FuncionarioDataGridStyle.xaml"/>
@@ -161,44 +139,12 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
-                        <!--<DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="DataGridRow">
-                                            <Border Style="{StaticResource RowBorder}">
-                                                <SelectiveScrollingGrid>
-                                                    <SelectiveScrollingGrid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </SelectiveScrollingGrid.ColumnDefinitions>
-                                                    --><!--<DataGridCellsPresenter Grid.Column="1" />
-                                                    <DataGridDetailsPresenter Grid.Column="1" />
-                                                    <DataGridRowHeader Grid.Column="0" />
-                                                    <DataGridCell Grid.Column="2" />
-                                                    <DataGridCell Grid.Column="3" />--><!--
-                                                </SelectiveScrollingGrid>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.RowStyle>-->
                     </DataGrid>
-
                 </Grid>
             </TabItem>
         </TabControl>
 
-
-
-
-
         <Border BorderBrush="#FFE2850F" BorderThickness="0,0,0,1" HorizontalAlignment="Center" Height="60" Margin="0,239,0,0" VerticalAlignment="Top" Width="1440"/>
-
-
 
     </Grid>
 </local:PageModel>
