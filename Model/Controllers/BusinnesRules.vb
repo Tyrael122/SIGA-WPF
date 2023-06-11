@@ -85,4 +85,19 @@
 
         dataBridge.Delete(idCurso, Table.Curso)
     End Sub
+
+    Friend Shared Sub DeleteDisciplina(idDisciplina As String)
+        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.ProfessorDisciplina)
+        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.AlunoDisciplina)
+        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.CursoDisciplina)
+        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Aula)
+        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Horario)
+        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Prova)
+
+        dataBridge.Delete(idDisciplina, Table.Disciplina)
+    End Sub
+
+    Friend Shared Sub Update(idEntity As String, table As Table, data As Dictionary(Of String, Object))
+        dataBridge.Update(idEntity, data, table)
+    End Sub
 End Class

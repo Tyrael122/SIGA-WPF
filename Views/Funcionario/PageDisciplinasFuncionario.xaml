@@ -30,7 +30,7 @@
         </Grid>
         <Image Margin="1227,-42,-54,854" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
 
-        <TabControl Background="Transparent" BorderBrush="Transparent" Margin="0,221,0,0">
+        <TabControl x:Name="tabControlEditarCadastrar" Background="Transparent" BorderBrush="Transparent" Margin="0,221,0,0">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Foreground" Value="Black" />
@@ -73,7 +73,7 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
+            <TabItem x:Name="tabCadastro" Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
                     <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
                     <Label Content="Nome da disciplina:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="262,115,0,0"/>
@@ -88,7 +88,7 @@
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="800,204,0,0" VerticalAlignment="Top" Width="413">
                         <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Semester}"/>
                     </Border>
-                    <local:ButtonCadastrar x:Name="btnCadastrarDisciplina" Margin="438,502,436,218"></local:ButtonCadastrar>
+                    <local:ButtonCadastrar x:Name="userControlCadastrar" Margin="438,502,436,218"></local:ButtonCadastrar>
                     <Label Content="Carga horária:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="793,292,0,0"/>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="47" Margin="800,380,0,0" VerticalAlignment="Top" Width="413">
                         <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="47" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Workload}"/>
@@ -100,61 +100,25 @@
                 <!-- Conteúdo da aba "Editar" -->
                 <Grid Height="790" Margin="-4,0,4,0">
                     <DataGrid x:Name="dataGridDisciplinas" CanUserAddRows="False" GridLinesVisibility="None" Margin="90,82,90,82" BorderBrush="#FFE45B1B">
-                        <DataGrid.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Padding" Value="10" />
-                                <Setter Property="Margin" Value="10" />
-                                <Setter Property="FontSize" Value="25" />
-                            </Style>
-                        </DataGrid.CellStyle>
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Foreground" Value="#FFB15225" />
-                                <Setter Property="FontSize" Value="25" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
-                        <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="Background" Value="White" />
-                                <Setter Property="Margin" Value="0 5" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type DataGridRow}">
-                                            <Border x:Name="DGR_Border" BorderBrush="{TemplateBinding BorderBrush}" 
-                                                    CornerRadius="5">
-                                                <SelectiveScrollingGrid>
-                                                    <SelectiveScrollingGrid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </SelectiveScrollingGrid.ColumnDefinitions>
-                                                    <SelectiveScrollingGrid.RowDefinitions>
-                                                        <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                    </SelectiveScrollingGrid.RowDefinitions>
-                                                    <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                                    <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Visibility="{TemplateBinding DetailsVisibility}"/>
-                                                    <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
-                                                </SelectiveScrollingGrid>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.RowStyle>
+                        <DataGrid.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="/Views/ResourceDictionaries/Funcionario/FuncionarioDataGridStyle.xaml"/>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Editar">
+                            <DataGridTemplateColumn Header="Apagar" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Editar" />
+                                        <Button Content="Apagar" Click="ButtonDeletar_Click" Tag="{Binding Id}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Deletar">
+                            <DataGridTemplateColumn Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Deletar" />
+                                        <Button Content="Editar" Click="ButtonEditar_Click" Tag="{Binding Id}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
