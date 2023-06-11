@@ -23,7 +23,6 @@
         End Set
     End Property
 
-
     Private _workload As String
     Public Property Workload As String
         Get

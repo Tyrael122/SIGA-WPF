@@ -33,9 +33,11 @@ Public MustInherit Class ViewModel
         Return dict
     End Function
 
-    Public Sub LoadFromDictionary(dict As Dictionary(Of String, String))
+    Public Sub LoadFromDictionary(dict As Dictionary(Of String, Object))
         For Each viewModelProperty In Me.GetType().GetProperties()
             Try
+                dict(viewModelProperty.Name) = dict(viewModelProperty.Name).ToString()
+
                 viewModelProperty.SetValue(Me, dict(viewModelProperty.Name))
             Catch ex As KeyNotFoundException
                 Continue For

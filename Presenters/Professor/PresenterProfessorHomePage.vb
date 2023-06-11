@@ -19,8 +19,7 @@ Public Class PresenterProfessorHomePage
         Call New TelaProfessor().Show()
     End Sub
 
-    Friend Function GetDisciplinasCadastradas() As DataView
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Professor, SessionCookie.GetCookie("userId"))
-        Return ConvertDictionaryToDataView(disciplinas)
+    Friend Function GetDisciplinasCadastradas() As IEnumerable(Of IDictionary(Of String, Object))
+        Return BusinessRules.GetDisciplinas(Table.Professor, SessionCookie.GetCookie("userId"))
     End Function
 End Class

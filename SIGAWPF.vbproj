@@ -44,6 +44,17 @@
     <None Remove="Views\Funcionario\ViewPassword.png" />
     <None Remove="Views\Icons\ArrowBack.png" />
     <None Remove="Views\Icons\ViewPassword.png" />
+    <None Remove="Views\Images\Books-2-icon.png" />
+    <None Remove="Views\Images\Books-icon.png" />
+    <None Remove="Views\Images\calendar-icon-ConversImagem.png" />
+    <None Remove="Views\Images\Home-2-icon.png" />
+    <None Remove="Views\Images\Magnifier-icon.png" />
+    <None Remove="Views\Images\mail-icon.png" />
+    <None Remove="Views\Images\menu-icon.png" />
+    <None Remove="Views\Images\Tablet-ou-notebook-qual-escolher-para-estudar_-768x512-1-removebg-preview-ConversImagem.png" />
+    <None Remove="Views\Images\user-icon-removebg-preview.png" />
+    <None Remove="Views\Images\user-icon.png" />
+    <None Remove="Views\Images\User-Interface-Logout-icon.png" />
     <None Remove="Views\menu-icon.png" />
     <None Remove="Views\Segurança\5137894.jpg" />
     <None Remove="Views\Segurança\FatecLogo.png" />
@@ -57,6 +68,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\Images\Books-2-icon.png" />
+    <Resource Include="Views\Images\Books-icon.png" />
+    <Resource Include="Views\Images\calendar-icon-ConversImagem.png" />
+    <Resource Include="Views\Images\Home-2-icon.png" />
+    <Resource Include="Views\Images\Magnifier-icon.png" />
+    <Resource Include="Views\Images\mail-icon.png" />
+    <Resource Include="Views\Images\menu-icon.png" />
+    <Resource Include="Views\Images\Tablet-ou-notebook-qual-escolher-para-estudar_-768x512-1-removebg-preview-ConversImagem.png" />
+    <Resource Include="Views\Images\user-icon-removebg-preview.png" />
+    <Resource Include="Views\Images\user-icon.png" />
+    <Resource Include="Views\Images\User-Interface-Logout-icon.png" />
     <Resource Include="Views\ResourceDictionaries\Professor\ProfessorDataGridStyle.xaml" />
   </ItemGroup>
 

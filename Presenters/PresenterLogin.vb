@@ -28,7 +28,7 @@
             Case Table.Aluno
                 Return New AlunoHomePage()
             Case Table.Professor
-                Return New TelaProfessor()
+                Return New TelaInicialProfessor()
             Case Table.FuncionarioAdm
                 Return New TelaFuncionario()
             Case Else
