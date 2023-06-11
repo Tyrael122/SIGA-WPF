@@ -40,7 +40,7 @@
         </Grid>
         <Image Margin="1227,-42,-54,854" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
 
-        <TabControl Background="Transparent" BorderBrush="Transparent" Margin="0,221,0,0">
+        <TabControl x:Name="tabControlAluno" Background="Transparent" BorderBrush="Transparent" Margin="0,221,0,0">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Foreground" Value="Black" />
@@ -83,7 +83,7 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
+            <TabItem x:Name="tabCadastroAluno" Header="Cadastro" Margin="566,0,-566,0" Foreground="#FFB15225">
                 <Grid Height="790" Margin="-4,0,4,0">
                     <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
                     <local:DataGridDisciplina x:Name="userControlDataGridDisciplinas" Margin="782,176,214,393"></local:DataGridDisciplina>
@@ -149,14 +149,14 @@
                             <DataGridTemplateColumn Header="Apagar" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnApagarAluno" Content="Apagar" Click="btnApagarAluno_Click" Tag="{Binding Id}"/>
+                                        <Button Content="Apagar" Click="btnApagarAluno_Click" Tag="{Binding Id}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnEditarAluno" Content="Editar" Click="btnEditarAluno_Click" Tag="{Binding Id}"/>
+                                        <Button Content="Editar" Click="btnEditarAluno_Click" Tag="{Binding Id}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

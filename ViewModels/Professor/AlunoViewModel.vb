@@ -7,7 +7,12 @@
             Return _curso
         End Get
         Set(value As Object)
-            _curso = value.Tag
+            If value.GetType() = GetType(ComboBoxItem) Then
+                _curso = value.Tag
+                Return
+            End If
+
+            _curso = value
             OnPropertyChanged(NameOf(Curso))
         End Set
     End Property

@@ -23,12 +23,12 @@
         End Set
     End Property
 
-    Private _foto As ImageSource
-    Public Property Foto As ImageSource
+    Private _foto As Object
+    Public Property Foto As Object
         Get
             Return _foto
         End Get
-        Set(value As ImageSource)
+        Set(value As Object)
             _foto = value
             OnPropertyChanged(NameOf(Foto))
         End Set

@@ -35,7 +35,20 @@
         btnImage.Background = backGround
     End Sub
 
-    Private Sub btnEditarAluno_Click(sender As Object, e As RoutedEventArgs) Handles btnEditarAluno.Click
+    Private Sub btnEditarAluno_Click(sender As Object, e As RoutedEventArgs)
+        tabControlAluno.SelectedItem = tabCadastroAluno
+        'tabControlAluno.SelectedIndex = 0 ' Deve mudar para a aba de cadastro
 
+        Dim button As Button = CType(sender, Button)
+
+        Presenter.CarregarAlunoParaEdicao(button.Tag)
+    End Sub
+
+    Private Sub btnApagarAluno_Click(sender As Object, e As RoutedEventArgs)
+        Dim button As Button = CType(sender, Button)
+
+        Presenter.DeleteAluno(button.Tag)
+
+        dataGridAlunos.ItemsSource = Presenter.GetDataView("Aluno")
     End Sub
 End Class

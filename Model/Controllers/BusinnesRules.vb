@@ -35,7 +35,7 @@
         Return GetAll(Table.Disciplina).Where(Function(disciplina) idDisciplinas.Contains(disciplina("Id")))
     End Function
 
-    Friend Shared Function GetAllById(id As String, tableStr As Table) As IEnumerable(Of IDictionary(Of String, String))
+    Friend Shared Function GetAllById(id As String, tableStr As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
 

@@ -36,7 +36,15 @@ Public MustInherit Class ViewModel
     Public Sub LoadFromDictionary(dict As Dictionary(Of String, Object))
         For Each viewModelProperty In Me.GetType().GetProperties()
             Try
-                dict(viewModelProperty.Name) = dict(viewModelProperty.Name).ToString()
+                Dim data = dict(viewModelProperty.Name)
+
+                If IsDBNull(data) Then
+                    Continue For
+                End If
+
+                If viewModelProperty.PropertyType = GetType(String) Then
+                    dict(viewModelProperty.Name) = data.ToString()
+                End If
 
                 viewModelProperty.SetValue(Me, dict(viewModelProperty.Name))
             Catch ex As KeyNotFoundException
