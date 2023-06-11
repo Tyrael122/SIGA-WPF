@@ -2,16 +2,11 @@
     Inherits UserViewModel
 
     Private _curso As String
-    Public Property Curso As Object
+    Public Property Curso As String
         Get
             Return _curso
         End Get
-        Set(value As Object)
-            If value.GetType() = GetType(ComboBoxItem) Then
-                _curso = value.Tag
-                Return
-            End If
-
+        Set(value As String)
             _curso = value
             OnPropertyChanged(NameOf(Curso))
         End Set

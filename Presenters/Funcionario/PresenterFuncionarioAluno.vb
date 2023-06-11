@@ -17,6 +17,7 @@ Public Class PresenterFuncionarioAluno
     Public Sub RegisterAluno(idsDisciplinasAluno As IEnumerable(Of String))
         Dim data = ViewModelAluno.ConvertToDictionary()
 
+        data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
         data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
 
         Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
@@ -27,7 +28,9 @@ Public Class PresenterFuncionarioAluno
     End Function
 
     Friend Function GetDisciplinasCurso() As DataView
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, ViewModelAluno.Curso)
+        Dim idCurso = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
+
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
 
         For Each disciplina In disciplinas
             disciplina("IsChecked") = True

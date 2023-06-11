@@ -21,27 +21,48 @@
         userControlDataGridDisciplinas.ItemsSource = Presenter.GetDisciplinasCurso()
     End Sub
 
-    Private Sub btnCadastrarAluno_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarAluno.Click
+    Private Sub btnCadastrarAluno_Click(sender As Object, e As RoutedEventArgs)
         Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(userControlDataGridDisciplinas.DataGrid)
 
         Presenter.RegisterAluno(idsDisciplinasAluno)
     End Sub
 
+    Private Sub btnAtualizarAluno_Click(sender As Object, e As RoutedEventArgs)
+        Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(userControlDataGridDisciplinas.DataGrid)
+
+        Presenter.UpdateAluno(idsDisciplinasAluno)
+        SetBotaoAlunoParaCadastro()
+    End Sub
+
+
     Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
         Dim backGround As New ImageBrush With {
-            .ImageSource = LoadImagePickerDialog()
-        }
+        .ImageSource = LoadImagePickerDialog()
+    }
 
         btnImage.Background = backGround
     End Sub
 
     Private Sub btnEditarAluno_Click(sender As Object, e As RoutedEventArgs)
         tabControlAluno.SelectedItem = tabCadastroAluno
-        'tabControlAluno.SelectedIndex = 0 ' Deve mudar para a aba de cadastro
 
         Dim button As Button = CType(sender, Button)
 
         Presenter.CarregarAlunoParaEdicao(button.Tag)
+
+        SetBotaoAlunoParaEdicao()
+    End Sub
+
+    Private Sub SetBotaoAlunoParaEdicao()
+        btnCadastrarAluno.Content = "Atualizar aluno"
+        RemoveHandler btnCadastrarAluno.Click, AddressOf btnCadastrarAluno_Click
+        AddHandler btnCadastrarAluno.Click, AddressOf btnAtualizarAluno_Click
+    End Sub
+
+    Private Sub SetBotaoAlunoParaCadastro()
+        btnCadastrarAluno.Content = "Cadastrar"
+        RemoveHandler btnCadastrarAluno.Click, AddressOf btnAtualizarAluno_Click
+        AddHandler btnCadastrarAluno.Click, AddressOf btnCadastrarAluno_Click
     End Sub
 
     Private Sub btnApagarAluno_Click(sender As Object, e As RoutedEventArgs)
