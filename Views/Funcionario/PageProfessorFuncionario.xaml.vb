@@ -24,11 +24,6 @@
         dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
     End Sub
 
-    Private Sub ButtonDeletar_Click(sender As Object, e As RoutedEventArgs)
-        Presenter.DeleteProfessor(GetIdFromButton(sender))
-
-        dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
-    End Sub
 
     Private Sub btnAtualizarAluno_Click(sender As Object, e As RoutedEventArgs)
         Dim idsDisciplinasProfessor = LoadIdsFromSelectedRows(userControlDisciplinas.DataGrid)
@@ -38,6 +33,12 @@
 
         dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
         userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+    End Sub
+
+    Private Sub ButtonDeletar_Click(sender As Object, e As RoutedEventArgs)
+        Presenter.DeleteProfessor(GetIdFromButton(sender))
+
+        dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
     End Sub
 
     Private Sub ButtonEditar_Click(sender As Object, e As RoutedEventArgs)

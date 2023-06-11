@@ -66,7 +66,7 @@
         Return SaveWithOutput(aula, Table.Aula).First()("Id")
     End Function
 
-    Public Shared Function GetDisciplinasWithCheckBoxColumn(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
+    Public Shared Function GetDisciplinasDaEntidade(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Dim idDisciplinas = GetDisciplinas(table, idEntity).Select(Function(dict) dict("Id"))
 
         Dim disciplinas = GetAll(Table.Disciplina)
@@ -77,4 +77,12 @@
 
         Return disciplinas
     End Function
+
+    Friend Shared Sub DeleteCurso(idCurso As Object)
+        dataBridge.Delete(idCurso, "IdCurso", Table.CursoDisciplina)
+        dataBridge.Delete(idCurso, "IdCurso", Table.Horario)
+        dataBridge.Delete(idCurso, "IdCurso", Table.Aula)
+
+        dataBridge.Delete(idCurso, Table.Curso)
+    End Sub
 End Class

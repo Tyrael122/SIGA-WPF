@@ -1,4 +1,6 @@
-﻿Public Class PresenterFuncionarioCurso
+﻿Imports System.Data
+
+Public Class PresenterFuncionarioCurso
     Inherits Presenter
 
     Private ViewModelCurso As New CursoViewModel()
@@ -18,9 +20,50 @@
     End Sub
 
 
-    Friend Sub ShowCursoPage(idCurso As String)
+    Friend Function ShowCursoPage(idCurso As String)
         SessionCookie.AddCookie("IdCurso", idCurso)
 
-        'Call New CursoPage().Show()
+        ' Add logic to change the page from here. It needs to change the content of the mainFrame. Maybe through binding?
+    End Function
+
+    Friend Sub DeleteCurso(idCurso As Object)
+        BusinessRules.DeleteCurso(idCurso)
     End Sub
+
+    Friend Sub CarregarCursoParaEdicao(idCurso As String)
+        Dim data = BusinessRules.GetAllById(idCurso, Table.Curso).First()
+
+        ViewModelCurso.LoadFromDictionary(data)
+
+        ViewModelCurso.Turno = [Enum].Parse(GetType(Turno), data("Turno")).ToString()
+
+        SessionCookie.AddCookie("IdCurso", idCurso)
+    End Sub
+
+    Friend Sub UpdateCurso(idsDisciplinasCurso As List(Of String))
+        Dim idCurso = SessionCookie.GetCookie("IdCurso")
+
+        BusinessRules.DeleteDisciplinas(idCurso, "IdCurso", Table.CursoDisciplina)
+
+        Dim data = ViewModelCurso.ConvertToDictionary()
+
+        data("Turno") = [Enum].Parse(GetType(Turno), ViewModelCurso.Turno)
+
+        Dim relation As New Relation(Table.Curso, Table.Disciplina) With {
+            .uniqueEntityData = data,
+            .idRelatedEntites = idsDisciplinasCurso
+        }
+
+        relation.Update(idCurso)
+
+        ViewModelCurso.Clear()
+    End Sub
+
+    Friend Function GetDisciplinasCurso() As DataView
+        Dim idCurso = SessionCookie.GetCookie("IdCurso")
+
+        Dim disciplinas = BusinessRules.GetDisciplinasDaEntidade(idCurso, Table.Curso)
+
+        Return ConvertDictionaryToDataView(disciplinas)
+    End Function
 End Class

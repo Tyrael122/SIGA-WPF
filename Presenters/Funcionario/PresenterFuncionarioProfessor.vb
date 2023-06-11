@@ -60,7 +60,7 @@ Public Class PresenterFuncionarioProfessor
     Friend Function GetDisciplinasProfessor() As DataView
         Dim idProfessor = SessionCookie.GetCookie("IdProfessor")
 
-        Dim disciplinas = BusinessRules.GetDisciplinasWithCheckBoxColumn(idProfessor, Table.Professor)
+        Dim disciplinas = BusinessRules.GetDisciplinasDaEntidade(idProfessor, Table.Professor)
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
