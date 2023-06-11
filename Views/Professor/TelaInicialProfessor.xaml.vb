@@ -14,8 +14,8 @@ Class TelaInicialProfessor
     End Sub
 
     Private Sub TelaInicialProfessor_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        'Dim disciplinas = Presenter.GetDisciplinasCadastradas()
-        Dim disciplinas = Presenter.GetAll("Disciplina")
+        Dim disciplinas = Presenter.GetDisciplinasCadastradas()
+        'Dim disciplinas = Presenter.GetAll("Disciplina")
 
         Dim itemControlSource As New ObservableCollection(Of DisciplinaViewModel)
         For Each disciplina In disciplinas
