@@ -35,7 +35,6 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding IsChecked}" Header="Selecionar" Width="130"/>
-                <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

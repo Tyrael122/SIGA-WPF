@@ -13,10 +13,14 @@
 
     Private Sub btnCadastrarDisciplina_Click(sender As Object, e As RoutedEventArgs)
         Presenter.RegisterDisciplina()
+
+        dataGridDisciplinas.ItemsSource = Presenter.GetDataView("Disciplina")
     End Sub
 
     Private Sub PageDisciplinasFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         dataGridDisciplinas.ItemsSource = Presenter.GetDataView("Disciplina")
+
+        SetBotaoParaCadastro()
     End Sub
 
     Private Sub btnAtualizarDisciplina_Click(sender As Object, e As RoutedEventArgs)
