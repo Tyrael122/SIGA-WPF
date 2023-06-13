@@ -5,10 +5,10 @@ Imports System.Text
 Public MustInherit Class Presenter
     Protected View As IView
 
-    Private Const EmptyUserImagePath As String = "C:\Users\Suporte\OneDrive - Fatec Centro Paula Souza\Programs\VB\SIGA\SIGAWPF\Views\Images\user-icon-removebg-preview.png"
+    Private Const EmptyUserImagePath As String = "Views\Images\user-icon-removebg-preview.png"
 
     Protected Function CarregarFotoVazia() As ImageSource
-        Return New BitmapImage(New Uri(EmptyUserImagePath, UriKind.Absolute))
+        Return New BitmapImage(New Uri(EmptyUserImagePath, UriKind.Relative))
     End Function
 
     Protected Function ConvertImageToByteArray(foto As ImageSource) As Byte()

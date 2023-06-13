@@ -3,6 +3,7 @@
     [Login]    VARCHAR (255) NULL,
     [Password] VARCHAR (255) NULL,
     [Foto] VARBINARY(MAX) NULL, 
+    [Email] VARBINARY(MAX) NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

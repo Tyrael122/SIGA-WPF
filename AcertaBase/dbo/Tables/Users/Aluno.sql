@@ -5,6 +5,7 @@
     [Curso] INT NULL, 
     [SemestreInicio] TINYINT NULL, 
     [Foto] VARBINARY(MAX) NULL, 
+    [Email] VARCHAR(MAX) NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC), 
     CONSTRAINT [IdCursoAluno] FOREIGN KEY ([Curso]) REFERENCES [Curso]([Id])
 );

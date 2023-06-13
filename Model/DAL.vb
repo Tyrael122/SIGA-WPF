@@ -148,4 +148,23 @@ Public Class DAL
     Public Sub Dispose() Implements IDisposable.Dispose
         connection.Close()
     End Sub
+
+    'Public Function ObterCredenciaisEmail() As (table As Table, remetente As String, senha As String) As String
+    '    Dim query As String = "SELECT senha, remetente FROM " & Table.ToString & " WHERE email = @Email"
+    '    Dim remetente As String = ""
+    '    Dim senha As String = ""
+
+    '        Using sqlCommand As New SqlCommand(query, connection)
+    '            sqlCommand.Parameters.AddWithValue("@Email", email)
+    '            Dim reader As SqlDataReader = sqlCommand.ExecuteReader()
+
+    '            If reader.Read() Then
+    '                senha = reader("senha").ToString()
+    '                remetente = reader("remetente").ToString()
+    '            End If
+    '        End Using
+    '    End Using
+
+    '    Return (remetente, senha)
+    'End Function
 End Class

@@ -11,7 +11,7 @@
     <local:PageModel.Resources>
         <ControlTemplate x:Key="CustomTextBoxTemplate" TargetType="TextBox">
             <TextBox HorizontalAlignment="Left" BorderThickness="0,0,0,1" BorderBrush="#FFD43E1C" TextWrapping="Wrap"
-                     VerticalAlignment="Top" Width="413" Height="47" Background="Transparent"
+                     VerticalAlignment="Top" Width="413" Height="40" Background="Transparent"
                      Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </ControlTemplate>
     </local:PageModel.Resources>
@@ -74,13 +74,15 @@
                     <Border BorderBrush="#FFDA8E58" BorderThickness="0,0,0,1" Margin="757,122,343,612">
                         <Label Content="Selecione as disciplinas:" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold"/>
                     </Border>
-                    <Label Content="Login:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,115,0,0"/>
-                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="230,194,868,542" Text="{Binding Login}"/>
-                    <Label Content="Senha:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,292,0,0"/>
-                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="222,351,872,386" Text="{Binding Password}"/>
+                    <Label Content="Login:" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,115,0,0" FontSize="25"/>
+                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="226,164,872,572" Text="{Binding Login}"/>
+                    <Label Content="Senha:" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="222,223,0,0" FontSize="25"/>
+                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="226,267,868,470" Text="{Binding Password}"/>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,423,0,0"/>
                     <local:ImagePicker Margin="288,483,1020,153" ImageSource="{Binding Foto}"></local:ImagePicker>
                     <local:ButtonCadastrar x:Name="userControlCadastrar" Margin="428,670,446,50"></local:ButtonCadastrar>
+                    <Label Content="E-Mail Institucional:" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,320,0,0" FontSize="25"/>
+                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="222,355,872,382" Text="{Binding Password}"/>
                 </Grid>
                 <!-- Conteúdo da aba "Cadastro" -->
             </TabItem>

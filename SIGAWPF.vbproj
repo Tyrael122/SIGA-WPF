@@ -19,6 +19,7 @@
     <None Remove="key-icon.png" />
     <None Remove="user-icon.png" />
     <None Remove="Views\5137894 %281%29.jpg" />
+    <None Remove="Views\5137894.jpg" />
     <None Remove="Views\Aluno\Banner super desconto para loja online azul e branco.png" />
     <None Remove="Views\Aluno\Books-2-icon.png" />
     <None Remove="Views\Aluno\Books-icon.png" />
@@ -42,7 +43,10 @@
     <None Remove="Views\Funcionario\disciplina.png" />
     <None Remove="Views\Funcionario\Funcionario.png" />
     <None Remove="Views\Funcionario\ViewPassword.png" />
+    <None Remove="Views\Icons\arrow-back-circle-outline-icon %281%29.png" />
     <None Remove="Views\Icons\ArrowBack.png" />
+    <None Remove="Views\Icons\Documents-icon-ConversImagem.png" />
+    <None Remove="Views\Icons\SetaVoltar.png" />
     <None Remove="Views\Icons\ViewPassword.png" />
     <None Remove="Views\Images\Books-2-icon.png" />
     <None Remove="Views\Images\Books-icon.png" />
@@ -68,6 +72,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\5137894.jpg" />
+    <Resource Include="Views\Icons\arrow-back-circle-outline-icon (1).png" />
+    <Resource Include="Views\Icons\Documents-icon-ConversImagem.png" />
+    <Resource Include="Views\Icons\SetaVoltar.png" />
     <Resource Include="Views\Images\Books-2-icon.png" />
     <Resource Include="Views\Images\Books-icon.png" />
     <Resource Include="Views\Images\calendar-icon-ConversImagem.png" />
