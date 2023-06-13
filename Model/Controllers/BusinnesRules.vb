@@ -82,7 +82,6 @@
         dataBridge.Delete(idCurso, "IdCurso", Table.CursoDisciplina)
         dataBridge.Delete(idCurso, "IdCurso", Table.Horario)
         dataBridge.Delete(idCurso, "IdCurso", Table.Aula)
-
         dataBridge.Delete(idCurso, Table.Curso)
     End Sub
 
@@ -92,8 +91,14 @@
         dataBridge.Delete(idDisciplina, "IdDisciplina", Table.CursoDisciplina)
         dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Aula)
         dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Horario)
-        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Prova)
 
+        Dim idsProva = dataBridge.SelectAll(Table.Prova).Where(Function(dict) dict("IdDisciplina") = idDisciplina).Select(Function(dict) dict("Id"))
+
+        For Each idProva In idsProva
+            dataBridge.Delete(idProva, "IdProva", Table.Nota)
+        Next
+
+        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Prova)
         dataBridge.Delete(idDisciplina, Table.Disciplina)
     End Sub
 
