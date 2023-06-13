@@ -23,7 +23,7 @@ Public Class PresenterFuncionarioCurso
     Friend Function ShowCursoPage(idCurso As String)
         SessionCookie.AddCookie("IdCurso", idCurso)
 
-        ' TODO: Add logic to change the page from here. It needs to change the content of the mainFrame. Maybe through binding?
+        Call New CadastroHorario().Show()
     End Function
 
     Friend Sub DeleteCurso(idCurso As Object)

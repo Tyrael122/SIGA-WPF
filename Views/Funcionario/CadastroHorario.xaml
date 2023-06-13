@@ -1,47 +1,32 @@
-﻿<Page x:Class="CadastroHorario"
+﻿<local:WindowModel x:Class="CadastroHorario"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SIGAWPF"
-      mc:Ignorable="d" 
-      d:DesignHeight="1070" d:DesignWidth="1520"
+      xmlns:local="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=local:HorarioCursoViewModel}"
+                   mc:Ignorable="d" WindowState="Maximized" Height="1080" Width="1920"
       Title="PageConsultas">
     <Grid Background="#FFECECEC">
-        <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="209*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="46*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="1238*"/>
-            </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
             <Border BorderBrush="#FFDA4803" BorderThickness="0,0,0,3" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="111" Margin="0,31,0,0" VerticalAlignment="Top" Width="1229">
                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Height="114" Width="868" FontSize="70" Foreground="#FBE62203" Margin="36,-16,0,0" Content="Cadastrar Horários"/>
             </Border>
 
-
         </Grid>
-        <Image Margin="1227,-42,-54,854" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
-        <Grid Margin="33,240,33,40">
+        <Image Margin="1425,-42,-54,815" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
+        <Grid Margin="38,221,28,59">
             <Rectangle HorizontalAlignment="Center" Height="600" Stroke="Black" VerticalAlignment="Top" Width="1136" RadiusX="30" RadiusY="30" Fill="#66FDD4B1" Margin="0,55,0,0"/>
-            <Label Content="Semestre:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,115,0,0" FontSize="30"/>
-            <Button x:Name="btnAviso" Content="Cadastrar Horário" HorizontalAlignment="Center" Margin="0,507,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFC58849" FontSize="25" FontFamily="Arial" FontWeight="Bold" Foreground="White">
+            <Label Content="Semestre:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="414,130,0,0" FontSize="30"/>
+            <Button x:Name="btnCadastrarHorario" Content="Cadastrar Horário" HorizontalAlignment="Center" Margin="0,507,0,0" VerticalAlignment="Top" Height="64" Width="618" BorderThickness="1,1,1,1" Background="#FFC77E33" FontSize="25" FontFamily="Arial" FontWeight="Bold" Foreground="White">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="32" Background="#FFFBC8A4">
+                        <Border CornerRadius="32" Background="#FFFF974E">
                             <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <ComboBox x:Name="cmbSemestre" HorizontalAlignment="Left" Margin="226,185,0,0" VerticalAlignment="Top" Width="294" Height="56">
+            <ComboBox x:Name="cmbSemestre" HorizontalAlignment="Left" Margin="414,200,0,0" VerticalAlignment="Top" Width="294" Height="56" SelectedItem="{Binding Semestre}">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>
@@ -49,8 +34,8 @@
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="6"/>
             </ComboBox>
-            <ComboBox x:Name="cmbDisciplinas" HorizontalAlignment="Left" Margin="600,190,0,0" VerticalAlignment="Top" Width="294" Height="56"/>
-            <ComboBox x:Name="cmbDiaSemana" HorizontalAlignment="Left" Margin="960,185,0,0" VerticalAlignment="Top" Width="294" Height="56">
+            <ComboBox x:Name="cmbDisciplinas" HorizontalAlignment="Left" Margin="788,205,0,0" VerticalAlignment="Top" Width="294" Height="56" SelectedItem="{Binding IdDisciplina}"/>
+            <ComboBox x:Name="cmbDiaSemana" HorizontalAlignment="Left" Margin="1148,200,0,0" VerticalAlignment="Top" Width="294" Height="56" Text="{Binding DiaSemana}">
                 <ComboBoxItem Content="Segunda"/>
                 <ComboBoxItem Content="Terça"/>
                 <ComboBoxItem Content="Quarta"/>
@@ -58,26 +43,23 @@
                 <ComboBoxItem Content="Sexta"/>
                 <ComboBoxItem Content="Sábado"/>
             </ComboBox>
-            <ComboBox x:Name="cmbProfessor" HorizontalAlignment="Left" Margin="969,355,0,0" VerticalAlignment="Top" Width="294" Height="56"/>
-            <ComboBox x:Name="cmbHorarioInicio" HorizontalAlignment="Left" Margin="226,354,0,0" VerticalAlignment="Top" Width="294" Height="56">
+            <ComboBox x:Name="cmbProfessor" HorizontalAlignment="Left" Margin="1156,370,0,0" VerticalAlignment="Top" Width="294" Height="56" SelectedItem="{Binding IdProfessor}"/>
+            <ComboBox x:Name="cmbHorarioInicio" HorizontalAlignment="Left" Margin="414,369,0,0" VerticalAlignment="Top" Width="294" Height="56" Text="{Binding HorarioInicio}">
                 <ComboBoxItem Content="7:00"/>
                 <ComboBoxItem Content="9:00"/>
                 <ComboBoxItem Content="11:00"/>
             </ComboBox>
-            <ComboBox x:Name="cmbHorarioFim" HorizontalAlignment="Left" Margin="600,355,0,0" VerticalAlignment="Top" Width="294" Height="56">
+            <ComboBox x:Name="cmbHorarioFim" HorizontalAlignment="Left" Margin="788,370,0,0" VerticalAlignment="Top" Width="294" Height="56" Text="{Binding HorarioFim}">
                 <ComboBoxItem Content="8:40"/>
                 <ComboBoxItem Content="10:40"/>
                 <ComboBoxItem Content="12:00"/>
             </ComboBox>
-            <Label Content="Semestre:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,284,0,0" FontSize="30"/>
-            <Label Content="Semestre:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="600,113,0,0" FontSize="30"/>
-            <Label Content="Semestre:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="600,285,0,0" FontSize="30"/>
-            <Label Content="Semestre:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="312" Foreground="#FFEF691B" FontWeight="Bold" Margin="951,111,0,0" FontSize="30"/>
-            <Label Content="Semestre:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="312" Foreground="#FFEF691B" FontWeight="Bold" Margin="960,285,0,0" FontSize="30"/>
+            <Label Content="Horário de Início:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="414,299,0,0" FontSize="30"/>
+            <Label Content="Disciplinas:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="788,128,0,0" FontSize="30"/>
+            <Label Content="Horário de Fim:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="788,300,0,0" FontSize="30"/>
+            <Label Content="Dia da semana:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="312" Foreground="#FFEF691B" FontWeight="Bold" Margin="1138,126,0,0" FontSize="30"/>
+            <Label Content="Professor:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="312" Foreground="#FFEF691B" FontWeight="Bold" Margin="1148,300,0,0" FontSize="30"/>
         </Grid>
-
-
-
     </Grid>
-</Page>
+</local:WindowModel>
 

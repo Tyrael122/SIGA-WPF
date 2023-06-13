@@ -24,11 +24,16 @@
     End Property
 
     Private _semestre As String
-    Public Property Semestre As String
+    Public Property Semestre As Object
         Get
             Return _semestre
         End Get
-        Set(value As String)
+        Set(value As Object)
+            If value.GetType() = GetType(ComboBoxItem) Then
+                _semestre = value.Content
+                Return
+            End If
+
             _semestre = value
             OnPropertyChanged(NameOf(Semestre))
         End Set
