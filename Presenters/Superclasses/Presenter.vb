@@ -1,6 +1,5 @@
 ﻿Imports System.Data
 Imports System.IO
-Imports System.Text
 
 Public MustInherit Class Presenter
     Protected View As IView
@@ -8,7 +7,11 @@ Public MustInherit Class Presenter
     Private Const EmptyUserImagePath As String = "Views\Images\user-icon-removebg-preview.png"
 
     Protected Function CarregarFotoVazia() As ImageSource
-        Return New BitmapImage(New Uri(EmptyUserImagePath, UriKind.Relative))
+        Dim baseDirectory As String = AppDomain.CurrentDomain.BaseDirectory
+        Dim projectFolder = New Uri(Directory.GetParent(baseDirectory).Parent.Parent.ToString())
+
+        Dim imageUri = New Uri(projectFolder, EmptyUserImagePath)
+        Return New BitmapImage(imageUri)
     End Function
 
     Protected Function ConvertImageToByteArray(foto As ImageSource) As Byte()
@@ -63,8 +66,8 @@ Public MustInherit Class Presenter
 
         For Each dict In selector()
             Dim comboBoxItem As New ComboBoxItem With {
-                .Content = dict(content),
-                .Tag = dict(tag)
+                .content = dict(content),
+                .tag = dict(tag)
             }
             comboBoxItems.Add(comboBoxItem)
         Next
