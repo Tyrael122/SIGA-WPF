@@ -67,6 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Views\ResourceDictionaries\Aluno\AlunoDataGridStyle.xaml" />
     <Page Remove="Views\ResourceDictionaries\Funcionario\FuncionarioDataGridStyle.xaml" />
     <Page Remove="Views\ResourceDictionaries\Professor\ProfessorDataGridStyle.xaml" />
   </ItemGroup>
@@ -87,6 +88,7 @@
     <Resource Include="Views\Images\user-icon-removebg-preview.png" />
     <Resource Include="Views\Images\user-icon.png" />
     <Resource Include="Views\Images\User-Interface-Logout-icon.png" />
+    <Resource Include="Views\ResourceDictionaries\Aluno\AlunoDataGridStyle.xaml" />
     <Resource Include="Views\ResourceDictionaries\Professor\ProfessorDataGridStyle.xaml" />
   </ItemGroup>
 

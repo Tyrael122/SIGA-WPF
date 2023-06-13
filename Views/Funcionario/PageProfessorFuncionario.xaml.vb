@@ -11,7 +11,7 @@
         Throw New NotImplementedException()
     End Sub
 
-    Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs) Handles userControlCadastrar.Click
+    Private Sub btnCadastrarProfessor_Click(sender As Object, e As RoutedEventArgs)
         Dim idsDisciplinasProfessor = LoadIdsFromSelectedRows(userControlDisciplinas.DataGrid)
 
         Presenter.RegisterProfessor(idsDisciplinasProfessor)

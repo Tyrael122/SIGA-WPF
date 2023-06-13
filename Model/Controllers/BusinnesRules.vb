@@ -66,7 +66,7 @@
         Return SaveWithOutput(aula, Table.Aula).First()("Id")
     End Function
 
-    Public Shared Function GetDisciplinasDaEntidade(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
+    Public Shared Function GetDisciplinasComCheckBoxColumn(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Dim idDisciplinas = GetDisciplinas(table, idEntity).Select(Function(dict) dict("Id"))
 
         Dim disciplinas = GetAll(Table.Disciplina)
@@ -100,4 +100,59 @@
     Friend Shared Sub Update(idEntity As String, table As Table, data As Dictionary(Of String, Object))
         dataBridge.Update(idEntity, data, table)
     End Sub
+
+    Friend Shared Function GetPresencasAluno(idAluno As String) As IEnumerable(Of IDictionary(Of String, Object))
+        Dim idDisciplinas = GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+
+        Dim aulas = dataBridge.SelectAll(Table.Aula).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")))
+        Dim idAulas = aulas.Select(Function(dict) dict("Id"))
+
+        Dim presencas = dataBridge.SelectAll(Table.Presenca).Where(Function(dict) idAulas.Contains(dict("IdAula")) And dict("IdAluno") = idAluno)
+
+        For Each presenca In presencas
+            presenca("Data") = aulas.Where(Function(aula) aula("Id") = presenca("IdAula")).First()("Data")
+        Next
+
+        Return presencas
+    End Function
+
+    Friend Shared Function GetNotasAluno(idAluno As String) As IEnumerable(Of IDictionary(Of String, Object))
+        Dim disciplinas = GetDisciplinas(Table.Aluno, idAluno)
+
+        Dim idDisciplinas = disciplinas.Select(Function(dict) dict("Id"))
+
+        Dim provas = dataBridge.SelectAll(Table.Prova).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")))
+        Dim idProvas = provas.Select(Function(dict) dict("Id"))
+
+        Dim notasAluno = dataBridge.SelectAll(Table.Nota).Where(Function(dict) idProvas.Contains(dict("IdProva")) And dict("IdAluno") = idAluno)
+
+        For Each nota In notasAluno
+            Dim prova = provas.Where(Function(dict) dict("Id") = nota("IdProva")).First()
+
+            nota("Data da prova") = prova("Data")
+
+            nota("Disciplina") = disciplinas.Where(Function(dict) dict("Id") = prova("IdDisciplina")).First()("Name")
+        Next
+
+        notasAluno = RemoveKeyFromDict(notasAluno, "IdProva")
+        Return notasAluno
+    End Function
+
+    Private Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), keyToRemove As String) As IEnumerable(Of IDictionary(Of String, Object))
+        data = data.Select(Function(dict)
+                               If dict.ContainsKey(keyToRemove) Then
+                                   dict.Remove(keyToRemove)
+                               End If
+                               Return dict
+                           End Function).ToList()
+        Return data
+    End Function
+
+    Friend Shared Function GetAllAlunosCadastrados(idDisciplina As Object) As IEnumerable(Of IDictionary(Of String, Object))
+        Dim idAlunos = dataBridge.SelectAll(Table.AlunoDisciplina).Where(Function(dict) dict("IdDisciplina") = idDisciplina).Select(Function(dict) dict("IdAluno"))
+
+        Dim alunos = dataBridge.SelectAll(Table.Aluno).Where(Function(dict) idAlunos.Contains(dict("Id")))
+
+        Return alunos
+    End Function
 End Class

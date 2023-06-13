@@ -33,7 +33,6 @@ Public Class PresenterProfessorPresenca
 
             If presencaData.Any() Then
                 aluno("IsPresente") = presencaData.First()("IsPresente")
-
             Else
                 aluno("IsPresente") = False
             End If

@@ -1,0 +1,19 @@
+﻿Imports System.Data
+
+Public Class PresenterNotasAluno
+    Inherits Presenter
+
+    Private View As IView
+
+    Public Sub New(view As IView)
+        Me.View = view
+    End Sub
+
+    Friend Function GetNotasAluno() As DataView
+        Dim idAluno = SessionCookie.GetCookie("UserId")
+
+        Dim data = BusinessRules.GetNotasAluno(idAluno)
+
+        Return ConvertDictionaryToDataView(data)
+    End Function
+End Class

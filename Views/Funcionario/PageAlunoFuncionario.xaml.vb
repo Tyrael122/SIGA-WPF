@@ -20,12 +20,15 @@
     End Sub
 
     Private Sub cmbCursos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbCursos.SelectionChanged
+        Presenter.ViewModelAluno.Curso = cmbCursos.SelectedItem.Content
+
         userControlDataGridDisciplinas.ItemsSource = Presenter.GetDisciplinas()
     End Sub
 
     Private Sub btnCadastrarAluno_Click(sender As Object, e As RoutedEventArgs)
         Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(userControlDataGridDisciplinas.DataGrid)
 
+        Presenter.ViewModelAluno.Curso = cmbCursos.SelectedItem.Content
         Presenter.RegisterAluno(idsDisciplinasAluno)
 
         dataGridAlunos.ItemsSource = Presenter.GetDataView("Aluno")
@@ -34,6 +37,7 @@
     Private Sub btnAtualizarAluno_Click(sender As Object, e As RoutedEventArgs)
         Dim idsDisciplinasAluno = LoadIdsFromSelectedRows(userControlDataGridDisciplinas.DataGrid)
 
+        Presenter.ViewModelAluno.Curso = cmbCursos.SelectedItem.Content
         Presenter.UpdateAluno(idsDisciplinasAluno)
         SetBotaoAlunoParaCadastro()
 
@@ -55,6 +59,13 @@
         Dim button As Button = CType(sender, Button)
 
         Presenter.CarregarAlunoParaEdicao(button.Tag)
+
+        Dim nomeCurso = Presenter.ViewModelAluno.Curso
+        For Each comboBoxItem As ComboBoxItem In cmbCursos.Items
+            If comboBoxItem.Content = nomeCurso Then
+                cmbCursos.SelectedItem = comboBoxItem
+            End If
+        Next
 
         SetBotaoAlunoParaEdicao()
     End Sub

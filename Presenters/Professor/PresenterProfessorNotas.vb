@@ -21,7 +21,7 @@
         Return provas.Where(Function(dict) dict("IdDisciplina") = idDisciplina)
     End Function
 
-    Public Sub RegisterNotas(notas As IEnumerable(Of IDictionary(Of String, String)))
+    Public Sub RegisterNotas(notas As IEnumerable(Of IDictionary(Of String, Object)))
         For Each nota In notas
             nota("IdAluno") = nota("Id")
             nota.Remove("Id")

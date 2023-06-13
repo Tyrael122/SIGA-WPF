@@ -4,7 +4,7 @@ Imports System.IO
 Public Class PresenterFuncionarioAluno
     Inherits Presenter
 
-    Private ViewModelAluno As New AlunoViewModel()
+    Public ViewModelAluno As New AlunoViewModel()
 
     Public Sub New(view As IViewModel)
         Me.View = view
@@ -39,12 +39,12 @@ Public Class PresenterFuncionarioAluno
             Return Nothing
         End If
 
+        Dim idCurso = queryData.First()("Id")
         Try
             Dim idAluno = SessionCookie.GetCookie("IdAluno")
-            Return GetDisciplinasAluno(idAluno)
+            Return GetDisciplinasAluno(idAluno, idCurso)
 
         Catch ex As KeyNotFoundException
-            Dim idCurso = queryData.First()("Id")
             Return GetDisciplinasCurso(idCurso)
         End Try
     End Function
@@ -59,12 +59,12 @@ Public Class PresenterFuncionarioAluno
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
 
-    Private Function GetDisciplinasAluno(idAluno As String) As DataView
+    Private Function GetDisciplinasAluno(idAluno As String, idCurso As String) As DataView
         Dim aluno = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
 
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, aluno("Curso"))
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
 
         For Each disciplina In disciplinas
             disciplina("IsChecked") = idDisciplinasAluno.Contains(disciplina("Id"))
