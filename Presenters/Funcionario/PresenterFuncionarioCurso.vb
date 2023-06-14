@@ -17,6 +17,8 @@ Public Class PresenterFuncionarioCurso
         data("Turno") = [Enum].Parse(GetType(Turno), data("Turno"))
 
         Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
+
+        ViewModelCurso.Clear()
     End Sub
 
 

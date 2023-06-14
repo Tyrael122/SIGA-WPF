@@ -39,51 +39,49 @@ Public Class PresenterLogin
         End Select
     End Function
 
-    Public Sub EnviarEmailRecuperacaoSenha(email As String)
-
+    Public Sub EnviarEmailRecuperacaoSenha(emailUsuario As String)
         Dim dal As New DAL()
-        Dim credenciaisEmailAluno = dal.SelectFields(Table.Aluno, "Password", "Login", "Email").Where(Function(dict) dict("Email") = email).FirstOrDefault()
-        Dim credenciaisEmailProfessor = dal.SelectFields(Table.Professor, "Password", "Login", "Email").Where(Function(dict) dict("Email") = email).FirstOrDefault()
+        Dim credenciaisEmailAluno = dal.SelectFields(Table.Aluno, "Password", "Email").Where(Function(dict) dict("Email") = emailUsuario).FirstOrDefault()
+        Dim credenciaisEmailProfessor = dal.SelectFields(Table.Professor, "Password", "Email").Where(Function(dict) dict("Email") = emailUsuario).FirstOrDefault()
 
-        Dim remetente As String = ""
-        Dim senha As String = ""
-
-
-        If credenciaisEmailAluno Is Nothing And credenciaisEmailProfessor Is Nothing Then
+        If credenciaisEmailAluno Is Nothing AndAlso credenciaisEmailProfessor Is Nothing Then
             View.DisplayInfo("Nenhum email cadastrado. ")
             Return
         End If
 
-        ' Aluno
+        Dim senha As String = ""
         If credenciaisEmailProfessor Is Nothing Then
-            remetente = credenciaisEmailAluno("Login")
             senha = credenciaisEmailAluno("Password")
         Else
-            remetente = credenciaisEmailProfessor("Login")
             senha = credenciaisEmailProfessor("Password")
         End If
 
-
-        ' Configurações do e-mail
         Dim assunto As String = "Recuperação de Senha"
         Dim corpo As String = "Olá, você solicitou a recuperação de senha. Sua senha é: " & senha
 
-        ' Configurações do servidor SMTP
-        Dim smtpHost As String = "smtp-mail.outlook.com"
-        Dim smtpPort As Integer = 587
-        Dim enableSsl As Boolean = True
+        Try
+            View.DisplayInfo("Enviando email...")
+            SendEmail(emailUsuario, assunto, corpo)
+        Catch ex As Exception
+            View.DisplayInfo("Falha ao enviar o email.")
+        End Try
 
-        ' Criando a mensagem de e-mail 
-        Dim mensagem As New MailMessage(remetente, email, assunto, corpo)
-
-        ' Configurando o cliente SMTP
-        Dim clienteSmtp As New SmtpClient(smtpHost, smtpPort)
-        clienteSmtp.EnableSsl = enableSsl
-        clienteSmtp.Credentials = New NetworkCredential(remetente, senha)
-
-        ' Enviando o e-mail
-        clienteSmtp.Send(mensagem)
         View.DisplayInfo("E-mail de recuperação de senha enviado com sucesso!")
+    End Sub
 
+    Private Shared Sub SendEmail(emailReceiver As String, assunto As String, corpo As String)
+        Dim emailSender = "kauan.borges01@fatec.sp.gov.br"
+        Dim passwordSender = "Potato 1203"
+
+        Dim smtpServer As New SmtpClient With {
+            .UseDefaultCredentials = False,
+            .EnableSsl = True,
+            .Host = "smtp.office365.com",
+            .Port = 25,
+            .Credentials = New NetworkCredential(emailSender, passwordSender)
+        }
+
+        Dim email As New MailMessage(emailSender, emailReceiver, assunto, corpo)
+        smtpServer.Send(email)
     End Sub
 End Class

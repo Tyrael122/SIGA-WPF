@@ -82,7 +82,7 @@
                     <local:ImagePicker Margin="288,483,1020,153" ImageSource="{Binding Foto}"></local:ImagePicker>
                     <local:ButtonCadastrar x:Name="userControlCadastrar" Margin="428,670,446,50"></local:ButtonCadastrar>
                     <Label Content="E-Mail Institucional:" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,320,0,0" FontSize="25"/>
-                    <TextBox Template="{StaticResource CustomTextBoxTemplate}" Margin="222,355,872,382" Text="{Binding Password}"/>
+                    <TextBox x:Name="txtEmail" Template="{StaticResource CustomTextBoxTemplate}" Margin="222,355,872,382" Text="{Binding Email}"/>
                 </Grid>
                 <!-- Conteúdo da aba "Cadastro" -->
             </TabItem>

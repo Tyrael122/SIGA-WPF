@@ -14,6 +14,8 @@
         Dim data = ViewModelDisciplina.ConvertToDictionary()
 
         BusinessRules.Save(data, Table.Disciplina)
+
+        ViewModelDisciplina.Clear()
     End Sub
 
     Friend Sub CarregarDisciplinaParaEdicao(idDisciplina As String)

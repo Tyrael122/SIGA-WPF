@@ -15,6 +15,8 @@
         userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
 
         dataGridCurso.ItemsSource = Presenter.GetDataView("Curso")
+
+        SetBotaoParaCadastro()
     End Sub
 
     Private Sub btnCadastroCurso_Click(sender As Object, e As RoutedEventArgs)

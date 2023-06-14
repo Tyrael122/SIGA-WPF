@@ -23,6 +23,17 @@
         End Set
     End Property
 
+    Private _email As String
+    Public Property Email As String
+        Get
+            Return _email
+        End Get
+        Set(value As String)
+            _email = value
+            OnPropertyChanged(NameOf(Email))
+        End Set
+    End Property
+
     Private _foto As Object
     Public Property Foto As Object
         Get

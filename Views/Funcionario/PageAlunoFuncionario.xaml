@@ -110,7 +110,7 @@
                     </ComboBox>
                     <local:ButtonCadastrar x:Name="userControlAluno" Margin="428,670,446,50"></local:ButtonCadastrar>
                     <Border BorderBrush="#FFD43E1C" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="42" Margin="226,369,0,0" VerticalAlignment="Top" Width="413">
-                        <TextBox x:Name="txtLogin2" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="42" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Password}"/>
+                        <TextBox x:Name="txtEmail" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="412" Height="42" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding Email}"/>
                     </Border>
                     <Label Content="E-mail Institucional:" HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="436" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,327,0,0" FontSize="25"/>
                 </Grid>
