@@ -40,7 +40,7 @@
     End Sub
 
     Private Sub btnPlanoEnsino_Click(sender As Object, e As RoutedEventArgs) Handles btnPlanoEnsino.Click
-
+        mainFrame.Content = New PageProvas()
     End Sub
 
     Private Sub btnConsultarFaltas_Click(sender As Object, e As RoutedEventArgs) Handles btnConsultarFaltas.Click

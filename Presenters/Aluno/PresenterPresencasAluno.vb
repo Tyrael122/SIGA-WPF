@@ -3,8 +3,6 @@
 Friend Class PresenterPresencasAluno
     Inherits Presenter
 
-    Private View As IView
-
     Public Sub New(view As IView)
         Me.View = view
     End Sub

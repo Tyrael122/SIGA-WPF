@@ -56,7 +56,7 @@
                         <Button x:Name="btnPlanoEnsino" Style="{StaticResource ResourceKey=menuButton}"  Width="278">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Views/Aluno/Books-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
-                                <TextBlock Text ="Plano de Ensino" VerticalAlignment="Center" Width="168"/>
+                                <TextBlock Text ="Provas" VerticalAlignment="Center" Width="168"/>
 
                             </StackPanel>
                         </Button>
