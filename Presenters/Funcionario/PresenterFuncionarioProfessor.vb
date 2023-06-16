@@ -22,6 +22,8 @@ Public Class PresenterFuncionarioProfessor
         End If
 
         Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
+
+        ViewModelProfessor.Clear()
     End Sub
 
     Friend Sub DeleteProfessor(idProfessor As String)

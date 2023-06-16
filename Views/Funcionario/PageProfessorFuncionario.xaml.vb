@@ -16,12 +16,14 @@
 
         Presenter.RegisterProfessor(idsDisciplinasProfessor)
         userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
     End Sub
 
     Private Sub PageProfessorFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
 
         dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
+        SetBotaoParaCadastro()
     End Sub
 
 

@@ -13,6 +13,7 @@
         <Setter Property="Foreground" Value="#FFB15225" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="10" />
     </Style>
 
     <Style TargetType="{x:Type DataGridCell}">

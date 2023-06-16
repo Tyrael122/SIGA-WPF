@@ -13,7 +13,7 @@
                 <Label Content="Veja suas faltas" HorizontalAlignment="Left" VerticalAlignment="Center" Height="114" Width="736" FontSize="70" Foreground="#FB7A07B3" Margin="36,0,0,0"/>
             </Border>
 
-            <DataGrid x:Name="dataGridPresencas" CanUserAddRows="False" GridLinesVisibility="None" Background="Transparent" RowBackground="White" AlternatingRowBackground="WhiteSmoke" Margin="55,304,65,44" BorderBrush="LightGray" BorderThickness="1" RowHeight="30" Grid.ColumnSpan="11">
+            <DataGrid x:Name="dataGridPresencas" CanUserAddRows="False" GridLinesVisibility="None" Margin="25,292,85,18">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="Presença" Binding="{Binding IsPresente}" Width="200" />
                 </DataGrid.Columns>

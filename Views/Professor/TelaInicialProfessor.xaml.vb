@@ -27,4 +27,10 @@ Class TelaInicialProfessor
 
         gridDisciplinas.GridItemsSource = itemControlSource
     End Sub
+
+    Private Sub btnSair_Click(sender As Object, e As RoutedEventArgs) Handles btnSair.Click
+        Dim login As New MainWindow()
+        login.Show()
+        Close()
+    End Sub
 End Class

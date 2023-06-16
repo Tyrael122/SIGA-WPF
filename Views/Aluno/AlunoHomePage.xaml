@@ -89,11 +89,10 @@
                 </DockPanel>
             </Border>
         </Grid>
-        <Button Style="{StaticResource ResourceKey=menuButton}" Width="NaN" Margin="0,1001,130,19" >
+        <Button x:Name="bntSair" Style="{StaticResource ResourceKey=menuButton}" Width="NaN" Margin="0,1001,130,19" >
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Views/Aluno/User-Interface-Logout-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" Height="21" Width="22" />
                 <TextBlock Text ="Sair" VerticalAlignment="Center" FontSize="19" Margin="-20 0 0 0 " />
-
             </StackPanel>
         </Button>
         <TextBlock Text="Ciclo:" Foreground="White" FontSize="20" FontWeight="SemiBold"

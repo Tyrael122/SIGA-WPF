@@ -21,7 +21,8 @@ Public Class PresenterProfessorPresenca
 
         Dim aulas = BusinessRules.GetAll(Table.Aula).Where(Function(dict) dict("IdHorario") = ViewModelAula.IdHorario And
                                                                 dict("IdProfessor") = idProfessor And
-                                                                dict("IdDisciplina") = idDisciplina)
+                                                                dict("IdDisciplina") = idDisciplina And
+                                                                dict("Data") = ViewModelAula.Data)
         Dim idAula = Nothing
         If aulas.Any() Then
             idAula = aulas.First()("Id")
@@ -109,5 +110,7 @@ Public Class PresenterProfessorPresenca
 
             BusinessRules.Save(presenca, Table.Presenca)
         Next
+
+        ViewModelAula.Clear()
     End Sub
 End Class

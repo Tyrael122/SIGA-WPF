@@ -54,4 +54,10 @@
     Private Sub btnNotas_Click(sender As Object, e As RoutedEventArgs) Handles btnNotas.Click
         mainFrame.Content = New PageNotas()
     End Sub
+
+    Private Sub bntSair_Click(sender As Object, e As RoutedEventArgs) Handles bntSair.Click
+        Dim login As New MainWindow()
+        login.Show()
+        Close()
+    End Sub
 End Class

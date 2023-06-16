@@ -32,4 +32,10 @@
     Private Sub btnDisciplina_Click(sender As Object, e As RoutedEventArgs) Handles btnDisciplina.Click
         mainFrame.Content = New PageDisciplinasFuncionario()
     End Sub
+
+    Private Sub btnSair_Click(sender As Object, e As RoutedEventArgs) Handles btnSair.Click
+        Dim login As New MainWindow()
+        login.Show()
+        Close()
+    End Sub
 End Class

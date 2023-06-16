@@ -17,15 +17,21 @@
 
     Private Sub cmbDiaAula_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDiaAula.SelectionChanged
         cmbHorario.ItemsSource = Presenter.LoadHorariosComboBox()
+
+        dataGridPresencas.ItemsSource = Nothing
     End Sub
 
     Private Sub cmbHorario_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbHorario.SelectionChanged
-        dataGridPresencas.ItemsSource = Presenter.GetAllPresencaAlunosCadastrados()
+        If cmbHorario.ItemsSource IsNot Nothing Then
+            dataGridPresencas.ItemsSource = Presenter.GetAllPresencaAlunosCadastrados()
+        End If
     End Sub
 
     Private Sub btnLancarPresencas_Click(sender As Object, e As RoutedEventArgs) Handles btnLancarPresencas.Click
         Dim presencas = LoadReferenceFromSelectedRows(dataGridPresencas, "Id", "IsPresente")
 
         Presenter.RegisterPresencas(presencas)
+
+        dataGridPresencas.ItemsSource = Nothing
     End Sub
 End Class
