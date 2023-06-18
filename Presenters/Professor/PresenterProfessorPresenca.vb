@@ -35,7 +35,7 @@ Public Class PresenterProfessorPresenca
             If presencaData.Any() Then
                 aluno("IsPresente") = presencaData.First()("IsPresente")
             Else
-                aluno("IsPresente") = False
+                aluno("IsPresente") = True
             End If
         Next
 
@@ -48,8 +48,8 @@ Public Class PresenterProfessorPresenca
         Dim horarios = BusinessRules.GetAll(Table.Horario).
                              Where(Function(horario) horario("IdDisciplina") = idDisciplina)
 
-        Dim startDate As Date = Date.Now
-        Dim endDate As New DateTime(2023, 11, 30)
+        Dim startDate As New DateTime(2023, 2, 2)
+        Dim endDate As New DateTime(2023, 6, 30)
 
         Dim targetDaysOfWeek As IEnumerable(Of DayOfWeek) = horarios.Select(Of DayOfWeek)(Function(dict) [Enum].Parse(GetType(DayOfWeek), dict("DiaSemana")))
 

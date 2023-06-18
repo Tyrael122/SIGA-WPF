@@ -6,6 +6,8 @@
     Public Sub New(view As IViewModel)
         Me.View = view
 
+        LoadUserInfo(ViewModelProfessor, Table.Professor)
+
         view.SetDataContext(ViewModelProfessor)
 
         ViewModelProfessor.Foto = CarregarFotoVazia()

@@ -1,4 +1,16 @@
 ﻿Public Class TelaProfessor
+    Inherits WindowModel
+
+    Private Presenter As PresenterProfessorHomePage = New PresenterProfessorHomePage(Me)
+
+    Public Overrides Sub DisplayInfo(infoMessage As String)
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Overrides Sub DisplayError()
+        Throw New NotImplementedException()
+    End Sub
+
     Private Sub btnInicio_Click(sender As Object, e As RoutedEventArgs) Handles btnInicio.Click
         mainFrame.Content = New PageAlunos()
     End Sub

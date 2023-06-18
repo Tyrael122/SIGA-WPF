@@ -14,7 +14,7 @@ Public Class PresenterAlunoProvas
     Friend Function GetProvasFuturas() As DataView
         Dim idDisciplinas = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
-        Dim idCurso = BusinessRules.GetAll(Table.Aluno).Where(Function(dict) dict("Id") = idAluno).First()("Curso")
+        Dim idCurso = BusinessRules.GetAll(Table.Aluno).First(Function(dict) dict("Id") = idAluno)("Curso")
 
         Dim provas = BusinessRules.GetAll(Table.Prova).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")) And
                                                                  dict("Data") > Date.Now)

@@ -1,6 +1,8 @@
 ﻿Public Class TelaFuncionario
     Inherits WindowModel
 
+    Private Presenter As PresenterFuncionarioHomePage = New PresenterFuncionarioHomePage(Me)
+
     Public Overrides Sub DisplayInfo(infoMessage As String)
         Throw New NotImplementedException()
     End Sub

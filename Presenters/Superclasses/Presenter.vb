@@ -14,6 +14,14 @@ Public MustInherit Class Presenter
         Return New BitmapImage(imageUri)
     End Function
 
+    Protected Sub LoadUserInfo(viewModel As ViewModel, table As Table)
+        Dim idUser = SessionCookie.GetCookie("userId")
+
+        Dim data = BusinessRules.GetAllById(idUser, table).First()
+
+        viewModel.LoadFromDictionary(data)
+    End Sub
+
     Protected Function ConvertImageToByteArray(foto As ImageSource) As Byte()
         Dim bitmapSource As BitmapSource = TryCast(foto, BitmapSource)
         If bitmapSource Is Nothing Then

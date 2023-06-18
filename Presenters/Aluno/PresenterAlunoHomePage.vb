@@ -3,16 +3,20 @@
 Public Class PresenterAlunoHomePage
     Inherits Presenter
 
-    Private ReadOnly idAluno As String
+    'Private ReadOnly idAluno As String
+    Private ViewModelAluno As New AlunoViewModel()
 
-    Public Sub New(view As IView)
+
+    Public Sub New(view As IViewModel)
         Me.View = view
 
-        idAluno = SessionCookie.GetCookie("userId")
+        LoadUserInfo(ViewModelAluno, Table.Aluno)
+
+        view.SetDataContext(ViewModelAluno)
     End Sub
 
     Friend Function GetDisciplinasCadastradas() As DataView
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, idAluno)
+        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, ViewModelAluno.Id)
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function

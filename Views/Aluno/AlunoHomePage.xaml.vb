@@ -1,33 +1,10 @@
 ﻿Public Class AlunoHomePage
-    Implements IView
+    Inherits WindowModel
 
     Private Presenter As New PresenterAlunoHomePage(Me)
 
-
     Private Sub AlunoHomePage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         mainFrame.Content = New PageInicioAluno()
-
-        'Dim valorCampo As String = Presenter.CarregarDadosDoAluno("Login")
-        'txtNomeAluno.Text = valorCampo
-        'Dim imageBrush As ImageBrush = Presenter.CarregarImagemPerfilAluno()
-        'If imageBrush IsNot Nothing Then
-        '    imgPerfil.Fill = imageBrush
-        'Else
-        '    ' Caso não haja imagem, pode exibir uma imagem padrão ou limpar a imagem existente
-        '    imgPerfil.Fill = Brushes.Transparent
-        'End If
-    End Sub
-
-    Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub DisplayError() Implements IView.DisplayError
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub CloseView() Implements IView.CloseView
-        Throw New NotImplementedException()
     End Sub
 
     Public Sub VerDisciplina_Click(sender As Object, e As EventArgs)
@@ -59,5 +36,13 @@
         Dim login As New MainWindow()
         login.Show()
         Close()
+    End Sub
+
+    Public Overrides Sub DisplayInfo(infoMessage As String)
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Overrides Sub DisplayError()
+        Throw New NotImplementedException()
     End Sub
 End Class
