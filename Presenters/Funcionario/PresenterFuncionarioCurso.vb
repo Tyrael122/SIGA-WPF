@@ -68,4 +68,14 @@ Public Class PresenterFuncionarioCurso
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
+
+    Friend Function GetAllCursos() As DataView
+        Dim cursos = BusinessRules.GetAll(Table.Curso)
+
+        For Each curso In cursos
+            curso("Turno") = [Enum].Parse(GetType(Turno), curso("Turno")).ToString()
+        Next
+
+        Return ConvertDictionaryToDataView(cursos)
+    End Function
 End Class

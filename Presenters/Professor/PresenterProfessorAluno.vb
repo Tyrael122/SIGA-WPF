@@ -14,6 +14,8 @@ Public Class PresenterProfessorAluno
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
         Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
 
+        alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
+
         Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 

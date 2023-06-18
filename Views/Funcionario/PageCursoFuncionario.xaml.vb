@@ -14,7 +14,7 @@
     Private Sub PageCursoFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         userControlDisciplinas.ItemsSource = Presenter.GetDisciplinasComColunaCheckBox(False)
 
-        dataGridCurso.ItemsSource = Presenter.GetDataView("Curso")
+        dataGridCurso.ItemsSource = Presenter.GetAllCursos()
 
         SetBotaoParaCadastro()
     End Sub
@@ -24,7 +24,7 @@
 
         Presenter.RegisterCurso(idsDisciplinasCurso)
 
-        dataGridCurso.ItemsSource = Presenter.GetDataView("Curso")
+        dataGridCurso.ItemsSource = Presenter.GetAllCursos()
     End Sub
 
     Private Sub btnAtualizarCurso_Click(sender As Object, e As RoutedEventArgs)
@@ -35,7 +35,7 @@
         SetBotaoParaCadastro()
 
         userControlDisciplinas.ItemsSource = Presenter.GetDisciplinasComColunaCheckBox(False)
-        dataGridCurso.ItemsSource = Presenter.GetDataView("Curso")
+        dataGridCurso.ItemsSource = Presenter.GetAllCursos()
     End Sub
 
     Private Sub EditarHorariosCurso_Click(sender As Object, e As RoutedEventArgs)
@@ -45,7 +45,7 @@
     Private Sub ButtonDeletar_Click(sender As Object, e As RoutedEventArgs)
         Presenter.DeleteCurso(GetIdFromButton(sender))
 
-        dataGridCurso.ItemsSource = Presenter.GetDataView("Curso")
+        dataGridCurso.ItemsSource = Presenter.GetAllCursos()
     End Sub
 
     Private Sub ButtonEditar_Click(sender As Object, e As RoutedEventArgs)

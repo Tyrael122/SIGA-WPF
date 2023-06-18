@@ -54,6 +54,8 @@
             End If
         Next
 
+        alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
+
         Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 End Class
