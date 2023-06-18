@@ -40,26 +40,31 @@ Public Class PresenterFuncionarioAluno
         End If
 
         Dim idCurso = queryData.First()("Id")
+        Dim disciplinas As IEnumerable(Of IDictionary(Of String, Object)) = Nothing
         Try
             Dim idAluno = SessionCookie.GetCookie("IdAluno")
-            Return GetDisciplinasAluno(idAluno, idCurso)
+            disciplinas = GetDisciplinasAluno(idAluno, idCurso)
 
         Catch ex As KeyNotFoundException
-            Return GetDisciplinasCurso(idCurso)
+            disciplinas = GetDisciplinasCurso(idCurso)
         End Try
+
+        disciplinas = BusinessRules.RemoveKeyFromDict(disciplinas, "Id")
+
+        Return ConvertDictionaryToDataView(disciplinas)
     End Function
 
-    Private Function GetDisciplinasCurso(idCurso As String) As DataView
+    Private Function GetDisciplinasCurso(idCurso As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
 
         For Each disciplina In disciplinas
             disciplina("IsChecked") = True
         Next
 
-        Return ConvertDictionaryToDataView(disciplinas)
+        Return disciplinas
     End Function
 
-    Private Function GetDisciplinasAluno(idAluno As String, idCurso As String) As DataView
+    Private Function GetDisciplinasAluno(idAluno As String, idCurso As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim aluno = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
 
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
@@ -70,7 +75,7 @@ Public Class PresenterFuncionarioAluno
             disciplina("IsChecked") = idDisciplinasAluno.Contains(disciplina("Id"))
         Next
 
-        Return ConvertDictionaryToDataView(disciplinas)
+        Return disciplinas
     End Function
 
     Friend Sub DeleteAluno(idAluno As String)

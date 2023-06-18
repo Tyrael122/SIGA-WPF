@@ -15,12 +15,12 @@
         Dim idsDisciplinasProfessor = LoadIdsFromSelectedRows(userControlDisciplinas.DataGrid)
 
         Presenter.RegisterProfessor(idsDisciplinasProfessor)
-        userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        userControlDisciplinas.ItemsSource = Presenter.GetDisciplinasComColunaCheckBox(False)
         dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
     End Sub
 
     Private Sub PageProfessorFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        userControlDisciplinas.ItemsSource = Presenter.GetDisciplinasComColunaCheckBox(False)
 
         dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
         SetBotaoParaCadastro()
@@ -34,7 +34,7 @@
         SetBotaoParaCadastro()
 
         dataGridProfessor.ItemsSource = Presenter.GetDataView("Professor")
-        userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        userControlDisciplinas.ItemsSource = Presenter.GetDisciplinasComColunaCheckBox(False)
     End Sub
 
     Private Sub ButtonDeletar_Click(sender As Object, e As RoutedEventArgs)

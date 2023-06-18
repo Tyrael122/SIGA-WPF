@@ -143,7 +143,7 @@
         Return notasAluno
     End Function
 
-    Private Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), keyToRemove As String) As IEnumerable(Of IDictionary(Of String, Object))
+    Public Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), keyToRemove As String) As IEnumerable(Of IDictionary(Of String, Object))
         data = data.Select(Function(dict)
                                If dict.ContainsKey(keyToRemove) Then
                                    dict.Remove(keyToRemove)

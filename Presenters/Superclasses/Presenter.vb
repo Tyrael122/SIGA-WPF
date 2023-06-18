@@ -126,4 +126,16 @@ Public MustInherit Class Presenter
 
         Return ConvertDictionaryToDataView(data)
     End Function
+
+    Public Function GetDisciplinasComColunaCheckBox(defaultValue As Boolean) As DataView
+        Dim disciplinas = GetAll(Table.Disciplina)
+
+        For Each disciplina In disciplinas
+            disciplina.Add("IsChecked", defaultValue)
+
+            disciplina.Remove("Id")
+        Next
+
+        Return ConvertDictionaryToDataView(disciplinas)
+    End Function
 End Class

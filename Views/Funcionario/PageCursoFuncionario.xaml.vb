@@ -12,7 +12,7 @@
     End Sub
 
     Private Sub PageCursoFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        userControlDisciplinas.ItemsSource = Presenter.GetDisciplinasComColunaCheckBox(False)
 
         dataGridCurso.ItemsSource = Presenter.GetDataView("Curso")
 
@@ -34,7 +34,7 @@
 
         SetBotaoParaCadastro()
 
-        userControlDisciplinas.ItemsSource = Presenter.GetDataViewWithCheckboxColumn("Disciplina", False)
+        userControlDisciplinas.ItemsSource = Presenter.GetDisciplinasComColunaCheckBox(False)
         dataGridCurso.ItemsSource = Presenter.GetDataView("Curso")
     End Sub
 

@@ -15,6 +15,7 @@
                         <ResourceDictionary Source="/Views/UserControls/FuncionarioDataGridStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>-->
+                
                 <Style TargetType="{x:Type DataGrid}">
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="Foreground" Value="#FFB15225" />
@@ -27,10 +28,11 @@
                     <Setter Property="Foreground" Value="#FFB15225" />
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="FontSize" Value="20" />
+                    <Setter Property="Margin" Value="5" />
                 </Style>
 
                 <Style TargetType="{x:Type DataGridCell}">
-                    <Setter Property="Margin" Value="0 5" />
+                    <Setter Property="Margin" Value="5" />
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
