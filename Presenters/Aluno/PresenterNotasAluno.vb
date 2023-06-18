@@ -12,6 +12,7 @@ Public Class PresenterNotasAluno
 
         Dim data = BusinessRules.GetNotasAluno(idAluno)
 
+        data = BusinessRules.RemoveKeyFromDict(data, "IdAluno")
         Return ConvertDictionaryToDataView(data)
     End Function
 End Class

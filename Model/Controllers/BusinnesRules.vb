@@ -116,8 +116,13 @@
 
         For Each presenca In presencas
             presenca("Data") = aulas.Where(Function(aula) aula("Id") = presenca("IdAula")).First()("Data")
+
+            Dim idDisciplina = GetAllById(presenca("IdAula"), Table.Aula).First()("IdDisciplina")
+            presenca("Disciplina") = GetAllById(idDisciplina, Table.Disciplina).First()("Name")
         Next
 
+        presencas = RemoveKeyFromDict(presencas, "IdAluno")
+        presencas = RemoveKeyFromDict(presencas, "IdAula")
         Return presencas
     End Function
 

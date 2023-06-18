@@ -18,4 +18,10 @@ Public Class DataGridDisciplina
             MainDataGrid.ItemsSource = value
         End Set
     End Property
+
+    Private Sub MainDataGrid_AutoGeneratingColumn(sender As Object, e As DataGridAutoGeneratingColumnEventArgs) Handles MainDataGrid.AutoGeneratingColumn
+        If e.PropertyName = "IsChecked" Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class
