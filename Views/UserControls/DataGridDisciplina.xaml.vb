@@ -23,5 +23,9 @@ Public Class DataGridDisciplina
         If e.PropertyName = "IsChecked" Then
             e.Cancel = True
         End If
+
+        If e.PropertyName = "Id" Then
+            e.Column.Visibility = Visibility.Collapsed
+        End If
     End Sub
 End Class

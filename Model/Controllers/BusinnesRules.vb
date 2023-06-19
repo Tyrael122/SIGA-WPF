@@ -10,6 +10,9 @@
     Friend Shared Sub DeleteDisciplinasAluno(idAluno As String)
         dataBridge.Delete(idAluno, "IdAluno", Table.AlunoDisciplina)
     End Sub
+    Friend Shared Sub DeleteNotaAluno(idNota As String)
+        dataBridge.Delete(idNota, Table.Nota)
+    End Sub
 
     Friend Shared Sub DeleteProfessor(idProfessor As String)
         dataBridge.Delete(idProfessor, "IdProfessor", Table.ProfessorDisciplina)

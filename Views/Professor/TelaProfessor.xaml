@@ -82,7 +82,7 @@
                 </DockPanel>
             </Border>
         </Grid>
-        <Button Style="{StaticResource ResourceKey=menuButton}" Width="NaN" Margin="0,1001,130,19" >
+        <Button Style="{StaticResource ResourceKey=menuButton}" Width="NaN" Margin="0,1001,130,19" Click="Button_Click" >
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Views/Aluno/User-Interface-Logout-icon.png" Style="{StaticResource ResourceKey=menuButtonIcon}" Height="21" Width="22" />
                 <TextBlock Text ="Sair" VerticalAlignment="Center" FontSize="19" Margin="-20 0 0 0 " Foreground="#FFBFE9FF" />

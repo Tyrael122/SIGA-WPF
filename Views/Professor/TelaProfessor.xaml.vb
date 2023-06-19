@@ -30,4 +30,8 @@
     Private Sub TelaProfessor_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         mainFrame.Content = New PageAlunos()
     End Sub
+
+    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+        Me.Close()
+    End Sub
 End Class

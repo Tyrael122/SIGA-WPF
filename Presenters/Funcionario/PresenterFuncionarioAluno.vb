@@ -49,8 +49,6 @@ Public Class PresenterFuncionarioAluno
             disciplinas = GetDisciplinasCurso(idCurso)
         End Try
 
-        disciplinas = BusinessRules.RemoveKeyFromDict(disciplinas, "Id")
-
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
 

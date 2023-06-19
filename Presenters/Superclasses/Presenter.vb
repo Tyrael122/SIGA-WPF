@@ -132,8 +132,6 @@ Public MustInherit Class Presenter
 
         For Each disciplina In disciplinas
             disciplina.Add("IsChecked", defaultValue)
-
-            disciplina.Remove("Id")
         Next
 
         Return ConvertDictionaryToDataView(disciplinas)

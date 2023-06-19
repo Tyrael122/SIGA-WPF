@@ -23,6 +23,15 @@
 
     Public Sub RegisterNotas(notas As IEnumerable(Of IDictionary(Of String, Object)))
         For Each nota In notas
+            Dim matchedNota = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = nota("Id") And
+                                                        dict("IdProva") = ViewModelNotas.IdProva)
+
+            If matchedNota.Any() Then
+                Dim idNotaMatched = matchedNota.First()("Id")
+
+                BusinessRules.DeleteNotaAluno(idNotaMatched)
+            End If
+
             nota("IdAluno") = nota("Id")
             nota.Remove("Id")
 
