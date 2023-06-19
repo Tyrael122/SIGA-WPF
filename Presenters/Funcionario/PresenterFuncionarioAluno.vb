@@ -1,4 +1,5 @@
 ﻿Imports System.Data
+Imports System.Data.Common
 Imports System.IO
 
 Public Class PresenterFuncionarioAluno
@@ -18,7 +19,10 @@ Public Class PresenterFuncionarioAluno
         Dim data = ViewModelAluno.ConvertToDictionary()
 
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
-        data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
+
+        If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
+            data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
+        End If
 
         Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
 
@@ -92,6 +96,8 @@ Public Class PresenterFuncionarioAluno
             .uniqueEntityData = data,
             .idRelatedEntites = idsDisciplinasAluno
         }
+
+        data.Remove("Id")
 
         relation.Update(idAluno)
 

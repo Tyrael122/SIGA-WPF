@@ -49,6 +49,8 @@ Public Class PresenterFuncionarioProfessor
             data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
         End If
 
+        data.Remove("Id")
+
         Dim relation As New Relation(Table.Professor, Table.Disciplina) With {
             .uniqueEntityData = data,
             .idRelatedEntites = idsDisciplinasProfessor
