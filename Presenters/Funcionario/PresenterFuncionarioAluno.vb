@@ -12,17 +12,14 @@ Public Class PresenterFuncionarioAluno
 
         view.SetDataContext(ViewModelAluno)
 
-        'ViewModelAluno.Foto = CarregarFotoVazia()
+        ViewModelAluno.Foto = CarregarFotoVazia()
     End Sub
 
     Public Sub RegisterAluno(idsDisciplinasAluno As IEnumerable(Of String))
         Dim data = ViewModelAluno.ConvertToDictionary()
 
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
-
-        'If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
-        '    data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
-        'End If
+        data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
 
         Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
 
@@ -92,9 +89,7 @@ Public Class PresenterFuncionarioAluno
         Dim data = ViewModelAluno.ConvertToDictionary()
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
 
-        'If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
-        '    data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
-        'End If
+        data("Foto") = ConvertImageToByteArray(data("Foto"))
 
         Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
             .uniqueEntityData = data,

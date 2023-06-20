@@ -94,13 +94,7 @@
                     <Label Content="Selecione o curso" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="302" Foreground="#FFEF691B" FontWeight="Bold" Margin="226,477,0,0" FontSize="30"/>
                     <ComboBox x:Name="cmbCursos" HorizontalAlignment="Left" Margin="226,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC"/>
                     <Label Content="Selecione uma foto:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="334" Foreground="#FFEF691B" FontWeight="Bold" Margin="960,395,0,0"/>
-                    <!--<Button x:Name="btnImage" HorizontalAlignment="Left" Margin="1034,472,0,0" VerticalAlignment="Top" Height="147" Width="186">
-                        <Button.Background>
-                            <ImageBrush ImageSource="{Binding Foto}"/>
-                        </Button.Background>
-                    </Button>-->
                     <local:ImagePicker Margin="1034,472,207,131" ImageSource="{Binding Foto, Mode=TwoWay}"/>
-                    <!--<Image x:Name="imgPerfil" Margin="1034,472,207,131" Source="{Binding Foto, Mode=TwoWay}" />-->
                     <Label Content="Selecione o semestre de inicio:" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="528" Foreground="#FFEF691B" FontWeight="Bold" Margin="576,477,0,0" FontSize="30"/>
                     <ComboBox HorizontalAlignment="Left" Margin="576,547,0,0" VerticalAlignment="Top" Width="276" Background="#FFE0E0E0" BorderBrush="#FFACACAC" Text="{Binding SemestreInicio}">
                         <ComboBoxItem Content="1"/>
