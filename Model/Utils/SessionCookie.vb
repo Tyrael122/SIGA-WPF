@@ -8,8 +8,4 @@
     Public Shared Function GetCookie(key As String) As Object
         Return userData(key.ToLower())
     End Function
-
-    Public Shared Function GetCookie(Of T)(key As String) As T
-        Return userData(key.ToLower())
-    End Function
 End Class

@@ -29,7 +29,7 @@ Public Class PresenterFuncionarioAluno
         ViewModelAluno.Clear()
     End Sub
 
-    Friend Function LoadCursosAlunoComboBox() As IEnumerable
+    Friend Function LoadCursosAlunoComboBox() As IEnumerable(Of ComboBoxItem)
         Return GenerateComboBoxItems(Function() GetAll(Table.Curso), "Nome", "Id")
     End Function
 
@@ -92,6 +92,10 @@ Public Class PresenterFuncionarioAluno
         Dim data = ViewModelAluno.ConvertToDictionary()
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
 
+        If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
+            data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
+        End If
+
         Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
             .uniqueEntityData = data,
             .idRelatedEntites = idsDisciplinasAluno
@@ -108,10 +112,25 @@ Public Class PresenterFuncionarioAluno
         Dim alunoData = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
 
         ViewModelAluno.LoadFromDictionary(alunoData)
+        ViewModelAluno.Foto = ConvertByteArrayToImage(alunoData("Foto"))
 
         Dim nomeCurso = BusinessRules.GetAllById(alunoData("Curso"), Table.Curso).First()("Nome")
         ViewModelAluno.Curso = nomeCurso
 
         SessionCookie.AddCookie("IdAluno", idAluno)
     End Sub
+
+    Private Function ConvertByteArrayToImage(byteArray As Byte()) As ImageSource
+        'Dim imageSourceConverter As New ImageSourceConverter()
+        'Return DirectCast(imageSourceConverter.ConvertFrom(byteArray), ImageSource)
+        Dim imageSource As New BitmapImage()
+        Using stream As New MemoryStream(byteArray)
+            imageSource.BeginInit()
+            imageSource.StreamSource = stream
+            imageSource.CacheOption = BitmapCacheOption.OnLoad
+            imageSource.EndInit()
+        End Using
+        imageSource.Freeze()
+        Return imageSource
+    End Function
 End Class
