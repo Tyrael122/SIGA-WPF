@@ -1,15 +1,12 @@
-﻿<UserControl x:Class="ImagePicker"
+﻿<UserControl x:Class="BindingText"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SIGAWPF"
-             mc:Ignorable="d" Height="147" Width="186">
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Ellipse x:Name="imgPerfil">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding ImageSource, RelativeSource={RelativeSource AncestorType={x:Type local:ImagePicker}}, Mode=TwoWay}" />
-            </Ellipse.Fill>
-        </Ellipse>
+        <TextBox Text="{Binding TextOne, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
     </Grid>
 </UserControl>

@@ -12,7 +12,7 @@ Public Class PresenterFuncionarioAluno
 
         view.SetDataContext(ViewModelAluno)
 
-        ViewModelAluno.Foto = CarregarFotoVazia()
+        'ViewModelAluno.Foto = CarregarFotoVazia()
     End Sub
 
     Public Sub RegisterAluno(idsDisciplinasAluno As IEnumerable(Of String))
@@ -20,9 +20,9 @@ Public Class PresenterFuncionarioAluno
 
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
 
-        If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
-            data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
-        End If
+        'If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
+        '    data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
+        'End If
 
         Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
 
@@ -92,9 +92,9 @@ Public Class PresenterFuncionarioAluno
         Dim data = ViewModelAluno.ConvertToDictionary()
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
 
-        If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
-            data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
-        End If
+        'If ViewModelAluno.Foto.GetType() <> GetType(Byte()) Then
+        '    data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
+        'End If
 
         Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
             .uniqueEntityData = data,
@@ -110,9 +110,9 @@ Public Class PresenterFuncionarioAluno
 
     Public Sub CarregarAlunoParaEdicao(idAluno As String)
         Dim alunoData = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
+        alunoData("Foto") = ConvertByteArrayToImage(alunoData("Foto"))
 
         ViewModelAluno.LoadFromDictionary(alunoData)
-        ViewModelAluno.Foto = ConvertByteArrayToImage(alunoData("Foto"))
 
         Dim nomeCurso = BusinessRules.GetAllById(alunoData("Curso"), Table.Curso).First()("Nome")
         ViewModelAluno.Curso = nomeCurso
@@ -121,16 +121,19 @@ Public Class PresenterFuncionarioAluno
     End Sub
 
     Private Function ConvertByteArrayToImage(byteArray As Byte()) As ImageSource
-        'Dim imageSourceConverter As New ImageSourceConverter()
-        'Return DirectCast(imageSourceConverter.ConvertFrom(byteArray), ImageSource)
-        Dim imageSource As New BitmapImage()
-        Using stream As New MemoryStream(byteArray)
-            imageSource.BeginInit()
-            imageSource.StreamSource = stream
-            imageSource.CacheOption = BitmapCacheOption.OnLoad
-            imageSource.EndInit()
-        End Using
-        imageSource.Freeze()
-        Return imageSource
+        Dim imageSourceConverter As New ImageSourceConverter()
+        Return DirectCast(imageSourceConverter.ConvertFrom(byteArray), ImageSource)
+        'Dim imageSource As New BitmapImage(True, byteArray)
+        'Dim imageSource As New(True, byteArray)
+
+
+
+        'imageSource.S
+
+        'Using stream As New MemoryStream(byteArray)
+        '    imageSource.BeginInit()
+        '    imageSource.EndInit()
+        'End Using
+        'Return imageSource
     End Function
 End Class

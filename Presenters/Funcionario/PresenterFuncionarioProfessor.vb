@@ -11,15 +11,15 @@ Public Class PresenterFuncionarioProfessor
 
         view.SetDataContext(ViewModelProfessor)
 
-        ViewModelProfessor.Foto = CarregarFotoVazia()
+        'ViewModelProfessor.Foto = CarregarFotoVazia()
     End Sub
 
     Friend Sub RegisterProfessor(idsDisciplinasProfessor As IEnumerable(Of String))
         Dim data = ViewModelProfessor.ConvertToDictionary()
 
-        If data("Foto").GetType() <> GetType(Byte()) Then
-            data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
-        End If
+        'If data("Foto").GetType() <> GetType(Byte()) Then
+        '    data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
+        'End If
 
         Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
 
@@ -45,9 +45,9 @@ Public Class PresenterFuncionarioProfessor
 
         Dim data = ViewModelProfessor.ConvertToDictionary()
 
-        If data("Foto").GetType() <> GetType(Byte()) Then
-            data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
-        End If
+        'If data("Foto").GetType() <> GetType(Byte()) Then
+        '    data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
+        'End If
 
         data.Remove("Id")
 

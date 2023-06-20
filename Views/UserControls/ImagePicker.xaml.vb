@@ -1,9 +1,13 @@
-﻿Public Class ImagePicker
-    Public Shared ReadOnly ImageSourceProperty As DependencyProperty =
-        DependencyProperty.Register(
-                "ImageSource",
-                GetType(ImageSource),
-                GetType(ImagePicker))
+﻿Imports System.ComponentModel
+
+Public Class ImagePicker
+    Inherits UserControl
+
+    Public Shared ReadOnly ImageSourceProperty As DependencyProperty = DependencyProperty.Register(
+            NameOf(ImageSource),
+            GetType(ImageSource),
+            GetType(ImagePicker),
+            New PropertyMetadata(Nothing))
 
     Public Property ImageSource As ImageSource
         Get
@@ -15,10 +19,10 @@
     End Property
 
     Private Sub imgPerfil_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles imgPerfil.MouseLeftButtonDown
-        Dim backGround As New ImageBrush With {
-            .ImageSource = LoadImagePickerDialog()
-        }
+        Dim imageSource As ImageSource = LoadImagePickerDialog()
 
-        imgPerfil.Fill = backGround
+        If imageSource IsNot Nothing Then
+            Me.ImageSource = imageSource
+        End If
     End Sub
 End Class

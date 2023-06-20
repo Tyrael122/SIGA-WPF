@@ -44,14 +44,13 @@
         dataGridAlunos.ItemsSource = Presenter.GetDataView("Aluno")
     End Sub
 
+    'Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
+    '    Dim backGround As New ImageBrush With {
+    '        .ImageSource = LoadImagePickerDialog()
+    '    }
 
-    Private Sub btnImage_Click(sender As Object, e As RoutedEventArgs) Handles btnImage.Click
-        Dim backGround As New ImageBrush With {
-            .ImageSource = LoadImagePickerDialog()
-        }
-
-        btnImage.Background = backGround
-    End Sub
+    '    btnImage.Background = backGround
+    'End Sub
 
     Private Sub btnEditarAluno_Click(sender As Object, e As RoutedEventArgs)
         tabControlAluno.SelectedItem = tabCadastroAluno
@@ -89,4 +88,10 @@
 
         dataGridAlunos.ItemsSource = Presenter.GetDataView("Aluno")
     End Sub
+
+    'Private Sub imgPerfil_MouseLeftButtonDown(sender As Object, e As MouseButtonEventArgs) Handles imgPerfil.MouseLeftButtonDown
+    '    imgPerfil.Source = LoadImagePickerDialog()
+
+    '    Debug.WriteLine(imgPerfil.Source)
+    'End Sub
 End Class
