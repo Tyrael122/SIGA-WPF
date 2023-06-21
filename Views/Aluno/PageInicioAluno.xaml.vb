@@ -18,4 +18,10 @@
     Private Sub btnVerAviso(sender As Object, e As RoutedEventArgs)
         Presenter.ShowAviso(GetIdFromButton(sender))
     End Sub
+
+    Private Sub dataGridAvisos_AutoGeneratingColumn(sender As Object, e As DataGridAutoGeneratingColumnEventArgs) Handles dataGridAvisos.AutoGeneratingColumn
+        If e.PropertyName = "Id" Then
+            e.Column.Visibility = Visibility.Collapsed
+        End If
+    End Sub
 End Class

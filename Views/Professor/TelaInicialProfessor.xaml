@@ -72,7 +72,7 @@
 
         <DataGrid x:Name="dataGridAvisos" CanUserAddRows="False" 
                       GridLinesVisibility="None" Margin="38,218,412,664"
-                  Height="198" Width="1070" Grid.Column="1">
+                  Height="198" Width="1070" Grid.Column="1" HeadersVisibility="None">
             <DataGrid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

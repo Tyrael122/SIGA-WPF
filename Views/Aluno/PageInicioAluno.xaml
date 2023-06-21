@@ -20,17 +20,17 @@
                Width="478" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" 
                FontSize="28" Margin="24,121,0,0" Grid.Column="1"/>
 
-        <DataGrid x:Name="dataGridAvisos" Margin="26,184,424,688" CanUserAddRows="False"
-                  Height="198" Width="1070" HeadersVisibility="None"
-                   Background="Transparent" RowBackground="White" 
-                   AlternatingRowBackground="WhiteSmoke" BorderBrush="LightGray" BorderThickness="1">
+        <DataGrid x:Name="dataGridAvisos" CanUserAddRows="False" 
+                      GridLinesVisibility="None" Margin="36,186,414,686"
+                  Height="198" Width="1070" HeadersVisibility="None">
             <DataGrid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/Views/ResourceDictionaries/Aluno/AlunoDataGridStyle.xaml" />
+                        <ResourceDictionary Source="/Views/ResourceDictionaries/Professor/ProfessorDataGridStyle.xaml" />
                     </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>   
+                </ResourceDictionary>
             </DataGrid.Resources>
+
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Ver">
                     <DataGridTemplateColumn.CellTemplate>
