@@ -102,6 +102,20 @@ Public MustInherit Class Presenter
         Return comboBoxItems
     End Function
 
+    Protected Function GenerateComboBoxItems(data As IEnumerable(Of Object)) As IEnumerable(Of ComboBoxItem)
+        Dim comboBoxItems As New List(Of ComboBoxItem)
+
+        For Each item In data
+            Dim comboBoxItem As New ComboBoxItem With {
+                .Content = item
+            }
+
+            comboBoxItems.Add(comboBoxItem)
+        Next
+
+        Return comboBoxItems
+    End Function
+
     Protected Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Return BusinessRules.GetAll(table)
     End Function

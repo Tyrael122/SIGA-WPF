@@ -22,4 +22,9 @@
     Private Sub btnCadastrarHorario_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarHorario.Click
         Presenter.RegisterHorarioCurso()
     End Sub
+
+    Private Sub CadastroHorario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        cmbHorarioInicio.ItemsSource = Presenter.LoadHorarioInicio()
+        cmbHorarioFim.ItemsSource = Presenter.LoadHorarioFim()
+    End Sub
 End Class
