@@ -1,24 +1,17 @@
-﻿<Page x:Class="PageSolicitacoes"
+﻿<local:PageModel x:Class="PageSolicitacoes"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SIGAWPF"
-      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=local:SolicitacaoViewModel}"
+                 mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageConsultas">
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="213*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
                 <ColumnDefinition Width="47*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
                 <ColumnDefinition Width="0*"/>
                 <ColumnDefinition Width="1260*"/>
             </Grid.ColumnDefinitions>
@@ -26,10 +19,13 @@
                 <Label Content="Solicitações de Documentos" HorizontalAlignment="Left" VerticalAlignment="Center" Height="114" Width="890" FontSize="70" Foreground="#FB7A07B3" Margin="36,0,0,0"/>
             </Border>
             <Border BorderBrush="#FF7651FF" BorderThickness="1" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="110" Margin="54,336,0,0" VerticalAlignment="Top" Width="1388" Background="#664F3892" CornerRadius="20,20,20,20">
-                <ComboBox HorizontalAlignment="Center" Height="60" VerticalAlignment="Center" Width="264" BorderBrush="#FFB3B3B3"/>
+                <ComboBox Text="{Binding Tipo}"  HorizontalAlignment="Center" Height="60" VerticalAlignment="Center" Width="264" BorderBrush="#FFB3B3B3">
+                    <ComboBoxItem Content="Historico Escolar"/>
+                    <ComboBoxItem Content="Atestado de matricula"/>
+                </ComboBox>
             </Border>
             <Label Content="Tipo de Solicitação" HorizontalAlignment="Left" Height="54" Margin="50,364,0,0" VerticalAlignment="Top" Width="294" FontSize="30" Foreground="White" FontWeight="Bold" Grid.Column="10"/>
-            <Button Content="Solicitar" Background="#FF653FA0" Foreground="White" FontWeight="Bold" Margin="698,355,388,643" FontSize="18" Grid.Column="10">
+            <Button x:Name="btnSolicitar" Content="Solicitar" Background="#FF653FA0" Foreground="White" FontWeight="Bold" Margin="698,355,388,643" FontSize="18" Grid.Column="10">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
@@ -38,14 +34,23 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Border BorderThickness="1" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="524" Margin="65,488,0,0" VerticalAlignment="Top" Width="1377" CornerRadius="10,10,10,10" Background="#FFE2E2E2">
-                <Border BorderBrush="#FFBFBFBF" BorderThickness="0,0,0,1" HorizontalAlignment="Center" Height="74" Margin="0,1,0,0" VerticalAlignment="Top" Width="1377">
-                    <Label Content="Solicitações Realizadas" HorizontalAlignment="Center" Height="54" VerticalAlignment="Center" Width="367" FontSize="35" Foreground="#FF444444"/>
-                </Border>
+            <Border BorderBrush="#FFBFBFBF" Background="LightGray" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="74" Margin="60,469,0,0" VerticalAlignment="Top" Width="1377" Grid.ColumnSpan="4">
+                <Label Content="Solicitações Realizadas" HorizontalAlignment="Center" Height="54" VerticalAlignment="Center" Width="367" FontSize="35" Foreground="#FF444444"/>
             </Border>
+            <DataGrid x:Name="dataGridSolicitacoes" CanUserAddRows="False" Background="LightGray" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" Margin="60,562,82,58">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Download">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Download" Click="btnDownload" Tag="{Binding Id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
 
         </Grid>
         <Image Margin="1183,-54,-10,788" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
 
     </Grid>
-</Page>
+</local:PageModel>

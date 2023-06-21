@@ -40,6 +40,16 @@ Module ViewUtils
         Return Nothing
     End Function
 
+    Function OpenFileDialog() As String
+        Dim fileDialog = New OpenFileDialog()
+        Dim hasUserClickedOk = fileDialog.ShowDialog() = True
+        If hasUserClickedOk Then
+            Return fileDialog.FileName
+        End If
+
+        Return Nothing
+    End Function
+
     Friend Function GetIdFromButton(sender As Object) As Object
         Dim button As Button = CType(sender, Button)
 

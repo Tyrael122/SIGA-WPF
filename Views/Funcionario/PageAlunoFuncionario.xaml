@@ -12,19 +12,6 @@
 
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="209*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="46*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="1238*"/>
-            </Grid.ColumnDefinitions>
             <Border BorderBrush="#FFDA4803" BorderThickness="0,0,0,3" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="111" Margin="0,31,0,0" VerticalAlignment="Top" Width="1229">
                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Height="114" Width="868" FontSize="70" Foreground="#FBE62203" Margin="36,-16,0,0" Content="Cadastrar Aluno"/>
             </Border>

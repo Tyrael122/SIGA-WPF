@@ -16,7 +16,7 @@
     End Sub
 
     Private Sub btnAvisos_Click(sender As Object, e As RoutedEventArgs) Handles btnAvisos.Click
-        mainFrame.Content = New PageInicioFuncionario()
+        mainFrame.Content = New PageSolitacacaoFuncionario()
     End Sub
 
     Private Sub btnAluno_Click(sender As Object, e As RoutedEventArgs) Handles btnAluno.Click

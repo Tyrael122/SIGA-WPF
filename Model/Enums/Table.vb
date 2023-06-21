@@ -12,4 +12,5 @@
     Horario
     Presenca
     Aula
+    Solicitacao
 End Enum
