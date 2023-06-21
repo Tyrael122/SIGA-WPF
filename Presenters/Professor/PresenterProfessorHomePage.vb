@@ -20,4 +20,10 @@
     Friend Function GetDisciplinasCadastradas() As IEnumerable(Of IDictionary(Of String, Object))
         Return BusinessRules.GetDisciplinas(Table.Professor, SessionCookie.GetCookie("userId"))
     End Function
+
+    Public Function GetNomeDisciplina() As String
+        Dim idDisciplina = SessionCookie.GetCookie("IdDisciplina")
+
+        Return BusinessRules.GetAll(Table.Disciplina).Where(Function(dict) dict("Id") = idDisciplina).First()("Name")
+    End Function
 End Class

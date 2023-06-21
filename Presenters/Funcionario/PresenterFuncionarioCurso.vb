@@ -33,7 +33,7 @@ Public Class PresenterFuncionarioCurso
     End Sub
 
     Friend Sub CarregarCursoParaEdicao(idCurso As String)
-        Dim data = BusinessRules.GetAllById(idCurso, Table.Curso).First()
+        Dim data = BusinessRules.FindById(idCurso, Table.Curso).First()
 
         ViewModelCurso.LoadFromDictionary(data)
 

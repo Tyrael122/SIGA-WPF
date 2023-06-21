@@ -29,9 +29,11 @@
 
     Private Sub TelaProfessor_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         mainFrame.Content = New PageAlunos()
+
+        txtNomeDisciplina.Text = Presenter.GetNomeDisciplina()
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-        Me.Close()
+        Close()
     End Sub
 End Class

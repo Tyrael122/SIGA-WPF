@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Aviso]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Titulo] NVARCHAR(MAX) NULL, 
+    [Conteudo] NVARCHAR(MAX) NULL
+)

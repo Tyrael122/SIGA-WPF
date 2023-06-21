@@ -21,7 +21,7 @@
     Friend Sub CarregarDisciplinaParaEdicao(idDisciplina As String)
         SessionCookie.AddCookie("IdDisciplina", idDisciplina)
 
-        Dim data = BusinessRules.GetAllById(idDisciplina, Table.Disciplina).First()
+        Dim data = BusinessRules.FindById(idDisciplina, Table.Disciplina).First()
 
         ViewModelDisciplina.LoadFromDictionary(data)
     End Sub

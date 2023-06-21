@@ -15,7 +15,6 @@ Class TelaInicialProfessor
 
     Private Sub TelaInicialProfessor_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Dim disciplinas = Presenter.GetDisciplinasCadastradas()
-        'Dim disciplinas = Presenter.GetAll("Disciplina")
 
         Dim itemControlSource As New ObservableCollection(Of DisciplinaViewModel)
         For Each disciplina In disciplinas
@@ -26,11 +25,17 @@ Class TelaInicialProfessor
         Next
 
         gridDisciplinas.GridItemsSource = itemControlSource
+
+        dataGridAvisos.ItemsSource = Presenter.GetDataView("Aviso")
     End Sub
 
     Private Sub btnSair_Click(sender As Object, e As RoutedEventArgs) Handles btnSair.Click
         Dim login As New MainWindow()
         login.Show()
         Close()
+    End Sub
+
+    Private Sub btnVerAviso(sender As Object, e As RoutedEventArgs)
+        Presenter.ShowAviso(GetIdFromButton(sender))
     End Sub
 End Class

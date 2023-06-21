@@ -13,4 +13,5 @@
     Presenca
     Aula
     Solicitacao
+    Aviso
 End Enum

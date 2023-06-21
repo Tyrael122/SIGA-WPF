@@ -1,31 +1,47 @@
-﻿<Page x:Name="PageInicio1" x:Class="PageInicioAluno"
+﻿<local:PageModel x:Class="PageInicioAluno"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SIGAWPF"
+      xmlns:local="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=local:AlunoViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="1070" d:DesignWidth="1520"
       Title="PageInicio" Background="#FFECECEC">
     <Grid HorizontalAlignment="Left" Height="1070" Margin="10,0,0,0" VerticalAlignment="Center" Width="1520">
-        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="32,260,0,0" VerticalAlignment="Top" Width="1070" Background="White" CornerRadius="10,10,10,10">
-            <Button x:Name="btnCalendario" Content="Avisos cadastrados pelo funcionário" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="456" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Margin="466,30,0,0">
-                <Button.Background>
-                    <ImageBrush/>
-                </Button.Background>
-            </Button>
-        </Border>
         <Label Content="Veja suas disciplinas" HorizontalAlignment="Left" Height="94" Margin="32,0,0,0" VerticalAlignment="Center" Width="493" FontSize="52"/>
         <Button x:Name="btnVerDisciplinas" Content="• Ver Disciplinas" HorizontalAlignment="Left" Height="46" Margin="508,0,0,0" VerticalAlignment="Center" Width="252" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <Grid HorizontalAlignment="Left" Height="147" Margin="32,113,0,0" VerticalAlignment="Top" Width="1493">
-            <Label Content="Olá" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="114" Width="126" FontSize="52"/>
-            <Label Content="Aluno" HorizontalAlignment="Left" Margin="113,0,0,0" VerticalAlignment="Center" Height="114" Width="164" FontSize="52"/>
-            <Label Content=", veja seus compromissos" HorizontalAlignment="Left" Margin="253,0,0,0" VerticalAlignment="Center" Height="114" Width="704" FontSize="52"/>
-        </Grid>
+        <Label Content="{Binding Login}" ContentStringFormat="Olá, {0}. Veja seus compromissos" HorizontalAlignment="Left" Margin="21,14,0,0" VerticalAlignment="Top" Height="93" Width="1077" FontSize="52"/>
+
+        <Label Content="Avisos cadastrados pelo funcionário" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" 
+               Width="478" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" 
+               FontSize="28" Margin="24,121,0,0" Grid.Column="1"/>
+
+        <DataGrid x:Name="dataGridAvisos" Margin="26,184,424,688" CanUserAddRows="False"
+                  Height="198" Width="1070" HeadersVisibility="None"
+                   Background="Transparent" RowBackground="White" 
+                   AlternatingRowBackground="WhiteSmoke" BorderBrush="LightGray" BorderThickness="1">
+            <DataGrid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="/Views/ResourceDictionaries/Aluno/AlunoDataGridStyle.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>   
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Ver">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Ver" Click="btnVerAviso" Tag="{Binding Id}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
         <Image Margin="1313,0,-5,934" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
         <Grid HorizontalAlignment="Left" Height="180" Margin="32,587,0,0" VerticalAlignment="Top" Width="640">
             <Border BorderThickness="1" HorizontalAlignment="Center" Height="180" VerticalAlignment="Center" Width="640" Background="White">
@@ -117,4 +133,4 @@
         </Grid>
     </Grid>
 
-</Page>
+</local:PageModel>

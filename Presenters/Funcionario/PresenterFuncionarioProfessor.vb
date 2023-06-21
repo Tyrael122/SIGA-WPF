@@ -28,7 +28,7 @@ Public Class PresenterFuncionarioProfessor
     End Sub
 
     Friend Sub CarregarProfessorParaEdicao(idProfessor As String)
-        Dim data = BusinessRules.GetAllById(idProfessor, Table.Professor).First()
+        Dim data = BusinessRules.FindById(idProfessor, Table.Professor).First()
 
         data("Foto") = ConvertByteArrayToImage(data("Foto"))
         ViewModelProfessor.LoadFromDictionary(data)

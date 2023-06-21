@@ -39,9 +39,13 @@
 
                     <TextBlock Text="{Binding Login}" Foreground="White" FontSize="30" FontWeight="SemiBold"
                                DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
+                    
+                    <TextBlock x:Name="txtNomeDisciplina" Foreground="#FFBFE9FF" FontSize="20" FontWeight="SemiBold"
+                               DockPanel.Dock="Top" TextAlignment="Center" Height="49" Width="338" />
+                    
                     <TextBlock Text="Seja Bem vindo(a)" Foreground="#FFBFE9FF" FontSize="23" FontWeight="SemiBold"
-                               DockPanel.Dock="Top" TextAlignment="Center" />
-
+                              DockPanel.Dock="Top" TextAlignment="Center"  Margin="0,4,0,0"/>
+                    
                     <Separator Background="#FFA995E6" Margin="50" DockPanel.Dock="Top" Height="0.8"/>
 
 
@@ -77,6 +81,8 @@
 
 
                     </StackPanel>
+                    <TextBlock Text="Seja Bem vindo(a)" Foreground="#FFBFE9FF" FontSize="23" FontWeight="SemiBold"
+                        DockPanel.Dock="Bottom" TextAlignment="Center" Height="31" />
 
 
                 </DockPanel>

@@ -4,11 +4,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=local:DisciplinaViewModel}"
+        xmlns:local="clr-namespace:SIGAWPF" d:DataContext="{d:DesignInstance Type=local:ProfessorViewModel}"
                    mc:Ignorable="d" Height="1080" Width="1920" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" AllowsTransparency='True' Background="#FFECECEC">
+        WindowStyle="None" AllowsTransparency='True'>
 
-    <Grid>
+    <Grid Background="#FFECECEC">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
@@ -32,13 +32,13 @@
                         DockPanel.Dock="Top" HorizontalAlignment="Left" Margin=" 40 0 0 0">
                         <Ellipse>
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="/Views/Aluno/user-icon-removebg-preview.png" />
+                                <ImageBrush ImageSource="{Binding Foto}" />
                             </Ellipse.Fill>
                         </Ellipse>
                     </Border>
 
-                    <TextBlock Text="Nome do Professor" Foreground="White" FontSize="30" FontWeight="SemiBold"
-                               DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
+                    <TextBlock Foreground="White" FontSize="30" FontWeight="SemiBold"
+                               DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10" Text="{Binding Login}"/>
                     <TextBlock Text="Seja Bem vindo(a)" Foreground="#FFBFE9FF" FontSize="23" FontWeight="SemiBold"
                                DockPanel.Dock="Top" TextAlignment="Center" />
 
@@ -65,24 +65,34 @@
         <TextBlock Text="" Foreground="White" FontSize="20" FontWeight="SemiBold"
             TextAlignment="Center" Margin="10,961,106,79"/>
         <Image Margin="1298,10,10,934" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill" Grid.Column="1"/>
-        <Grid HorizontalAlignment="Left" Height="147" Margin="17,78,0,0" VerticalAlignment="Top" Width="1493" Grid.Column="1">
-            <Label Content="Olá" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="114" Width="126" FontSize="52"/>
-            <Label Content="Professor" HorizontalAlignment="Left" Margin="113,0,0,0" VerticalAlignment="Center" Height="114" Width="230" FontSize="52"/>
-            <Label Content=", veja seus compromissos" HorizontalAlignment="Left" VerticalAlignment="Center" Height="114" Width="704" FontSize="52" Margin="325,0,0,0"/>
-        </Grid>
-        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="25,212,0,0" VerticalAlignment="Top" Width="1070" Background="White" CornerRadius="10,10,10,10" Grid.Column="1">
-            <Button x:Name="btnCalendario1" Content="Avisos cadastrados pelo funcionário" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="478" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Margin="466,30,0,0">
-                <Button.Background>
-                    <ImageBrush/>
-                </Button.Background>
-            </Button>
-        </Border>
+        <Label Content="{Binding Login}" ContentStringFormat="Olá, {0}. Veja suas atividades." HorizontalAlignment="Left" Margin="27,14,0,0" VerticalAlignment="Top" Height="114" Width="1201" FontSize="52" Grid.Column="1"/>
+        <Label Content="Avisos cadastrados pelo funcionário" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" 
+               Width="478" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" 
+               FontSize="28" Margin="24,121,0,0" Grid.Column="1"/>
+
+        <DataGrid x:Name="dataGridAvisos" CanUserAddRows="False" 
+                      GridLinesVisibility="None" Margin="38,218,412,664"
+                  Height="198" Width="1070" Grid.Column="1">
+            <DataGrid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="/Views/ResourceDictionaries/Professor/ProfessorDataGridStyle.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Ver">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Ver" Click="btnVerAviso" Tag="{Binding Id}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
         <Label Content="Veja suas disciplinas" HorizontalAlignment="Left" Height="94" Margin="22,442,0,0" VerticalAlignment="Top" Width="493" FontSize="52" Grid.Column="1"/>
-        <Button x:Name="btnVerDisciplinas" Content="• Ver Disciplinas" HorizontalAlignment="Left" Height="46" Margin="518,472,0,0" VerticalAlignment="Top" Width="252" BorderBrush="{x:Null}" Foreground="#FF1B7BC5" FontSize="28" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
         <ScrollViewer Margin="36,548,38,48" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Column="1">
             <local:DisciplinasGrid x:Name="gridDisciplinas"></local:DisciplinasGrid>
         </ScrollViewer>

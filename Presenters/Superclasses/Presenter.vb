@@ -6,6 +6,11 @@ Public MustInherit Class Presenter
 
     Private Const EmptyUserImagePath As String = "Views\Images\user-icon-removebg-preview.png"
 
+    Public Sub ShowAviso(idAviso As String)
+        Dim aviso As New AvisoPopUp(idAviso)
+        aviso.Show()
+    End Sub
+
     Protected Function CarregarFotoVazia() As ImageSource
         Dim baseDirectory As String = AppDomain.CurrentDomain.BaseDirectory
         Dim projectFolder = New Uri(Directory.GetParent(baseDirectory).Parent.Parent.ToString())
@@ -17,7 +22,7 @@ Public MustInherit Class Presenter
     Protected Sub LoadUserInfo(viewModel As ViewModel, table As Table)
         Dim idUser = SessionCookie.GetCookie("userId")
 
-        Dim data = BusinessRules.GetAllById(idUser, table).First()
+        Dim data = BusinessRules.FindById(idUser, table).First()
 
         If data.ContainsKey("Foto") Then
             If IsDBNull(data("Foto")) Then
@@ -88,8 +93,8 @@ Public MustInherit Class Presenter
 
         For Each dict In selector()
             Dim comboBoxItem As New ComboBoxItem With {
-                .content = dict(content),
-                .tag = dict(tag)
+                .Content = dict(content),
+                .Tag = dict(tag)
             }
             comboBoxItems.Add(comboBoxItem)
         Next
@@ -113,7 +118,7 @@ Public MustInherit Class Presenter
 
     Public Function GetAllById(id As String, tableStr As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
-        Return BusinessRules.GetAllById(id, table)
+        Return BusinessRules.FindById(id, table)
     End Function
 
     Private Function GetDataTable(tableStr As String) As DataTable

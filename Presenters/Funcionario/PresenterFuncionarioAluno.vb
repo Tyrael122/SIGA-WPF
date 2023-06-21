@@ -62,7 +62,7 @@ Public Class PresenterFuncionarioAluno
     End Function
 
     Private Function GetDisciplinasAluno(idAluno As String, idCurso As String) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim aluno = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
+        Dim aluno = BusinessRules.FindById(idAluno, Table.Aluno).First()
 
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
@@ -102,12 +102,12 @@ Public Class PresenterFuncionarioAluno
     End Sub
 
     Public Sub CarregarAlunoParaEdicao(idAluno As String)
-        Dim alunoData = BusinessRules.GetAllById(idAluno, Table.Aluno).First()
+        Dim alunoData = BusinessRules.FindById(idAluno, Table.Aluno).First()
         alunoData("Foto") = ConvertByteArrayToImage(alunoData("Foto"))
 
         ViewModelAluno.LoadFromDictionary(alunoData)
 
-        Dim nomeCurso = BusinessRules.GetAllById(alunoData("Curso"), Table.Curso).First()("Nome")
+        Dim nomeCurso = BusinessRules.FindById(alunoData("Curso"), Table.Curso).First()("Nome")
         ViewModelAluno.Curso = nomeCurso
 
         SessionCookie.AddCookie("IdAluno", idAluno)

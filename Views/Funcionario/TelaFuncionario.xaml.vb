@@ -15,7 +15,7 @@
         mainFrame.Content = New PageInicioFuncionario()
     End Sub
 
-    Private Sub btnAvisos_Click(sender As Object, e As RoutedEventArgs) Handles btnAvisos.Click
+    Private Sub btnSolicitacoes_Click(sender As Object, e As RoutedEventArgs) Handles btnSolicitacoes.Click
         mainFrame.Content = New PageSolitacacaoFuncionario()
     End Sub
 
@@ -33,6 +33,10 @@
 
     Private Sub btnDisciplina_Click(sender As Object, e As RoutedEventArgs) Handles btnDisciplina.Click
         mainFrame.Content = New PageDisciplinasFuncionario()
+    End Sub
+
+    Private Sub btnAvisos_Click(sender As Object, e As RoutedEventArgs) Handles btnAvisos.Click
+        mainFrame.Content = New PageInicioFuncionario()
     End Sub
 
     Private Sub btnSair_Click(sender As Object, e As RoutedEventArgs) Handles btnSair.Click

@@ -13,7 +13,9 @@
                 <Label Content="Cadastro de Notas&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Height="114" Width="868" FontSize="70" Foreground="#FB0760B3" Margin="36,-16,0,0"/>
             </Border>
 
-            <DataGrid x:Name="dataGridNotasAluno" CanUserAddRows="False" GridLinesVisibility="None" Grid.ColumnSpan="11" Margin="36,325,70,195">
+            <DataGrid x:Name="dataGridNotasAluno" CanUserAddRows="False" 
+                      GridLinesVisibility="None" 
+                      Grid.ColumnSpan="11" Margin="36,325,70,195">
                 <DataGrid.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>

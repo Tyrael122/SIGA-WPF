@@ -51,7 +51,7 @@
         Return GetAll(Table.Disciplina).Where(Function(disciplina) idDisciplinas.Contains(disciplina("Id")))
     End Function
 
-    Friend Shared Function GetAllById(id As String, tableStr As Table) As IEnumerable(Of IDictionary(Of String, Object))
+    Friend Shared Function FindById(id As String, tableStr As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
 
@@ -120,8 +120,8 @@
         For Each presenca In presencas
             presenca("Data") = aulas.Where(Function(aula) aula("Id") = presenca("IdAula")).First()("Data")
 
-            Dim idDisciplina = GetAllById(presenca("IdAula"), Table.Aula).First()("IdDisciplina")
-            presenca("Disciplina") = GetAllById(idDisciplina, Table.Disciplina).First()("Name")
+            Dim idDisciplina = FindById(presenca("IdAula"), Table.Aula).First()("IdDisciplina")
+            presenca("Disciplina") = FindById(idDisciplina, Table.Disciplina).First()("Name")
         Next
 
         presencas = RemoveKeyFromDict(presencas, "IdAluno")

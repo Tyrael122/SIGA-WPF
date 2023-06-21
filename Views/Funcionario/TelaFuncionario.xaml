@@ -43,7 +43,7 @@
                     <Separator Background="#FFA995E6" Margin="50" DockPanel.Dock="Top" Height="0.8"/>
                     
                     <StackPanel DockPanel.Dock="Top">
-                        <Button x:Name="btnAvisos" Style="{StaticResource menuButton}" Width="284" Foreground="#FFFFBD9E" Background="#FFFFBD9E" >
+                        <Button x:Name="btnSolicitacoes" Style="{StaticResource menuButton}" Width="284" Foreground="#FFFFBD9E" Background="#FFFFBD9E" >
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Views/Funcionario/casa.png" Style="{StaticResource menuButtonIcon}" />
                                 <TextBlock Text ="Solicitações" VerticalAlignment="Center" Foreground="White"/>
@@ -74,6 +74,12 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Views/Funcionario/disciplina.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
                                 <TextBlock Text ="Disciplina" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnAvisos" Style="{StaticResource ResourceKey=menuButton}" Width="270" Foreground="White" Background="#FFFFBD9E">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Views/Funcionario/disciplina.png" Style="{StaticResource ResourceKey=menuButtonIcon}" />
+                                <TextBlock Text ="Avisos" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
