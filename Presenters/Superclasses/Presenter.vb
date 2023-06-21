@@ -19,6 +19,14 @@ Public MustInherit Class Presenter
 
         Dim data = BusinessRules.GetAllById(idUser, table).First()
 
+        If data.ContainsKey("Foto") Then
+            If IsDBNull(data("Foto")) Then
+                data("Foto") = CarregarFotoVazia()
+            Else
+                data("Foto") = ConvertByteArrayToImage(data("Foto"))
+            End If
+        End If
+
         viewModel.LoadFromDictionary(data)
     End Sub
 
@@ -36,6 +44,12 @@ Public MustInherit Class Presenter
             Return memoryStream.ToArray()
         End Using
     End Function
+
+    Protected Function ConvertByteArrayToImage(byteArray As Byte()) As ImageSource
+        Dim imageSourceConverter As New ImageSourceConverter()
+        Return DirectCast(imageSourceConverter.ConvertFrom(byteArray), ImageSource)
+    End Function
+
 
     Protected Sub ShowWindowAndCloseCurrent(window As Window, view As IView)
         window.Show()

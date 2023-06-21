@@ -9,8 +9,6 @@
         LoadUserInfo(ViewModelProfessor, Table.Professor)
 
         view.SetDataContext(ViewModelProfessor)
-
-        'ViewModelProfessor.Foto = CarregarFotoVazia()
     End Sub
 
     Public Shared Sub ShowDisciplinaPage(idDisciplina As String)

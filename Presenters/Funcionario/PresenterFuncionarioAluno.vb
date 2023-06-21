@@ -1,6 +1,4 @@
 ﻿Imports System.Data
-Imports System.Data.Common
-Imports System.IO
 
 Public Class PresenterFuncionarioAluno
     Inherits Presenter
@@ -114,21 +112,4 @@ Public Class PresenterFuncionarioAluno
 
         SessionCookie.AddCookie("IdAluno", idAluno)
     End Sub
-
-    Private Function ConvertByteArrayToImage(byteArray As Byte()) As ImageSource
-        Dim imageSourceConverter As New ImageSourceConverter()
-        Return DirectCast(imageSourceConverter.ConvertFrom(byteArray), ImageSource)
-        'Dim imageSource As New BitmapImage(True, byteArray)
-        'Dim imageSource As New(True, byteArray)
-
-
-
-        'imageSource.S
-
-        'Using stream As New MemoryStream(byteArray)
-        '    imageSource.BeginInit()
-        '    imageSource.EndInit()
-        'End Using
-        'Return imageSource
-    End Function
 End Class

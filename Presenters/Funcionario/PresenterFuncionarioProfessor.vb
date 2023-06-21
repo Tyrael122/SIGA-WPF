@@ -11,15 +11,12 @@ Public Class PresenterFuncionarioProfessor
 
         view.SetDataContext(ViewModelProfessor)
 
-        'ViewModelProfessor.Foto = CarregarFotoVazia()
+        ViewModelProfessor.Foto = CarregarFotoVazia()
     End Sub
 
     Friend Sub RegisterProfessor(idsDisciplinasProfessor As IEnumerable(Of String))
         Dim data = ViewModelProfessor.ConvertToDictionary()
-
-        'If data("Foto").GetType() <> GetType(Byte()) Then
-        '    data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
-        'End If
+        data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
 
         Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
 
@@ -33,6 +30,7 @@ Public Class PresenterFuncionarioProfessor
     Friend Sub CarregarProfessorParaEdicao(idProfessor As String)
         Dim data = BusinessRules.GetAllById(idProfessor, Table.Professor).First()
 
+        data("Foto") = ConvertByteArrayToImage(data("Foto"))
         ViewModelProfessor.LoadFromDictionary(data)
 
         SessionCookie.AddCookie("IdProfessor", idProfessor)
@@ -44,10 +42,7 @@ Public Class PresenterFuncionarioProfessor
         BusinessRules.DeleteDisciplinas(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
 
         Dim data = ViewModelProfessor.ConvertToDictionary()
-
-        'If data("Foto").GetType() <> GetType(Byte()) Then
-        '    data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
-        'End If
+        data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
 
         data.Remove("Id")
 

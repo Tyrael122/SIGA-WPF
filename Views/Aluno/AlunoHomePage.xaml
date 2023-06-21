@@ -32,7 +32,7 @@
                         DockPanel.Dock="Top" HorizontalAlignment="Left" Margin=" 40 0 0 0">
                         <Ellipse>
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="/Views/Aluno/user-icon-removebg-preview.png" />
+                                <ImageBrush ImageSource="{Binding Foto}" />
                             </Ellipse.Fill>
                         </Ellipse>
                     </Border>
