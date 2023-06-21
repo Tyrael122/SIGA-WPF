@@ -14,4 +14,14 @@
     Private Sub btnCadastrarAviso_Click(sender As Object, e As RoutedEventArgs) Handles btnCadastrarAviso.Click
         Presenter.RegisterAviso()
     End Sub
+
+    Private Sub ButtonDeletar_Click(sender As Object, e As RoutedEventArgs)
+        Presenter.DeleteAviso(GetIdFromButton(sender))
+
+        dataGridAvisos.ItemsSource = Presenter.GetDataView("Aviso")
+    End Sub
+
+    Private Sub PageInicioFuncionario_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        dataGridAvisos.ItemsSource = Presenter.GetDataView("Aviso")
+    End Sub
 End Class

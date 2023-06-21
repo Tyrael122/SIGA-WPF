@@ -168,4 +168,8 @@
 
         Return alunos
     End Function
+
+    Friend Shared Sub Delete(idEntity As String, table As Table)
+        dataBridge.Delete(idEntity, table)
+    End Sub
 End Class

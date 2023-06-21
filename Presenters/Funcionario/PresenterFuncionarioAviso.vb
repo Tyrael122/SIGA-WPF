@@ -16,4 +16,8 @@
 
         ViewModelAviso.Clear()
     End Sub
+
+    Friend Sub DeleteAviso(idAviso As String)
+        BusinessRules.Delete(idAviso, Table.Aviso)
+    End Sub
 End Class

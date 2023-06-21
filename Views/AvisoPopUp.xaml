@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="AvisoPopUp" Height="450" Width="800">
     <Grid>
-        <Label x:Name="txtTitulo" Content="Título" Background="Transparent" HorizontalContentAlignment="Center"
+        <Label x:Name="txtTitulo" Background="Transparent" HorizontalContentAlignment="Center"
                FontFamily="Arial" FontSize="20" Foreground="Black" FontWeight="Bold"
-               HorizontalAlignment="Left" Margin="268,47,0,0" VerticalAlignment="Top" Height="55" Width="229"/>
-        <TextBlock x:Name="txtConteudo" Text="Título" Background="Transparent" Height="222" Width="599" Margin="100,174,101,38"
+               HorizontalAlignment="Left" Margin="268,47,0,0" VerticalAlignment="Top" Height="55"/>
+        <TextBlock x:Name="txtConteudo" Background="Transparent" Height="222" Width="599" Margin="100,174,101,38"
                FontFamily="Arial" FontSize="20" Foreground="Black" TextWrapping="Wrap"/>
     </Grid>
 </Window>
