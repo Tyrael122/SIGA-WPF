@@ -25,4 +25,9 @@
         Presenter.DownloadDocumento(GetIdFromButton(sender))
     End Sub
 
+    Private Sub dataGridSolicitacoes_AutoGeneratingColumn(sender As Object, e As DataGridAutoGeneratingColumnEventArgs) Handles dataGridSolicitacoes.AutoGeneratingColumn
+        If e.PropertyName = "Id" Then
+            e.Column.Visibility = Visibility.Collapsed
+        End If
+    End Sub
 End Class

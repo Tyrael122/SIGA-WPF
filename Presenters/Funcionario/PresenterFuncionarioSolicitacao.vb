@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Data
+Imports System.IO
 
 Friend Class PresenterFuncionarioSolicitacao
     Inherits Presenter
@@ -15,4 +16,20 @@ Friend Class PresenterFuncionarioSolicitacao
 
         BusinessRules.Update(idSolicitacao, Table.Solicitacao, data)
     End Sub
+
+    Friend Function GetSolicitacoes() As DataView
+        Dim solicitacoesAluno = BusinessRules.GetAll(Table.Solicitacao)
+
+        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
+        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "Documento")
+
+        For Each solicitacao In solicitacoesAluno
+            solicitacao("Título do Documento") = solicitacao("TituloDocumento")
+            solicitacao("Tipo") = [Enum].GetName(GetType(TipoSolicitacao), solicitacao("Tipo"))
+        Next
+
+        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
+
+        Return ConvertDictionaryToDataView(solicitacoesAluno)
+    End Function
 End Class

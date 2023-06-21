@@ -37,7 +37,9 @@
             <Border BorderBrush="#FFBFBFBF" Background="LightGray" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="74" Margin="60,469,0,0" VerticalAlignment="Top" Width="1377" Grid.ColumnSpan="4">
                 <Label Content="Solicitações Realizadas" HorizontalAlignment="Center" Height="54" VerticalAlignment="Center" Width="367" FontSize="35" Foreground="#FF444444"/>
             </Border>
-            <DataGrid x:Name="dataGridSolicitacoes" CanUserAddRows="False" Background="LightGray" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" Margin="60,562,82,58">
+            <DataGrid x:Name="dataGridSolicitacoes" CanUserAddRows="False" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" Margin="60,562,82,58"
+                      GridLinesVisibility="None" Background="Transparent"
+                  RowBackground="White" AlternatingRowBackground="WhiteSmoke" BorderBrush="LightGray" BorderThickness="1">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Download">
                         <DataGridTemplateColumn.CellTemplate>
@@ -47,6 +49,14 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
+
+                <DataGrid.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="/Views/ResourceDictionaries/Aluno/AlunoDataGridStyle.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </DataGrid.Resources>
             </DataGrid>
 
         </Grid>
