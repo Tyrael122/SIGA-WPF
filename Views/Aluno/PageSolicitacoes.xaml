@@ -35,7 +35,7 @@
                 </Button.Template>
             </Button>
             <Border BorderBrush="#FFBFBFBF" Background="LightGray" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Height="74" Margin="60,469,0,0" VerticalAlignment="Top" Width="1377" Grid.ColumnSpan="4">
-                <Label Content="Solicitações Realizadas" HorizontalAlignment="Center" Height="54" VerticalAlignment="Center" Width="367" FontSize="35" Foreground="#FF444444"/>
+                <Label x:Name="lblInfo" Content="Solicitações Realizadas" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="58" VerticalAlignment="Center" Width="1360" FontSize="35" Foreground="#FF444444"/>
             </Border>
             <DataGrid x:Name="dataGridSolicitacoes" CanUserAddRows="False" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" Margin="60,562,82,58"
                       GridLinesVisibility="None" Background="Transparent"
