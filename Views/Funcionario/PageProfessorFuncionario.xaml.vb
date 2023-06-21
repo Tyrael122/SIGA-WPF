@@ -66,4 +66,10 @@
         RemoveHandler userControlCadastrar.btnCadastrar.Click, AddressOf btnAtualizarAluno_Click
         AddHandler userControlCadastrar.btnCadastrar.Click, AddressOf btnCadastrarProfessor_Click
     End Sub
+
+    Private Sub dataGridProfessor_AutoGeneratingColumn(sender As Object, e As DataGridAutoGeneratingColumnEventArgs) Handles dataGridProfessor.AutoGeneratingColumn
+        If e.PropertyName = "Foto" Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class

@@ -24,6 +24,13 @@
                     </ResourceDictionary>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Foto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image  Width="50" Height="50" Source="{Binding Foto}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridCheckBoxColumn Header="Presente" Width="200" Binding="{Binding IsPresente}"/>
                 </DataGrid.Columns>
             </DataGrid>

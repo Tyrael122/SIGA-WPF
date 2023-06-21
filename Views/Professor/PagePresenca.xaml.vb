@@ -39,5 +39,13 @@
         If e.PropertyName = "IsPresente" Then
             e.Cancel = True
         End If
+
+        If e.PropertyName = "Id" Then
+            e.Cancel = True
+        End If
+
+        If e.PropertyName = "Foto" Then
+            e.Cancel = True
+        End If
     End Sub
 End Class

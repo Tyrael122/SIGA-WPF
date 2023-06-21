@@ -1,6 +1,15 @@
-﻿Public MustInherit Class SuperPage
+﻿Imports System.Windows.Threading
+
+Public MustInherit Class SuperPage
     Inherits Page
     Implements IView
+
+
+    Protected originalContent As String
+
+    Protected ReadOnly timer As New DispatcherTimer With {
+            .Interval = TimeSpan.FromSeconds(3)
+        }
 
     Public MustOverride Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
     Public MustOverride Sub DisplayError() Implements IView.DisplayError

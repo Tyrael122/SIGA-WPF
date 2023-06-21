@@ -30,7 +30,7 @@ Module ViewUtils
 
     Function LoadImagePickerDialog() As ImageSource
         Dim fileDialog = New OpenFileDialog With {
-                    .Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*"
+                    .Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*"
                 }
         Dim hasUserClickedOk = fileDialog.ShowDialog() = True
         If hasUserClickedOk Then

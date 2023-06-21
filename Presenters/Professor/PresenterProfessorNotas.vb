@@ -1,4 +1,6 @@
-﻿Public Class PresenterProfessorNotas
+﻿Imports System.Data
+
+Public Class PresenterProfessorNotas
     Inherits Presenter
 
     Private ViewModelNotas As New NotasViewModel()
@@ -43,9 +45,11 @@
 
             BusinessRules.Save(savebleData, Table.Nota)
         Next
+
+        View.DisplayInfo("Notas cadastradas com sucesso!")
     End Sub
 
-    Friend Function GetAllNotasAlunosCadastrados() As Object
+    Friend Function GetAllNotasAlunosCadastrados() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
         Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
@@ -66,5 +70,32 @@
         alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
 
         Return ConvertDictionaryToDataView(alunosCadastrados)
+    End Function
+
+
+    Friend Function GetAllNotasAlunosCadastrado() As ImageSource
+        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
+
+        Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
+        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
+
+        For Each aluno In alunosCadastrados
+            Dim idAluno = aluno("Id")
+            Dim dadosNota = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = idAluno And
+                                                                                dict("IdProva") = ViewModelNotas.IdProva)
+
+            If dadosNota.Any() Then
+                aluno("Nota") = dadosNota.First()("Nota")
+            Else
+                aluno("Nota") = ""
+            End If
+
+
+            'aluno("Foto") = ConvertByteArrayToImage(aluno("Foto"))
+        Next
+
+        alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
+
+        Return alunosCadastrados.First()("Foto")
     End Function
 End Class

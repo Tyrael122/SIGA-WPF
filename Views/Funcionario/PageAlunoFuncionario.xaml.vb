@@ -80,4 +80,10 @@
 
         dataGridAlunos.ItemsSource = Presenter.GetDataView("Aluno")
     End Sub
+
+    Private Sub dataGridAlunos_AutoGeneratingColumn(sender As Object, e As DataGridAutoGeneratingColumnEventArgs) Handles dataGridAlunos.AutoGeneratingColumn
+        If e.PropertyName = "Foto" Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class

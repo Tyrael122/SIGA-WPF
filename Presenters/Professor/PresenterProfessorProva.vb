@@ -21,5 +21,7 @@
         data("Data") = ViewModelProva.Data.ToString("yyyy-MM-dd")
 
         BusinessRules.Save(data, Table.Prova)
+
+        View.DisplayInfo("Prova cadastrada com sucesso!")
     End Sub
 End Class

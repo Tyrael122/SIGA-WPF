@@ -9,21 +9,8 @@
       Title="PageConsultas">
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="209*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="46*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="1238*"/>
-            </Grid.ColumnDefinitions>
             <Border BorderBrush="#FF78C4FF" BorderThickness="0,0,0,3" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="195" Margin="36,89,0,0" VerticalAlignment="Top" Width="1229">
-                <Label Content="Cadastre uma prova" HorizontalAlignment="Left" VerticalAlignment="Center" Height="114" Width="736" FontSize="70" Foreground="#FB0760B3" Margin="36,0,0,0"/>
+                <Label x:Name="lblInfo" Content="Cadastre uma prova" HorizontalAlignment="Left" VerticalAlignment="Center" Height="114" Width="1165" FontSize="70" Foreground="#FB0760B3" Margin="36,0,0,0"/>
             </Border>
             <Border BorderBrush="#FF2EC2DE" BorderThickness="0,0,0,6" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="164" Margin="106,483,0,0" VerticalAlignment="Top" Width="1185"/>
 
@@ -45,7 +32,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Label Grid.Column="10" Content="Selecione o tipo da prova:" HorizontalAlignment="Left" Height="49" Margin="500,483,0,0" VerticalAlignment="Top" Width="388" FontSize="30" Foreground="#FF2C77B1" FontWeight="Bold"/>
+            <Label Content="Selecione o tipo da prova:" HorizontalAlignment="Left" Height="49" Margin="755,485,0,0" VerticalAlignment="Top" Width="388" FontSize="30" Foreground="#FF2C77B1" FontWeight="Bold"/>
             <Label Content="Selecione uma data para a prova:" HorizontalAlignment="Left" Height="49" Margin="208,483,0,0" VerticalAlignment="Top" Width="490" FontSize="30" Foreground="#FF2C77B1" FontWeight="Bold" Grid.ColumnSpan="11"/>
 
 

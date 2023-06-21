@@ -51,8 +51,17 @@ Public MustInherit Class Presenter
     End Function
 
     Protected Function ConvertByteArrayToImage(byteArray As Byte()) As ImageSource
-        Dim imageSourceConverter As New ImageSourceConverter()
-        Return DirectCast(imageSourceConverter.ConvertFrom(byteArray), ImageSource)
+        'Dim imageSourceConverter As New ImageSourceConverter()
+        'Return DirectCast(imageSourceConverter.ConvertFrom(byteArray), ImageSource)
+        Using stream As New MemoryStream(byteArray)
+            Dim imageSource As New BitmapImage()
+            imageSource.BeginInit()
+            imageSource.StreamSource = stream
+            imageSource.CacheOption = BitmapCacheOption.OnLoad
+            imageSource.EndInit()
+            imageSource.Freeze()
+            Return imageSource
+        End Using
     End Function
 
 
@@ -73,12 +82,24 @@ Public MustInherit Class Presenter
         End If
 
         For Each key In data(0).Keys
+            If key = "Foto" Then
+                Dim dataColumn As New DataColumn(key, GetType(ImageSource))
+                dataTable.Columns.Add(dataColumn)
+                Continue For
+            End If
+
             dataTable.Columns.Add(key)
         Next
 
         For Each dict In data
             Dim newRow As DataRow = dataTable.NewRow()
             For Each keyValuePair In dict
+
+                If keyValuePair.Value.GetType() Is GetType(Byte()) Then
+                    newRow(keyValuePair.Key) = ConvertByteArrayToImage(keyValuePair.Value)
+                    Continue For
+                End If
+
                 newRow(keyValuePair.Key) = keyValuePair.Value
             Next
 

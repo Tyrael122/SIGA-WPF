@@ -21,6 +21,15 @@
                         </ResourceDictionary.MergedDictionaries>
                     </ResourceDictionary>
                 </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Foto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image  Width="100" Height="100" Source="{Binding Foto}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <Image Margin="1183,-54,-10,788" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>

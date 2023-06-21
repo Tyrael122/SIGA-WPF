@@ -10,7 +10,7 @@
     <Grid Background="#FFECECEC">
         <Grid HorizontalAlignment="Left" Height="1070" Margin="10,10,0,0" VerticalAlignment="Top" Width="1520">
             <Border BorderBrush="#FF78C4FF" BorderThickness="0,0,0,3" Grid.ColumnSpan="11" HorizontalAlignment="Left" Height="111" Margin="36,55,0,0" VerticalAlignment="Top" Width="1229">
-                <Label Content="Cadastro de Notas&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Height="114" Width="868" FontSize="70" Foreground="#FB0760B3" Margin="36,-16,0,0"/>
+                <Label x:Name="lblInfo" Content="Cadastro de Notas" HorizontalAlignment="Left" VerticalAlignment="Top" Height="114" FontSize="70" Foreground="#FB0760B3" Margin="36,-16,0,0" Width="1190"/>
             </Border>
 
             <DataGrid x:Name="dataGridNotasAluno" CanUserAddRows="False" 
@@ -23,7 +23,17 @@
                         </ResourceDictionary.MergedDictionaries>
                     </ResourceDictionary>
                 </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Foto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image  Width="50" Height="50" Source="{Binding Foto}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
             </DataGrid> 
+            
             <Button x:Name="btnLancarNotas" Width="390" Height="96" Content="Lançar Notas" Grid.Column="10" Margin="305,905,565,69" FontWeight="Bold" FontSize="28" BorderBrush="#FF80C1BF" Background="#FF3399C5" Foreground="White">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -45,6 +55,7 @@
             <Border BorderBrush="#FF45BEF1" BorderThickness="0,0,0,4" Grid.Column="10" HorizontalAlignment="Left" Height="101" Margin="138,199,0,0" VerticalAlignment="Top" Width="628"/>
             <Label Grid.Column="10" Content="Selecione a prova:" HorizontalAlignment="Left" Height="45" Margin="359,199,0,0" VerticalAlignment="Top" Width="185" FontSize="20" FontWeight="Bold" Foreground="#FF31B9DC"/>
             <ComboBox x:Name="cmbProva" HorizontalAlignment="Left" Margin="335,250,0,0" VerticalAlignment="Top" Width="233" Grid.Column="10" Height="32" SelectedItem="{Binding IdProva}"/>
+            <Image x:Name="imgTest" HorizontalAlignment="Left" Height="100" Margin="1077,193,0,0" VerticalAlignment="Top" Width="100"/>
         </Grid>
         <Image Margin="1217,-70,-44,804" Source="/Views/Images/fatec-identidade-removebg-preview.png" Stretch="Fill"/>
     </Grid>

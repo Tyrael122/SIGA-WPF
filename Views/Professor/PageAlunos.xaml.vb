@@ -14,4 +14,10 @@
     Private Sub PageAlunos_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         dataGridAlunos.ItemsSource = Presenter.GetAllAlunosCadastrados()
     End Sub
+
+    Private Sub dataGridAlunos_AutoGeneratingColumn(sender As Object, e As DataGridAutoGeneratingColumnEventArgs) Handles dataGridAlunos.AutoGeneratingColumn
+        If e.PropertyName = "Foto" Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class
