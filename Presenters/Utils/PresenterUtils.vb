@@ -130,13 +130,16 @@ Public Class PresenterUtils
         Return comboBoxItems
     End Function
 
-    Public Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), keyToRemove As String) As IEnumerable(Of IDictionary(Of String, Object))
-        data = data.Select(Function(dict)
-                               If dict.ContainsKey(keyToRemove) Then
-                                   dict.Remove(keyToRemove)
-                               End If
-                               Return dict
-                           End Function).ToList()
+    Public Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), ParamArray keysToRemove As String()) As IEnumerable(Of IDictionary(Of String, Object))
+        For Each keyToRemove In keysToRemove
+            data = data.Select(Function(dict)
+                                   If dict.ContainsKey(keyToRemove) Then
+                                       dict.Remove(keyToRemove)
+                                   End If
+                                   Return dict
+                               End Function).ToList()
+        Next
+
         Return data
     End Function
 

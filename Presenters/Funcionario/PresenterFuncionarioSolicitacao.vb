@@ -20,8 +20,7 @@ Friend Class PresenterFuncionarioSolicitacao
     Friend Function GetSolicitacoes() As DataView
         Dim solicitacoesAluno = ModelUtils.GetAll(Table.Solicitacao)
 
-        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
-        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "Documento")
+        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno", "Documento")
 
         For Each solicitacao In solicitacoesAluno
             solicitacao("Título do Documento") = solicitacao("TituloDocumento")
