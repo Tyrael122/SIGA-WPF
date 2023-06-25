@@ -39,7 +39,7 @@ Public Class PresenterFuncionarioProfessor
     Friend Sub UpdateProfessor(idsDisciplinasProfessor As List(Of String))
         Dim idProfessor = SessionCookie.GetCookie("IdProfessor")
 
-        BusinessRules.DeleteDisciplinas(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
+        DisciplinaBusinessRules.DeleteDisciplinas(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
 
         Dim data = ViewModelProfessor.ConvertToDictionary()
         data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)

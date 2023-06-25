@@ -27,7 +27,7 @@
     End Sub
 
     Friend Sub DeleteDisciplina(idDisciplina As String)
-        BusinessRules.DeleteDisciplina(idDisciplina)
+        DisciplinaBusinessRules.DeleteDisciplina(idDisciplina)
     End Sub
 
     Friend Sub UpdateDisciplina()

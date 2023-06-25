@@ -45,7 +45,7 @@ Public Class PresenterFuncionarioCurso
     Friend Sub UpdateCurso(idsDisciplinasCurso As List(Of String))
         Dim idCurso = SessionCookie.GetCookie("IdCurso")
 
-        BusinessRules.DeleteDisciplinas(idCurso, "IdCurso", Table.CursoDisciplina)
+        DisciplinaBusinessRules.DeleteDisciplinas(idCurso, "IdCurso", Table.CursoDisciplina)
 
         Dim data = ViewModelCurso.ConvertToDictionary()
 

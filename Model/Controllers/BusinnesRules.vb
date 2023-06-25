@@ -10,10 +10,6 @@
         dataBridge.Delete(idProfessor, Table.Professor)
     End Sub
 
-    Friend Shared Sub DeleteDisciplinas(idEntity As String, whereField As String, table As Table)
-        dataBridge.Delete(idEntity, whereField, table)
-    End Sub
-
     Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, Object), table As Table) As List(Of IDictionary(Of String, Object))
         Return dataBridge.SaveWithOutput(aulaData, table)
     End Function
@@ -75,27 +71,11 @@
         dataBridge.Delete(idCurso, Table.Curso)
     End Sub
 
-    Friend Shared Sub DeleteDisciplina(idDisciplina As String)
-        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.ProfessorDisciplina)
-        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.AlunoDisciplina)
-        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.CursoDisciplina)
-        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Aula)
-        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Horario)
-
-        Dim idsProva = dataBridge.SelectAll(Table.Prova).Where(Function(dict) dict("IdDisciplina") = idDisciplina).Select(Function(dict) dict("Id"))
-
-        For Each idProva In idsProva
-            dataBridge.Delete(idProva, "IdProva", Table.Nota)
-        Next
-
-        dataBridge.Delete(idDisciplina, "IdDisciplina", Table.Prova)
-        dataBridge.Delete(idDisciplina, Table.Disciplina)
-    End Sub
-
     Friend Shared Sub Update(idEntity As String, table As Table, data As Dictionary(Of String, Object))
         dataBridge.Update(idEntity, data, table)
     End Sub
 
+    ' TODO: Should be in the Presenter Class because it's a UI logic.
     Public Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), keyToRemove As String) As IEnumerable(Of IDictionary(Of String, Object))
         data = data.Select(Function(dict)
                                If dict.ContainsKey(keyToRemove) Then
@@ -104,14 +84,6 @@
                                Return dict
                            End Function).ToList()
         Return data
-    End Function
-
-    Friend Shared Function GetAllAlunosCadastrados(idDisciplina As Object) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim idAlunos = dataBridge.SelectAll(Table.AlunoDisciplina).Where(Function(dict) dict("IdDisciplina") = idDisciplina).Select(Function(dict) dict("IdAluno"))
-
-        Dim alunos = dataBridge.SelectAll(Table.Aluno).Where(Function(dict) idAlunos.Contains(dict("Id")))
-
-        Return alunos
     End Function
 
     Friend Shared Sub Delete(idEntity As String, table As Table)
