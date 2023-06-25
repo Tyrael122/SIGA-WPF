@@ -1,4 +1,4 @@
-﻿Public Class ModelUtils
+﻿Public NotInheritable Class ModelUtils
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
     Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, Object), table As Table) As List(Of IDictionary(Of String, Object))
@@ -29,18 +29,13 @@
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
 
-    Friend Shared Function SalvarAula(aula As IDictionary(Of String, Object)) As String
-        Dim aulaMatched = GetAll(Table.Aula).Where(Function(dict) Date.Parse(dict("Data")) = Date.Parse(aula("Data")))
+    Public Shared Function LoadUserWithPhotoById(id As String, table As Table) As IDictionary(Of String, Object)
+        Dim data = FindById(id, table).First()
+        data("Foto") = PresenterUtils.ConvertByteArrayToImage(data("Foto"))
 
-        If aulaMatched.Any() Then
-            Dim idAula = aulaMatched.First()("Id")
+        SessionCookie.AddCookie("Id" & table.ToString(), id)
 
-            dataBridge.Delete(idAula, "IdAula", Table.Presenca)
-
-            Return idAula
-        End If
-
-        Return SaveWithOutput(aula, Table.Aula).First()("Id")
+        Return data
     End Function
 
     Public Shared Function GetDisciplinasComCheckBoxColumn(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
@@ -64,8 +59,7 @@
     End Sub
 
     Public Shared Sub RegisterUserWithPhoto(relation As Relation)
-        Dim data = relation.uniqueEntityData
-        relation.uniqueEntityData("Foto") = PresenterUtils.ConvertImageToByteArray(data("Foto"))
+        ParseUserPhoto(relation)
 
         relation.Save()
     End Sub

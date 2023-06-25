@@ -17,7 +17,7 @@
     End Sub
 
     Public Sub UpdateAluno(data As IDictionary(Of String, Object), idsDisciplinasAluno As IEnumerable(Of String))
-        DeleteDisciplinasAluno(idAluno)
+        DisciplinaBusinessRules.DeleteDisciplinas(idAluno, "IdAluno", Table.AlunoDisciplina)
 
         Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
             .uniqueEntityData = data,
@@ -27,16 +27,12 @@
         ModelUtils.UpdateUserWithPhoto(relation, idAluno)
     End Sub
 
-
     Public Shared Sub DeleteAluno(idAluno As String)
         dataBridge.Delete(idAluno, "IdAluno", Table.Nota)
 
         dataBridge.Delete(idAluno, Table.Aluno)
     End Sub
 
-    Public Shared Sub DeleteDisciplinasAluno(idAluno As String)
-        dataBridge.Delete(idAluno, "IdAluno", Table.AlunoDisciplina)
-    End Sub
     Public Shared Sub DeleteNotaAluno(idNota As String)
         dataBridge.Delete(idNota, Table.Nota)
     End Sub

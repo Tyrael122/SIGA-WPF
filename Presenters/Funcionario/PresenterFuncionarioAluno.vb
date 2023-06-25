@@ -87,14 +87,11 @@ Public Class PresenterFuncionarioAluno
     End Sub
 
     Public Sub CarregarAlunoParaEdicao(idAluno As String)
-        Dim alunoData = ModelUtils.FindById(idAluno, Table.Aluno).First()
-        alunoData("Foto") = PresenterUtils.ConvertByteArrayToImage(alunoData("Foto"))
+        Dim alunoData = ModelUtils.LoadUserWithPhotoById(idAluno, Table.Aluno)
 
         ViewModelAluno.LoadFromDictionary(alunoData)
 
         Dim nomeCurso = ModelUtils.FindById(alunoData("Curso"), Table.Curso).First()("Nome")
         ViewModelAluno.Curso = nomeCurso
-
-        SessionCookie.AddCookie("IdAluno", idAluno) ' TODO: Refactor this, it's a responsibility of the business rules.
     End Sub
 End Class

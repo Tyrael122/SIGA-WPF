@@ -28,12 +28,9 @@ Public Class PresenterFuncionarioProfessor
     End Sub
 
     Friend Sub CarregarProfessorParaEdicao(idProfessor As String)
-        Dim data = ModelUtils.FindById(idProfessor, Table.Professor).First()
+        Dim data = ModelUtils.LoadUserWithPhotoById(idProfessor, Table.Professor)
 
-        data("Foto") = PresenterUtils.ConvertByteArrayToImage(data("Foto"))
         ViewModelProfessor.LoadFromDictionary(data)
-
-        SessionCookie.AddCookie("IdProfessor", idProfessor)
     End Sub
 
     Friend Sub UpdateProfessor(idsDisciplinasProfessor As List(Of String))
