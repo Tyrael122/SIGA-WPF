@@ -19,15 +19,7 @@ Friend Class PresenterFuncionarioSolicitacao
 
     Friend Function GetSolicitacoes() As DataView
         Dim solicitacoesAluno = ModelUtils.GetAll(Table.Solicitacao)
-
-        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno", "Documento")
-
-        For Each solicitacao In solicitacoesAluno
-            solicitacao("Título do Documento") = solicitacao("TituloDocumento")
-            solicitacao("Tipo") = [Enum].GetName(GetType(TipoSolicitacao), solicitacao("Tipo"))
-        Next
-
-        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
+        solicitacoesAluno = PresenterSolicitacaoUtils.CleanSolicitacaoDict(solicitacoesAluno)
 
         Return PresenterUtils.ConvertDictionaryToDataView(solicitacoesAluno)
     End Function

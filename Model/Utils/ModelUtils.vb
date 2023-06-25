@@ -1,4 +1,7 @@
-﻿Public NotInheritable Class ModelUtils
+﻿Imports System.IO
+Imports Microsoft.Win32
+
+Public NotInheritable Class ModelUtils
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
     Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, Object), table As Table) As List(Of IDictionary(Of String, Object))
@@ -25,8 +28,31 @@
         Return GetAll(Table.Disciplina).Where(Function(disciplina) idDisciplinas.Contains(disciplina("Id")))
     End Function
 
-    Friend Shared Function FindById(id As String, tableStr As Table) As IEnumerable(Of IDictionary(Of String, Object))
-        Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
+    Public Shared Function SaveDocumento(dataToSave As Byte(), tituloDocumento As String) As Boolean
+        Dim saveFileDialog As New SaveFileDialog With {
+            .FileName = Path.GetFileNameWithoutExtension(tituloDocumento),
+            .DefaultExt = Path.GetExtension(tituloDocumento)
+        }
+
+        Dim hasUserClickedOk = saveFileDialog.ShowDialog()
+        If hasUserClickedOk Then
+            Dim filePath As String = saveFileDialog.FileName
+
+            File.WriteAllBytes(filePath, dataToSave)
+
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    ' TODO: If less than 2 usages, remove this function.
+    Friend Shared Function FindInListOfId(ids As IEnumerable(Of String), tableStr As Table) As IEnumerable(Of IDictionary(Of String, Object))
+        Return dataBridge.SelectAll(tableStr).Where(Function(dict) ids.Contains(dict("Id")))
+    End Function
+
+    Friend Shared Function FindById(id As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
+        Return dataBridge.SelectAll(table).Where(Function(dict) dict("Id") = id)
     End Function
 
     Public Shared Function LoadEntityById(id As String, table As Table) As IDictionary(Of String, Object)

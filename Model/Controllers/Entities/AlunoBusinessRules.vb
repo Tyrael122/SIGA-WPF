@@ -78,4 +78,14 @@
         notasAluno = PresenterUtils.RemoveKeyFromDict(notasAluno, "IdProva")
         Return notasAluno
     End Function
+
+    Friend Function GetProvasFuturas() As IEnumerable(Of IDictionary(Of String, Object))
+        Dim idDisciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+
+        Return ModelUtils.FindInListOfId(idDisciplinas, Table.Prova).Where(Function(dict) dict("Data") > Date.Now)
+    End Function
+
+    Public Function GetSolicitacoes()
+        Return ModelUtils.FindById(idAluno, Table.Solicitacao)
+    End Function
 End Class

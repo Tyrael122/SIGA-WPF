@@ -1,11 +1,10 @@
 ﻿Imports System.Data
-Imports System.IO
-Imports Microsoft.Win32
 
 Public Class PresenterAlunoSolicitacoes
     Inherits Presenter
 
     Private ViewModelSolicitacao As New SolicitacaoViewModel()
+    Private alunoBusinessRules As New AlunoBusinessRules()
 
     Public Sub New(view As IViewModel)
         Me.View = view
@@ -15,56 +14,31 @@ Public Class PresenterAlunoSolicitacoes
 
     Friend Sub RegisterSolicitacao()
         Dim data = ViewModelSolicitacao.ConvertToDictionary()
-
-        data("IdAluno") = SessionCookie.GetCookie("UserId")
-
         Dim tipoSolicitacao = ViewModelSolicitacao.Tipo.Replace(" ", "")
         data("Tipo") = [Enum].Parse(GetType(TipoSolicitacao), tipoSolicitacao)
 
-        ModelUtils.Save(data, Table.Solicitacao)
+        SolicitacaoBusinessRules.RegisterSolicitacao(data)
     End Sub
 
     Friend Sub DownloadDocumento(idSolicitacao As String)
         Dim solicitacao = ModelUtils.GetAll(Table.Solicitacao).Where(Function(dict) dict("Id") = idSolicitacao).First()
 
-        If Not IsDBNull(solicitacao("Documento")) Then
-            SaveDocumento(solicitacao("Documento"), solicitacao("TituloDocumento"))
-        Else
+        If IsDBNull(solicitacao("Documento")) Then
             View.DisplayInfo("A solicitação não possui documento anexado.")
+            Return
         End If
-    End Sub
 
-    Private Sub SaveDocumento(dataToSave As Byte(), tituloDocumento As String)
-        Dim saveFileDialog As New SaveFileDialog With {
-            .FileName = Path.GetFileNameWithoutExtension(tituloDocumento),
-            .DefaultExt = Path.GetExtension(tituloDocumento)
-        }
-
-        Dim hasUserClickedOk = saveFileDialog.ShowDialog()
-
-        If hasUserClickedOk Then
-            Dim filePath As String = saveFileDialog.FileName
-
-            File.WriteAllBytes(filePath, dataToSave)
-
-            View.DisplayInfo("File saved successfully.")
+        Dim hasSavedSucessfully = ModelUtils.SaveDocumento(solicitacao("Documento"), solicitacao("TituloDocumento"))
+        If hasSavedSucessfully Then
+            View.DisplayInfo("Arquivo salvo com sucesso!")
+        Else
+            View.DisplayInfo("Ocorreu um erro ao salvar o arquivo")
         End If
     End Sub
 
     Friend Function GetAllSolitacacoesAluno() As DataView
-        Dim idAluno = SessionCookie.GetCookie("UserId")
-
-        Dim solicitacoesAluno = ModelUtils.GetAll(Table.Solicitacao).Where(Function(dict) dict("IdAluno") = idAluno)
-
-        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
-        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "Documento")
-
-        For Each solicitacao In solicitacoesAluno
-            solicitacao("Título do Documento") = solicitacao("TituloDocumento")
-            solicitacao("Tipo") = [Enum].GetName(GetType(TipoSolicitacao), solicitacao("Tipo"))
-        Next
-
-        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
+        Dim solicitacoesAluno = alunoBusinessRules.GetSolicitacoes()
+        solicitacoesAluno = PresenterSolicitacaoUtils.CleanSolicitacaoDict(solicitacoesAluno)
 
         Return PresenterUtils.ConvertDictionaryToDataView(solicitacoesAluno)
     End Function

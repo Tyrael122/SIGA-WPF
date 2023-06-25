@@ -1,7 +1,7 @@
 ﻿Class PageDisciplinasCadastradas
     Implements IView
 
-    Private Presenter As New PresenterAlunoDisciplina(Me)
+    'Private Presenter As New PresenterAlunoDisciplina(Me)
 
     Public Sub DisplayInfo(infoMessage As String) Implements IView.DisplayInfo
         Throw New NotImplementedException()

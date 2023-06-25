@@ -3,31 +3,34 @@
 Public Class PresenterAlunoProvas
     Inherits Presenter
 
-    Private ReadOnly idAluno As String
+    Private alunoBusinessRules As New AlunoBusinessRules()
 
     Public Sub New(view As IView)
         Me.View = view
-
-        idAluno = SessionCookie.GetCookie("userId")
     End Sub
 
     Friend Function GetProvasFuturas() As DataView
-        Dim idDisciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
-
-        Dim idCurso = ModelUtils.GetAll(Table.Aluno).First(Function(dict) dict("Id") = idAluno)("Curso")
-
-        Dim provas = ModelUtils.GetAll(Table.Prova).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")) And
-                                                                 dict("Data") > Date.Now)
+        Dim provas = alunoBusinessRules.GetProvasFuturas()
 
         For Each prova In provas
-            Dim nomeDisciplina = ModelUtils.GetAll(Table.Disciplina).Where(Function(dict) dict("Id") = prova("IdDisciplina")).First()("Name")
-
-            Dim nomeProfessor = ModelUtils.GetAll(Table.Professor).Where(Function(dict) dict("Id") = prova("IdProfessor")).First()("Login")
-
-            prova("NomeDisciplina") = nomeDisciplina
-            prova("NomeProfessor") = nomeProfessor
+            prova = AddNomeDisciplinaToProvas(prova)
+            prova = AddNomeProfessorToProvas(prova)
         Next
 
         Return PresenterUtils.ConvertDictionaryToDataView(provas)
+    End Function
+
+    Private Function AddNomeProfessorToProvas(prova As IDictionary(Of String, Object)) As IDictionary(Of String, Object)
+        Dim nomeProfessor = ModelUtils.FindById(prova("IdProfessor"), Table.Professor).First()("Login")
+        prova("NomeProfessor") = nomeProfessor
+
+        Return prova
+    End Function
+
+    Private Shared Function AddNomeDisciplinaToProvas(prova As IDictionary(Of String, Object)) As IDictionary(Of String, Object)
+        Dim nomeDisciplina = ModelUtils.FindById(prova("IdDisciplina"), Table.Disciplina).First()("Name")
+        prova("NomeDisciplina") = nomeDisciplina
+
+        Return prova
     End Function
 End Class
