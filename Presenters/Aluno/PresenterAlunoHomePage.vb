@@ -1,6 +1,4 @@
-﻿Imports System.Data
-
-Public Class PresenterAlunoHomePage
+﻿Public Class PresenterAlunoHomePage
     Inherits Presenter
 
     Private ViewModelAluno As New AlunoViewModel()

@@ -10,8 +10,10 @@ Friend Class PresenterPresencasAluno
     End Sub
 
     Friend Function GetPresencasAluno() As DataView
-        Dim data = alunoBusinessRules.GetPresencasAluno()
+        Dim presencas = alunoBusinessRules.GetPresencasAluno()
 
-        Return PresenterUtils.ConvertDictionaryToDataView(data)
+        presencas = PresenterUtils.RemoveKeyFromDict(presencas, "IdAluno", "IdAula")
+
+        Return PresenterUtils.ConvertDictionaryToDataView(presencas)
     End Function
 End Class

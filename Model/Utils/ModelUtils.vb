@@ -46,7 +46,7 @@ Public NotInheritable Class ModelUtils
         Return False
     End Function
 
-    ' TODO: If less than 2 usages, remove this function.
+    ' TODO: Remove this method if less than 2 usages are found.
     Friend Shared Function FindInListOfId(ids As IEnumerable(Of String), tableStr As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) ids.Contains(dict("Id")))
     End Function

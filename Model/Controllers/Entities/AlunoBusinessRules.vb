@@ -37,13 +37,14 @@
         dataBridge.Delete(idNota, Table.Nota)
     End Sub
 
+    ' TODO: Refactor this method
     Friend Function GetPresencasAluno() As IEnumerable(Of IDictionary(Of String, Object))
-        Dim idDisciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+        Dim idDisciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno).SelectIds()
 
-        Dim aulas = dataBridge.SelectAll(Table.Aula).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")))
-        Dim idAulas = aulas.Select(Function(dict) dict("Id"))
+        Dim aulas = ModelUtils.GetAll(Table.Aula).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")))
+        Dim idAulas = aulas.SelectIds()
 
-        Dim presencas = dataBridge.SelectAll(Table.Presenca).Where(Function(dict) idAulas.Contains(dict("IdAula")) And dict("IdAluno") = idAluno)
+        Dim presencas = ModelUtils.GetAll(Table.Presenca).Where(Function(dict) idAulas.Contains(dict("IdAula")) And dict("IdAluno") = idAluno)
 
         For Each presenca In presencas
             presenca("Data") = aulas.Where(Function(aula) aula("Id") = presenca("IdAula")).First()("Data")
@@ -52,11 +53,10 @@
             presenca("Disciplina") = ModelUtils.FindById(idDisciplina, Table.Disciplina).First()("Name")
         Next
 
-        presencas = PresenterUtils.RemoveKeyFromDict(presencas, "IdAluno")
-        presencas = PresenterUtils.RemoveKeyFromDict(presencas, "IdAula")
         Return presencas
     End Function
 
+    ' TODO: Refactor this method
     Friend Function GetNotasAluno() As IEnumerable(Of IDictionary(Of String, Object))
         Dim disciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno)
 
