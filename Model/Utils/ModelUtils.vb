@@ -29,6 +29,20 @@
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
 
+    Friend Shared Function SalvarAula(aula As IDictionary(Of String, Object)) As String
+        Dim aulaMatched = GetAll(Table.Aula).Where(Function(dict) Date.Parse(dict("Data")) = Date.Parse(aula("Data")))
+
+        If aulaMatched.Any() Then
+            Dim idAula = aulaMatched.First()("Id")
+
+            dataBridge.Delete(idAula, "IdAula", Table.Presenca)
+
+            Return idAula
+        End If
+
+        Return SaveWithOutput(aula, Table.Aula).First()("Id")
+    End Function
+
     Public Shared Function GetDisciplinasComCheckBoxColumn(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Dim idDisciplinas = GetDisciplinas(table, idEntity).Select(Function(dict) dict("Id"))
 
