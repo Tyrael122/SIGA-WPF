@@ -1,11 +1,21 @@
 ﻿Public Class AlunoBusinessRules
-    Private Shared ReadOnly dataBridge As IDAL = New DAL()
+    Inherits Model
 
     Private ReadOnly idAluno As String
 
     Sub New()
         idAluno = SessionCookie.GetCookie("userId")
     End Sub
+
+    Public Shared Sub RegisterAluno(data As IDictionary(Of String, Object), idsDisciplinasAluno As IEnumerable(Of String))
+        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
+            .uniqueEntityData = data,
+            .idRelatedEntites = idsDisciplinasAluno
+        }
+
+        ModelUtils.RegisterUserWithPhoto(relation)
+    End Sub
+
 
     Public Shared Sub DeleteAluno(idAluno As String)
         dataBridge.Delete(idAluno, "IdAluno", Table.Nota)

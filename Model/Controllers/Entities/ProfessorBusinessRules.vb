@@ -1,5 +1,5 @@
 ﻿Public Class ProfessorBusinessRules
-    Inherits BusinessRules
+    Inherits Model
 
     Private idProfessor As String
 
@@ -14,5 +14,14 @@
         dataBridge.Delete(idProfessor, "IdProfessor", Table.Aula)
 
         dataBridge.Delete(idProfessor, Table.Professor)
+    End Sub
+
+    Friend Shared Sub Register(data As IDictionary(Of String, Object), idsDisciplinasProfessor As IEnumerable(Of String))
+        Dim relation As New Relation(Table.Professor, Table.Disciplina) With {
+            .uniqueEntityData = data,
+            .idRelatedEntites = idsDisciplinasProfessor
+        }
+
+        ModelUtils.RegisterUserWithPhoto(relation)
     End Sub
 End Class

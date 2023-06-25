@@ -16,9 +16,8 @@ Public Class PresenterFuncionarioProfessor
 
     Friend Sub RegisterProfessor(idsDisciplinasProfessor As IEnumerable(Of String))
         Dim data = ViewModelProfessor.ConvertToDictionary()
-        data("Foto") = PresenterUtils.ConvertImageToByteArray(ViewModelProfessor.Foto)
 
-        Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
+        ProfessorBusinessRules.Register(data, idsDisciplinasProfessor)
 
         ViewModelProfessor.Clear()
     End Sub

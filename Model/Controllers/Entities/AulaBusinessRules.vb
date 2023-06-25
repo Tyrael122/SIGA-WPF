@@ -1,5 +1,5 @@
 ﻿Public Class AulaBusinessRules
-    Inherits BusinessRules
+    Inherits Model
 
     Friend Shared Function SalvarAula(aula As IDictionary(Of String, Object)) As String
         Dim aulaMatched = ModelUtils.GetAll(Table.Aula).Where(Function(dict) Date.Parse(dict("Data")) = Date.Parse(aula("Data")))

@@ -62,4 +62,12 @@
     Friend Shared Sub Delete(idEntity As String, table As Table)
         dataBridge.Delete(idEntity, table)
     End Sub
+
+    Public Shared Sub RegisterUserWithPhoto(relation As Relation)
+        Dim data = relation.uniqueEntityData
+
+        relation.uniqueEntityData("Foto") = PresenterUtils.ConvertImageToByteArray(data("Foto"))
+
+        relation.Save()
+    End Sub
 End Class

@@ -1,5 +1,5 @@
 ﻿Public Class CursoBusinessRules
-    Inherits BusinessRules
+    Inherits Model
 
     Public Shared Sub DeleteCurso(idCurso As Object)
         dataBridge.Delete(idCurso, "IdCurso", Table.CursoDisciplina)

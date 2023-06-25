@@ -18,9 +18,8 @@ Public Class PresenterFuncionarioAluno
         Dim data = ViewModelAluno.ConvertToDictionary()
 
         data("Curso") = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
-        data("Foto") = PresenterUtils.ConvertImageToByteArray(ViewModelAluno.Foto)
 
-        Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
+        AlunoBusinessRules.RegisterAluno(data, idsDisciplinasAluno)
 
         ViewModelAluno.Clear()
     End Sub
