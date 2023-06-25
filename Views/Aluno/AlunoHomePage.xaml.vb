@@ -7,11 +7,6 @@
         mainFrame.Content = New PageInicioAluno()
     End Sub
 
-    Public Sub VerDisciplina_Click(sender As Object, e As EventArgs)
-        Dim button As Button = CType(sender, Button)
-        Presenter.ShowDisciplinaPage(button.Tag)
-    End Sub
-
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
         mainFrame.Content = New PageInicioAluno()
     End Sub

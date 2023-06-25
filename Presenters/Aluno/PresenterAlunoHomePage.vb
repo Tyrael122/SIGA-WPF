@@ -12,15 +12,4 @@ Public Class PresenterAlunoHomePage
 
         view.SetDataContext(ViewModelAluno)
     End Sub
-
-    Friend Function GetDisciplinasCadastradas() As DataView
-        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Aluno, ViewModelAluno.Id)
-
-        Return PresenterUtils.ConvertDictionaryToDataView(disciplinas)
-    End Function
-
-    Friend Sub ShowDisciplinaPage(idDisciplina As String)
-        SessionCookie.AddCookie("idDisciplina", idDisciplina)
-        'Call New DisciplinaAlunoPage().Show()
-    End Sub
 End Class
