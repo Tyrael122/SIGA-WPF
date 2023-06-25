@@ -13,7 +13,7 @@ Public Class PresenterProfessorAluno
     Public Function GetAllAlunosCadastrados() As DataView
         Dim alunosCadastrados = disciplinaBusinessRules.GetAllAlunosCadastrados()
 
-        alunosCadastrados = ModelUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
+        alunosCadastrados = PresenterUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
 
         Return PresenterUtils.ConvertDictionaryToDataView(alunosCadastrados)
     End Function

@@ -59,17 +59,6 @@
         dataBridge.Update(idEntity, data, table)
     End Sub
 
-    ' TODO: Should be in the Presenter Class because it's a UI logic.
-    Public Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), keyToRemove As String) As IEnumerable(Of IDictionary(Of String, Object))
-        data = data.Select(Function(dict)
-                               If dict.ContainsKey(keyToRemove) Then
-                                   dict.Remove(keyToRemove)
-                               End If
-                               Return dict
-                           End Function).ToList()
-        Return data
-    End Function
-
     Friend Shared Sub Delete(idEntity As String, table As Table)
         dataBridge.Delete(idEntity, table)
     End Sub

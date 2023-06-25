@@ -35,8 +35,8 @@
             presenca("Disciplina") = ModelUtils.FindById(idDisciplina, Table.Disciplina).First()("Name")
         Next
 
-        presencas = ModelUtils.RemoveKeyFromDict(presencas, "IdAluno")
-        presencas = ModelUtils.RemoveKeyFromDict(presencas, "IdAula")
+        presencas = PresenterUtils.RemoveKeyFromDict(presencas, "IdAluno")
+        presencas = PresenterUtils.RemoveKeyFromDict(presencas, "IdAula")
         Return presencas
     End Function
 
@@ -58,7 +58,7 @@
             nota("Disciplina") = disciplinas.Where(Function(dict) dict("Id") = prova("IdDisciplina")).First()("Name")
         Next
 
-        notasAluno = ModelUtils.RemoveKeyFromDict(notasAluno, "IdProva")
+        notasAluno = PresenterUtils.RemoveKeyFromDict(notasAluno, "IdProva")
         Return notasAluno
     End Function
 End Class

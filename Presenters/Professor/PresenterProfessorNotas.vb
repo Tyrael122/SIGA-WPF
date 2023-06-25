@@ -67,7 +67,7 @@ Public Class PresenterProfessorNotas
             End If
         Next
 
-        alunosCadastrados = ModelUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
+        alunosCadastrados = PresenterUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
 
         Return PresenterUtils.ConvertDictionaryToDataView(alunosCadastrados)
     End Function

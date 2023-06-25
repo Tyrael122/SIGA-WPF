@@ -12,8 +12,8 @@ Public Class PresenterNotasAluno
     Friend Function GetNotasAluno() As DataView
         Dim data = alunoBusinessRules.GetNotasAluno()
 
-        data = ModelUtils.RemoveKeyFromDict(data, "IdAluno")
-        data = ModelUtils.RemoveKeyFromDict(data, "Id")
+        data = PresenterUtils.RemoveKeyFromDict(data, "IdAluno")
+        data = PresenterUtils.RemoveKeyFromDict(data, "Id")
         Return PresenterUtils.ConvertDictionaryToDataView(data)
     End Function
 End Class

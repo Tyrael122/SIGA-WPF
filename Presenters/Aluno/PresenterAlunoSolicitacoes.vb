@@ -56,15 +56,15 @@ Public Class PresenterAlunoSolicitacoes
 
         Dim solicitacoesAluno = ModelUtils.GetAll(Table.Solicitacao).Where(Function(dict) dict("IdAluno") = idAluno)
 
-        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
-        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "Documento")
+        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
+        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "Documento")
 
         For Each solicitacao In solicitacoesAluno
             solicitacao("Título do Documento") = solicitacao("TituloDocumento")
             solicitacao("Tipo") = [Enum].GetName(GetType(TipoSolicitacao), solicitacao("Tipo"))
         Next
 
-        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
+        solicitacoesAluno = PresenterUtils.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
 
         Return PresenterUtils.ConvertDictionaryToDataView(solicitacoesAluno)
     End Function
