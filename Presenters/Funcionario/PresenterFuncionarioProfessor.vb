@@ -11,12 +11,12 @@ Public Class PresenterFuncionarioProfessor
 
         view.SetDataContext(ViewModelProfessor)
 
-        ViewModelProfessor.Foto = CarregarFotoVazia()
+        ViewModelProfessor.Foto = PresenterUtils.CarregarFotoVazia()
     End Sub
 
     Friend Sub RegisterProfessor(idsDisciplinasProfessor As IEnumerable(Of String))
         Dim data = ViewModelProfessor.ConvertToDictionary()
-        data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
+        data("Foto") = PresenterUtils.ConvertImageToByteArray(ViewModelProfessor.Foto)
 
         Relation.SaveRelation(Table.Professor, Table.Disciplina, idsDisciplinasProfessor, data)
 
@@ -30,7 +30,7 @@ Public Class PresenterFuncionarioProfessor
     Friend Sub CarregarProfessorParaEdicao(idProfessor As String)
         Dim data = ModelUtils.FindById(idProfessor, Table.Professor).First()
 
-        data("Foto") = ConvertByteArrayToImage(data("Foto"))
+        data("Foto") = PresenterUtils.ConvertByteArrayToImage(data("Foto"))
         ViewModelProfessor.LoadFromDictionary(data)
 
         SessionCookie.AddCookie("IdProfessor", idProfessor)
@@ -42,7 +42,7 @@ Public Class PresenterFuncionarioProfessor
         DisciplinaBusinessRules.DeleteDisciplinas(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
 
         Dim data = ViewModelProfessor.ConvertToDictionary()
-        data("Foto") = ConvertImageToByteArray(ViewModelProfessor.Foto)
+        data("Foto") = PresenterUtils.ConvertImageToByteArray(ViewModelProfessor.Foto)
 
         data.Remove("Id")
 
@@ -61,6 +61,6 @@ Public Class PresenterFuncionarioProfessor
 
         Dim disciplinas = ModelUtils.GetDisciplinasComCheckBoxColumn(idProfessor, Table.Professor)
 
-        Return ConvertDictionaryToDataView(disciplinas)
+        Return PresenterUtils.ConvertDictionaryToDataView(disciplinas)
     End Function
 End Class

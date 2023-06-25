@@ -28,6 +28,6 @@ Public Class PresenterAlunoProvas
             prova("NomeProfessor") = nomeProfessor
         Next
 
-        Return ConvertDictionaryToDataView(provas)
+        Return PresenterUtils.ConvertDictionaryToDataView(provas)
     End Function
 End Class

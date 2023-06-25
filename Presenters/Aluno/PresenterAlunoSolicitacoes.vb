@@ -66,6 +66,6 @@ Public Class PresenterAlunoSolicitacoes
 
         solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
 
-        Return ConvertDictionaryToDataView(solicitacoesAluno)
+        Return PresenterUtils.ConvertDictionaryToDataView(solicitacoesAluno)
     End Function
 End Class

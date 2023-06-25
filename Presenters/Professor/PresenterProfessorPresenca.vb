@@ -41,7 +41,7 @@ Public Class PresenterProfessorPresenca
 
         alunosCadastrados = ModelUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
 
-        Return ConvertDictionaryToDataView(alunosCadastrados)
+        Return PresenterUtils.ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 
     Friend Function LoadDiaAulaComboBox() As IEnumerable(Of String)

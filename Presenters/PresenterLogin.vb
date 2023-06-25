@@ -19,11 +19,11 @@ Public Class PresenterLogin
 
         SessionCookie.AddCookie("userId", user.First()("Id"))
 
-        ShowWindowAndCloseCurrent(ChooseWindow(table), View)
+        PresenterUtils.ShowWindowAndCloseCurrent(ChooseWindow(table), View)
     End Sub
 
     Public Sub ShowChangePasswordScreen()
-        ShowWindowAndCloseCurrent(New ChangePasswordScreen, View)
+        PresenterUtils.ShowWindowAndCloseCurrent(New ChangePasswordScreen, View)
     End Sub
 
     Private Function ChooseWindow(user As Table) As Window

@@ -6,7 +6,7 @@
     Public Sub New(view As IViewModel)
         Me.View = view
 
-        LoadUserInfo(ViewModelProfessor, Table.Professor)
+        PresenterUtils.LoadUserInfo(ViewModelProfessor, Table.Professor)
 
         view.SetDataContext(ViewModelProfessor)
     End Sub

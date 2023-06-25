@@ -12,13 +12,13 @@
     Public Function LoadDisciplinasPorSemestre() As IEnumerable(Of ComboBoxItem)
         Dim idCurso = SessionCookie.GetCookie("IdCurso")
 
-        Return GenerateComboBoxItems(Function() GetAllDisciplinasPorSemestre(idCurso, ViewModelHorarioCurso.Semestre), "Name", "Id")
+        Return PresenterUtils.GenerateComboBoxItems(Function() PresenterUtils.GetAllDisciplinasPorSemestre(idCurso, ViewModelHorarioCurso.Semestre), "Name", "Id")
     End Function
 
     Friend Function LoadProfessoresPorDisciplina() As IEnumerable(Of ComboBoxItem)
         Dim relation = New Relation(Table.Disciplina, Table.Professor)
 
-        Return GenerateComboBoxItems(Function() relation.GetAllMultipleEntitiesById(ViewModelHorarioCurso.IdDisciplina), "Login", "Id")
+        Return PresenterUtils.GenerateComboBoxItems(Function() relation.GetAllMultipleEntitiesById(ViewModelHorarioCurso.IdDisciplina), "Login", "Id")
     End Function
 
     Friend Sub RegisterHorarioCurso()
@@ -67,32 +67,26 @@
     End Function
 
     Private Function GenerateHorarioFimManha() As IEnumerable(Of ComboBoxItem)
-        Return GenerateComboBoxItems({"8:40", "10:30", "12:00"})
+        Return PresenterUtils.GenerateComboBoxItems({"8:40", "10:30", "12:00"})
     End Function
 
     Private Function GenerateHorarioFimTarde() As IEnumerable(Of ComboBoxItem)
-        Return GenerateComboBoxItems({"14:40", "16:30", "18:20"})
+        Return PresenterUtils.GenerateComboBoxItems({"14:40", "16:30", "18:20"})
     End Function
 
     Private Function GenerateHorarioFimNoite() As IEnumerable(Of ComboBoxItem)
-        Return GenerateComboBoxItems({"20:40", "22:30"})
+        Return PresenterUtils.GenerateComboBoxItems({"20:40", "22:30"})
     End Function
 
     Private Function GenerateHorarioInicioManha() As IEnumerable(Of ComboBoxItem)
-        'Dim data As New List(Of String) From {
-        '    "7:00",
-        '    "8:50",
-        '    "10:40"
-        '}
-
-        Return GenerateComboBoxItems({"7:00", "8:50", "10:40"})
+        Return PresenterUtils.GenerateComboBoxItems({"7:00", "8:50", "10:40"})
     End Function
 
     Private Function GenerateHorarioInicioTarde() As IEnumerable(Of ComboBoxItem)
-        Return GenerateComboBoxItems({"13:00", "14:50", "16:40"})
+        Return PresenterUtils.GenerateComboBoxItems({"13:00", "14:50", "16:40"})
     End Function
 
     Private Function GenerateHorarioInicioNoite() As IEnumerable(Of ComboBoxItem)
-        Return GenerateComboBoxItems({"19:00", "20:50"})
+        Return PresenterUtils.GenerateComboBoxItems({"19:00", "20:50"})
     End Function
 End Class

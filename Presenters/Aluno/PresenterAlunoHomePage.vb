@@ -8,7 +8,7 @@ Public Class PresenterAlunoHomePage
     Public Sub New(view As IViewModel)
         Me.View = view
 
-        LoadUserInfo(ViewModelAluno, Table.Aluno)
+        PresenterUtils.LoadUserInfo(ViewModelAluno, Table.Aluno)
 
         view.SetDataContext(ViewModelAluno)
     End Sub
@@ -16,7 +16,7 @@ Public Class PresenterAlunoHomePage
     Friend Function GetDisciplinasCadastradas() As DataView
         Dim disciplinas = ModelUtils.GetDisciplinas(Table.Aluno, ViewModelAluno.Id)
 
-        Return ConvertDictionaryToDataView(disciplinas)
+        Return PresenterUtils.ConvertDictionaryToDataView(disciplinas)
     End Function
 
     Friend Sub ShowDisciplinaPage(idDisciplina As String)

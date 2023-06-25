@@ -11,14 +11,14 @@ Public Class PresenterFuncionarioAluno
 
         view.SetDataContext(ViewModelAluno)
 
-        ViewModelAluno.Foto = CarregarFotoVazia()
+        ViewModelAluno.Foto = PresenterUtils.CarregarFotoVazia()
     End Sub
 
     Public Sub RegisterAluno(idsDisciplinasAluno As IEnumerable(Of String))
         Dim data = ViewModelAluno.ConvertToDictionary()
 
         data("Curso") = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
-        data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
+        data("Foto") = PresenterUtils.ConvertImageToByteArray(ViewModelAluno.Foto)
 
         Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
 
@@ -26,7 +26,7 @@ Public Class PresenterFuncionarioAluno
     End Sub
 
     Friend Function LoadCursosAlunoComboBox() As IEnumerable(Of ComboBoxItem)
-        Return GenerateComboBoxItems(Function() GetAll(Table.Curso), "Nome", "Id")
+        Return PresenterUtils.GenerateComboBoxItems(Function() GetAll(Table.Curso), "Nome", "Id")
     End Function
 
     Public Function GetDisciplinas() As DataView
@@ -49,7 +49,7 @@ Public Class PresenterFuncionarioAluno
             disciplinas = GetDisciplinasCurso(idCurso)
         End Try
 
-        Return ConvertDictionaryToDataView(disciplinas)
+        Return PresenterUtils.ConvertDictionaryToDataView(disciplinas)
     End Function
 
     Private Function GetDisciplinasCurso(idCurso As String) As IEnumerable(Of IDictionary(Of String, Object))
@@ -86,7 +86,7 @@ Public Class PresenterFuncionarioAluno
         Dim data = ViewModelAluno.ConvertToDictionary()
         data("Curso") = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
 
-        data("Foto") = ConvertImageToByteArray(data("Foto"))
+        data("Foto") = PresenterUtils.ConvertImageToByteArray(data("Foto"))
 
         Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
             .uniqueEntityData = data,
@@ -102,7 +102,7 @@ Public Class PresenterFuncionarioAluno
 
     Public Sub CarregarAlunoParaEdicao(idAluno As String)
         Dim alunoData = ModelUtils.FindById(idAluno, Table.Aluno).First()
-        alunoData("Foto") = ConvertByteArrayToImage(alunoData("Foto"))
+        alunoData("Foto") = PresenterUtils.ConvertByteArrayToImage(alunoData("Foto"))
 
         ViewModelAluno.LoadFromDictionary(alunoData)
 

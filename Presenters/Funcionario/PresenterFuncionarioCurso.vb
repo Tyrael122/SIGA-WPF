@@ -66,7 +66,7 @@ Public Class PresenterFuncionarioCurso
 
         Dim disciplinas = ModelUtils.GetDisciplinasComCheckBoxColumn(idCurso, Table.Curso)
 
-        Return ConvertDictionaryToDataView(disciplinas)
+        Return PresenterUtils.ConvertDictionaryToDataView(disciplinas)
     End Function
 
     Friend Function GetAllCursos() As DataView
@@ -76,6 +76,6 @@ Public Class PresenterFuncionarioCurso
             curso("Turno") = [Enum].Parse(GetType(Turno), curso("Turno")).ToString()
         Next
 
-        Return ConvertDictionaryToDataView(cursos)
+        Return PresenterUtils.ConvertDictionaryToDataView(cursos)
     End Function
 End Class

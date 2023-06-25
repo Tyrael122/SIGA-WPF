@@ -12,7 +12,7 @@ Public Class PresenterAlunoDisciplina
     Friend Function GetDisciplinasCadastradas() As DataView
         Dim disciplinas = ModelUtils.GetDisciplinas(Table.Aluno, SessionCookie.GetCookie("userId"))
 
-        Return ConvertDictionaryToDataView(disciplinas)
+        Return PresenterUtils.ConvertDictionaryToDataView(disciplinas)
     End Function
 
     Public Function ConvertStringToBytes(imageString As String) As Byte()
@@ -37,7 +37,7 @@ Public Class PresenterAlunoDisciplina
         Dim rawData = notas.Where(Function(dict) dict("IdAluno") = idAluno And
                                 idProvasDaDisciplina.Contains(dict("IdProva")))
 
-        Return ConvertDictionaryToDataView(rawData)
+        Return PresenterUtils.ConvertDictionaryToDataView(rawData)
     End Function
 
     Friend Function GetPresencaDisciplina() As DataView
@@ -47,6 +47,6 @@ Public Class PresenterAlunoDisciplina
                                         Where(Function(presenca) presenca("IdDisciplina") = idDisciplina And
                                                             presenca("IdAluno") = idAluno)
 
-        Return ConvertDictionaryToDataView(presencasDaDisciplina)
+        Return PresenterUtils.ConvertDictionaryToDataView(presencasDaDisciplina)
     End Function
 End Class

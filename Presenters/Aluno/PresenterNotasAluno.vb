@@ -14,6 +14,6 @@ Public Class PresenterNotasAluno
 
         data = ModelUtils.RemoveKeyFromDict(data, "IdAluno")
         data = ModelUtils.RemoveKeyFromDict(data, "Id")
-        Return ConvertDictionaryToDataView(data)
+        Return PresenterUtils.ConvertDictionaryToDataView(data)
     End Function
 End Class

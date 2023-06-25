@@ -12,6 +12,6 @@ Friend Class PresenterPresencasAluno
     Friend Function GetPresencasAluno() As DataView
         Dim data = alunoBusinessRules.GetPresencasAluno()
 
-        Return ConvertDictionaryToDataView(data)
+        Return PresenterUtils.ConvertDictionaryToDataView(data)
     End Function
 End Class

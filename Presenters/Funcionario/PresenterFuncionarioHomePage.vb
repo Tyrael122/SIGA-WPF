@@ -6,7 +6,7 @@
     Public Sub New(view As IViewModel)
         Me.View = view
 
-        LoadUserInfo(ViewModelFuncionario, Table.FuncionarioAdm)
+        PresenterUtils.LoadUserInfo(ViewModelFuncionario, Table.FuncionarioAdm)
 
         view.SetDataContext(ViewModelFuncionario)
     End Sub

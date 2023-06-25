@@ -12,7 +12,7 @@ Public Class PresenterProfessorNotas
     End Sub
 
     Function LoadProvasComboBox() As IEnumerable(Of ComboBoxItem)
-        Return GenerateComboBoxItems(Function() GetAllProvas(), "Data", "Id")
+        Return PresenterUtils.GenerateComboBoxItems(Function() GetAllProvas(), "Data", "Id")
     End Function
 
     Friend Function GetAllProvas() As IEnumerable(Of IDictionary(Of String, Object))
@@ -69,6 +69,6 @@ Public Class PresenterProfessorNotas
 
         alunosCadastrados = ModelUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
 
-        Return ConvertDictionaryToDataView(alunosCadastrados)
+        Return PresenterUtils.ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 End Class

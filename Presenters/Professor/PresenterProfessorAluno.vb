@@ -15,7 +15,7 @@ Public Class PresenterProfessorAluno
 
         alunosCadastrados = ModelUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
 
-        Return ConvertDictionaryToDataView(alunosCadastrados)
+        Return PresenterUtils.ConvertDictionaryToDataView(alunosCadastrados)
     End Function
 
 End Class
