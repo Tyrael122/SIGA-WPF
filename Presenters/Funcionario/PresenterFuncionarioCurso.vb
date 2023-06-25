@@ -4,6 +4,7 @@ Public Class PresenterFuncionarioCurso
     Inherits Presenter
 
     Private ViewModelCurso As New CursoViewModel()
+    Private cursoBusinessRules As New CursoBusinessRules()
 
     Public Sub New(view As IViewModel)
         Me.View = view
@@ -13,14 +14,12 @@ Public Class PresenterFuncionarioCurso
 
     Friend Sub RegisterCurso(idsDisciplinasCurso As List(Of String))
         Dim data = ViewModelCurso.ConvertToDictionary()
-
         data("Turno") = [Enum].Parse(GetType(Turno), data("Turno"))
 
-        Relation.SaveRelation(Table.Curso, Table.Disciplina, idsDisciplinasCurso, data)
+        cursoBusinessRules.RegisterCurso(data, idsDisciplinasCurso)
 
         ViewModelCurso.Clear()
     End Sub
-
 
     Friend Function ShowCursoPage(idCurso As String)
         SessionCookie.AddCookie("IdCurso", idCurso)
@@ -33,30 +32,17 @@ Public Class PresenterFuncionarioCurso
     End Sub
 
     Friend Sub CarregarCursoParaEdicao(idCurso As String)
-        Dim data = ModelUtils.FindById(idCurso, Table.Curso).First()
+        Dim data = ModelUtils.LoadEntityById(idCurso, Table.Curso)
 
         ViewModelCurso.LoadFromDictionary(data)
-
         ViewModelCurso.Turno = [Enum].Parse(GetType(Turno), data("Turno")).ToString()
-
-        SessionCookie.AddCookie("IdCurso", idCurso)
     End Sub
 
     Friend Sub UpdateCurso(idsDisciplinasCurso As List(Of String))
-        Dim idCurso = SessionCookie.GetCookie("IdCurso")
-
-        DisciplinaBusinessRules.DeleteDisciplinas(idCurso, "IdCurso", Table.CursoDisciplina)
-
         Dim data = ViewModelCurso.ConvertToDictionary()
-
         data("Turno") = [Enum].Parse(GetType(Turno), ViewModelCurso.Turno)
 
-        Dim relation As New Relation(Table.Curso, Table.Disciplina) With {
-            .uniqueEntityData = data,
-            .idRelatedEntites = idsDisciplinasCurso
-        }
-
-        relation.Update(idCurso)
+        cursoBusinessRules.UpdateCurso(data, idsDisciplinasCurso)
 
         ViewModelCurso.Clear()
     End Sub

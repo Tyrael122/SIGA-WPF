@@ -29,11 +29,17 @@
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
 
-    Public Shared Function LoadUserWithPhotoById(id As String, table As Table) As IDictionary(Of String, Object)
+    Public Shared Function LoadEntityById(id As String, table As Table) As IDictionary(Of String, Object)
         Dim data = FindById(id, table).First()
-        data("Foto") = PresenterUtils.ConvertByteArrayToImage(data("Foto"))
 
         SessionCookie.AddCookie("Id" & table.ToString(), id)
+
+        Return data
+    End Function
+
+    Public Shared Function LoadUserWithPhotoById(id As String, table As Table) As IDictionary(Of String, Object)
+        Dim data = LoadEntityById(id, table)
+        data("Foto") = PresenterUtils.ConvertByteArrayToImage(data("Foto"))
 
         Return data
     End Function
@@ -50,7 +56,15 @@
         Return disciplinas
     End Function
 
-    Friend Shared Sub Update(idEntity As String, table As Table, data As Dictionary(Of String, Object))
+    Friend Shared Sub Update(table As Table, data As IDictionary(Of String, Object))
+        Dim idEntity = SessionCookie.GetCookie("Id" & table.ToString())
+
+        Update(idEntity, table, data)
+    End Sub
+
+    Friend Shared Sub Update(idEntity As String, table As Table, data As IDictionary(Of String, Object))
+        data.Remove("Id")
+
         dataBridge.Update(idEntity, data, table)
     End Sub
 

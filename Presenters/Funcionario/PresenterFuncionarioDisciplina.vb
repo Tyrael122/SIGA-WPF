@@ -9,7 +9,6 @@
         view.SetDataContext(ViewModelDisciplina)
     End Sub
 
-
     Friend Sub RegisterDisciplina()
         Dim data = ViewModelDisciplina.ConvertToDictionary()
 
@@ -19,9 +18,7 @@
     End Sub
 
     Friend Sub CarregarDisciplinaParaEdicao(idDisciplina As String)
-        SessionCookie.AddCookie("IdDisciplina", idDisciplina)
-
-        Dim data = ModelUtils.FindById(idDisciplina, Table.Disciplina).First()
+        Dim data = ModelUtils.LoadEntityById(idDisciplina, Table.Disciplina)
 
         ViewModelDisciplina.LoadFromDictionary(data)
     End Sub
@@ -32,11 +29,8 @@
 
     Friend Sub UpdateDisciplina()
         Dim data = ViewModelDisciplina.ConvertToDictionary()
-        Dim idDisciplina = SessionCookie.GetCookie("IdDisciplina")
 
-        data.Remove("Id")
-
-        ModelUtils.Update(idDisciplina, Table.Disciplina, data)
+        ModelUtils.Update(Table.Disciplina, data)
 
         ViewModelDisciplina.Clear()
     End Sub

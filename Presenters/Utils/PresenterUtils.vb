@@ -153,10 +153,4 @@ Public Class PresenterUtils
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
         Return GetDataTable(table)
     End Function
-
-    Public Shared Function GetAllDisciplinasPorSemestre(idCurso As String, semestre As Integer) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Curso, idCurso)
-
-        Return disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
-    End Function
 End Class

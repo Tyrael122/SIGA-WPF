@@ -2,6 +2,7 @@
     Inherits Presenter
 
     Private ViewModelHorarioCurso As New HorarioCursoViewModel
+    Private cursoBusinessRules As New CursoBusinessRules()
 
     Public Sub New(View As IViewModel)
         Me.View = View
@@ -10,9 +11,7 @@
     End Sub
 
     Public Function LoadDisciplinasPorSemestre() As IEnumerable(Of ComboBoxItem)
-        Dim idCurso = SessionCookie.GetCookie("IdCurso")
-
-        Return PresenterUtils.GenerateComboBoxItems(Function() PresenterUtils.GetAllDisciplinasPorSemestre(idCurso, ViewModelHorarioCurso.Semestre), "Name", "Id")
+        Return PresenterUtils.GenerateComboBoxItems(Function() cursoBusinessRules.GetAllDisciplinasPorSemestre(ViewModelHorarioCurso.Semestre), "Name", "Id")
     End Function
 
     Friend Function LoadProfessoresPorDisciplina() As IEnumerable(Of ComboBoxItem)
@@ -23,19 +22,15 @@
 
     Friend Sub RegisterHorarioCurso()
         Dim data = ViewModelHorarioCurso.ConvertToDictionary()
-
         data("DiaSemana") = [Enum].Parse(GetType(DiaSemana), data("DiaSemana"))
-        data("IdCurso") = SessionCookie.GetCookie("IdCurso")
 
-        ModelUtils.Save(data, Table.Horario)
+        cursoBusinessRules.RegisterHorarioCurso(data)
 
         ViewModelHorarioCurso.Clear()
     End Sub
 
     Friend Function LoadHorarioInicio() As IEnumerable(Of ComboBoxItem)
-        Dim idCurso = SessionCookie.GetCookie("IdCurso")
-
-        Dim turno As Turno = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Id") = idCurso).First()("Turno")
+        Dim turno = cursoBusinessRules.GetTurnoFromCurso()
 
         Select Case turno
             Case Turno.Matutino
@@ -50,9 +45,7 @@
     End Function
 
     Friend Function LoadHorarioFim() As IEnumerable(Of ComboBoxItem)
-        Dim idCurso = SessionCookie.GetCookie("IdCurso")
-
-        Dim turno As Turno = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Id") = idCurso).First()("Turno")
+        Dim turno = cursoBusinessRules.GetTurnoFromCurso()
 
         Select Case turno
             Case Turno.Matutino

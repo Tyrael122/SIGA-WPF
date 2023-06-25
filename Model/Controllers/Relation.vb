@@ -82,13 +82,4 @@
 
         Return True
     End Function
-
-    Public Shared Function SaveRelation(uniqueEntityTable As Table, relatedEntitiesTable As Table, idRelatedEntities As IEnumerable(Of String), uniqueEntityData As IDictionary(Of String, Object)) As Boolean
-        Dim relation As New Relation(uniqueEntityTable, relatedEntitiesTable) With {
-            .uniqueEntityData = uniqueEntityData,
-            .idRelatedEntites = idRelatedEntities
-        }
-
-        Return relation.Save()
-    End Function
 End Class
