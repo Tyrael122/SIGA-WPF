@@ -12,17 +12,17 @@ Public Class PresenterAlunoProvas
     End Sub
 
     Friend Function GetProvasFuturas() As DataView
-        Dim idDisciplinas = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+        Dim idDisciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
-        Dim idCurso = BusinessRules.GetAll(Table.Aluno).First(Function(dict) dict("Id") = idAluno)("Curso")
+        Dim idCurso = ModelUtils.GetAll(Table.Aluno).First(Function(dict) dict("Id") = idAluno)("Curso")
 
-        Dim provas = BusinessRules.GetAll(Table.Prova).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")) And
+        Dim provas = ModelUtils.GetAll(Table.Prova).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")) And
                                                                  dict("Data") > Date.Now)
 
         For Each prova In provas
-            Dim nomeDisciplina = BusinessRules.GetAll(Table.Disciplina).Where(Function(dict) dict("Id") = prova("IdDisciplina")).First()("Name")
+            Dim nomeDisciplina = ModelUtils.GetAll(Table.Disciplina).Where(Function(dict) dict("Id") = prova("IdDisciplina")).First()("Name")
 
-            Dim nomeProfessor = BusinessRules.GetAll(Table.Professor).Where(Function(dict) dict("Id") = prova("IdProfessor")).First()("Login")
+            Dim nomeProfessor = ModelUtils.GetAll(Table.Professor).Where(Function(dict) dict("Id") = prova("IdProfessor")).First()("Login")
 
             prova("NomeDisciplina") = nomeDisciplina
             prova("NomeProfessor") = nomeProfessor

@@ -43,7 +43,7 @@ Public Class PresenterProfessorNotas
                 {"Nota", nota("Nota")}
             }
 
-            BusinessRules.Save(savebleData, Table.Nota)
+            ModelUtils.Save(savebleData, Table.Nota)
         Next
 
         View.DisplayInfo("Notas cadastradas com sucesso!")
@@ -67,7 +67,7 @@ Public Class PresenterProfessorNotas
             End If
         Next
 
-        alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
+        alunosCadastrados = ModelUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
 
         Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function

@@ -10,7 +10,7 @@ Public Class PresenterAlunoDisciplina
     End Sub
 
     Friend Function GetDisciplinasCadastradas() As DataView
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, SessionCookie.GetCookie("userId"))
+        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Aluno, SessionCookie.GetCookie("userId"))
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
@@ -27,11 +27,11 @@ Public Class PresenterAlunoDisciplina
     Friend Function GetNotasDisciplina() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
-        Dim idProvasDaDisciplina = BusinessRules.GetAll(Table.Prova).
+        Dim idProvasDaDisciplina = ModelUtils.GetAll(Table.Prova).
                                         Where(Function(prova) prova("IdDisciplina") = idDisciplina).
                                         Select(Function(prova) prova("Id"))
 
-        Dim notas = BusinessRules.GetAll(Table.Nota)
+        Dim notas = ModelUtils.GetAll(Table.Nota)
 
         Dim idAluno = SessionCookie.GetCookie("userId")
         Dim rawData = notas.Where(Function(dict) dict("IdAluno") = idAluno And
@@ -43,7 +43,7 @@ Public Class PresenterAlunoDisciplina
     Friend Function GetPresencaDisciplina() As DataView
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
-        Dim presencasDaDisciplina = BusinessRules.GetAll(Table.Presenca).
+        Dim presencasDaDisciplina = ModelUtils.GetAll(Table.Presenca).
                                         Where(Function(presenca) presenca("IdDisciplina") = idDisciplina And
                                                             presenca("IdAluno") = idAluno)
 

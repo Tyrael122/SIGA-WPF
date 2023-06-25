@@ -1,14 +1,5 @@
-﻿Public Class BusinessRules
+﻿Public Class ModelUtils
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
-
-    Friend Shared Sub DeleteProfessor(idProfessor As String)
-        dataBridge.Delete(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
-        dataBridge.Delete(idProfessor, "IdProfessor", Table.Prova)
-        dataBridge.Delete(idProfessor, "IdProfessor", Table.Horario)
-        dataBridge.Delete(idProfessor, "IdProfessor", Table.Aula)
-
-        dataBridge.Delete(idProfessor, Table.Professor)
-    End Sub
 
     Friend Shared Function SaveWithOutput(aulaData As Dictionary(Of String, Object), table As Table) As List(Of IDictionary(Of String, Object))
         Return dataBridge.SaveWithOutput(aulaData, table)
@@ -38,20 +29,6 @@
         Return dataBridge.SelectAll(tableStr).Where(Function(dict) dict("Id") = id)
     End Function
 
-    Friend Shared Function SalvarAula(aula As IDictionary(Of String, Object)) As String
-        Dim aulaMatched = GetAll(Table.Aula).Where(Function(dict) Date.Parse(dict("Data")) = Date.Parse(aula("Data")))
-
-        If aulaMatched.Any() Then
-            Dim idAula = aulaMatched.First()("Id")
-
-            dataBridge.Delete(idAula, "IdAula", Table.Presenca)
-
-            Return idAula
-        End If
-
-        Return SaveWithOutput(aula, Table.Aula).First()("Id")
-    End Function
-
     Public Shared Function GetDisciplinasComCheckBoxColumn(idEntity As String, table As Table) As IEnumerable(Of IDictionary(Of String, Object))
         Dim idDisciplinas = GetDisciplinas(table, idEntity).Select(Function(dict) dict("Id"))
 
@@ -63,13 +40,6 @@
 
         Return disciplinas
     End Function
-
-    Friend Shared Sub DeleteCurso(idCurso As Object)
-        dataBridge.Delete(idCurso, "IdCurso", Table.CursoDisciplina)
-        dataBridge.Delete(idCurso, "IdCurso", Table.Horario)
-        dataBridge.Delete(idCurso, "IdCurso", Table.Aula)
-        dataBridge.Delete(idCurso, Table.Curso)
-    End Sub
 
     Friend Shared Sub Update(idEntity As String, table As Table, data As Dictionary(Of String, Object))
         dataBridge.Update(idEntity, data, table)

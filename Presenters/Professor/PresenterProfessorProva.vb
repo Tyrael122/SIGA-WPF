@@ -20,7 +20,7 @@
 
         data("Data") = ViewModelProva.Data.ToString("yyyy-MM-dd")
 
-        BusinessRules.Save(data, Table.Prova)
+        ModelUtils.Save(data, Table.Prova)
 
         View.DisplayInfo("Prova cadastrada com sucesso!")
     End Sub

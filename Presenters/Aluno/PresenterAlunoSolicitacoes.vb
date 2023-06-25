@@ -21,11 +21,11 @@ Public Class PresenterAlunoSolicitacoes
         Dim tipoSolicitacao = ViewModelSolicitacao.Tipo.Replace(" ", "")
         data("Tipo") = [Enum].Parse(GetType(TipoSolicitacao), tipoSolicitacao)
 
-        BusinessRules.Save(data, Table.Solicitacao)
+        ModelUtils.Save(data, Table.Solicitacao)
     End Sub
 
     Friend Sub DownloadDocumento(idSolicitacao As String)
-        Dim solicitacao = BusinessRules.GetAll(Table.Solicitacao).Where(Function(dict) dict("Id") = idSolicitacao).First()
+        Dim solicitacao = ModelUtils.GetAll(Table.Solicitacao).Where(Function(dict) dict("Id") = idSolicitacao).First()
 
         If Not IsDBNull(solicitacao("Documento")) Then
             SaveDocumento(solicitacao("Documento"), solicitacao("TituloDocumento"))
@@ -54,17 +54,17 @@ Public Class PresenterAlunoSolicitacoes
     Friend Function GetAllSolitacacoesAluno() As DataView
         Dim idAluno = SessionCookie.GetCookie("UserId")
 
-        Dim solicitacoesAluno = BusinessRules.GetAll(Table.Solicitacao).Where(Function(dict) dict("IdAluno") = idAluno)
+        Dim solicitacoesAluno = ModelUtils.GetAll(Table.Solicitacao).Where(Function(dict) dict("IdAluno") = idAluno)
 
-        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
-        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "Documento")
+        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
+        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "Documento")
 
         For Each solicitacao In solicitacoesAluno
             solicitacao("Título do Documento") = solicitacao("TituloDocumento")
             solicitacao("Tipo") = [Enum].GetName(GetType(TipoSolicitacao), solicitacao("Tipo"))
         Next
 
-        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
+        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
 
         Return ConvertDictionaryToDataView(solicitacoesAluno)
     End Function

@@ -14,21 +14,21 @@ Friend Class PresenterFuncionarioSolicitacao
             {"TituloDocumento", Path.GetFileName(filePath)}
         }
 
-        BusinessRules.Update(idSolicitacao, Table.Solicitacao, data)
+        ModelUtils.Update(idSolicitacao, Table.Solicitacao, data)
     End Sub
 
     Friend Function GetSolicitacoes() As DataView
-        Dim solicitacoesAluno = BusinessRules.GetAll(Table.Solicitacao)
+        Dim solicitacoesAluno = ModelUtils.GetAll(Table.Solicitacao)
 
-        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
-        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "Documento")
+        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "IdAluno")
+        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "Documento")
 
         For Each solicitacao In solicitacoesAluno
             solicitacao("Título do Documento") = solicitacao("TituloDocumento")
             solicitacao("Tipo") = [Enum].GetName(GetType(TipoSolicitacao), solicitacao("Tipo"))
         Next
 
-        solicitacoesAluno = BusinessRules.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
+        solicitacoesAluno = ModelUtils.RemoveKeyFromDict(solicitacoesAluno, "TituloDocumento")
 
         Return ConvertDictionaryToDataView(solicitacoesAluno)
     End Function

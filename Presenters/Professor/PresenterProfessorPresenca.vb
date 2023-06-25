@@ -19,7 +19,7 @@ Public Class PresenterProfessorPresenca
 
         Dim idProfessor = SessionCookie.GetCookie("userId")
 
-        Dim aulas = BusinessRules.GetAll(Table.Aula).Where(Function(dict) dict("IdHorario") = ViewModelAula.IdHorario And
+        Dim aulas = ModelUtils.GetAll(Table.Aula).Where(Function(dict) dict("IdHorario") = ViewModelAula.IdHorario And
                                                                 dict("IdProfessor") = idProfessor And
                                                                 dict("IdDisciplina") = idDisciplina And
                                                                 dict("Data") = ViewModelAula.Data)
@@ -29,7 +29,7 @@ Public Class PresenterProfessorPresenca
         End If
 
         For Each aluno In alunosCadastrados
-            Dim presencaData = BusinessRules.GetAll(Table.Presenca).Where(Function(dict) dict("IdAula") = idAula And
+            Dim presencaData = ModelUtils.GetAll(Table.Presenca).Where(Function(dict) dict("IdAula") = idAula And
                                                                                     dict("IdAluno") = aluno("Id"))
 
             If presencaData.Any() Then
@@ -39,7 +39,7 @@ Public Class PresenterProfessorPresenca
             End If
         Next
 
-        alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
+        alunosCadastrados = ModelUtils.RemoveKeyFromDict(alunosCadastrados, "Password")
 
         Return ConvertDictionaryToDataView(alunosCadastrados)
     End Function
@@ -47,7 +47,7 @@ Public Class PresenterProfessorPresenca
     Friend Function LoadDiaAulaComboBox() As IEnumerable(Of String)
         Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
 
-        Dim horarios = BusinessRules.GetAll(Table.Horario).
+        Dim horarios = ModelUtils.GetAll(Table.Horario).
                              Where(Function(horario) horario("IdDisciplina") = idDisciplina)
 
         Dim startDate As New DateTime(2023, 2, 2)
@@ -75,7 +75,7 @@ Public Class PresenterProfessorPresenca
         Dim dayOfWeek = Date.Parse(ViewModelAula.Data).DayOfWeek
 
         Dim selector = Function()
-                           Return BusinessRules.GetAll(Table.Horario).
+                           Return ModelUtils.GetAll(Table.Horario).
                                                 Where(Function(horario) horario("IdDisciplina") = idDisciplina And
                                                 horario("DiaSemana") = dayOfWeek)
                        End Function
@@ -102,7 +102,7 @@ Public Class PresenterProfessorPresenca
         data("IdProfessor") = SessionCookie.GetCookie("userId")
         data("IdDisciplina") = SessionCookie.GetCookie("idDisciplina")
 
-        Dim idAula = BusinessRules.SalvarAula(data)
+        Dim idAula = AulaBusinessRules.SalvarAula(data)
 
         For Each presenca In presencas
             presenca("IdAluno") = presenca("Id")
@@ -110,7 +110,7 @@ Public Class PresenterProfessorPresenca
 
             presenca("IdAula") = idAula
 
-            BusinessRules.Save(presenca, Table.Presenca)
+            ModelUtils.Save(presenca, Table.Presenca)
         Next
 
         ViewModelAula.Clear()

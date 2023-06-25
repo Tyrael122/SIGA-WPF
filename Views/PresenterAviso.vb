@@ -6,10 +6,10 @@
     End Sub
 
     Friend Function GetTitulo() As String
-        Return BusinessRules.FindById(idAviso, Table.Aviso).First()("Titulo")
+        Return ModelUtils.FindById(idAviso, Table.Aviso).First()("Titulo")
     End Function
 
     Friend Function GetConteudo() As String
-        Return BusinessRules.FindById(idAviso, Table.Aviso).First()("Conteudo")
+        Return ModelUtils.FindById(idAviso, Table.Aviso).First()("Conteudo")
     End Function
 End Class

@@ -21,7 +21,7 @@
     End Sub
 
     Friend Function GetPresencasAluno() As IEnumerable(Of IDictionary(Of String, Object))
-        Dim idDisciplinas = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+        Dim idDisciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
         Dim aulas = dataBridge.SelectAll(Table.Aula).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")))
         Dim idAulas = aulas.Select(Function(dict) dict("Id"))
@@ -31,17 +31,17 @@
         For Each presenca In presencas
             presenca("Data") = aulas.Where(Function(aula) aula("Id") = presenca("IdAula")).First()("Data")
 
-            Dim idDisciplina = BusinessRules.FindById(presenca("IdAula"), Table.Aula).First()("IdDisciplina")
-            presenca("Disciplina") = BusinessRules.FindById(idDisciplina, Table.Disciplina).First()("Name")
+            Dim idDisciplina = ModelUtils.FindById(presenca("IdAula"), Table.Aula).First()("IdDisciplina")
+            presenca("Disciplina") = ModelUtils.FindById(idDisciplina, Table.Disciplina).First()("Name")
         Next
 
-        presencas = BusinessRules.RemoveKeyFromDict(presencas, "IdAluno")
-        presencas = BusinessRules.RemoveKeyFromDict(presencas, "IdAula")
+        presencas = ModelUtils.RemoveKeyFromDict(presencas, "IdAluno")
+        presencas = ModelUtils.RemoveKeyFromDict(presencas, "IdAula")
         Return presencas
     End Function
 
     Friend Function GetNotasAluno() As IEnumerable(Of IDictionary(Of String, Object))
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, idAluno)
+        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Aluno, idAluno)
 
         Dim idDisciplinas = disciplinas.Select(Function(dict) dict("Id"))
 
@@ -58,7 +58,7 @@
             nota("Disciplina") = disciplinas.Where(Function(dict) dict("Id") = prova("IdDisciplina")).First()("Name")
         Next
 
-        notasAluno = BusinessRules.RemoveKeyFromDict(notasAluno, "IdProva")
+        notasAluno = ModelUtils.RemoveKeyFromDict(notasAluno, "IdProva")
         Return notasAluno
     End Function
 End Class

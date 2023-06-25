@@ -22,7 +22,7 @@ Public MustInherit Class Presenter
     Protected Sub LoadUserInfo(viewModel As ViewModel, table As Table)
         Dim idUser = SessionCookie.GetCookie("userId")
 
-        Dim data = BusinessRules.FindById(idUser, table).First()
+        Dim data = ModelUtils.FindById(idUser, table).First()
 
         If data.ContainsKey("Foto") Then
             If IsDBNull(data("Foto")) Then
@@ -138,7 +138,7 @@ Public MustInherit Class Presenter
     End Function
 
     Protected Function GetAll(table As Table) As IEnumerable(Of IDictionary(Of String, Object))
-        Return BusinessRules.GetAll(table)
+        Return ModelUtils.GetAll(table)
     End Function
 
     Protected Function GetDataTable(table As Table) As DataTable
@@ -153,7 +153,7 @@ Public MustInherit Class Presenter
 
     Public Function GetAllById(id As String, tableStr As String) As IEnumerable(Of IDictionary(Of String, Object))
         Dim table As Table = [Enum].Parse(GetType(Table), tableStr)
-        Return BusinessRules.FindById(id, table)
+        Return ModelUtils.FindById(id, table)
     End Function
 
     Private Function GetDataTable(tableStr As String) As DataTable
@@ -166,7 +166,7 @@ Public MustInherit Class Presenter
     End Function
 
     Protected Function GetAllDisciplinasPorSemestre(idCurso As String, semestre As Integer) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
+        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Curso, idCurso)
 
         Return disciplinas.Where(Function(disciplina) disciplina("Semester") = semestre)
     End Function

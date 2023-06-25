@@ -27,7 +27,7 @@
         data("DiaSemana") = [Enum].Parse(GetType(DiaSemana), data("DiaSemana"))
         data("IdCurso") = SessionCookie.GetCookie("IdCurso")
 
-        BusinessRules.Save(data, Table.Horario)
+        ModelUtils.Save(data, Table.Horario)
 
         ViewModelHorarioCurso.Clear()
     End Sub
@@ -35,7 +35,7 @@
     Friend Function LoadHorarioInicio() As IEnumerable(Of ComboBoxItem)
         Dim idCurso = SessionCookie.GetCookie("IdCurso")
 
-        Dim turno As Turno = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Id") = idCurso).First()("Turno")
+        Dim turno As Turno = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Id") = idCurso).First()("Turno")
 
         Select Case turno
             Case Turno.Matutino
@@ -52,7 +52,7 @@
     Friend Function LoadHorarioFim() As IEnumerable(Of ComboBoxItem)
         Dim idCurso = SessionCookie.GetCookie("IdCurso")
 
-        Dim turno As Turno = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Id") = idCurso).First()("Turno")
+        Dim turno As Turno = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Id") = idCurso).First()("Turno")
 
         Select Case turno
             Case Turno.Matutino

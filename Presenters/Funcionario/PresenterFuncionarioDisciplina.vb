@@ -13,7 +13,7 @@
     Friend Sub RegisterDisciplina()
         Dim data = ViewModelDisciplina.ConvertToDictionary()
 
-        BusinessRules.Save(data, Table.Disciplina)
+        ModelUtils.Save(data, Table.Disciplina)
 
         ViewModelDisciplina.Clear()
     End Sub
@@ -21,7 +21,7 @@
     Friend Sub CarregarDisciplinaParaEdicao(idDisciplina As String)
         SessionCookie.AddCookie("IdDisciplina", idDisciplina)
 
-        Dim data = BusinessRules.FindById(idDisciplina, Table.Disciplina).First()
+        Dim data = ModelUtils.FindById(idDisciplina, Table.Disciplina).First()
 
         ViewModelDisciplina.LoadFromDictionary(data)
     End Sub
@@ -36,7 +36,7 @@
 
         data.Remove("Id")
 
-        BusinessRules.Update(idDisciplina, Table.Disciplina, data)
+        ModelUtils.Update(idDisciplina, Table.Disciplina, data)
 
         ViewModelDisciplina.Clear()
     End Sub

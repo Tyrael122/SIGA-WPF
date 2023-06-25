@@ -17,7 +17,7 @@ Public Class PresenterFuncionarioAluno
     Public Sub RegisterAluno(idsDisciplinasAluno As IEnumerable(Of String))
         Dim data = ViewModelAluno.ConvertToDictionary()
 
-        data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
+        data("Curso") = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
         data("Foto") = ConvertImageToByteArray(ViewModelAluno.Foto)
 
         Relation.SaveRelation(Table.Aluno, Table.Disciplina, idsDisciplinasAluno, data)
@@ -34,7 +34,7 @@ Public Class PresenterFuncionarioAluno
             Return Nothing
         End If
 
-        Dim queryData = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso)
+        Dim queryData = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso)
         If Not queryData.Any() Then
             Return Nothing
         End If
@@ -53,7 +53,7 @@ Public Class PresenterFuncionarioAluno
     End Function
 
     Private Function GetDisciplinasCurso(idCurso As String) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
+        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Curso, idCurso)
 
         For Each disciplina In disciplinas
             disciplina("IsChecked") = True
@@ -63,9 +63,9 @@ Public Class PresenterFuncionarioAluno
     End Function
 
     Private Function GetDisciplinasAluno(idAluno As String, idCurso As String) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
+        Dim idDisciplinasAluno = ModelUtils.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
+        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Curso, idCurso)
 
         For Each disciplina In disciplinas
             disciplina("IsChecked") = idDisciplinasAluno.Contains(disciplina("Id"))
@@ -84,7 +84,7 @@ Public Class PresenterFuncionarioAluno
         AlunoBusinessRules.DeleteDisciplinasAluno(idAluno)
 
         Dim data = ViewModelAluno.ConvertToDictionary()
-        data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
+        data("Curso") = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
 
         data("Foto") = ConvertImageToByteArray(data("Foto"))
 
@@ -101,12 +101,12 @@ Public Class PresenterFuncionarioAluno
     End Sub
 
     Public Sub CarregarAlunoParaEdicao(idAluno As String)
-        Dim alunoData = BusinessRules.FindById(idAluno, Table.Aluno).First()
+        Dim alunoData = ModelUtils.FindById(idAluno, Table.Aluno).First()
         alunoData("Foto") = ConvertByteArrayToImage(alunoData("Foto"))
 
         ViewModelAluno.LoadFromDictionary(alunoData)
 
-        Dim nomeCurso = BusinessRules.FindById(alunoData("Curso"), Table.Curso).First()("Nome")
+        Dim nomeCurso = ModelUtils.FindById(alunoData("Curso"), Table.Curso).First()("Nome")
         ViewModelAluno.Curso = nomeCurso
 
         SessionCookie.AddCookie("IdAluno", idAluno) ' TODO: Refactor this, it's a responsibility of the business rules.

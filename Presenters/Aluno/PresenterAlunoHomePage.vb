@@ -14,7 +14,7 @@ Public Class PresenterAlunoHomePage
     End Sub
 
     Friend Function GetDisciplinasCadastradas() As DataView
-        Dim disciplinas = BusinessRules.GetDisciplinas(Table.Aluno, ViewModelAluno.Id)
+        Dim disciplinas = ModelUtils.GetDisciplinas(Table.Aluno, ViewModelAluno.Id)
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function

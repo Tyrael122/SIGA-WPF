@@ -12,12 +12,12 @@
     Friend Sub RegisterAviso()
         Dim data = ViewModelAviso.ConvertToDictionary()
 
-        BusinessRules.Save(data, Table.Aviso)
+        ModelUtils.Save(data, Table.Aviso)
 
         ViewModelAviso.Clear()
     End Sub
 
     Friend Sub DeleteAviso(idAviso As String)
-        BusinessRules.Delete(idAviso, Table.Aviso)
+        ModelUtils.Delete(idAviso, Table.Aviso)
     End Sub
 End Class

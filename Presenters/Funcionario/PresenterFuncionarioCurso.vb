@@ -29,11 +29,11 @@ Public Class PresenterFuncionarioCurso
     End Function
 
     Friend Sub DeleteCurso(idCurso As Object)
-        BusinessRules.DeleteCurso(idCurso)
+        CursoBusinessRules.DeleteCurso(idCurso)
     End Sub
 
     Friend Sub CarregarCursoParaEdicao(idCurso As String)
-        Dim data = BusinessRules.FindById(idCurso, Table.Curso).First()
+        Dim data = ModelUtils.FindById(idCurso, Table.Curso).First()
 
         ViewModelCurso.LoadFromDictionary(data)
 
@@ -64,13 +64,13 @@ Public Class PresenterFuncionarioCurso
     Friend Function GetDisciplinasCurso() As DataView
         Dim idCurso = SessionCookie.GetCookie("IdCurso")
 
-        Dim disciplinas = BusinessRules.GetDisciplinasComCheckBoxColumn(idCurso, Table.Curso)
+        Dim disciplinas = ModelUtils.GetDisciplinasComCheckBoxColumn(idCurso, Table.Curso)
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
 
     Friend Function GetAllCursos() As DataView
-        Dim cursos = BusinessRules.GetAll(Table.Curso)
+        Dim cursos = ModelUtils.GetAll(Table.Curso)
 
         For Each curso In cursos
             curso("Turno") = [Enum].Parse(GetType(Turno), curso("Turno")).ToString()

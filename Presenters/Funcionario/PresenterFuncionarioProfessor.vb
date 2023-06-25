@@ -24,11 +24,11 @@ Public Class PresenterFuncionarioProfessor
     End Sub
 
     Friend Sub DeleteProfessor(idProfessor As String)
-        BusinessRules.DeleteProfessor(idProfessor)
+        ProfessorBusinessRules.DeleteProfessor(idProfessor)
     End Sub
 
     Friend Sub CarregarProfessorParaEdicao(idProfessor As String)
-        Dim data = BusinessRules.FindById(idProfessor, Table.Professor).First()
+        Dim data = ModelUtils.FindById(idProfessor, Table.Professor).First()
 
         data("Foto") = ConvertByteArrayToImage(data("Foto"))
         ViewModelProfessor.LoadFromDictionary(data)
@@ -59,7 +59,7 @@ Public Class PresenterFuncionarioProfessor
     Friend Function GetDisciplinasProfessor() As DataView
         Dim idProfessor = SessionCookie.GetCookie("IdProfessor")
 
-        Dim disciplinas = BusinessRules.GetDisciplinasComCheckBoxColumn(idProfessor, Table.Professor)
+        Dim disciplinas = ModelUtils.GetDisciplinasComCheckBoxColumn(idProfessor, Table.Professor)
 
         Return ConvertDictionaryToDataView(disciplinas)
     End Function
