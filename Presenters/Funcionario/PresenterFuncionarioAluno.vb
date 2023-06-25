@@ -4,6 +4,7 @@ Public Class PresenterFuncionarioAluno
     Inherits Presenter
 
     Public ViewModelAluno As New AlunoViewModel()
+    'Private alunoBusinessRules As New AlunoBussinessRules()
 
     Public Sub New(view As IViewModel)
         Me.View = view
@@ -62,8 +63,6 @@ Public Class PresenterFuncionarioAluno
     End Function
 
     Private Function GetDisciplinasAluno(idAluno As String, idCurso As String) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim aluno = BusinessRules.FindById(idAluno, Table.Aluno).First()
-
         Dim idDisciplinasAluno = BusinessRules.GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
 
         Dim disciplinas = BusinessRules.GetDisciplinas(Table.Curso, idCurso)
@@ -76,13 +75,13 @@ Public Class PresenterFuncionarioAluno
     End Function
 
     Friend Sub DeleteAluno(idAluno As String)
-        BusinessRules.DeleteAluno(idAluno)
+        AlunoBusinessRules.DeleteAluno(idAluno)
     End Sub
 
     Friend Sub UpdateAluno(idsDisciplinasAluno As List(Of String))
         Dim idAluno = SessionCookie.GetCookie("IdAluno")
 
-        BusinessRules.DeleteDisciplinasAluno(idAluno)
+        AlunoBusinessRules.DeleteDisciplinasAluno(idAluno)
 
         Dim data = ViewModelAluno.ConvertToDictionary()
         data("Curso") = BusinessRules.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
@@ -110,6 +109,6 @@ Public Class PresenterFuncionarioAluno
         Dim nomeCurso = BusinessRules.FindById(alunoData("Curso"), Table.Curso).First()("Nome")
         ViewModelAluno.Curso = nomeCurso
 
-        SessionCookie.AddCookie("IdAluno", idAluno)
+        SessionCookie.AddCookie("IdAluno", idAluno) ' TODO: Refactor this, it's a responsibility of the business rules.
     End Sub
 End Class

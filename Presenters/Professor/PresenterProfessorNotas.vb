@@ -25,13 +25,13 @@ Public Class PresenterProfessorNotas
 
     Public Sub RegisterNotas(notas As IEnumerable(Of IDictionary(Of String, Object)))
         For Each nota In notas
-            Dim matchedNota = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = nota("Id") And
+            Dim matchedNota = GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = nota("Id") And
                                                         dict("IdProva") = ViewModelNotas.IdProva)
 
             If matchedNota.Any() Then
                 Dim idNotaMatched = matchedNota.First()("Id")
 
-                BusinessRules.DeleteNotaAluno(idNotaMatched)
+                AlunoBusinessRules.DeleteNotaAluno(idNotaMatched)
             End If
 
             nota("IdAluno") = nota("Id")
@@ -57,7 +57,7 @@ Public Class PresenterProfessorNotas
 
         For Each aluno In alunosCadastrados
             Dim idAluno = aluno("Id")
-            Dim dadosNota = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = idAluno And
+            Dim dadosNota = GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = idAluno And
                                                                                 dict("IdProva") = ViewModelNotas.IdProva)
 
             If dadosNota.Any() Then
@@ -70,32 +70,5 @@ Public Class PresenterProfessorNotas
         alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
 
         Return ConvertDictionaryToDataView(alunosCadastrados)
-    End Function
-
-
-    Friend Function GetAllNotasAlunosCadastrado() As ImageSource
-        Dim idDisciplina = SessionCookie.GetCookie("idDisciplina")
-
-        Dim entityRelation = New Relation(Table.Disciplina, Table.Aluno)
-        Dim alunosCadastrados = entityRelation.GetAllMultipleEntitiesById(idDisciplina)
-
-        For Each aluno In alunosCadastrados
-            Dim idAluno = aluno("Id")
-            Dim dadosNota = BusinessRules.GetAll(Table.Nota).Where(Function(dict) dict("IdAluno") = idAluno And
-                                                                                dict("IdProva") = ViewModelNotas.IdProva)
-
-            If dadosNota.Any() Then
-                aluno("Nota") = dadosNota.First()("Nota")
-            Else
-                aluno("Nota") = ""
-            End If
-
-
-            'aluno("Foto") = ConvertByteArrayToImage(aluno("Foto"))
-        Next
-
-        alunosCadastrados = BusinessRules.RemoveKeyFromDict(alunosCadastrados, "Password")
-
-        Return alunosCadastrados.First()("Foto")
     End Function
 End Class

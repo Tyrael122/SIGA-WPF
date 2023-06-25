@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-
-Public Class ImagePicker
+﻿Public Class ImagePicker
     Inherits UserControl
 
     Public Shared ReadOnly ImageSourceProperty As DependencyProperty = DependencyProperty.Register(

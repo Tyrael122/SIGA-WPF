@@ -3,14 +3,14 @@
 Public Class PresenterNotasAluno
     Inherits Presenter
 
+    Private alunoBusinessRules As New AlunoBusinessRules()
+
     Public Sub New(view As IView)
         Me.View = view
     End Sub
 
     Friend Function GetNotasAluno() As DataView
-        Dim idAluno = SessionCookie.GetCookie("UserId")
-
-        Dim data = BusinessRules.GetNotasAluno(idAluno)
+        Dim data = alunoBusinessRules.GetNotasAluno()
 
         data = BusinessRules.RemoveKeyFromDict(data, "IdAluno")
         data = BusinessRules.RemoveKeyFromDict(data, "Id")

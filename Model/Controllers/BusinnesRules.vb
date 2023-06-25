@@ -1,19 +1,6 @@
 ﻿Public Class BusinessRules
     Private Shared ReadOnly dataBridge As IDAL = New DAL() ' TODO: Search for a way to cleanly dispose of the connection created by the IDAL.
 
-    Friend Shared Sub DeleteAluno(idAluno As String)
-        dataBridge.Delete(idAluno, "IdAluno", Table.Nota)
-
-        dataBridge.Delete(idAluno, Table.Aluno)
-    End Sub
-
-    Friend Shared Sub DeleteDisciplinasAluno(idAluno As String)
-        dataBridge.Delete(idAluno, "IdAluno", Table.AlunoDisciplina)
-    End Sub
-    Friend Shared Sub DeleteNotaAluno(idNota As String)
-        dataBridge.Delete(idNota, Table.Nota)
-    End Sub
-
     Friend Shared Sub DeleteProfessor(idProfessor As String)
         dataBridge.Delete(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
         dataBridge.Delete(idProfessor, "IdProfessor", Table.Prova)
@@ -108,48 +95,6 @@
     Friend Shared Sub Update(idEntity As String, table As Table, data As Dictionary(Of String, Object))
         dataBridge.Update(idEntity, data, table)
     End Sub
-
-    Friend Shared Function GetPresencasAluno(idAluno As String) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim idDisciplinas = GetDisciplinas(Table.Aluno, idAluno).Select(Function(dict) dict("Id"))
-
-        Dim aulas = dataBridge.SelectAll(Table.Aula).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")))
-        Dim idAulas = aulas.Select(Function(dict) dict("Id"))
-
-        Dim presencas = dataBridge.SelectAll(Table.Presenca).Where(Function(dict) idAulas.Contains(dict("IdAula")) And dict("IdAluno") = idAluno)
-
-        For Each presenca In presencas
-            presenca("Data") = aulas.Where(Function(aula) aula("Id") = presenca("IdAula")).First()("Data")
-
-            Dim idDisciplina = FindById(presenca("IdAula"), Table.Aula).First()("IdDisciplina")
-            presenca("Disciplina") = FindById(idDisciplina, Table.Disciplina).First()("Name")
-        Next
-
-        presencas = RemoveKeyFromDict(presencas, "IdAluno")
-        presencas = RemoveKeyFromDict(presencas, "IdAula")
-        Return presencas
-    End Function
-
-    Friend Shared Function GetNotasAluno(idAluno As String) As IEnumerable(Of IDictionary(Of String, Object))
-        Dim disciplinas = GetDisciplinas(Table.Aluno, idAluno)
-
-        Dim idDisciplinas = disciplinas.Select(Function(dict) dict("Id"))
-
-        Dim provas = dataBridge.SelectAll(Table.Prova).Where(Function(dict) idDisciplinas.Contains(dict("IdDisciplina")))
-        Dim idProvas = provas.Select(Function(dict) dict("Id"))
-
-        Dim notasAluno = dataBridge.SelectAll(Table.Nota).Where(Function(dict) idProvas.Contains(dict("IdProva")) And dict("IdAluno") = idAluno)
-
-        For Each nota In notasAluno
-            Dim prova = provas.Where(Function(dict) dict("Id") = nota("IdProva")).First()
-
-            nota("Data da prova") = prova("Data")
-
-            nota("Disciplina") = disciplinas.Where(Function(dict) dict("Id") = prova("IdDisciplina")).First()("Name")
-        Next
-
-        notasAluno = RemoveKeyFromDict(notasAluno, "IdProva")
-        Return notasAluno
-    End Function
 
     Public Shared Function RemoveKeyFromDict(data As IEnumerable(Of IDictionary(Of String, Object)), keyToRemove As String) As IEnumerable(Of IDictionary(Of String, Object))
         data = data.Select(Function(dict)

@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Threading
-
-Class PageSolicitacoes
+﻿Class PageSolicitacoes
     Inherits PageModel
 
     Private Presenter As New PresenterAlunoSolicitacoes(Me)
