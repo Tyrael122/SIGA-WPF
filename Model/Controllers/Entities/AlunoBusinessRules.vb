@@ -16,6 +16,17 @@
         ModelUtils.RegisterUserWithPhoto(relation)
     End Sub
 
+    Public Sub UpdateAluno(data As IDictionary(Of String, Object), idsDisciplinasAluno As IEnumerable(Of String))
+        DeleteDisciplinasAluno(idAluno)
+
+        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
+            .uniqueEntityData = data,
+            .idRelatedEntites = idsDisciplinasAluno
+        }
+
+        ModelUtils.UpdateUserWithPhoto(relation, idAluno)
+    End Sub
+
 
     Public Shared Sub DeleteAluno(idAluno As String)
         dataBridge.Delete(idAluno, "IdAluno", Table.Nota)

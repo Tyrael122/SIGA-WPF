@@ -7,6 +7,17 @@
         idProfessor = SessionCookie.GetCookie("userId")
     End Sub
 
+    Public Sub UpdateProfessor(data As IDictionary(Of String, Object), idsDisciplinasProfessor As IEnumerable(Of String))
+        DisciplinaBusinessRules.DeleteDisciplinas(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
+
+        Dim relation As New Relation(Table.Professor, Table.Disciplina) With {
+            .uniqueEntityData = data,
+            .idRelatedEntites = idsDisciplinasProfessor
+        }
+
+        ModelUtils.UpdateUserWithPhoto(relation, idProfessor)
+    End Sub
+
     Public Shared Sub DeleteProfessor(idProfessor As String)
         dataBridge.Delete(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
         dataBridge.Delete(idProfessor, "IdProfessor", Table.Prova)

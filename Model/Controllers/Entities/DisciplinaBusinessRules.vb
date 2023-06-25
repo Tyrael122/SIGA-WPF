@@ -10,6 +10,7 @@
     Friend Shared Sub DeleteDisciplinas(idEntity As String, whereField As String, table As Table)
         dataBridge.Delete(idEntity, whereField, table)
     End Sub
+
     Friend Shared Sub DeleteDisciplina(idDisciplina As String)
         dataBridge.Delete(idDisciplina, "IdDisciplina", Table.ProfessorDisciplina)
         dataBridge.Delete(idDisciplina, "IdDisciplina", Table.AlunoDisciplina)

@@ -4,6 +4,7 @@ Public Class PresenterFuncionarioProfessor
     Inherits Presenter
 
     Private ViewModelProfessor As New ProfessorViewModel()
+    Private professorBusinessRules As New ProfessorBusinessRules()
 
 
     Public Sub New(view As IViewModel)
@@ -36,21 +37,10 @@ Public Class PresenterFuncionarioProfessor
     End Sub
 
     Friend Sub UpdateProfessor(idsDisciplinasProfessor As List(Of String))
-        Dim idProfessor = SessionCookie.GetCookie("IdProfessor")
-
-        DisciplinaBusinessRules.DeleteDisciplinas(idProfessor, "IdProfessor", Table.ProfessorDisciplina)
-
         Dim data = ViewModelProfessor.ConvertToDictionary()
-        data("Foto") = PresenterUtils.ConvertImageToByteArray(ViewModelProfessor.Foto)
-
         data.Remove("Id")
 
-        Dim relation As New Relation(Table.Professor, Table.Disciplina) With {
-            .uniqueEntityData = data,
-            .idRelatedEntites = idsDisciplinasProfessor
-        }
-
-        relation.Update(idProfessor)
+        professorBusinessRules.UpdateProfessor(data, idsDisciplinasProfessor)
 
         ViewModelProfessor.Clear()
     End Sub

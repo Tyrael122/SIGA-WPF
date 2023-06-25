@@ -65,9 +65,19 @@
 
     Public Shared Sub RegisterUserWithPhoto(relation As Relation)
         Dim data = relation.uniqueEntityData
-
         relation.uniqueEntityData("Foto") = PresenterUtils.ConvertImageToByteArray(data("Foto"))
 
         relation.Save()
+    End Sub
+
+    Public Shared Sub UpdateUserWithPhoto(relation As Relation, idUser As String)
+        ParseUserPhoto(relation)
+
+        relation.Update(idUser)
+    End Sub
+
+    Private Shared Sub ParseUserPhoto(relation As Relation)
+        Dim data = relation.uniqueEntityData
+        relation.uniqueEntityData("Foto") = PresenterUtils.ConvertImageToByteArray(data("Foto"))
     End Sub
 End Class

@@ -4,7 +4,7 @@ Public Class PresenterFuncionarioAluno
     Inherits Presenter
 
     Public ViewModelAluno As New AlunoViewModel()
-    'Private alunoBusinessRules As New AlunoBussinessRules()
+    Private alunoBusinessRules As New AlunoBusinessRules()
 
     Public Sub New(view As IViewModel)
         Me.View = view
@@ -16,7 +16,6 @@ Public Class PresenterFuncionarioAluno
 
     Public Sub RegisterAluno(idsDisciplinasAluno As IEnumerable(Of String))
         Dim data = ViewModelAluno.ConvertToDictionary()
-
         data("Curso") = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
 
         AlunoBusinessRules.RegisterAluno(data, idsDisciplinasAluno)
@@ -78,23 +77,11 @@ Public Class PresenterFuncionarioAluno
     End Sub
 
     Friend Sub UpdateAluno(idsDisciplinasAluno As List(Of String))
-        Dim idAluno = SessionCookie.GetCookie("IdAluno")
-
-        AlunoBusinessRules.DeleteDisciplinasAluno(idAluno)
-
         Dim data = ViewModelAluno.ConvertToDictionary()
         data("Curso") = ModelUtils.GetAll(Table.Curso).Where(Function(dict) dict("Nome") = ViewModelAluno.Curso).First()("Id")
-
-        data("Foto") = PresenterUtils.ConvertImageToByteArray(data("Foto"))
-
-        Dim relation As New Relation(Table.Aluno, Table.Disciplina) With {
-            .uniqueEntityData = data,
-            .idRelatedEntites = idsDisciplinasAluno
-        }
-
         data.Remove("Id")
 
-        relation.Update(idAluno)
+        alunoBusinessRules.UpdateAluno(data, idsDisciplinasAluno)
 
         ViewModelAluno.Clear()
     End Sub
